@@ -1,0 +1,48 @@
+
+<fieldset>
+     <section class="solidbody">
+<%= form_for(@work_queue_user_subscription_object,:url => process_user_queue_subscription_wizard_path, method: :post) do |f| %>
+    <legend><%= set_subheader("User Queue Subscription" ) %></legend>
+
+    <% if  "#{@work_queue_user_subscription_object.current_step}" == "user_queue_subscription_first" %>
+             <h3>Step 1 of 3</h3>
+            <!--  <h5>Select User</h5> -->
+             <%= render "shared/common_error", object_argument: @work_queue_user_subscription_object %>
+    <% end %>
+
+    <% if  "#{@work_queue_user_subscription_object.current_step}" == "user_queue_subscription_second" %>
+            <h3>Step 2 of 3 </h3>
+             <!--   <h5>Select Queues</h5> -->
+              <%= render "shared/common_error", object_argument: @work_queue_user_subscription_object %>
+    <% end %>
+      <% if  "#{@work_queue_user_subscription_object.current_step}" == "user_queue_subscription_last" %>
+            <h3>Step 3 of 3 </h3>
+             <!--   <h5>Select Queues</h5> -->
+              <%= render "shared/common_error", object_argument: @work_queue_user_subscription_object %>
+    <% end %>
+
+
+    <ul>
+        <div class="row">
+         <% if  "#{@work_queue_user_subscription_object.current_step}" == "user_queue_subscription_first" ||
+                 "#{@work_queue_user_subscription_object.current_step}" == "user_queue_subscription_second"
+          %>
+             <div class="large-5 columns">
+                <%= render "#{@work_queue_user_subscription_object.current_step}", :arg_object => f,arg_user_list:@users_list,arg_user_name:@user_name,arg_user_local_office:@user_local_office_list %>
+              </div>
+         <% else %>
+              <div class="large-10 columns">
+                <%= render "#{@work_queue_user_subscription_object.current_step}", :arg_object => f,arg_user_list:@users_list,arg_user_name:@user_name,arg_user_local_office_name:@users_local_office_name,arg_user_location_queus:@user_location_queues,arg_user_array:@user_queues_in_db_array %>
+              </div>
+         <% end %>
+       </div>
+
+    </ul>
+    <div>
+      <%= render "user_queue_subscription_buttons_next_back_save", :arg_object => f , :arg_instance =>@work_queue_user_subscription_object %>
+    </div>
+
+
+<% end %>
+ </section>
+ </fieldset>

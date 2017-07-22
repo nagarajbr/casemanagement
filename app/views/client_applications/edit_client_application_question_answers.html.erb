@@ -1,0 +1,34 @@
+<!--Manoj Patil 10/16/2014  -->
+  <fieldset>
+<section class="solidbody">
+        <legend>
+          <%= set_subheader("Application for client: #{client_full_name(@client)}") %>
+          </legend>
+
+        <%= form_tag update_client_application_question_answers_path(@client_application.id), method: :put do %>
+          <table>
+          <caption style="text-align:inherit">
+          <b>Check the relevant box to indicate whether someone in your household (including yourself)</b><p></p>
+          </caption>
+            <thead>
+              <tr>
+                   <th> Question  </th>
+                  <th> Answer </th>
+              </tr>
+            </thead>
+              <tbody>
+                <% for arg_q_a in @client_application_question_answers   %>
+                  <tr>
+                    <%= fields_for "client_application_q_answers[]", arg_q_a do |f|  %>
+                       <%= render "client_application_question_answers", arg_object: f,arg_object2:arg_q_a %>
+                    <% end %>
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+             <%= link_to 'Cancel', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+             <%= submit_tag "Save", class: "button radius" %>
+      <% end %>
+
+</section>
+ </fieldset>

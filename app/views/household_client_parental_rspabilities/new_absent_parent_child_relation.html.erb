@@ -1,0 +1,35 @@
+
+<!--Manoj Patil 03/19/2016  -->
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Add clients from the household who are children's of absent parent: #{client_full_name(@absent_parent)}") %></legend>
+		<p>
+		 <%= render 'households/selected_household_partial',arg_household: @household %>
+		</p>
+		<%if @children_with_absent_parent_collection.present?%>
+			<%= render 'children_of_absent_parent_for_household',arg_collection:@children_with_absent_parent_collection,arg_absent_parent:@absent_parent %>
+		<% end %>	
+		<%= form_for(@ap_relation_object, :url => create_absent_parent_child_relation_path(@absent_parent.id), method: :post) do |f| %>
+		    <%= render "shared/common_error", object_argument: @ap_relation_object %>
+		    	<ul>
+			     	<div class="row">
+			          <div class="large-4 columns">
+			          	<li>
+			          		 <b>Absent parent name:</b>
+            					<%= get_client_full_name(@absent_parent.id) %>
+			          	</li>
+			               <li class="required">
+							      <%= f.label :from_client_id, "Child" %>
+							      <%= f.select :from_client_id, @available_children.collect { |p| ["#{get_client_full_name(p.id)}", p.id] },{ :include_blank => 'Select child of absent parent' } %>
+							</li>
+				 	  </div>
+				    </div>
+				</ul>
+			    <p>
+			    	<%= link_to 'Back',start_household_absent_parents_wizard_path ,class: "secondary button radius" %>
+			        <%= f.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+			        <%= f.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+			    </p>
+		   <% end %>
+	</section>
+  </fieldset>

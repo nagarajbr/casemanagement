@@ -1,0 +1,28 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<p>
+	<table>
+			<caption style="text-align:inherit"><b>Selected Activity </b><p></p></caption>
+			  <thead>
+			    <tr>
+			<!--     	<th> Program Unit ID</th> -->
+				<!-- 	<th> Service Program</th> -->
+					<th> Activity </th>
+					<th> Status </th>
+					<th> Activity Start Date </th>
+					<th> Activity End Date </th>
+				</tr>
+			  </thead>
+			    <tbody>
+						<tr>
+							<!-- <td>  <%= arg_activity.program_unit_id %>  </td> -->
+					<!-- 		<td>  <%= get_service_program_name(arg_activity.service_program_id) %></td> -->
+							<td>  <%= drop_down_value_description(arg_activity.activity_type) %>  </td>
+							<td> <%= drop_down_value_description(arg_activity.activity_status) %>  </td>
+							<td>  <%= format_db_date(arg_activity.action_plan_detail_start_date) %>  </td>
+							<td>  <%= format_db_date(arg_activity.action_plan_detail_end_date) %></td>
+
+						</tr>
+				</tbody>
+			</table>
+</p>

@@ -1,0 +1,72 @@
+
+       <li class="required", title1="Expense Type">
+        <%= f.label :expensetype %>
+        <%= f.select :expensetype, CodetableItem.item_list(35,"Expense Type").collect { |p| ["#{p.short_description} ", p.id] }, { :include_blank => 'select expense type' },autofocus: true,title1: "select expense type", data: {tooltip1: '' } %>
+      </li>
+
+      <li class="required", title1="Frequency">
+        <%= f.label :frequency %>
+        <%= f.select :frequency, CodetableItem.item_list(27,"Frequency").collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'select frequency' },title1: "select frequency", data: {tooltip1: '' } %>
+      </li>
+
+      <li class="required", title1="Begin Date">
+        <%= f.label :effective_beg_date %>
+        <%= f.date_field :effective_beg_date, title1: "Effective begin date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)"%>
+      </li>
+
+      <li>
+        <%= f.label :effective_end_date %>
+        <%= f.date_field :effective_end_date, autofocus: true,title1: "Effective end date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+      </li>
+
+      <li >
+        <%= f.label :creditor_name %>
+        <%= f.text_field :creditor_name, alt: "policy or account number",maxlength: "35",title1: "Enter policy or account number", data: {tooltip1: '' } %>
+      </li>
+      <li >
+        <%= f.label :creditor_contact %>
+        <%= f.text_field :creditor_contact, alt: "creditor",maxlength: "35",title1: "Enter creditor details", data: {tooltip1: '' } %>
+      </li>
+
+       <div class="row">
+          <div class="large-8 columns">
+             <li>
+                <%= f.label :creditor_phone %>
+                <%= f.text_field :creditor_phone,maxlength: "10",onkeypress: "return isNumberKey(event)" %>
+              </li>
+          </div>
+          <div class="large-4 columns">
+            <li>
+                <%= f.label :creditor_ext %>
+                <%= f.number_field :creditor_ext,min: "1",onkeypress: "return isLimitedNaturalNumber(event,4)"%>
+
+            </li>
+          </div>
+      </div>
+       <li >
+              <fieldset class="radio">
+                <legend class="radiolegend"> Verified</legend>
+                <div class="button-group">
+                <label class="radio-button"><%= f.radio_button :verified, "1"%>&nbsp;Yes</label>
+                <label class="radio-button"><%= f.radio_button :verified, "0"%>&nbsp;No</label>
+                </fieldset>
+        </li>
+        <li >
+          <%= f.label :exp_calc_months %>
+           <%= f.number_field :exp_calc_months,min: "1",onkeypress: "return isLimitedNaturalNumber(event,3)"%>
+        </li>
+
+
+       <li >
+
+           <fieldset class="radio">
+              <legend class="radiolegend">Recalculate Indicator</legend>
+                <div class="button-group">
+                  <label class="radio-button"><%= f.radio_button :budget_recalc_ind, "1"%>&nbsp;Yes</label>
+                  <label class="radio-button"><%= f.radio_button :budget_recalc_ind, "0"%>&nbsp;No</label>
+            </fieldset>
+        </li>
+
+      <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+
+

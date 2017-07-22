@@ -1,0 +1,34 @@
+<% count = 1 %>
+<div class="row">
+		<div class="large-7 columns">
+			<%= label_tag :questions, "Questions" %>
+        </div>
+
+
+</div>
+<% arg_questions.each do |q| %>
+	<div class="row">
+	    <div class="large-12 columns">
+			<ul>
+				<li>
+		            <li>
+
+		            </li>
+		            <div class="row">
+
+		            		<div class="large-8 columns">
+		            			<%= label_tag :question, "#{count}) "+q.long_description %>
+		                    </div>
+		                    <div class="large-3 columns">
+		                    	<%= select_tag q.id, options_for_select([['Strongly Dislike', 1], ['Dislike', 2],['Unsure', 1], ['Like', 2],['Strongly Like', 1]],(arg_selected_dropdown_values.present? ? arg_selected_dropdown_values[count-1] : nil)),prompt: "" %>
+			                </div>
+			                <div class="large-1 columns">
+			                </div>
+		            </div>
+		      	</li>
+		    </ul>
+		</div>
+	</div>
+	<% count += 1 %>
+<% end %>
+

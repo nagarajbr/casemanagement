@@ -1,0 +1,97 @@
+<header id="header">
+  <br>
+  <div class="row">
+    <div class="large-12 columns">
+     <!--<img src="assets/DWSBanner1.jpg" alt="DWS banner" width="100%" >-->
+     <div class = "row">
+        <div class = "large-2 column">
+          <%= image_tag("tanf_logo.jpg" ) %>
+        </div>
+
+        <div class = "large-8 column">
+
+           <h1 style="color: #ffffff "  margin-top = "false" align = "center"> <span style="color:#ff3200">AR</span>kansas <span style="color:#ff3200">W</span>orkforce <span style="color:#ff3200">I</span>ntegrated <span style="color:#ff3200">N</span>etwork <span style="color:#ff3200">S</span>ystems  </h1>
+        </div>
+
+        <div class = "large-2 column" class="right">
+          <%= image_tag("DWS_logo2.jpg" ) %>
+        </div>
+
+     </div>
+     <br>
+
+
+      <% if current_user %>
+         <div class="left" class="large-5 columns">
+          <medium style="color: #ffffff">Welcome, <%= current_user.name%> </medium>
+          <medium style="color: #ffffff">| Profile: <%= current_user.get_role_id_desc()  %> </medium>
+         </div>
+
+         <!-- <div align ="center" class="large-8 columns" ><marquee  style="color: #ffffff" behavior="scroll" direction="left">
+          AIRCRAFT AVIONICS TECHNICIAN in Mena, Arkansas
+Security Guard in Batesville, Arkansas
+Sales Associate P/T in Texarkana, Texas
+Production in TEXARKANA, Arkansas
+Carpenter Laborer in Benton, Arkansas
+AIRCRAFT A & P SHEET METAL MECHANIC in Mena, Arkansas
+ELECTRICIAN CLASS A in FORREST CITY, Arkansas
+Picker/Puller in POCAHONTAS, Arkansas
+Custodian in Hot Springs, Arkansas
+Part Time Senior Worker in Hot Springs, Arkansas
+Cashier in Texarkana, Texas
+Sales Associate(Commission) in Texarkana, Texas
+Janitorial Maintenance in Mena, Arkansas
+Truck Drivers/CDL in FORREST CITY, Arkansas
+MATERIAL HANDLER - LUMBER STACKER in Hatfield, Arkansas
+Office Associate in Texarkana, Texas
+PUBLIC WORKS DIRECTOR in FORREST CITY, Arkansas
+Assistant Public WorksDirector in FORREST CITY, Arkansas
+Cashier in Texarkana, Arkansas
+Detention Officer in Texarkana, Arkansas
+Cashier in Texarkana, Texas
+Retail Cashier in Texarkana, Texas
+Roofer in Paragould , Arkansas
+General Forestry Laborer in De Queen, Arkansas
+Industrial Service Technician in Mena, Arkansas
+Part Time Driver in Conway, Arkansas
+Warehouse Worker in Texarkana, Texas
+Warehouse in Texarkana, Texas
+Warehouse/Delivery Driver in Texarkana, Texas
+Live Hanger in DeQueen, Arkansas
+Sanitation Worker in DeQueen, Arkansas
+Certified Nurses Aide (CNA) in Walnut Ridge, Arkansas
+Live Hang/Production in Batesville, Arkansas
+Personal Care Aide - Craighead County in Jonesboro, Arkansas
+Truck Driver in Texarkana, Texas
+Fast Food Crew in Mena, Arkansas
+security in jonesboro, Arkansas
+Telephone Sales Representative in Paragould, Arkansas
+Telephone Website Sales Representative in Paragould, Arkansas
+Millwright in TEXARKANA, Arkansas
+Industrial Electrician in TEXARKANA, Arkansas
+Bank Teller in Bryant, Arkansas
+Residential Habilitaion Aide in Booneville, Arkansas
+Emergency Room RN in Walnut Ridge, Arkansas
+Certified Nursing Assistant in Benton, Arkansas
+PREP HAND in MENA, Arkansas
+Welder, Stainless Steel in Cabot, Arkansas
+Communications Specialist in Texarkana, Texas
+AIRCRAFT CABINET BUILDER in Mena, Arkansas
+Dietary Aide in Walnut Ridge, Arkansas
+
+
+         </marquee>  </div>-->
+
+         <div class="right" class="large-3 columns">
+            <div >
+              <ul class="inline-list">
+				        <li>
+                  <medium> <%= link_to "Signout" ,logout_path, style: "color: #ffffff"%></medium>
+                </li>
+              </ul>
+            </div>
+         </div>
+      <%end %>
+    </div>
+  </div>
+</header>

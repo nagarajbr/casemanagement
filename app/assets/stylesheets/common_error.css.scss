@@ -1,0 +1,30 @@
+@import "colors";
+
+#error_explanation {
+    background-color: $error-background-color;
+    padding: 0.1px 1 2px 0 ;
+    h6{
+    margin-left: 10px;
+    color: $error-heading-text-color;
+    }
+    li{
+    list-style-type: disc;
+    margin-left: 35px;
+    color: $black-color;
+    }
+  }
+
+   div .field_with_errors label{
+         color: $error-label-text-color;
+   }
+
+   div .field_with_errors input{
+    background-color: $error-input-background-color;
+   }
+
+    div .field_with_errors select{
+    background-color: $error-input-background-color;
+   }
+   .field_with_errors {
+      display: inline;
+     }

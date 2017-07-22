@@ -1,0 +1,54 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+<legend></legend>
+	<% if @clients.present? %>
+		<caption><%= set_subheader("Search Results") %></caption>
+		<table>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> Social Security Number </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+                    <th> Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @clients.each do |client| %>
+				<tr>
+					<td>  <%=  client.get_full_name %></td>
+					<td>  <%=  format_SSN(client.ssn) %></td>
+					<td>  <%=  format_db_date client.dob %></td>
+					<td>  <%=  drop_down_value_description(client.gender) %></td>
+
+					<td>
+
+							<%= link_to "select",set_program_unit_member_in_session_path(@selected_program_unit.id,client),id: "hyperlink"  %>
+
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+		<%= link_to 'New Search',program_unit_member_search_path(@selected_program_unit.id), class: "button radius"%>
+		<%# if validate_authorization(295) %>
+			<%= link_to 'Register New Client', new_program_unit_member_path(@selected_program_unit.id) ,class: "button radius" %>
+		<%# end %>
+	<% else %>
+		<%= set_subheader("Search for a Client") %>
+		<%= form_tag program_unit_member_search_results_path(@selected_program_unit.id), method: 'get' do %>
+				<%= render 'shared/common_client_search_criteria' %>
+				<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius"%>
+				<%= submit_tag "Search", class: 'button radius' %>
+				<% if @show_add_button  %>
+					<%# if validate_authorization(295) %>
+						<%= link_to 'Register New Client', new_program_unit_member_path(@selected_program_unit.id) ,class: "button radius" %>
+					<%# end %>
+				<% end %>
+		<% end %>
+    <% end %>
+
+</section>
+</fieldset>

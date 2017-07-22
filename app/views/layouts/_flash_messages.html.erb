@@ -1,0 +1,14 @@
+
+<% flash.each do |name, msg| %>
+
+		<div data-alert class="alert-box large-8 large-centered columns" >
+		     <% if name == "alert" %>
+			    <%= content_tag :div, msg, class: "fi-alert text-center flash-alert" %>
+			    <% elsif name ==  "error" %>
+			    <%= content_tag :div, msg, class: "fi-alert text-center flash-error" %>
+			   	<% else  %>
+			   	<%= content_tag :div, msg, class: "text-center" %>
+		    <% end %>
+		</div>
+
+<% end %>

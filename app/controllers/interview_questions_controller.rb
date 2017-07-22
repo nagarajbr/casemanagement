@@ -1,0 +1,2 @@
+class InterviewQuestionsController < AttopAncestorController
+end

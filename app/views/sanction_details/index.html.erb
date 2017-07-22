@@ -1,0 +1,79 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("#{drop_down_value_description(@sanction.sanction_type)} sanction information for: #{client_full_name(@client)}") %></legend>
+<%= render "parent_sanction",arg_sanction:@sanction%>
+
+<table>
+	<caption class="fontc">
+			<%= "Sanction details" %>
+	<p> </p> </caption>
+	<thead>
+	    <tr>
+			<!-- <th> Effective Begin Date </th> -->
+			<th> Sanction Month </th>
+			<!-- <th width=10%> Duration </th>
+			<th> Modified Month </th> -->
+			<th> Sanction Implication </th>
+			<th> Release Indicator </th>
+			<th width=10%> Sanction Served </th>
+			<th> Action </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @sanction_details.each do |sanction_detail| %>
+			<tr>
+				<!-- <td>  <%= format_db_date sanction_detail.effective_begin_date %></td> -->
+				<td>  <%= format_db_date_MM_YYYY sanction_detail.sanction_month %></td>
+				<!-- <td>  <%= sanction_detail.duration %></td>
+				<td>  <%= format_db_date sanction_detail.modified_month %></td> -->
+				<td>  <%= drop_down_value_description(sanction_detail.sanction_indicator)  %></td>
+
+				<td>  <%= get_flag_description(sanction_detail.release_indicatior) %></td>
+				<td>  <%= get_flag_description(sanction_detail.sanction_served) %>  </td>
+				<td>
+					<%= link_to "Show", sanction_sanction_detail_path(@sanction.id,sanction_detail.id),id: "hyperlink" %>
+			    </td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+	<%= link_to 'Back', sanctions_path,class: "secondary button radius" %>
+	 <%if @is_it_progressive_sanction == true %>
+             <!-- if it is progressive sanction -->
+	 	<%if @sanction.compliance_office_id? %>
+	   	   <!-- if santion is not picked up by compliance officer-->
+	       	<%if  can_logged_in_user_edit?("SANCTION",@sanction.id) %>
+	       	   <!-- if authorized fron queue to edit-->
+	       	   	<%= link_to "Add Detail", new_sanction_sanction_detail_path(@sanction.id) , class: 'button radius' %>
+	       	<%else%>
+	            <%= link_to "Add Detail","#", class: "disabled button"%>
+				<p>
+	        		<h6 class="subheader"><b>Add Detail</b> button is disabled because, You are not the compliance officer for this sanction.
+	        			compliance officer for this sanction is: <%= "#{get_user_name(@sanction.compliance_office_id)}"%>
+	        		  </h6>
+	        	</p>
+
+	        <%end%>
+	    <%else%>
+	    	 <%if @sanction.infraction_end_date? %>
+                <!-- Add Detail button is not shown as it is removed for sanction queue and task is completed. -->
+                <%= link_to "Add Detail","#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Add Detail</b> button is disabled because, sanction is closed</h6>
+                </p>
+              <%else%>
+                <%= link_to "Add Detail","#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Add Detail</b> button is disabled because, sanction is in queue:'Ready for Sanctions Queue',not assigned to any user.Users subscribed to that queue will be able to work on this sanction.</h6>
+                </p>
+              <%end%>
+
+	    <%end%>
+  	<%else%>
+  		<%= link_to "Add Detail", new_sanction_sanction_detail_path(@sanction.id) , class: 'button radius' %>
+  	<%end%>
+
+</section>
+</fieldset>
+

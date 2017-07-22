@@ -1,0 +1,38 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Narrative for: #{client_full_name(@client)}") %></legend>
+	<% if session[:CLIENT_ID].present? %>
+		<% if @narative_notes_types.present? %>
+			<% @narative_notes_types.each do |narative| %>
+				<p>
+					<h6><b><%="#{narative.long_description} Comments: " %> <%= link_to "show",narative_show_path(narative.entity_type,narative.entity_id,narative.long_description),id: "hyperlink"%></b></h6>
+					<% NotesService.get_notes_for_notes_type(narative.entity_type,narative.entity_id,narative.long_description).each_with_index do |narative_notes,index| %>
+                        <% if index == 0  %>
+						   <%=  narative_notes.notes %><br>
+                        <%end%>
+
+					<%end%>
+				</p>
+			<% end %>
+			<%if @current_uri %>
+		    <%= link_to("Back", household_narative_index_path , class: 'button radius secondary')%>
+		    <% end %>
+			 <div id="narative_notes" style="display: none">
+				<%= render 'form' %>
+            </div>
+		<% else %>
+			<p>
+		    	<h5 class="subheader">No narrative information found.</h5>
+	        </p>
+	        <%if @current_uri %>
+		    <%= link_to("Back", household_narative_index_path , class: 'button radius secondary')%>
+		    <% end %>
+		<% end %>
+	<% else %>
+		<p>
+        	<h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+        <%= render "shared/search_client_button" %>
+	<% end %>
+</section>
+</fieldset>

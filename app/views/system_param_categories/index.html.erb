@@ -1,0 +1,28 @@
+<fieldset>
+	<legend></legend>
+<section class="solidbody">
+	<table>
+		<caption style="text-align:inherit"><%= set_subheader("System Parameter Categories ") %></caption>
+	  <thead>
+	      <tr>
+	      <th> ID </th>
+	      <th> Description </th>
+	      <th> Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @systemparamcategory.each do |system| %>
+			<tr>
+				<td>  <%=  system.id %></td>
+				<td>  <%=  system.description %>  </td>
+				<td>   <%= link_to "Show",system_param_category_path(system),id: "hyperlink" %> | <%= link_to("Edit", edit_system_param_category_path(system),id: "hyperlink") %> </td>
+			</tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<%= paginate @systemparamcategory %>
+	<% if validate_authorization(637) %>
+		<%= link_to("New ", new_system_param_category_path , class: 'button') %>
+	<% end %>
+</section>
+</fieldset>

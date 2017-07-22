@@ -1,0 +1,92 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Eligibility determination for selected program unit for client: #{client_full_name(@client)} ") %></legend>
+	<% if session[:PROGRAM_UNIT_ID].present? %>
+		<%# if @client_program_units.present? %>
+		 	<p>
+		 	<%= render 'selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		 	</p>
+
+		 	<% if @program_wizards.present?%>
+				 	<table>
+				 		<caption style="text-align:inherit">
+				 			<p><b>Eligibility Determinations </b></p>
+				 		</caption>
+							  <thead>
+							    <tr>
+									<th> Run ID</th>
+									<th> Run Month </th>
+									<th> Run DateTime</th>
+									<th> Eligible </th>
+									<th> Submit Date </th>
+									<th> Retain</th>
+									<th> Action </th>
+								</tr>
+							  </thead>
+							    <tbody>
+									<%  @program_wizards.each do |arg_wizard| %>
+										<tr>
+											<td> <%= arg_wizard.run_id %> </td>
+											<td> <%= format_db_date_MM_YYYY(arg_wizard.run_month) %> </td>
+											<td> <%= format_date(arg_wizard.created_at)%> </td>
+											<td> <%= get_run_month_summary_eligibility_info(arg_wizard) %> </td>
+
+											<td><%= format_date(arg_wizard.submit_date)%></td>
+											<% if arg_wizard.submit_date.blank? %>
+												<% if arg_wizard.retain_ind == "Y" %>
+													<% if  can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id)%>
+														<td><%= link_to "Dispose",update_retain_indicator_for_run_id_path(@selected_program_unit.id,arg_wizard.id),id: "hyperlink" %></td>
+													<% end %>
+												<% else %>
+													<% if  can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id) %>
+														<td><%= link_to "Retain",update_retain_indicator_for_run_id_path(@selected_program_unit.id,arg_wizard.id),id: "hyperlink" %></td>
+													<% end %>
+												<% end %>
+											<% else%>
+											<td></td>
+											<% end %>
+											<!-- <td> <%#= get_flag_description(arg_wizard.retain_ind) %></td> -->
+											<td><%= link_to "show",show_program_wizard_run_id_details_path(@selected_program_unit.id,arg_wizard.id),id: "hyperlink" %></td>
+
+										</tr>
+									 <% end %>
+								</tbody>
+					</table>
+
+
+			<% else %>
+			     <legend><h5 class="subheader">No eligibility runs found.Run eligibility determination by clicking <b>Check Eligibility</b> menu.</h5></legend><br>
+			<% end %>
+			<%= link_to 'Back',program_units_path, class: "button radius secondary"%>
+
+		   <%# unless @program_unit_closed_for_more_30_days == true %>
+				<%# if validate_authorization(681) || can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id)%>
+					<%#= link_to 'Eligibility Determination',program_unit_eligibility_wizard_initialize_path(@selected_program_unit.id), class: "button radius"%>
+				<%# end %>
+			<%# end %>
+		<%# else%>
+			<%# if validate_authorization(682) || can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id)%>
+				<!-- <p>
+		        <h5 class="subheader">No Completed Program Units found.Complete the Program Unit by clicking Complete Program Unit button </h5>
+		        </p> -->
+		        <%#= link_to 'Complete Program Unit',view_program_unit_summary_path(session[:PROGRAM_UNIT_ID].to_i), class: "button radius"%>
+
+		        <!-- <p>
+		        <h5 class="subheader">Eligibility Dertermination is not completed for the selected Program Unit. Proceed to Eligibility Determination queue. </h5>
+		        </p> -->
+		        <%#= link_to 'Queues',my_queues_summary_path, class: "button radius"%>
+	        <%# else %>
+	        	 <!-- <h5 class="subheader">No Completed Program Units to show. </h5> -->
+	        <%# end %>
+		<%# end%>
+
+<% else %>
+	<p>
+	<h5 class="subheader">No Program Unit is selected.Select Program Unit by clicking Program Unit button.</h5>
+	</p>
+
+	 	<%= link_to 'Program Unit',program_units_path, class: "button radius"%>
+<% end %>
+</section>
+</fieldset>

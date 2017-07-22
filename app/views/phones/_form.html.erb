@@ -1,0 +1,31 @@
+<%= label :primary,"#{drop_down_value_description(4661)}" %>
+<li>
+  <%= text_field_tag :primary, arg_primary.present? ? arg_primary.phone_number : "", maxlength: "14",id: "primary_Primary",onkeypress: "return isNumberKey(event)",autofocus: true %>
+
+</li>
+
+  <%= label :secondary,"#{drop_down_value_description(4662)}" %>
+<li>
+  <%= text_field_tag :secondary, arg_secondary.present? ? arg_secondary.phone_number : "", maxlength: "14", id: "secondary_Secondary",onkeypress: "return isNumberKey(event)" %>
+</li>
+
+  <%= label :other,"#{drop_down_value_description(4663)}" %>
+<li >
+  <%= text_field_tag :other, arg_other.present? ? arg_other.phone_number : "", maxlength: "14", id: "other_Other",onkeypress: "return isNumberKey(event)" %>
+</li>
+
+<li >
+  <%= label :email_address,"Email" %>
+  <%= text_field_tag :email_address,  arg_email ,maxlength: "40"%>
+
+</li>
+
+<li>
+	 <% if arg_entity_type.present? && arg_entity_type == 6338 %>
+	       <%= label :contact_notes,"Contact Notes" %>
+		  <%= text_area_tag :contact_notes, arg_notes, id: "notes_Notes" ,maxlength: "255"%>
+	 <%else%>
+		  <%= label :notes,"Notes" %>
+		  <%= text_area_tag :notes, arg_notes, id: "notes_Notes" ,maxlength: "255"%>
+  <%end%>
+</li>

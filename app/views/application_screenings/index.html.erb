@@ -1,0 +1,76 @@
+<!--Index Page is not used any more Manoj Patil 10/16/2014  -->
+<!--
+<section class="solidbody">
+<%# if session[:CLIENT_ID].present? %>
+	<%# if @client_applications.present? %>
+		<fieldset>
+			<legend>
+			<%#= set_subheader("Screening for completed #{pluralize_without_count(@client_applications.count,"application","")}  of client: #{client_full_name(@client)}") %>
+			</legend>
+
+			<table>
+			  <thead>
+			    <tr>
+					<th>  ID </th>
+					<th> Primary Applicant </th>
+					<th> Application Date </th>
+					<th> Service Program Group </th>
+					<th>  Status </th>
+					<th>  Disposition Status </th>
+					<th>  Service Program </th>
+					<th>  Disposition Date </th>
+					<th>  Disposition Reason </th>
+
+
+					<th>                                </th>
+					<th>                                </th>
+					<th>                                </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<%# @client_applications.each do |arg_app| %>
+
+						<tr>
+							<td>  <%= arg_app.id %></td>
+							<td>   <%= get_primary_applicant_name(arg_app.id) %>  </td>
+							<td>  <%= format_db_date(arg_app.application_date)  %></td>
+							<td>  <%= drop_down_value_description(arg_app.service_program_group) %></td>
+							<td>  <%= drop_down_value_description(arg_app.application_status) %></td>
+							<td>  <%= drop_down_value_description(arg_app.application_disposition_status) %></td>
+							<td>  <%= get_service_program_name(arg_app.selected_service_program) %></td>
+							<td>  <%= format_db_date(arg_app.disposition_date)  %></td>
+							<td>  <%= drop_down_value_description(arg_app.application_disposition_reason) %></td>
+
+							<%# if arg_app.application_disposition_status.blank? %>
+								<td><%#= link_to "Application Screening",application_check_program_eligibility_wizard_initialize_path(arg_app.id),id: "hyperlink" %></td>
+							<%# end %>
+
+							<td><%#= link_to "Summary",view_screening_summary_path(arg_app.id),id: "hyperlink" %></td>
+						</tr>
+					 <%# end %>
+				</tbody>
+			</table>
+
+		</fieldset>
+	<%#else%>
+		<fieldset>
+			<legend>
+	        <%#= set_subheader("Completed Application information for : #{client_full_name(@client)}" ) %>
+	        </legend>
+	        <h5 class="subheader">No Completed Application details found.Complete the Application by clicking Client Application button </h5>
+	        <p></p>
+	        <%#= link_to 'Client Application',client_applications_path, class: "button radius"%>
+		</fieldset>
+	<%#end%>
+<%#else%>
+	<fieldset>
+		<legend>
+        <%#= set_subheader("Application List" ) %>
+        </legend>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%#= render "shared/search_client_button" %>
+    </fieldset>
+<%#end%>
+</section>
+-->

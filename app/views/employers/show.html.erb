@@ -1,0 +1,56 @@
+
+  <fieldset>
+  <section class="solidbody">
+
+<%= set_subheader("Employer details") %>
+
+  <p>
+    <b>Employer Name: </b>
+    <%= @employer.employer_name %>
+  </p>
+
+  <p>
+    <b>Federal EIN: </b>
+    <%= format_EIN(@employer.federal_ein) %>
+  </p>
+
+  <p>
+    <b>State EIN: </b>
+    <%= format_EIN(@employer.state_ein) %>
+  </p>
+
+  <p>
+    <b>Contact Person: </b>
+    <%= @employer.employer_contact %>
+  </p>
+
+   <p>
+    <b> Optional Contact Person: </b>
+    <%= @employer.employer_optional_contact %>
+  </p>
+
+
+  <p>
+    <b>Country Code: </b>
+    <%= drop_down_value_long_description(@employer.employer_country_code) %>
+  </p>
+
+
+<%= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+
+
+
+    <%= link_to 'Cancel', employer_new_search_path,class: "secondary button radius" %>
+    <%# if validate_authorization(380) %>
+      <%= link_to 'Edit', edit_employer_path(@employer),class: "button radius" , title1:"Press Enter Key or Mouse Click to edit incomes details ", data: {tooltip1: '' } %>
+    <%# end %>
+    <!--
+<%# if validate_authorization(381) %>
+      <%#= link_to 'Delete', @employer, method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" ,title1:"Press Enter Key or Mouse Click to delete incomes details ", data: {tooltip1: '' } %>
+    <%# end %> -->
+
+  </section>
+</fieldset>
+

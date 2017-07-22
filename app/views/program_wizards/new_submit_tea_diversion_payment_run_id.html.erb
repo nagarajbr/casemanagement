@@ -1,0 +1,28 @@
+<%= form_for(@program_benefit_detail, :url => create_submit_tea_diversion_payment_run_id_path(@selected_program_unit.id,@selected_program_wizard.id), method: :post) do |f| %>
+
+  <section class="solidbody">
+	<fieldset>
+       <legend><%= set_subheader("Enter TEA Diversion Amount for Client  #{client_full_name(@client)} #{@run_month_description}") %></legend>
+       <%= render "shared/common_error", object_argument: @program_benefit_detail %><br>
+        <ul>
+	     	<div class="row">
+	          <div class="large-5 columns">
+	               <%= render 'form_tea_diversion_submit',arg_object: f,arg_program_benfit_details:@program_benefit_detail %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+    	<%= link_to "Cancel",show_program_wizard_run_id_details_path(@selected_program_wizard.program_unit_id,@selected_program_wizard.id),class: 'secondary button radius'%>
+    	<% if can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id)%>
+        	<%= f.submit "Submit Payment",class: 'button radius'%>
+    	<% else %>
+            <%= link_to 'Submit Payment',"#", class: "disabled button"%>
+            <p>
+              <h6 class="subheader"><b>Submit Payment</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can submit payment.</h6>
+            </p>
+      <% end %>
+	    </p>
+    </fieldset>
+    </section>
+<% end %>
+

@@ -1,0 +1,13 @@
+<li class = "required">
+  <%= arg_object.label :pregnancy_due_date %>
+  <%= arg_object.date_field :pregnancy_due_date, title1: "Enter the pregnancy due date in mm/dd/yyyy format",autofocus: true, data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+</li>
+<li class = "required">
+  <%= arg_object.label :number_of_unborn %>
+  <%= arg_object.number_field :number_of_unborn, min: 1,max: 9, step: 1, onkeypress: "return isLimitedNaturalNumber(event,1)"%>
+</li>
+<!-- <li >
+  <%#= arg_object.label :pregnancy_termination_date %>
+  <%#= arg_object.date_field :pregnancy_termination_date, title1: "Enter the pregnancy termination date in mm/dd/yyyy format", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+</li> -->
+ <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>

@@ -1,0 +1,12 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Edit code table item for: #{@codetable.name}") %></legend>
+<%= form_for(@codetableitem, :url => code_table_codetable_item_path(@codetable.id,@codetableitem.id), method: :put) do |f| %>
+  <%= render 'form', arg_object: f %>
+    <p>
+      <%= link_to 'Back', code_table_path(@codetable),class: "secondary button radius" %>
+      <%= f.submit "Save" ,class: 'button radius' %>
+    </p>
+<% end %>
+</section>
+</fieldset>

@@ -1,0 +1,65 @@
+ <fieldset>
+ <section class="solidbody">
+  <% if session[:CLIENT_ID].present? %>
+     <% if @pregnancy.present? %>
+          <legend><%= set_subheader("Pregnancy information for: #{@client.last_name}, #{@client.first_name}") %></legend>
+          <p>
+            <b>Pregnancy Due Date:</b>
+            <%= format_db_date(@pregnancy.pregnancy_due_date) %>
+          </p>
+
+          <p>
+            <b>Expected Number of Children:</b>
+            <%= @pregnancy.number_of_unborn %>
+          </p>
+          <p>
+            <b>Worker: </b>
+            <%= get_user_name(@pregnancy.updated_by)%>
+          </p>
+
+          <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+            <%= link_to 'Edit', edit_pregnancy_path(@menu,@pregnancy.id), class: "button radius" %>
+
+            <%= link_to 'Delete', delete_pregnancy_path(@menu,@pregnancy.id),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+            <% if @client_assessment.present? %>
+                         <%if !(@client_assessment.first_step?)%>
+                           <%= link_to "Previous", process_previous_step_path,class: ' button radius' %>
+                         <%end%>
+                         <%if !(@client_assessment.last_step?)%>
+                          <%= link_to "Next",process_next_step_path,class: 'button radius ' %>
+                        <%end%>
+            <% end %>
+
+  <%else%>
+            <legend><%= set_subheader("Pregnancy information for: #{client_full_name(@client)}" ) %></legend>
+
+              <h5 class="subheader">No pregnancy information found. Click New to add pregnancy information.</h5>
+              <p></p>
+              <%# @pregnancy = Pregnancy.new%>
+
+              <%#= form_for(@pregnancy, :url => new_pregnancy_path) do |f| %>
+                  <%#= f.submit 'New', class: "button radius" %>
+              <%# end %>
+               <%= link_to 'New', new_pregnancy_path(@menu), class: "button radius" %>
+              <% if @client_assessment.present? %>
+                         <%if !(@client_assessment.first_step?)%>
+                           <%= link_to "Previous", process_previous_step_path,class: ' button radius' %>
+                         <%end%>
+                         <%if !(@client_assessment.last_step?)%>
+                          <%= link_to "Next",process_next_step_path,class: 'button radius ' %>
+                        <%end%>
+            <% end %>
+
+
+       <%end%>
+ <%else%>
+       <legend><%= set_subheader("View pregnancy information" ) %></legend>
+
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+       <%= render "shared/search_client_button" %>
+   <%end%>
+ </section>
+</fieldset>

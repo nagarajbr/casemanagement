@@ -1,0 +1,22 @@
+<li class="required">
+    <%= f.label :service_date%>
+    <%= f.date_field :service_date, onkeyup:"validate_date_format(event)" %>
+</li>
+
+ <!-- <li>
+    <%#= f.label :provider_invoice%>
+    <%#= f.text_field :provider_invoice,  maxlength: "50" %>
+</li> -->
+
+ <li class="required">
+    <%= f.label :actual_cost%>
+    <%= f.number_field :actual_cost, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+</li>
+ <li>
+    <%= f.label :actual_quantity%>
+    <%= f.number_field :actual_quantity %>
+</li>
+ <li>
+    <%= f.label :notes%>
+    <%= f.text_area :notes,maxlength: "250"  %>
+</li>

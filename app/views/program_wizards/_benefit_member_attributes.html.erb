@@ -1,0 +1,9 @@
+<li class="required">
+      <%= arg_object.label :client_id %>
+      <%= arg_object.select :client_id, arg_available_mem.collect { |p| ["#{get_client_full_name(p.id)}", p.id] },{ :include_blank => 'Select Program Unit Member' } %>
+</li>
+
+<li class="required">
+      <%= arg_object.label :member_status%>
+      <%= arg_object.select :member_status, pgu_status.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Status' } %>
+</li>

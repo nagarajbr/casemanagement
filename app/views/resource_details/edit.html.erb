@@ -1,0 +1,55 @@
+
+<fieldset>
+  <section class="solidbody">
+    <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+            <legend><%= set_subheader("Edit resource details for household member: #{client_full_name(@client)} for resource:#{drop_down_value_description(@resource.resource_type)}") %> </legend>
+            <p>
+             <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+             <%= render "parent_resource",arg_resource: @resource %>
+            </p>
+            <%= form_for(@resource_detail,:url => update_household_member_resource_detail_path(@client.id,@resource.id,@resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :put) do |f| %>
+                 <%= render "shared/common_error", object_argument: @resource_detail %><br>
+
+                  <ul>
+                      <div class="row">
+                          <div class="large-4 columns">
+                               <%= render 'form',f: f,arg_notes:@notes   %>
+                          </div>
+                      </div>
+                  </ul>
+                <p>
+                  <%= link_to 'Back',household_member_resource_detail_index_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+                    <%= f.submit "Save",class: "button radius" %>
+                </p>
+            <% end %>
+    <% else %>
+    		 <%= render "parent_resource",arg_resource: @resource %>
+              <%= form_for(@resource_detail,:url => resource_resource_detail_path(@resource.id,@resource_detail.id), method: :put) do |f| %>
+                     <legend><%= set_subheader(" Edit #{drop_down_value_description(@resource.resource_type)} resource for: #{client_full_name(@client)}") %></legend>
+
+                   <%= render "shared/common_error", object_argument: @resource_detail %><br>
+                    <ul>
+                      <div class="row">
+                          <div class="large-4 columns">
+                               <%= render 'form',f: f,arg_notes:@notes   %>
+                          </div>
+                      </div>
+                    </ul>
+                  <p>
+                    <%= link_to 'Cancel', resource_resource_details_path,class: " secondary button radius" %>
+                    <%= f.submit "Save",class: "button radius" %>
+                  </p>
+              <% end %>
+    <% end %>
+
+  </section>
+</fieldset>
+
+
+
+
+
+
+
+
+

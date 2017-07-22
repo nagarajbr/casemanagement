@@ -1,0 +1,40 @@
+
+<b> Service Authorization Line Items</b>
+		<p></p>
+		<table>
+			  <thead>
+			    <tr>
+					<th> Service Date </th>
+					<th> Service Day </th>
+					<th> Service Begin Time </th>
+					<th> Distance</th>
+					<th> Estimated Cost</th>
+
+
+				</tr>
+			  </thead>
+			    <tbody>
+			    	<% total = 0.00 %>
+			    	<% if  arg_srvc_line_item.present? %>
+						<% arg_srvc_line_item.each do |arg_line_item| %>
+							<tr>
+								<td>  <%= format_db_date(arg_line_item.service_date)%></td>
+								<td>  <%= day_name_for_the_date(arg_line_item.service_date)%></td>
+								<td>  <%= arg_line_item.service_begin_time.strftime("%I:%M %p") %></td>
+								<td>  <%= "#{arg_line_item.quantity} #{drop_down_value_description(arg_line_item.unit_of_measure)}"%></td>
+								<td> <%=  number_to_currency_br(arg_line_item.estimated_cost)%></td></td>
+								<% total = total + arg_line_item.estimated_cost %>
+							</tr>
+						 <% end %>
+					<% end %>
+				</tbody>
+				<tfoot>
+					<tr >
+						<td></td>
+						<td></td>
+						<td></td>
+						<td> Total:</td>
+						<td> <%= number_to_currency_br(total) %> </td>
+					</tr>
+				</tfoot>
+			</table>

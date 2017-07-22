@@ -1,0 +1,14 @@
+<fieldset>
+	<section class="solidbody">
+
+		<p>
+	        <h5 class="subheader"> Complete Assessment step before activating TEA Diversion Program Unit.There is no complete Assessment found for client:<%= "#{client_full_name(@client_object)}"%>.Please complete Work Readiness Assessment by clicking Assessment button.</h5>
+	      </p>
+				<%= link_to "Back",show_program_wizard_run_id_details_path(@selected_program_unit_id,@program_wizard_id),class: "secondary button radius"%>
+				<%= link_to "Assessment",edit_common_assessment_path(14,@assessment_id),class: "button radius"%>
+
+
+</section>
+</fieldset>
+
+

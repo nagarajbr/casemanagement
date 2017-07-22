@@ -1,0 +1,58 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Expense information for: #{client_full_name(@client)}" ) %></legend>
+	<% if session[:CLIENT_ID].present? %>
+	<% if @expense.present? %>
+			<table>
+				<caption class="fontc"> <p><%=("#{pluralize_without_count(@expense.count,"Expense","")}") %></p></caption>
+				<thead>
+					<tr>
+						<th> Type of Expense </th>
+						<th> Frequency </th>
+						<th> Begin Date </th>
+						<th> End Date </th>
+						<th width="10%"> Recalculate Indicator </th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @expense.each do |expense| %>
+					<tr>
+						<td>  <%= drop_down_value_description(expense.expensetype) %></td>
+						<td>  <%= drop_down_value_description(expense.frequency) %></td>
+						<td>  <%=  format_db_date expense.effective_beg_date %></td>
+						<td>  <%=  format_db_date expense.effective_end_date %></td>
+						<td>  <%= get_flag_description(expense.budget_recalc_ind) %>  </td>
+
+						<td>   <%= link_to "Show",expense_path(expense.id),id: "hyperlink" %> |
+							<%= link_to("Expense details", expense_expense_details_path(expense),id: "hyperlink") %>
+							 |
+							<%= link_to("Share", new_client_share_search_path("expense",expense),id: "hyperlink") %>
+
+
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<%= paginate @expense %>
+
+				<%= link_to("New", new_expense_path , class: 'button radius',title1:"Press Enter Key or Mouse Click to add expenses details ", data: {tooltip1: '' }) %>
+
+
+	<%else%>
+
+
+        	<p><h5 class="subheader">Expense information is not found. Click New to add expense details</h5></p>
+        	<%= link_to 'New',new_expense_path, class: "button radius",title1:"Press Enter Key or Mouse Click to add expenses details ", data: {tooltip1: '' }%>
+
+	<%end%>
+<% else %>
+		<p>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+        <%= render "shared/search_client_button" %>
+
+<% end %>
+</section>
+</fieldset>

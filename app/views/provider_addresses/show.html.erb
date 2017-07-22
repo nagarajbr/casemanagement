@@ -1,0 +1,66 @@
+<!--
+Rule1) Client not found in the session - inform Client is not found in session - show Client Search Link.
+Rule 2) If No Address records are found - inform the user -and show New button , so that new records can be     created.
+Rule 3) If Address records are found for the provider - show Mailing & Residential address records in a loop.
+-->
+<fieldset>
+<section class="solidbody">
+<% if session[:PROVIDER_ID].present? %>
+    <legend><%= set_subheader("Address information for provider : #{@provider.provider_name}" ) %></legend>
+    <%= render "providers/selected_provider" %>
+     <% if @addresses.present? %>
+      <!-- record found so Normal View Page -->
+
+         <% for arg_addr in @addresses   %>
+                    <P>
+                      <fieldset style="width: 50%" id = "test_fieldset">
+                      <legend style=" width: auto " class="legend_group">
+                      <b><%= drop_down_value_description(arg_addr.address_type) %> Address:</b><br>
+                    </legend>
+                      <% if arg_addr.in_care_of.present? %>
+                  <%= " C/O #{arg_addr.in_care_of}"%><br>
+                  <% end %>
+                      <%= arg_addr.address_line1%><br>
+                       <% if arg_addr.address_line2.present? then %>
+                        <%= arg_addr.address_line2 %><br>
+               <% end %>
+                      <%= " #{arg_addr.city}, #{drop_down_value_description(arg_addr.state)}"%>
+                  <% if arg_addr.zip_suffix.present? %>
+                  <%= "#{arg_addr.zip}-#{arg_addr.zip_suffix}"%>
+                  <%else%>
+                  <%= "#{arg_addr.zip}"%>
+                  <% end %><br>
+                  <% if arg_addr.county.present? %>
+                  <%= drop_down_value_long_description(arg_addr.county) %><br>
+                  <% end %>
+           </fieldset>
+
+             <% end %>
+             <p>
+              <% if @notes.present? %>
+                <b>Notes: </b>
+                <%=  @notes %>
+              <%end%>
+            </p>
+             <p></p>
+        <%= link_to 'Edit',edit_provider_address_path, class: "button radius"%>
+
+     <% else %>
+      <!-- record not found , so show New button. -->
+      <% if validate_authorization(538) %>
+        <h5 class="subheader">No address information found. Click New to add address information.</h5>
+        <p></p>
+        <%= link_to 'New',new_provider_address_path, class: "button radius" %>
+      <% else %>
+        <h5 class="subheader">No address information to show.</h5>
+      <% end %>
+     <% end %>
+
+<% else %>
+        <legend><%= set_subheader("View Address information" ) %></legend>
+      <h5 class="subheader">Provider is not selected, Select a provider by clicking Search button.</h5>
+      <p></p>
+      <%= render "shared/search_provider_button" %>
+  <% end %>
+</section>
+</fieldset>

@@ -1,0 +1,43 @@
+<fieldset>
+<section class="solidbody">
+ <legend>
+  <%= set_subheader("Cost center information") %>
+    </legend>
+
+  <p>
+    <b>Service Program: </b>
+    <%= get_service_program_name(@cost_center.service_program_group) %>
+  </p>
+
+   <p>
+    <b>Cost Center: </b>
+    <%= @cost_center.cost_center %>
+  </p>
+
+
+  <p>
+    <b>Internal Order: </b>
+    <%= @cost_center.internal_order %>
+  </p>
+
+   <p>
+    <b>Account: </b>
+    <%= @cost_center.gl_account %>
+  </p>
+
+  <% if @cost_center.service_type.present? %>
+    <p>
+      <b>Service Type: </b>
+      <%= drop_down_value_description(@cost_center.service_type) %>
+    </p>
+  <% end %>
+
+    <%= link_to 'Back', cost_centers_path,class: "secondary button radius" %>
+    <% if validate_authorization(362) %>
+      <%= link_to 'Edit', edit_cost_center_path(@cost_center),class: "button radius" %>
+    <% end %>
+    <% if validate_authorization(363) %>
+      <%= link_to 'Delete', cost_center_path(@cost_center), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <% end %>
+</section>
+</fieldset>

@@ -1,0 +1,50 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Select program unit of client: #{client_full_name(@client)}") %></legend>
+		<% if @client_program_units.present? %>
+			<table>
+				<caption style="text-align:inherit"><p><b><%=("Program #{pluralize_without_count(@client_program_units.count,"Unit","")}") %></b></p></caption>
+			  <thead>
+			    <tr>
+					<th> Program Unit ID </th>
+					<th> Status</th>
+					<th> Primary Contact</th>
+					<th> Service Program </th>
+					<th> Disposition </th>
+					<th> Disposition Date </th>
+					<th> Current Participation Status </th>
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @client_program_units.each do |arg_pgu| %>
+
+						<tr>
+							<td>  <%= arg_pgu.id %></td>
+							<td>  <%= drop_down_value_description(arg_pgu.program_unit_status) %></td>
+							<td> <%= get_primary_beneficiary_of_program_unit(arg_pgu.id)%></td>
+							<td>  <%= get_service_program_name(arg_pgu.service_program_id) %></td>
+							<td>  <%= drop_down_value_description(arg_pgu.disposition_status) %></td>
+							<td>  <%= format_db_date(arg_pgu.disposition_date) %></td>
+							<td>  <%=  ProgramUnit.get_current_participation_status(arg_pgu.id)%></td>
+							<td><%= link_to "Select",service_authorizations_index_path(arg_pgu.id),id: "hyperlink" %></td>
+
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+	<%else%>
+		<% if validate_authorization(705) %>
+			<p>
+	         <h5 class="subheader">No Open Program Units found. Manage program Unit by clicking Program Management button</h5>
+	        </p>
+	        <%= link_to 'Program Management',program_units_path, class: "button radius"%>
+        <% else %>
+        	<h5 class="subheader">No Open Program Units to show.</h5>
+        <% end %>
+	<%end%>
+
+</section >
+</fieldset>

@@ -1,0 +1,26 @@
+<section class="solidbody">
+ 	<fieldset>
+		<p>
+			<%= render 'application_screenings/selected_application_details',arg_selected_application: @selected_application %>
+		</p>
+ 		<%#= set_subheader("Enter race-ethnicity information for client: #{client_full_name(@client)}") %>
+ 		<%= render "application_members", arg_object: @application_members, arg_object2:@show_race, arg_object3: @selected_application%>
+
+ 		<% if @application_members_without_race.present? %>
+	        <%= form_for @client, url: create_application_member_race_path, method: :post do |f| %>
+	  	     	<br><%= render "shared/common_error", object_argument: @client %><br>
+		        <ul>
+		           <%= render 'client_races/form',arg_object: f,arg_app_members:@application_members_without_race, arg_client: @client,arg_client_array:@client_races_in_db_array, arg_notes:@notes,arg_show_race:@show_race   %>
+				</ul>
+			    <p>
+	            	<%= link_to 'Cancel', start_application_processing_wizard_path,class: "secondary button radius" %>
+			        <%= f.submit "Save & Add",:name => "save_and_add",class: 'button radius' if @application_members_without_race.count > 1 %>
+			        <%= f.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+			    </p>
+			<% end %>
+		<% else %>
+			<b><h5 class="subheader">All the application members have their race information entered.</h5></b><br>
+			<%= link_to 'Back', start_application_processing_wizard_path,class: "secondary button radius" %>
+		<% end %>
+	</fieldset>
+</section>

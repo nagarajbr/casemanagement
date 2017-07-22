@@ -1,0 +1,52 @@
+<!--Manoj Patil 12/04/2015  -->
+
+
+
+<!-- NOT USED
+<fieldset>
+<section class="solidbody">
+	<legend><%#= set_subheader("Household Characteristics") %></legend>
+	<%#= render 'selected_household_partial' %>
+
+	<%#= form_for(@household,:url => process_household_characteristics_data_entry_wizard_path, method: :post) do |arg_household| %>
+		<%#= render "shared/common_error", object_argument: @household %>
+
+		<%# if  "#{@household.current_step}" == "household_member_general_health_characteristics_step" %>
+          <b><h3>Step 12-General health characteristics </h3></b>
+	    <%# end %>
+	    <%# if  "#{@household.current_step}" == "household_member_disability_characteristics_step" %>
+          <b><h3>Step 13-Disability characteristics </h3></b>
+	    <%# end %>
+	     <%# if  "#{@household.current_step}" == "household_member_mental_health_characteristics_step" %>
+          <b><h3>Step 14-Mental health characteristics </h3></b>
+	    <%# end %>
+	     <%# if  "#{@household.current_step}" == "household_member_substance_abuse_characteristics_step" %>
+          <b><h3>Step 15-Substance abuse characteristics </h3></b>
+	    <%# end %>
+	     <%# if  "#{@household.current_step}" == "household_member_domestic_violance_characteristics_step" %>
+          <b><h3>Step 16-Domestic violence/safety characteristics </h3></b>
+	    <%# end %>
+	     <%# if  "#{@household.current_step}" == "household_member_legal_characteristics_step" %>
+          <b><h3>Step 17-Legal characteristics </h3></b>
+	    <%# end %>
+	     <%# if  "#{@household.current_step}" == "household_member_pregnancy_characteristics_step" %>
+          <b><h3>Step 18-Pregnancy characteristic </h3></b>
+	    <%# end %>
+
+	    <ul>
+	       	<div class="row">
+				<div class="large-12 columns">
+                   <%#= render "#{@household.current_step}", :arg_object => arg_household %>
+                </div>
+	        </div>
+	    </ul>
+
+	    <div>
+      		<%#= render "buttons_next_back_save_for_characteristics", :arg_object => arg_household , :arg_instance =>@household %>
+    	</div>
+    <%# end %>
+</section>
+</fieldset>
+
+
+-->

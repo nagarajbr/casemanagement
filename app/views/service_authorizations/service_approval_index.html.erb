@@ -1,0 +1,63 @@
+<fieldset>
+<section class="solidbody">
+
+<legend> <%= set_subheader("Provider Services Pending Approval") %></legend>
+	<p>
+			<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		</p>
+
+			<% if @service_approval_pending_collection.present? %>
+
+
+					<table>
+						<caption style="text-align:inherit">
+								<p>
+									<b>
+										Services Pending Approval
+									</b>
+								</p>
+						</caption>
+					  <thead>
+					    <tr>
+
+							<th>  Plan </th>
+
+							<th> Service </th>
+							<th> Supportive Service </th>
+							<th> Provider </th>
+							<th> Service Date </th>
+							<th> Start Date </th>
+							<th> End Date </th>
+							<th> Action </th>
+						</tr>
+					  </thead>
+					    <tbody>
+							<% @service_approval_pending_collection.each do |arg_auth| %>
+								<tr>
+									<td>  <%= drop_down_value_description(arg_auth.action_plan_type) %></td>
+
+									<td>  <%= drop_down_value_description(arg_auth.service_type)  %></td>
+									<td>  <%= arg_auth.supportive_service_flag  %></td>
+									<td>  <%= get_provider_name(arg_auth.provider_id) %></td>
+									<td>  <%= format_db_date(arg_auth.service_date) if arg_auth.service_date.present?%></td>
+									<td>  <%= format_db_date(arg_auth.service_start_date) %></td>
+									<td>  <%= format_db_date(arg_auth.service_end_date)  %></td>
+									<td> <%= link_to "Show",service_approval_show_path(arg_auth.id),id: "hyperlink" %>	</td>
+								</tr>
+							 <% end %>
+						</tbody>
+					</table>
+
+
+			<% else %> <!-- else of @service_authorizations.present?-->
+			        <p>
+			        <h5 class="subheader">There are no services pending Approval.</h5>
+			        </p>
+
+
+			<% end %>
+
+
+</section>
+</fieldset>
+

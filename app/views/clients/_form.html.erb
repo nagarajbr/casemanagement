@@ -1,0 +1,146 @@
+			  </li>
+			  <body onload = "js_other_identification_document()">
+			   <li class="required">
+			      <%= arg_object.label :last_name%>
+			      <%= arg_object.text_field :last_name, autofocus: true,title1: "Enter Client's Last Name",maxlength: "35", data: {tooltip1: '' } %>
+			  </li>
+
+			  <li class="required">
+			      <%= arg_object.label :first_name%>
+			      <%= arg_object.text_field :first_name,  maxlength: "35",title1: "Enter Client's First Name", data: {tooltip1: '' } %>
+
+			  <li>
+			      <%= arg_object.label :middle_name %>
+			      <%= arg_object.text_field :middle_name, title1: "Enter Client's Middle Name", maxlength: "35", data: {tooltip1: '' } %>
+			  </li>
+
+			   <li>
+			      <%= arg_object.label :suffix %>
+			      <%= arg_object.text_field :suffix, title1: "Enter Client's Suffix", maxlength: "4", data: {tooltip1: '' } %>
+			  </li>
+			  <li class="required">
+
+			      <%= arg_object.label :ssn %>
+			      <%= arg_object.text_field :ssn, title1: "Enter Client's Social Security Number", maxlength: "11", data: {tooltip1: '' } %>
+			  </li>
+
+			  <%# if @client.new_record? %>
+			  <% if arg_client.new_record? %>
+				  <li>
+				  	<fieldset class="radio">
+		             <legend class="radiolegend"> Assign Pseudo SSN</legend>
+							<div class="button-group">
+								<label class="radio-button"><%= arg_object.radio_button :ssn_not_found, "Y"%>Yes</label>
+								<label class="radio-button"><%= arg_object.radio_button :ssn_not_found, "N"%>No</label>
+							</div>
+					</fieldset>
+
+				  </li>
+			  <% end %>
+
+			<li>
+			     <%= arg_object.label :ssn_enumeration_type %>
+			    <%if arg_client.ssn_enumeration_type.present? && arg_client.ssn_enumeration_type == 4354 %>
+			    	<%= text_field_tag arg_client.ssn_enumeration_type, "#{drop_down_value_description(arg_client.ssn_enumeration_type)}" ,:disabled => true%>
+			    <%else%>
+			    	<%= arg_object.select :ssn_enumeration_type, CodetableItem.active_item_list(74,"SSN Enumeration List").collect { |p| ["#{p.short_description} ", p.id] }%>
+			    <%end%>
+
+			 </li>
+
+			   <li>
+			      <%= arg_object.label :dob %>
+			      <%= arg_object.date_field :dob, onkeyup:"validate_date_format(event)" %>
+			      <!-- will be implemented after analysis of Feb/30/ day issue -fix
+				      <span class="datetime">
+				          	 <%#=  arg_object.date_select(:dob,attop_date_settings)%>
+				      </span>
+			 		 -->
+			  </li>
+
+
+			  <li>
+			      <%= arg_object.label :gender%>
+
+			      <%= arg_object.select :gender, CodetableItem.item_list(85,"Gender List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a gender' },title1: "Select Client's Gender from list", data: {tooltip1: '' } %>
+
+			  </li>
+			   <fieldset class="radio">
+            	<div class="required">
+	            	<legend class="radiolegend"> Felon </legend>
+	            </div>
+				<div class="button-group">
+						<label class="radio-button"><%= arg_object.radio_button :felon_flag, "Y"%>Yes</label>
+						<label class="radio-button"><%= arg_object.radio_button :felon_flag, "N"%>No</label>
+				</div>
+			</fieldset>
+
+			<fieldset class="radio">
+				<div class="required">
+	            	<legend class="radiolegend"> Received TANF payment in other state </legend>
+	            </div>
+					<div class="button-group">
+							<label class="radio-button"><%= arg_object.radio_button :rcvd_tea_out_of_state_flag, "Y"%>Yes</label>
+								<label class="radio-button"><%= arg_object.radio_button :rcvd_tea_out_of_state_flag, "N"%>No</label>
+					</div>
+
+			</fieldset>
+
+			<fieldset class="radio">
+	            	<legend class="radiolegend"> Registered to Vote </legend>
+				<div class="button-group">
+						<label class="radio-button"><%= arg_object.radio_button :register_to_vote_flag, "Y"%>Yes</label>
+						<label class="radio-button"><%= arg_object.radio_button :register_to_vote_flag, "N"%>No</label>
+				</div>
+			</fieldset>
+
+			 <fieldset class="radio">
+	             <legend class="radiolegend"> Veteran </legend>
+						<div class="button-group">
+							<label class="radio-button"><%= arg_object.radio_button :veteran_flag, "Y"%>Yes</label>
+							<label class="radio-button"><%= arg_object.radio_button :veteran_flag, "N"%>No</label>
+						</div>
+				</fieldset>
+
+			   <li>
+			      <%= arg_object.label :marital_status %>
+
+			       <%= arg_object.select :marital_status, CodetableItem.item_list(41,"Marital Status List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a Marital Status' },title1: "Select Client's Marital Status from list", data: {tooltip1: '' } %>
+			  </li>
+			   <li>
+			      <%= arg_object.label :primary_language%>
+
+			       <%= arg_object.select :primary_language, CodetableItem.item_list(3,"Language List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a Primary Language' },title1: "Enter Client's Primary Language", data: {tooltip1: '' } %>
+			  </li>
+
+
+				<li>
+			      <%= arg_object.label :identification_type %>
+
+			      <%= arg_object.select :identification_type, CodetableItem.item_list(92,"Identification List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Identification Type' },:onchange => 'js_other_identification_document(this);'%>
+
+			  </li>
+
+
+            <div id="client_other_identification_document" style="display: none">
+			  <li class="required">
+				<%= arg_object.label :other_identification_document ,"Other identification document" %>
+				<%= arg_object.text_field :other_identification_document,  maxlength: "25"%>
+			  <li>
+            </div>
+
+
+
+
+
+              <%# if @client.new_record? != true %>
+					<!-- <li>
+					      <%#= arg_object.label :death_date%>
+					      <%#= arg_object.date_field :death_date %>
+					  </li> -->
+			  <%# end %>
+
+
+
+
+

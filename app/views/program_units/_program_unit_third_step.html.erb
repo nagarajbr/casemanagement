@@ -1,0 +1,11 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- 3rd step - Beneficiary Member -->
+ <li class="required">
+
+  <%= arg_object.label :beneficiary_client_id,"Primary" %>
+  <%= arg_object.select :beneficiary_client_id, @program_unit_members.collect { |p| ["#{get_client_full_name(p.client_id)} ", p.client_id ] },{ :include_blank => 'Choose Primary Member' } %>
+
+</li>
+
+
+

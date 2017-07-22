@@ -1,0 +1,44 @@
+
+  <%= form_for @out_of_state_payments, url: create_out_of_state_payment_path do |f| %>
+    <fieldset>
+      <section class="solidbody">
+    	<legend><%= set_subheader("Enter out of state payments for client: #{client_full_name(@client)}") %></legend>
+  <%= render "shared/common_error", object_argument: @out_of_state_payments %>
+    <ul>
+
+    <div class="row">
+    	<div class="large-4 columns">
+
+             <li class="required">
+              <%= f.label :state %>
+              <%= f.select :state, CodetableItem.get_all_states_except_arkansas(104,"States").collect { |p| ["#{p.long_description} ", p.id] },{ :include_blank => 'Select State' } %>
+            </li>
+
+             <li class="required">
+            	<%= label_tag :from %>
+            	<%= date_field_tag 'from', value = params[:from], onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <li class="required">
+            	<%= label_tag :to %>
+            	<%= date_field_tag 'to', value = params[:to], onkeyup:"validate_date_format(event)" %>
+            </li>
+
+             <!-- <li class="required">
+              <%#= f.label :work_participation_status %>
+              <%#= f.select :work_participation_status, CodetableItem.item_list(113,"work_participation_status").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Work Participation Status' } %>
+            </li> -->
+
+         </div>
+    </div>
+    </ul>
+    <p>
+      <%= link_to 'Cancel', out_of_state_payments_path,class: "secondary button radius" %>
+      <%= f.submit "Save", class: 'button radius' %>
+    </p>
+</section >
+</fieldset>
+<% end %>
+
+
+

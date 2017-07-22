@@ -1,0 +1,21 @@
+<fieldset>
+  <section class="solidbody">
+    <!-- <legend><%= set_subheader("Edit address information for: #{client_full_name(@client)}") %></legend> -->
+
+        <% if session[:CLIENT_ID].present? %>
+          <%= form_for @address, url: update_living_arrangement_path, method: :post do |f| %>
+            <%= render "shared/common_error", object_argument: @addresses_error_messages %>
+            <%= render 'addresses/form_living_arrangement',arg_object: f,arg_address: @address,arg_primary_applicant_address: @primary_applicant_address, arg_primary_applicant: @primary_applicant, arg_client: @client %>
+             <p>
+                <%= link_to 'Cancel', show_address_path, class: "secondary button radius" %>
+                <%= f.submit "Save", class: 'button radius' %>
+            </p>
+          <% end %>
+        <% else %>
+          <legend><h5 class="subheader">Client is not selected, Select a client by clicking Search Client button.</h5><br></legend>
+          <p></p>
+          <%= render "shared/search_client_button" %>
+      <% end %>
+  </section>
+</fieldset>
+

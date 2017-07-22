@@ -1,0 +1,25 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %> </legend>
+	<p><%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal: @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+	</p>
+	<p>
+			<% @assessment_questions.each do |arg_qstn|%>
+				<%= show_assessment_question_control(arg_qstn.id,@assessment_id).html_safe %>
+			<% end %>
+		</p>
+ 		<%if !(@client_assessment.first_step?)%>
+			 <%= link_to "Previous", process_previous_step_path,class: 'button' %>
+		 <%end%>
+		<%# if validate_authorization(311) %>
+			<%= link_to "Edit",edit_common_assessment_path(@sub_section_id,@assessment_id),class: 'button radius'%>
+		<%# end %>
+		 <%if !(@client_assessment.last_step?)%>
+			<%= link_to "Next",process_next_step_path,class: 'button' %>
+		<%end%>
+		<%# if validate_authorization(664) %>
+			<%= link_to "Review Assessment",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+		<%# end %>
+</section>
+</fieldset>
+

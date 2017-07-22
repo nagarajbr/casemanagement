@@ -1,0 +1,5 @@
+Death match batch process start: 03-04-2016 16-20-29
+Number of records extracted: 171
+Number of records processed: 171
+Number of records errored: 0- look at error file for detailed records and the reason for error
+Death match batch process end: 03-04-2016 16-20-29

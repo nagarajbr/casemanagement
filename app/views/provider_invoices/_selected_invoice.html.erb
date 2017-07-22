@@ -1,0 +1,27 @@
+<table>
+	<caption style="text-align:inherit"><b>Selected Warrant</b>
+<p></p></caption>
+  <thead>
+    <tr>
+		<th> Warrant number </th>
+		<th> Client </th>
+		<th> Program Unit ID </th>
+		<th> Warrant Date </th>
+		<th> Amount </th>
+
+		<th> Status </th>
+		<th> Provider submitted Invoice</th>
+	</tr>
+  </thead>
+    <tbody>
+			<tr>
+				<td>  <%= arg_provider_invoice.id%></td>
+				<td>  <%= get_client_full_name(arg_service_authorization_object.client_id)%></td>
+				<td>  <%= arg_service_authorization_object.program_unit_id%></td>
+				<td>  <%= format_db_date(arg_provider_invoice.invoice_date)%></td>
+				<td>  <%= number_to_currency_br(arg_provider_invoice.invoice_amount)%></td>
+				<td>  <%= drop_down_value_description(arg_provider_invoice.invoice_status) %></td>
+				<td>  <%= arg_provider_invoice.provider_invoice %></td>
+			</tr>
+	</tbody>
+</table>

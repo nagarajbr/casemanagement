@@ -1,0 +1,52 @@
+<fieldset>
+	 <section class="solidbody">
+	 	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+	 		<legend><%= set_subheader(" Enter #{drop_down_value_description(@income.incometype)} income adjustment details for household member: #{client_full_name(@client)}") %> </legend>
+	           <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+	          <%= render "/income_details/parent_income",arg_income: @income %>
+	          <%= render "parent_income_detail", arg_income_detail:@income_detail %>
+
+		        <%= form_for(@adjust_reason, :url => create_household_member_unearned_income_detail_adjust_reason_path(@client.id,@income_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :post) do |f| %>
+				       <%= render "shared/common_error", object_argument: @adjust_reason %><br>
+				        <ul>
+					     	<div class="row">
+					          <div class="large-4 columns">
+					               <%= render 'form',f: f %>
+						 	  </div>
+						    </div>
+						</ul>
+					    <p>
+				       		<%= link_to 'Back', household_member_unearned_income_detail_adjust_reasons_index_path(@client.id,@income_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "secondary button radius" %>
+	       					<%= f.submit "Save", class: 'button radius'%>
+
+					    </p>
+				<% end %>
+	 	<% else %>
+	 			<legend><%= set_subheader(" Enter #{drop_down_value_description(@income.incometype)} income adjustment details for: #{client_full_name(@client)}") %> </legend>
+	          <%= render "/income_details/parent_income",arg_income: @income %>
+	          <%= render "parent_income_detail", arg_income_detail:@income_detail %>
+
+			<%= form_for(@adjust_reason, :url => create_unearned_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id), method: :post) do |f| %>
+			       <%= render "shared/common_error", object_argument: @adjust_reason %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'form',f: f %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+			       		<%= link_to 'Cancel', unearned_income_detail_income_detail_adjust_reasons_path(@menu,@income_detail.id),class: "secondary button radius" %>
+       					<%= f.submit "Save", class: 'button radius'%>
+				      <% if @show_delete.present? %>
+				        <%= link_to 'Delete', delete_unearned_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id,@adjust_reason.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+				      <% end %>
+				    </p>
+			<% end %>
+
+
+	 	<% end %>
+
+
+ 	</section>
+</fieldset>

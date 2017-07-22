@@ -1,0 +1,32 @@
+<!--Manoj Patil 10/16/2014  -->
+<table>
+	<caption style="text-align:inherit"><b> Program Benefit Summary </b><p></p></caption>
+	  <thead>
+	    <tr>
+			<th> Eligible </th>
+			<th> Number of Eligible Members </th>
+			<!--
+			<th> Total Earned Income </th>
+			<th> Total Unearned Income </th>
+			<th> Total Expenses </th>
+			<th> Resources Pass/Fail</th>
+			<th> Total Resources</th>
+		-->
+			<th> Benefit Amount </th>
+		</tr>
+	  </thead>
+	    <tbody>
+				<tr>
+					<td id = <%= get_flag_description(arg_object.budget_eligible_ind) == "No" ? "col-result-fail" : "col-result-pass" %> > <%=  get_flag_description(arg_object.budget_eligible_ind) %></td>
+					<td> <%= arg_object.program_unit_size %></td>
+					<!--
+					<td> <%#= arg_object.tot_earned_inc %></td>
+					<td> <%#= arg_object.tot_unearned_inc %></td>
+					<td> <%#= arg_object.tot_expenses %></td>
+					<td> <%#= get_flag_description(arg_object.res_pass_fail_ind) %></td>
+					<td> <%#= arg_object.tot_resources %></td>
+				-->
+					<td> <%= number_to_currency_br(arg_object.bu_sum_result) %>  </td>
+				</tr>
+		</tbody>
+</table>

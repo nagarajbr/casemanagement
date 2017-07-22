@@ -1,0 +1,48 @@
+
+<%= form_for @work_queue_local_office_subscription_object, url: update_work_queue_local_office_subscription_path(@work_queue_local_office_subscription_object.local_office_id), method: :put do |f| %>
+
+<section class="solidbody">
+	<fieldset>
+	     <legend>
+	     	<%= set_subheader("Edit Local Office Queue Subscription information") %>
+         </legend>
+	     <br><%= render "shared/common_error", object_argument: @work_queue_local_office_subscription_object %><br>
+
+	    <p>
+	        <b>Local Office: </b>
+	        <%=  drop_down_value_description(@work_queue_local_office_subscription_object.local_office_id) %>
+	    </p>
+
+        <p></p>
+        <fieldset>
+        <div class="required">
+		  <legend class="radiolegend"> Queue </legend>
+		</div>
+		<br>
+
+        <div class="row">
+				<div class="large-8 column">
+			         <div class="checkbox-style">
+			        	<%#= hidden_field_tag("work_queue_local_office_subscription[queue_types][]",nil) %>
+						<% @all_queues.each do |each_queue|%>
+							<%= check_box_tag("work_queue_local_office_subscription[queue_types][]",
+							                   each_queue.id,
+							                   @local_office_queues_in_db_array.include?(each_queue.id)
+							                )
+							%>
+							<%= each_queue.short_description%>
+							<br>
+						<% end %>
+			        </div>
+			    </div>
+		</div>
+
+        </fieldset><br>
+
+       <p>
+       		<%= link_to 'Cancel', work_queue_local_office_subscriptions_index_path,class: "button secondary radius" %>
+            <%= f.submit "Save", class: 'button radius' %>
+	    </p>
+	</fieldset>
+	 </section>
+<% end %>

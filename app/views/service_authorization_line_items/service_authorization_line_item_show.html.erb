@@ -1,0 +1,98 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Service Plan Line Item details for Provider:  #{provider_name(@provider)}" ) %>
+			</legend>
+			<br>
+			<%= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+			<P></P>
+
+			<p>
+			<b>Warrant number:  </b>
+                <%= @service_authorization_line_item.provider_invoice_id %>
+			</p>
+
+			<p>
+			    <b>Service Date:  </b>
+                <%= format_db_date(@service_authorization_line_item.service_date) %>
+			</p>
+
+			<% if @provider_service_authorization.service_type == 6215 %>
+				<p>
+				   <%= render  "common_start_address", arg_object: @service_authorization_line_item %>
+				</p>
+				<p>
+				   <%= render  "common_end_address", arg_object: @service_authorization_line_item %>
+				</p>
+
+
+				<p>
+				    <b>Service Begin Time:  </b>
+	                <%= @service_authorization_line_item.service_begin_time.strftime("%I:%M %p") %>
+				</p>
+				<p>
+				    <b>Service End Time:  </b>
+	                <%= @service_authorization_line_item.service_end_time.strftime("%I:%M %p") if @service_authorization_line_item.service_end_time.present?%>
+				</p>
+				<p>
+				    <b>Estimated Distance Travelled:  </b>
+	                <%= @service_authorization_line_item.quantity %> <%= drop_down_value_description(@service_authorization_line_item.unit_of_measure) %>
+				</p>
+
+				<p>
+				    <b>Estimated Cost:  </b>
+	                 <%= number_to_currency_br(@service_authorization_line_item.estimated_cost) %>
+				</p>
+				<p>
+				    <b>Actual Distance Travelled:   </b>
+	                <%= @service_authorization_line_item.actual_quantity %> <%= drop_down_value_description(@service_authorization_line_item.unit_of_measure) %>
+				</p>
+			<% end %>
+
+			<p>
+			    <b>Actual Cost:  </b>
+                <%= number_to_currency_br(@service_authorization_line_item.actual_cost) %>
+			</p>
+
+			<p>
+			    <b>Override Reason:  </b>
+                <%= @service_authorization_line_item.override_reason %>
+			</p>
+
+			<p>
+			    <b>Provider Submitted Invoice:  </b>
+                <%= @service_authorization_line_item.provider_invoice %>
+			</p>
+
+			<p>
+			    <b>Work Flow Status:  </b>
+                <%= drop_down_value_description(@service_authorization_line_item.state) %>
+			</p>
+
+			<p>
+			    <b>Payment Status:  </b>
+                <%= drop_down_value_description(@service_authorization_line_item.line_item_status) %>
+			</p>
+
+			<b>Notes:  </b>
+                <%= @service_authorization_line_item.notes %>
+			</p>
+
+		<%= link_to "Back ",service_authorization_line_items_index_path(@provider_service_authorization.id), class: "secondary button radius" %>
+
+		<% if @can_edit == "Y" %>
+			<% if @provider_service_authorization.service_type == 6215 %>
+			    <% if validate_authorization(617) %>
+				   <%= link_to "Edit ",transport_service_authorization_line_item_edit_path(@provider_service_authorization.id,@service_authorization_line_item.id), class: "button radius" %>
+				<% end %>
+			<% else %>
+			     <% if validate_authorization(744) %>
+				    <%= link_to "Edit ",non_transport_service_authorization_line_item_edit_path(@provider_service_authorization.id,@service_authorization_line_item.id), class: "button radius" %>
+				<% end %>
+			<% end %>
+		   <!--  <%# if validate_authorization(728) %>
+			  <%#= link_to "Submit ",service_authorization_line_item_approve_path(@provider_service_authorization.id,@service_authorization_line_item.id), class: "button radius" %>
+			<%# end %> -->
+		<% end %>
+	</section>
+</fieldset>
+

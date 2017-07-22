@@ -1,0 +1,14 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Address information for household: #{@household.name}") %></legend>
+		    		<%= form_for @household_physical_address, url: create_household_address_path(session[:HOUSEHOLD_ID].to_i), method: :post do |f| %>
+					     	<%= render "shared/common_error", object_argument: @household_physical_address %>
+					     	<%= render "contacts/address_confirmation_partial", arg_object: f, arg_partial: "show_entered_and_usps_address", arg_flag: :overwrite_household_address, addr_type: "mailing", arg_address: @household_physical_address, arg_ups_address: @usps_address %>
+					     	<%= render "address_enetered_fields", arg_object: f %>
+					     	 <p>
+						        <%= link_to 'Back', new_household_address_path(session[:HOUSEHOLD_ID].to_i), class: "secondary button radius" %>
+						        <%= f.submit "Save", class: 'button radius' %>
+						    </p>
+				    <% end %>
+	</section>
+</fieldset>

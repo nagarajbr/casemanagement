@@ -1,0 +1,24 @@
+
+    <ul>
+        <div class="row">
+
+         <div class="large-4 columns">
+            <li class="required">
+              <%= arg_object.label :language_type %>
+              <%= arg_object.select :language_type, CodetableItem.item_list(3,"Language").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a language' }%>
+            </li>
+
+            <li  class="required" >
+              <%= arg_object.label :start_date %>
+              <%= arg_object.date_field :start_date, alt: "start date", onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <li>
+              <%= arg_object.label :end_date %>
+              <%= arg_object.date_field :end_date, alt: "end date", onkeyup:"validate_date_format(event)" %>
+            </li>
+         </div>
+      </div>
+    </ul>
+
+

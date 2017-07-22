@@ -1,0 +1,60 @@
+<!--Manoj Patil 10/16/2014  -->
+<section class="solidbody">
+
+	<% if @clients.present? %>
+		<caption>
+			<%= set_subheader("Search Results") %>
+		</caption>
+		<P><%= render "shared/common_error", object_argument: @client_application %></p>
+		<table>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> Social Security Number </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+
+					<th> </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @clients.each do |client| %>
+				<tr>
+					<td>  <%=  client.get_full_name %></td>
+					<td>  <%=  format_SSN(client.ssn) %></td>
+					<td>  <%=  format_db_date client.dob %></td>
+					<td>  <%=  drop_down_value_description(client.gender) %></td>
+
+					<td>
+							<%= link_to "select",set_member_in_session_path(client.client_id),id: "hyperlink",title1: "Mouse Click to Select the Target Client", data: {tooltip1: '' }  %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius",title1: "Press Enter Key or Mouse Click to go back to previous Page", data: {tooltip1: '' } %>
+			<%= link_to 'New Search',new_member_search_path(@client_application.id,"WIZARD"), class: "button radius"%>
+
+		<%= link_to 'Register New Client', new_member_path ,class: "button radius",title: "Press Enter Key or Mouse Click to Register new client and add him to Application", data: {tooltip1: '' } %>
+
+	<% else %>
+	<legend>
+	<%= set_subheader("Search for a client") %>
+	</legend>
+	<fieldset>
+
+		<%= form_tag member_search_results_path, method: 'get' do %>
+				<%= render 'shared/common_client_search_criteria' %>
+				<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+				<%= submit_tag "Search", class: 'button radius' %>
+				<% if @show_add_button  %>
+
+					<%= link_to 'Register New Client', new_member_path ,class: "button radius" %>
+
+				<% end %>
+
+		<% end %>
+	</fieldset>
+  <% end %>
+</section>

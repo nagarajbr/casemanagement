@@ -1,0 +1,12 @@
+<fieldset>
+  <section class="solidbody">
+<legend><%= set_subheader("#{drop_down_value_description(@action_plan.action_plan_type)} information for: #{client_full_name(@client)}") %></legend>
+      <%= render "parent_action_plan",arg_action_plan:@action_plan,arg_emp_goal:@employment_goal  %>
+
+      <%= render 'show_partial',arg_object: @action_plan_detail,arg_outcome:@outcome,arg_schedule:@schedule %>
+
+      <%= link_to 'Back', client_activities_path, class: "secondary button radius" %>
+
+
+  </section>
+</fieldset>

@@ -1,0 +1,176 @@
+@import "colors";
+
+
+fieldset {
+    border: 0px solid #dddddd !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#test_fieldset {
+    border: 2px solid #000 !important;
+    border-radius: 5px;
+    padding: 15px;
+    ul{
+        padding-left: 5px;
+        }
+
+    li{
+        padding-left: 20px;
+        }
+
+}
+
+#test_fieldset  legend {
+    color: #000;
+    font-size: 20px;
+    padding: 5px 10px ;
+    border-radius: 5px;
+    margin-left: 20px;
+
+
+}
+
+
+
+fieldset legend {
+    background: none !important;
+    width: 100%;
+}
+fieldset ul{
+	list-style-type:none;
+	}
+
+fieldset ul li{
+	&.required input{
+
+	}
+
+	&.required label::after{
+	content:"*";
+	color: $star-red-color;
+	}
+}
+
+
+fieldset .radio{
+    border: none;
+    padding: 0;
+    }
+
+fieldset .button-group{
+    padding: 0 0 1em 0;
+ }
+
+
+fieldset .subheader {
+    font-weight: 300;
+    margin-bottom: 0.0em;
+    width: 100%;
+   }
+
+.solidbody {
+    border: 1px solid #dddddd;
+    margin: 1.125em 0;
+    padding: 1.25em;
+    background-color: lighten($secondary-background-color, 50%);
+    }
+
+fieldset div{
+    &.required input{
+
+    }
+
+    &.required label::after{
+    content:"*";
+    color: $star-red-color;
+    }
+    &.required legend::after{
+    content:"*";
+    color: $star-red-color;
+    }
+}
+.radiolegend {
+    color: #4d4d4d;
+    cursor: pointer;
+    display: block;
+    font-size: 1.125em;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+table {
+      width: 99% ;
+     }
+
+th label {
+    color: #222222;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+}
+
+caption .subheader {
+    font-weight: 300;
+    margin-bottom: 0.0em;
+    text-align: left;
+   }
+
+ .fontc {
+    color: #4d4d4d;
+    font-size: 1.125em;
+    text-align: left;
+}
+
+
+
+//pagination styles
+
+.pagination {
+    text-align: center;
+    margin: 20px
+}
+.pagination a, .pagination strong {
+    background: $white-color;
+    display: inline-block;
+    margin-right: 3px;
+    padding: 4px 12px;
+    text-decoration: none;
+    line-height: 1.5em;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    border-style: solid ;
+    border-width: 1px;
+    border-color: $white-color;
+}
+.pagination a:hover {
+    background-color: lighten($top-nav-bg-color, 25%);
+    color: #fff;
+}
+.pagination .current {
+    background: lighten($top-nav-bg-color, 5%);
+    color: $white-color;
+    display: inline-block;
+    margin-right: 3px;
+    padding: 4px 12px;
+    text-decoration: none;
+    line-height: 1.5em;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.pagination strong {
+    color: #fff;
+    background-color: #BEBEBE;
+}
+
+
+
+
+
+#prescreen_household_member_personal_responsibility_agreement{
+    min-height: 400px;
+    min-width: 700px;
+}

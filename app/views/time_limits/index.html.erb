@@ -1,0 +1,47 @@
+<fieldset>
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+	<legend>  <%= set_subheader("Program participation information for: #{client_full_name(@client)}") %>
+	</legend>
+	<% if @time_limits.present? %>
+
+			<table>
+				<caption style="text-align:inherit"><p><b>Time Limits</b></p></caption>
+			  <thead>
+			    <tr>
+					<th style="text-align:center"> Federal Count</th>
+					<th style="text-align:center"> TEA State Count</th>
+					<th style="text-align:center"> Work Pays State Count</th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @time_limits.each do |arg_s| %>
+						<tr>
+							<td align= "center">  <%=  arg_s.federal_count %></td>
+							<td align= "center">  <%=  arg_s.tea_state_count %></td>
+							<td align= "center" >  <%=  arg_s.work_pays_state_count %></td>
+
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+
+
+	<% else %>
+		<% if validate_authorization(640) %>
+	        <p><h5 class="subheader">No time limit informaton found.</h5></p>
+	        <h5 class="subheader">Click <b><%= link_to 'here',out_of_state_payments_path %></b> to enter Out of state payments.</h5>
+	    <% else %>
+	    	 <p><h5 class="subheader">No time limit informaton to show.</h5></p>
+	    <% end %>
+    <%end%>
+<%else%>
+        <%= set_subheader("Program participation information for #{client_full_name(@client)} " ) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+<%end%>
+</section>
+<fieldset>

@@ -1,0 +1,41 @@
+<fieldset>
+	 <section class="solidbody">
+	 	    <legend><%= set_subheader(" Enter #{drop_down_value_description(@income.incometype)} income adjustment details for: #{client_full_name(@client)}") %> </legend>
+	          <%= render "/income_details/parent_income",arg_income: @income %>
+	          <%= render "income_detail_adjust_reasons/parent_income_detail", arg_income_detail:@income_detail %>
+
+		<% if  @menu == 'CLIENT'%>
+			<%= form_for(@adjust_reason, :url => create_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id), method: :post) do |f| %>
+
+			       <%= render "shared/common_error", object_argument: @adjust_reason %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'income_detail_adjust_reasons/form',f: f %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+			      <%= link_to 'Cancel', income_detail_income_detail_adjust_reasons_path(@menu,@income_detail.id),class: "secondary button radius" %>
+       				<%= f.submit "Save", class: 'button radius'%>
+			    </p>
+			<% end %>
+		<%else%>
+			<%= form_for(@adjust_reason, :url => create_household_member_income_detail_adjustment_path(@client.id,@income_detail.id), method: :post) do |f| %>
+
+			       <%= render "shared/common_error", object_argument: @adjust_reason %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'income_detail_adjust_reasons/form',f: f %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+			       <%= link_to 'Back', household_member_income_detail_adjustments_index_path(@client.id,@income_detail.id),class: "secondary button radius" %>
+       				<%= f.submit "Save", class: 'button radius'%>
+			    </p>
+			<% end %>
+		<%end%>
+ 	</section>
+</fieldset>

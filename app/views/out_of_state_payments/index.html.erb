@@ -1,0 +1,52 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Out of state payments for: #{client_full_name(@client)}") %></legend>
+		<% if  @out_of_state_payments.present?%>
+			<p>
+				<b>Out of State Payment Count:</b>
+			<!-- 	<%= @out_of_state_payments.present? ? @out_of_state_payments.count : 0 %> -->
+				<%= @out_of_state_payments.total_count %>
+			</p>
+
+
+			<table>
+				<caption style="text-align:inherit"> <b> Out of State Payment details</b><p></p></caption>
+			  <thead>
+			    <tr>
+					<th> State </th>
+					<th> Payment Month </th>
+					<th> Work Participation Status</th>
+					<th> Action </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @out_of_state_payments.each do |oosp| %>
+						<tr>
+							<td> <%= drop_down_value_long_description(oosp.state) %></td>
+							<td> <%= oosp.payment_month %></td>
+							<td> <%= drop_down_value_description(oosp.work_participation_status) %></td>
+							<%# if validate_authorization(468) %>
+								<td><%= link_to 'Delete',destroy_out_of_state_payment_path(oosp.id ),id: "hyperlink",data: { confirm: 'Are you sure?' },method: :delete, class: "alert", id: "hyperlink_alert"  %>
+								</td>
+							<%# end %>
+					 <% end %>
+				</tbody>
+			</table>
+
+			<%= paginate @out_of_state_payments %>
+    	<%else%>
+    		<%# if validate_authorization(466) %>
+	            <h5 class="subheader">Out of state payments information is not found. Click Add Payments to enter out of state payment information. </h5>
+	            <p></p>
+            <%# else %>
+            	<!-- <h5 class="subheader">No Out of state payments information to show. </h5>
+            	<p></p> -->
+            <%# end %>
+    	<%end%>
+	<%= link_to("Back", time_limits_path , class: "secondary button radius") %>
+	<%# if validate_authorization(466) %>
+    	<%= link_to("Add Payments", edit_out_of_state_payment_path , class: 'button radius') %>
+	<%# end %>
+</section>
+</fieldset>

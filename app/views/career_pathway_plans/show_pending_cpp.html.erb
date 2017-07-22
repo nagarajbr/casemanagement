@@ -1,0 +1,43 @@
+<fieldset>
+	<section class="solidbody">
+		<%= render 'show_cpp',
+					arg_career_pathway_plan:@career_pathway_plan,
+					arg_selected_program_unit: @selected_program_unit,
+					arg_sections: @assessed_sections_with_barriers,
+					arg_barriers:@assessment_barriers,
+					arg_plan_details: @open_employment_plan_details,
+					arg_pathway_plan: 0,
+					arg_client:@client,
+					arg_assessment_id:@assessment_id,
+					arg_action_plan: @action_plan,
+					arg_work_participation: @work_participation,
+					arg_employment_goal: @employment_goal,
+					completed_activities: @completed_activities,
+					scheduled_activities: @scheduled_activities,
+					planned_activity_for_clients_in_pgu: @planned_client_activity_hours_collection,
+					arg_warnings: @warnings
+		%>
+
+		<% if @career_pathway_plan.state != 6166 %>
+			<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+		    	<%= link_to 'Edit', edit_cpp_path(@career_pathway_plan.id),class: "button radius" %>
+		    <% else %>
+		    	<%= link_to 'Edit',"#", class: "disabled button"%>
+				<p>
+					<h6 class="subheader"><b>Edit</b> button is disabled because, You are not the case manager of this program unit. Only case manager of this program unit can edit career plan.</h6>
+				</p>
+		    <% end %>
+		<% end %>
+
+		<% if @can_show_approve_reject_buttons %>
+			<% if can_logged_in_user_edit?("REQUEST_TO_APPROVE_CPP",@selected_program_unit.id)%>
+				<%= link_to 'Approve', approve_cpp_path(@career_pathway_plan.id),class: "button radius" %>
+				<%= link_to 'Reject', edit_cpp_reject_path(@career_pathway_plan.id),class: "button radius" %>
+			<% else %>
+				<%= link_to 'Approve', "#",class: "disabled button" %>
+				<%= link_to 'Reject', "#",class: "disabled button" %>
+				<h6 class="subheader"><b>Approve</b> and <b>Reject</b> buttons are disabled because, <%= "#{@ls_security_message}" if @ls_security_message.present? %></h6>
+			<% end%>
+		<% end%>
+	</section>
+</fieldset>

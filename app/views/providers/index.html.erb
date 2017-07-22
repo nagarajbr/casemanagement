@@ -1,0 +1,64 @@
+	<fieldset>
+<section class="solidbody">
+<% if @provider.present? %>
+		<legend><%= set_subheader("Provider Information for: #{@provider.provider_name}") %></legend>
+	<%= render "selected_head_provider_with_link" %>
+	<p></p>
+	<table>
+		<% if @head_office_indicator == "Yes" %>
+			<caption style="text-align:inherit"> <b> Selected Provider Main Office </b><p></p></caption>
+			  <thead>
+	    		<tr>
+				<th> Provider Name </th>
+				<th> Tax ID/ SSN </th>
+				<th> Provider Type </th>
+				<th> Action </th>
+				</tr>
+	 		 </thead>
+	    	<tbody>
+
+				<tr>
+					<td>  <%=  @provider.provider_name %></td>
+					<td>  <%= @provider.tax_id_ssn %></td>
+					<td>  <%= drop_down_value_description(@provider.provider_type) %></td>
+					<!-- Assumption : Only Provider of type Business can have Branch office -->
+					<td>  <%= link_to "Show",show_provider_path(@provider.id),id: "hyperlink" %>| <%= link_to "Branch Offices",branch_offices_index_path(@provider.head_office_provider_id),id: "hyperlink" %>	</td>
+				</tr>
+			</tbody>
+	<% else %>
+			<caption style="text-align:inherit"> <b> Selected Provider Branch Office </b><p></p></caption>
+			<thead>
+	    		<tr>
+				<th> Provider Name </th>
+				<th> City </th>
+				<th> Provider Type </th>
+				<th> Action </th>
+				</tr>
+	 		 </thead>
+	    	<tbody>
+
+				<tr>
+					<td>  <%=  @provider.provider_name %></td>
+					<td>  <%= get_provider_city(@provider.id) %></td>
+					<td>  <%= drop_down_value_description(@provider.provider_type) %></td>
+					<!-- Assumption : Only Provider of type Business can have Branch office -->
+					<td>  <%= link_to "Show",show_provider_path(@provider.id),id: "hyperlink" %>	</td>
+				</tr>
+			</tbody>
+		<% end %>
+	</table>
+		<% if @provider.provider_type == 6139  && @head_office_indicator == "Yes" %>
+			<% if validate_authorization(685) %>
+	  			<%= link_to "Add Branch Office", new_branch_office_path(@head_provider_id) , class: 'button radius' %>
+  			<% end %>
+	  	<% end %>
+<% else %>
+	<legend><%= set_subheader("Provider Information") %></legend>
+	<h5 class="subheader">No providers selected, search for a provider.</h5><br><br>
+    <%= link_to 'New Search',new_provider_search_path, class: "button radius"%>
+<% end %>
+
+
+</section>
+</fieldset>
+

@@ -1,0 +1,15 @@
+<client>
+	<license_id>123456789</license_id>
+	<first_name>Patricia</first_name>
+	<last_name>Will</last_name>
+	<dob>12-06-1980</dob>
+	<height>6-01</height>
+	<issued_date>06-20-2014</issued_date>
+	<expiry_date>05-29-2018</expiry_date>
+	<ssn>785219847</ssn>
+	<address_line1>#2 Capitol Mall</address_line1>
+	<address_line2></address_line2>
+	<city>Little Rock</city>
+	<state>Arkansas</state>
+	<zip>72201</zip>
+</client>

@@ -1,0 +1,34 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Hours of operation for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+ <%= render 'selected_provider_service_type_location' %>
+
+    <b><%= "Service availability timing on #{drop_down_value_description(@provider_service_area_availability.day_of_the_week)}"%></b><p></p>
+  <%#= set_subheader("Service area availability details") %>
+
+
+  <!--<p>
+    <b>Day of Week: </b>
+    <%= drop_down_value_description(@provider_service_area_availability.day_of_the_week) %>
+  </p>-->
+
+  <p>
+    <b>Start Time: </b>
+    <%#= @provider_service_area_availability.start_time %>
+    <%= @provider_service_area_availability.start_time.strftime("%I:%M %p") %>
+  </p>
+
+  <p>
+    <b>End Time: </b>
+    <%#= @provider_service_area_availability.end_time %>
+    <%= @provider_service_area_availability.end_time.strftime("%I:%M %p") %>
+  </p>
+
+
+    <%= link_to 'Back', provider_service_areas_availability_path(@provider_service_area_availability.provider_service_area_id),class: "secondary button radius" %>
+    <%= link_to 'Edit', edit_provider_service_area_availability_path(@provider_service_area_availability.id),class: "button radius" %>
+    <%= link_to 'Delete',provider_service_area_availability_destroy_path(@provider_service_area_availability.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+
+</section>
+</fieldset>

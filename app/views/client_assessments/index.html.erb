@@ -1,0 +1,51 @@
+<!-- NOT USED
+<fieldset>
+<section class="solidbody">
+<legend> <%#= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+	<%# if session[:CLIENT_ID].present? %>
+	<%# if @client_assessments.present? %>
+			<table>
+			<caption style="text-align:inherit"> <p><b><%#=("#{pluralize_without_count(@client_assessments.count,"Assessment","")}") %></b></p></caption>
+			  <thead>
+			    <tr>
+					<th> Assessment Date </th>
+					<th> Status </th>
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<%# @client_assessments.each do |arg_asmt| %>
+						<tr>
+							<td>  <%#= format_db_date(arg_asmt.assessment_date) %></td>
+							<td>  <%#= drop_down_value_description(arg_asmt.assessment_status) %></td>
+							<td>
+							 <%#= link_to "Show",client_assessment_path(arg_asmt.id),id: "hyperlink" %>|
+							 <%#= link_to("Select", select_assessment_id_path(arg_asmt.id),id: "hyperlink") %>
+							</td>
+						</tr>
+					 <%# end %>
+				</tbody>
+			</table>
+			<%# if validate_authorization(310) %>
+			    <%#= link_to("New", new_client_assessment_path , class: 'button radius') %>
+		    <%# end %>
+	<%#else%>
+		<%# if validate_authorization(310) %>
+			<p>
+	        <h5 class="subheader"> Assessment information is not found for this client. Click 'New' to create a new assessment.</h5>
+	        </p>
+	        <%#= link_to 'New',new_client_assessment_path, class: "button radius" %>
+		<%# else %>
+
+		<%# end %>
+	<%#end%>
+<%#else%>
+		<p>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+        <%#= link_to 'Search Client',client_search_path, class: "button radius" %>
+<%#end%>
+</section>
+</fieldset>
+
+-->

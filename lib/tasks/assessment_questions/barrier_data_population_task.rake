@@ -1,0 +1,43 @@
+namespace :barrier_data_population_task do
+	desc "Barrier data for Assessment Section"
+	task :populate_barriers => :environment do
+		connection = ActiveRecord::Base.connection()
+    	connection.execute("TRUNCATE TABLE public.barriers")
+    	connection.execute("SELECT setval('public.barriers_id_seq', 1, true)")
+		Barrier.create(assessment_section_id:	2	 ,description:"	Never held a paying job	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	2	 ,description:"	Currently working and needs assistance	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	2	 ,description:"	Upcoming court date	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	2	 ,description:"	Criminal record and/or on parole or probation	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	2	 ,description:"	Currently not working	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	3	 ,description:"	No high school diploma	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	3	 ,description:"	May have learning disabilities	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	3	 ,description:"	May lack English language proficiency	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	4	 ,description:"	Unstable housing	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	5	 ,description:"	Customer or household member may be pregnant	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	6	 ,description:"Child(ren) not in child care",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	6	 ,description:"	Child Support	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	6	 ,description:"	Providing care giving services	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	6	 ,description:"	Need Child Protective Service	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	6	 ,description:"	Child disability, health or other need	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	8	 ,description:"	Vaccinations not current	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	8	 ,description:"	Health challenge to work	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	8	 ,description:"	Serious health concern	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	9	 ,description:"	Participant does not want to answer questions regarding substance abuse	",confirmed:0,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	9	 ,description:"	May have an alcohol or drug addiction	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	10	 ,description:"	Mental health diagnosis or treatment	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	10	 ,description:"	Emotional health challenge	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	11	 ,description:"	Participant does not want to answer questions regarding domestic violence	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	11	 ,description:"	Safety concerns	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	11	 ,description:"	Domestic violence-related conflicts	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	13	 ,description:"	Transportation challenge	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	14	 ,description:"	Separated or Divorced	",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	14	 ,description:"	In an unhealthy relationship	",confirmed:1,created_by: 1,updated_by: 1)
+		# 02/21/2015
+		Barrier.create(assessment_section_id:	15	 ,description:"Financial Management Issues",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	6	 ,description:"Parenting Training",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	0	 ,description:"Barrier - Other",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	0	 ,description:"Barrier - Undertermined",confirmed:1,created_by: 1,updated_by: 1)
+		Barrier.create(assessment_section_id:	0	 ,description:"Food",confirmed:1,created_by: 1,updated_by: 1)
+
+	end
+end

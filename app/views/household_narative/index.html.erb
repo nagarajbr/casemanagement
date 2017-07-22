@@ -1,0 +1,31 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Narrative for household: #{@household.name}") %></legend>
+	<% if session[:HOUSEHOLD_ID].present? %>
+		<% if @household_narative_collection.present? %>
+			<% @household_narative_collection.each do |household_narative| %>
+			<p>
+				<h6><b><%="#{household_narative.long_description} notes: " %> <%= link_to "show",household_narative_show_path(household_narative.entity_type,household_narative.entity_id,household_narative.long_description),id: "hyperlink"%></b></h6>
+				<% NotesService.get_notes_for_notes_type(household_narative.entity_type,household_narative.entity_id,household_narative.long_description).each_with_index do |household_narative_notes,index| %>
+	                <% if index == 0  %>
+					   <%=  household_narative_notes.notes %><br>
+	                <%end%>
+
+				<%end%>
+			</p>
+			<% end %>
+		<% end %>
+	<% else %>
+		<p>
+        	<h5 class="subheader">Household is not selected, Select a household.</h5>
+        </p>
+	<% end %>
+	<h5><b><%= "Narrative for clients in household:"%></b></h5>
+	<%@household_members.each do |member|%>
+		<%= member.name %> <%= link_to "show details", show_client_narative_path(member.client_id),id: "hyperlink"%><br><br>
+	<%end%>
+	<br>
+	<br>
+	<%= link_to("Add comment", household_narative_new_path , class: 'button radius') %>
+</section>
+</fieldset>

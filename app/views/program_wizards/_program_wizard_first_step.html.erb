@@ -1,0 +1,12 @@
+<!--Manoj Patil 10/16/2014  -->
+<li class="required">
+      <%= arg_object.label :run_month,"Eligibility Determination Month" %>
+     <div class = "row">
+
+     <%= arg_object.date_select :run_month,:discard_day => true,:order => [:month,:day, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }%>
+
+ 	</div>
+
+
+
+</li>

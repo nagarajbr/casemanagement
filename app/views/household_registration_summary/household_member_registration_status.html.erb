@@ -1,0 +1,6 @@
+<fieldset>
+	<section class="solidbody">
+		<%= render "household_member_registration_summary", arg_steps: @member_steps, arg_client_id: @client.id %>
+		<%= link_to 'Back',@back_button_path, class: "button secondary radius"%>
+	</section>
+</fieldset>

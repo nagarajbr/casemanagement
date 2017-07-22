@@ -1,0 +1,2 @@
+class ProgramMonthSummariesController < AttopAncestorController
+end

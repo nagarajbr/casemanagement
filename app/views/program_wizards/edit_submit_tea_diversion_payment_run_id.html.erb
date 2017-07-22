@@ -1,0 +1,20 @@
+<%= form_for(@program_benefit_detail, :url => update_submit_tea_diversion_payment_run_id_path(@selected_program_unit.id,@selected_program_wizard.id), method: :put) do |f| %>
+
+  <section class="solidbody">
+	<fieldset>
+       <legend><%= set_subheader("Enter TEA Diversion Amount for Client  #{client_full_name(@client)} #{@run_month_description}") %></legend>
+       <%= render "shared/common_error", object_argument: @program_benefit_detail %><br>
+        <ul>
+	     	<div class="row">
+	          <div class="large-5 columns">
+	               <%= render 'form_tea_diversion_submit',arg_object: f,arg_program_benfit_details:@program_benefit_detail  %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+    	<%= link_to "Cancel",show_program_wizard_run_id_details_path(@selected_program_wizard.program_unit_id,@selected_program_wizard.id),class: 'secondary button radius'%>
+        <%= f.submit "Submit Payment",class: 'button radius'%>
+	    </p>
+    </fieldset>
+    </section>
+<% end %>

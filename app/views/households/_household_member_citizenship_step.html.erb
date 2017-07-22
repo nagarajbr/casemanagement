@@ -1,0 +1,66 @@
+<%#= render 'selected_household_partial' %>
+<!-- <p></p>
+
+<b><h4>Household Member: <%#= "#{client_full_name(@client)}" %></h4></b>
+<p></p> -->
+
+  <% if @client.citizenship? %>
+
+                      <p>
+                     <b>US Citizenship:</b>
+                     <%= get_flag_description(@client.citizenship) %>
+                    </p>
+
+                    <p>
+                      <b>US Citizenship Verification Status:</b>
+                      <%= drop_down_value_description(@client.sves_type)  %>
+                    </p>
+
+
+
+
+                    <% if @client.citizenship == "N"%>
+                            <p>
+                              <b>Immigration Status:</b>
+                              <%= drop_down_value_description(@alien.refugee_status) %>
+                            </p>
+
+                            <p>
+                              <b>Country of Origin:</b>
+                              <%= drop_down_value_description(@alien.country_of_origin) %>
+                            </p>
+
+                            <p>
+                              <b>Alien Date of Entry:</b>
+                              <%= format_db_date(@alien.alien_DOE) %>
+                            </p>
+
+                            <p>
+                              <b>Alien Number:</b>
+                              <%= @alien.alien_no %>
+                            </p>
+                    <% end %>
+                <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+                    <%= link_to 'Edit', edit_household_member_citizenship_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: "button radius"%>
+  <%else%>
+
+
+
+                      <h5 class="subheader">No citizenship information found.Click New button to enter citizenship information</h5>
+                      <p></p>
+
+<!--             <fieldset class="radio">
+                <div class="button-group">
+                  <label class="radio_button_bigger_text" for="member_citizenship_add_flag_y"><%#= arg_object.radio_button :member_citizenship_add_flag, "Y"%>Yes</label>
+                  <label class="radio_button_bigger_text" for="member_citizenship_add_flag_n"><%#= arg_object.radio_button :member_citizenship_add_flag, "N"%>No</label>
+                   <label class="radio_button_bigger_text" for="member_citizenship_add_flag_s"><%#= arg_object.radio_button :member_citizenship_add_flag, "S"%>Skip for now</label>
+                </div>
+            </fieldset> -->
+
+              <p></p>
+               <%= link_to 'New',new_household_member_citizenship_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: "button radius"%>
+
+
+  <%end%>

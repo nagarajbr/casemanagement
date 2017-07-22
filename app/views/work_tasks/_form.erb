@@ -1,0 +1,103 @@
+
+  <% if arg_work_task.new_record? || arg_work_task_created == 'manual_create' %>
+			   <li class="required">
+			      <%= arg_object.label :task_category %>
+			      <%= arg_object.select :task_category ,arg_work_task_category.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Task Category' }%>
+			  </li>
+
+			   <li class="required">
+			      <%= arg_object.label :task_type %>
+			      <%= arg_object.select  :task_type , arg_work_task_type.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Task Type' }%>
+			  </li>
+
+
+			   <li class="required" >
+			      <%= arg_object.label :action_text %>
+			      <%= arg_object.text_area :action_text, maxlength: "255" %>
+			  </li>
+
+
+			  <li class="required">
+			      <%= arg_object.label :assigned_to_id %>
+			      <%= arg_object.select :assigned_to_id, User.all.collect { |p| ["#{p.name} ", p.uid] },prompt: "select a user"  %>
+			  </li>
+			  <li class="required">
+			      <%= arg_object.label :due_date %>
+			      <%= arg_object.date_field :due_date, onkeyup:"validate_date_format(event)" %>
+			  </li>
+
+
+			   <li class="required">
+			      <%= arg_object.label :instructions %>
+			      <%= arg_object.text_area :instructions %>
+			  </li>
+			  <li class="required" >
+
+			      <%= arg_object.label :urgency %>
+			      <%= arg_object.select  :urgency,CodetableItem.item_list(20,"Identification List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Identification Type' } %>
+			  </li>
+			   <li>
+			      <%= arg_object.label :notes %>
+			      <%= arg_object.text_area :notes, maxlength: "255" %>
+			  </li>
+
+			   <li class="required" >
+			      <%= arg_object.label :status %>
+			       <%= arg_object.select  :status,arg_work_task_status.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Status' } %>
+			  </li>
+	<% else %>
+            <p>
+		      <b>Task Category:</b>
+		      <%= drop_down_value_description(arg_work_task.task_category) %>
+
+			</p>
+
+			<p>
+			    <b> Task Type:</b>
+			    <%=drop_down_value_description(arg_work_task.task_type) %>
+		    </p>
+
+
+		    <p>
+			    <b> Task: </b>
+			    <%= arg_work_task.action_text %>
+			</p>
+
+			 <p>
+			    <b> Assigned To: </b>
+			    <%= get_user_name(arg_work_task.assigned_to_id) %>
+			</p>
+
+			<p>
+			    <b> Due Date:</b>
+			    <%= format_db_date arg_work_task.due_date %>
+			</p>
+			<p>
+			    <b> Instructions:</b>
+			    <%= arg_work_task.instructions %>
+			</p>
+			<p>
+			    <b>Urgency:</b>
+			    <%= drop_down_value_description(arg_work_task.urgency) %>
+			</p>
+			<li>
+			      <%= arg_object.label :notes %>
+			      <%= arg_object.text_area :notes, maxlength: "255"%>
+			  </li>
+	       <% if arg_work_task_created == 'system_closed' %>
+	            <p>
+				    <b> Status:</b>
+				   	<%= drop_down_value_description(arg_work_task.status) %>
+		        </p>
+	       <% else %>
+	               <li class="required" >
+				      <%= arg_object.label :status %>
+				       <%= arg_object.select  :status,arg_work_task_status.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Status' } %>
+				  </li>
+	       <% end %>
+
+
+    <% end %>
+
+
+

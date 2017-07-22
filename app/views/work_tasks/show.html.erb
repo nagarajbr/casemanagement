@@ -1,0 +1,147 @@
+<section class="solidbody">
+
+
+	<% if @work_task.present? %>
+			<fieldset>
+
+
+			<% if @work_task.assigned_to_type == 6343%>
+				<legend><%= set_subheader("Details of selected Task for Local Office: #{drop_down_value_description(@work_task.assigned_to_id)}" ) %>
+				</legend><br>
+
+				<p>
+				    <b>Assigned to Type:</b>
+				    <%= drop_down_value_description(@work_task.assigned_to_type) %>
+				</p>
+			<% else %>
+				<legend><%= set_subheader("Details of selected Task for User: #{get_user_name(@work_task.assigned_to_id)}" ) %>
+				</legend><br>
+
+			<% end %>
+
+			<p>
+			    <b>Urgency:</b>
+			    <%= drop_down_value_description(@work_task.urgency) %>
+			</p>
+
+			<p>
+			     <b>Created Date:  </b>
+                 <%= format_db_date(@work_task.created_at) %>
+			</p>
+			<p>
+			    <b> Due Date:</b>
+			    <%= format_db_date @work_task.due_date %>
+			</p>
+
+			<p>
+			    <b>Task Category:</b>
+			     <%= drop_down_value_description(@work_task.task_category) %>
+
+			</p>
+
+			<p>
+			    <b> Task Type:</b>
+			    <%=drop_down_value_description(@work_task.task_type) %>
+		    </p>
+
+
+		    <p>
+			    <b> Task: </b>
+			    <%= @work_task.action_text %>
+			</p>
+
+
+
+
+
+			<p>
+			     <b>Assigned by:  </b>
+                 <%=  get_user_name(@work_task.created_by) %>
+			</p>
+
+
+			<p>
+			    <b> Instructions:</b>
+			    <%= @work_task.instructions %>
+			</p>
+
+			<p>
+			    <b> Notes:</b>
+		    	<%= @work_task.notes %>
+
+		    </p>
+
+
+			 <p>
+			    <b> Status:</b>
+			   	<%= drop_down_value_description(@work_task.status) %>
+		    </p>
+
+			<p>
+			    <b> Completion Date:</b>
+			    <%= format_db_date(@work_task.complete_date) %>
+			</p>
+
+
+			<% if @work_task.beneficiary_type.present? %>
+				<p>
+				    <b> Task for Type: </b>
+				    <%= drop_down_value_description(@work_task.beneficiary_type)  %>
+				</p>
+			<% end %>
+
+
+			<% if @work_task.beneficiary_type.present? %>
+				<p>
+		    		<b> Task for ID:</b>
+		    		  <%= @work_task.reference_id %>
+
+		  		</p>
+
+		    <% end %>
+
+		    <% if @work_task.auto_complete_by_system.present? %>
+				<p>
+				    <b> Completed By System: </b>
+				    <%= get_flag_description(@work_task.auto_complete_by_system)  %>
+				</p>
+			<% end %>
+
+
+		    <%= link_to 'Back',work_tasks_path, class: "secondary button radius"%>
+		    	<%= link_to "Edit",edit_work_task_path(@work_task.id), class: "button radius" %>
+			<% if @show_work_on_task_button == true%>
+				<% if @work_task.status != 6341 %>
+					<!-- not equal to Complete -->
+					<%# if validate_authorization(709) %>
+						<%= link_to "Work on the Task",work_on_task_path(@work_task.id), class: "button radius" %>
+					<%# end %>
+				<% end %>
+			<%# else %>
+				<%# if validate_authorization(656) %>
+
+					<%# if @show_navigate_button == true%>
+                      <%#= link_to "Navigate",work_on_task_path(@work_task.id), class: "button radius" %>
+				    <%#end%>
+				<%# end %>
+
+			<% end %>
+
+
+
+		</fieldset>
+	<% else %>
+		<fieldset>
+			<legend><%= set_subheader("Work Task") %></legend>
+			<h5 class="subheader">No work task details found.</h5>
+			<p></p>
+			 <%= link_to 'Back',work_tasks_path, class: "secondary button radius"%>
+			<%# if validate_authorization(655) %>
+				<%= link_to 'New',new_work_task_path, class: "button radius"%>
+			<%# end %>
+		</fieldset>
+
+	<% end %>
+
+
+</section>

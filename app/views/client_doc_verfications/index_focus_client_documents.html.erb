@@ -1,0 +1,50 @@
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+	<% if @client_documents.present? %>
+		<fieldset>
+			<caption><%= set_subheader("Documents of client: #{client_full_name(@client)}") %></caption><br>
+
+			<table>
+			  <thead>
+			    <tr>
+				    <th> Document Type </th>
+                    <th> Verification Date </th>
+                    <th></th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @client_documents.each do |arg_doc| %>
+						<tr>
+							<td>  <%= drop_down_value_description(arg_doc.document_type) %></td>
+							<td>  <%= format_db_date(arg_doc.document_verfied_date)  %></td>
+							<td>   <%= link_to 'show',show_focus_client_document_path(arg_doc.id) ,id: "hyperlink" %></td>
+						</tr>
+				    <% end %>
+				</tbody>
+			</table>
+			<%# if validate_authorization(666) %>
+			   <%= link_to 'Add Document',new_focus_client_document_path, class: "button radius"%>
+		    <%# end %>
+		</fieldset>
+	<%else%>
+		<fieldset>
+	        <%= set_subheader("Documents of client: #{client_full_name(@client)}" ) %>
+	        <%# if validate_authorization(666) %>
+		        <h5 class="subheader">No Documents found.Add Documents by clicking Add Document Button </h5>
+		        <p></p>
+		        <%= link_to 'Add Document',new_focus_client_document_path, class: "button radius"%>
+	        <%# else %>
+	        <!-- <h5 class="subheader">No Documents to show </h5> -->
+	        <%# end %>
+		</fieldset>
+	<%end%>
+
+<%else%>
+	<fieldset>
+        <%= set_subheader("Application list" ) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+    </fieldset>
+<%end%>
+</section>

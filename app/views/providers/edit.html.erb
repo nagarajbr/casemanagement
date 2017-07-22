@@ -1,0 +1,27 @@
+<fieldset>
+	<section class="solidbody">
+<legend><%= set_subheader("Edit provider information for: #{provider_name(@provider)}") %></legend>
+<%= form_for(@provider, url: update_provider_path,:method => :patch ) do |f| %>
+  <%= render "shared/common_error", object_argument: @provider %>
+  <ul>
+      <div class="row">
+        <div class="large-4 columns">
+			<%= render 'form',arg_object: f %>
+			<% if  @edit_provider_status.present? %>
+				<li>
+		            <%= f.label :status %>
+		             <%= f.select :status, @edit_provider_status.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Status' } %>
+		        </li>
+
+			<% end %>
+			</div>
+      </div>
+    </ul>
+
+	 <p>
+      <%= link_to 'Cancel', show_provider_path(@provider.id),class: "secondary button radius" %>
+      <%= f.submit "Save", class: 'button radius'%>
+    </p>
+	<% end %>
+</section>
+</fieldset>

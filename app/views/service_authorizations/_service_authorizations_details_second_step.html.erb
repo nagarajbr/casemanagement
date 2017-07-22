@@ -1,0 +1,5 @@
+ <!--  <li class="required">
+      <%#= arg_object.label :provider_id %>
+      <%#= arg_object.select :provider_id, @approved_providers.collect { |p| ["#{p.provider_name} ", p.id] },{ :include_blank => 'Select Provider' } %>
+  </li> -->
+<%= render "transportation_start_end_address_attributes", arg_common_object: arg_object %>

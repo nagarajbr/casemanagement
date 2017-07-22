@@ -1,0 +1,110 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Provider information for:  #{@provider.provider_name}" ) %></legend>
+
+
+<% if @branch_office == "Yes" %>
+  <%= render "selected_head_provider" %>
+      <p><b>Branch Office Details</b></p>
+      <p>
+        <b>Provider Name: </b>
+        <%= @provider.provider_name %>
+      </p>
+
+       <p>
+        <b>Contact Person: </b>
+        <%= @provider.contact_person %>
+      </p>
+
+      <p>
+        <b>License Number: </b>
+        <%= @provider.license_number %>
+      </p>
+
+      <p>
+        <b>License Expire Date: </b>
+        <%= format_db_date @provider.license_expire_dt %>
+      </p>
+
+       <p>
+        <b>Status: </b>
+        <%= drop_down_value_description(@provider.status)%>
+      </p>
+
+      <b>Status date: </b>
+        <%= @provider.status_date %>
+      </p>
+
+      <%= render "notes/notes_field_show", arg_notes: @notes %>
+        <%= link_to 'Back', branch_offices_index_path(@provider.head_office_provider_id),class: "secondary button radius" %>
+ <% if validate_authorization(686) %>
+<%= link_to 'Edit Branch Office', edit_branch_office_path(@provider.id),class: "button radius" %>
+<% end %>
+<% else %>
+
+      <p>
+        <b>Provider Name: </b>
+        <%= @provider.provider_name %>
+      </p>
+
+      <p>
+        <b>Provider Type: </b>
+        <%= drop_down_value_description(@provider.provider_type) %>
+      </p>
+
+      <p>
+        <b>W9 Classification: </b>
+        <%= drop_down_value_description(@provider.classification) %>
+      </p>
+
+      <p>
+        <b>Contact Person: </b>
+        <%= @provider.contact_person %>
+      </p>
+
+      <p>
+        <b>License Number: </b>
+        <%= @provider.license_number %>
+      </p>
+
+      <p>
+        <b>License Expire Date: </b>
+        <%= format_db_date @provider.license_expire_dt %>
+      </p>
+
+      <p>
+        <b>Tax Id / SSN: </b>
+        <%= @provider.tax_id_ssn %>
+      </p>
+
+       <p>
+        <b>Status: </b>
+        <%= drop_down_value_description(@provider.status)%>
+      </p>
+
+      <b>Status date: </b>
+        <%= @provider.status_date %>
+      </p>
+
+       <p>
+        <b>Web Address: </b>
+        <%= @provider.web_address %>
+      </p>
+
+
+
+<%= render "notes/notes_field_show", arg_notes: @notes %>
+
+    <%= link_to 'Back', provider_index_path,class: "secondary button radius" %>
+     <% if validate_authorization(536) %>
+      <%= link_to 'Edit', edit_provider_path,class: "button radius" %>
+    <% end %>
+ <% end %>
+<p></p>
+
+
+
+
+
+</section>
+</fieldset>

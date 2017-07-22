@@ -1,0 +1,35 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+  <section class="solidbody">
+  <legend><%= set_subheader("My Queues") %></legend>
+
+  <% if @subscribed_queues_of_logged_in_user.present? %>
+
+      <table>
+        <caption style="text-align:inherit"> <b> Subscribed Queues <b><p></p><caption>
+        <thead>
+          <tr>
+          <th> Queue </th>
+          <th> Local Office </th>
+          <th> Action </th>
+        </tr>
+        </thead>
+          <tbody>
+          <% @subscribed_queues_of_logged_in_user.each do |arg_queue| %>
+              <tr>
+                <td>  <%= arg_queue.queue_name %></td>
+                <td>  <%= arg_queue.local_office_name %></td>
+                 <td><%= link_to "Details",selected_queue_details_edit_path(arg_queue.queue_type,arg_queue.local_office_id),id: "hyperlink" %>
+                </td>
+              </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+  <%else%>
+          <h5 class="subheader">No Queues are subscribed for you.</h5>
+
+  <%end%>
+
+</section >
+</fieldset>

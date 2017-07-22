@@ -1,0 +1,47 @@
+<!--Manoj Patil 11/03/2015  -->
+<fieldset>
+<section class="solidbody">
+		<legend><%= set_subheader("Household information") %></legend>
+	<% if @household.present? %>
+			<%= render 'households/selected_household_partial',arg_household: @household %>
+
+				<caption style="text-align:inherit">
+					<b>Household Members</b><p></p>
+				</caption>
+
+					<% @household_members.each do |arg_member| %>
+						 <table>
+						  <thead>
+						    <tr>
+								<th> Member Name </th>
+
+								<th> SSN </th>
+								<th> Date of Birth </th>
+								<th> Gender </th>
+								<th> Client ID </th>
+							</tr>
+						  </thead>
+						    <tbody>
+						<tr>
+							<td>  <%= arg_member.client_full_name  %></td>
+
+
+							<td>  <%= format_SSN(arg_member.ssn) %></td>
+							<td>  <%= format_db_date(arg_member.dob) %></td>
+							<td>  <%=  drop_down_value_description(arg_member.gender) %></td>
+							<td>  <%= arg_member.client_id %>  </td>
+						</tr>
+						<% @member_steps = HouseholdMemberStepStatus.collection_of_steps_for_given_household_client(@household.id,arg_member.client_id)%>
+						<% if @member_steps.present?%>
+							<%= render "household_member_registration_summary", arg_steps: @member_steps, arg_client_id: arg_member.client_id %>
+						<% end %> <!-- end of @member_steps.present?-->
+
+						</tbody>
+					</table>
+					<% end %> <!-- end of @household_members.each do |arg_member|-->
+
+
+
+	<%end%>
+</section>
+</fieldset>

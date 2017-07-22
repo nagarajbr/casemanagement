@@ -1,0 +1,20 @@
+<p>
+		<b>Selected Program Unit </b>
+		<table>
+			  <thead>
+			    <tr>
+					<th> Program Unit ID </th>
+					<th> Service Program </th>
+					<th> Primary Contact </th>
+				</tr>
+			  </thead>
+			    <tbody>
+						<tr>
+							<td>  <%= arg_selected_program_unit.id %></td>
+							<td>  <%= get_service_program_name(arg_selected_program_unit.service_program_id) %></td>
+							<td> <%= get_primary_beneficiary_of_program_unit(arg_selected_program_unit.id)%></td>
+						</tr>
+				</tbody>
+			</table>
+
+	</p>

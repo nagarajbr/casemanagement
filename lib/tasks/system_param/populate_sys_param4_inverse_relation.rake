@@ -1,0 +1,36 @@
+namespace :populate_sys_param4 do
+	desc "Inverse Relation"
+	task :inverse_relation => :environment do
+		systemParamCategories = SystemParamCategory.create(description:"Inverse Relation",created_by: 1,updated_by: 1)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5948",value:"5977",description:"Inverse relation for Child - Adoptive is Parent",created_by: 1,updated_by: 1)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5949",value:"5956",description:"Inverse relation for 	Child - Biological	is	parent-Bilogical",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5956",value:"5949",description:"Inverse relation for 	parent-Bilogical	is	Child - Biological",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5951",value:"5977",description:"Inverse relation for 	Child - Foster	is	parent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5952",value:"5977",description:"Inverse relation for 	Child - In common	is	parent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5953",value:"5977",description:"Inverse relation for 	Child - Step	is	parent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5954",value:"5958",description:"Inverse relation for 	Daughter-in-law/Son-in-law	is	Father-in-law/Mother-in-law",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5958",value:"5954",description:"Inverse relation for 	Father-in-law/Mother-in-law	is	Daughter-in-law/Son-in-law",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5962",value:"6014",description:"Inverse relation for 	Gr Gr Gr  Grandchild	is	Gr Gr Gr  Grandparent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5964",value:"5965",description:"Inverse relation for 	Grandchild	is	Grandparent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5965",value:"5964",description:"Inverse relation for 	Grandparent	is	Grandchild",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5968",value:"5969",description:"Inverse relation for 	Great Grandchild	is	Great Grandparent ",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5969",value:"5968",description:"Inverse relation for 	Great Grandparent 	is	Great Grandchild",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5972",value:"5973",description:"Inverse relation for 	Great Great Grandchild	is	Great Great Grandparent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5973",value:"5972",description:"Inverse relation for 	Great Great Grandparent	is	Great Great Grandchild",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5977",value:"6009",description:"Inverse relation for 	parent	is	child",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6009",value:"5977",description:"Inverse relation for 	child	is 	parent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5957",value:"6010",description:"Inverse relation for 	parent-legal	is	child -legal",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6010",value:"5957",description:"Inverse relation for 	child-legal	is	parent-legal",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5956",value:"6011",description:"Inverse relation for 	Step Gr Gr Gr Grandchild	is	Step Gr Gr Gr Grandparent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6011",value:"5956",description:"Inverse relation for 	Step Gr Gr Gr Grandparent	is	Step Gr Gr Gr Grandchild",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5997",value:"5998",description:"Inverse relation for 	Step Grandchild	is 	Step Grandparent ",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5998",value:"5997",description:"Inverse relation for 	Step Grandparent 	is	Step Grandchild",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6000",value:"6012",description:"Inverse relation for 	Step Great Grandchild	is	Step Great Grandparent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6012",value:"6000",description:"Inverse relation for 	Step Great Grandparent	is	Step Great Grandchild",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6003",value:"6013",description:"Inverse relation for 	Step Parent	is	Step Child",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6013",value:"6003",description:"Inverse relation for 	Step Child	is	Step Parent",created_by: 1,updated_by: 1	)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5945",value:"5978",description:"Inverse relation for 	Aunt/Uncle	is	Niece/Nephew	",created_by: 1,updated_by: 1)
+SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"5978",value:"5945",description:"Inverse relation for 	Niece/Nephew	is	Aunt/Uncle	",created_by: 1,updated_by: 1)
+
+end
+end

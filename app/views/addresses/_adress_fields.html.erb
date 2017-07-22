@@ -1,0 +1,84 @@
+<!-- <li>
+  <% if arg_counter == 1%>
+  <%= arg_object.label :in_care_of ,"Care of"%>
+  <% else %>
+  <%= arg_object.label :in_care_of , "Care of"%>
+  <% end %>
+  <%= arg_object.text_field :in_care_of, title: "Care of", maxlength: "20" ,autofocus: true,title1: "Enter In Care of Name", data: {tooltip1: '' } %>
+
+</li>
+<li class="required">
+  <% if arg_counter == 1%>
+     <%= arg_object.label :address_line1,"Address Line1" %>
+  <% else %>
+   <%= arg_object.label :address_line1,"Address Line1" %>
+  <% end %>
+
+  <%= arg_object.text_field :address_line1, title1: "Address Line1", maxlength: "50",title1: "Enter Address Line1", data: {tooltip1: '' }  %>
+</li>
+
+
+<li>
+  <% if arg_counter == 1%>
+    <%= arg_object.label :address_line2,"Address Line2" %>
+  <% else %>
+  <%= arg_object.label :address_line2,"Address Line2" %>
+  <% end %>
+  <%= arg_object.text_field :address_line2, title1: "Address Line2", maxlength: "50",title1: "Enter Address Line2", data: {tooltip1: '' }  %>
+
+</li>
+
+<li class="required">
+  <% if arg_counter == 1%>
+   <%= arg_object.label :city,"City" %>
+  <% else %>
+   <%= arg_object.label :city,"City" %>
+  <% end %>
+  <%= arg_object.text_field :city, title1: "City", maxlength: "50",title1: "Enter City", data: {tooltip1: '' }  %>
+
+</li>
+
+<li class="required">
+  <% if arg_counter == 1%>
+   <%= arg_object.label :state,"State" %>
+  <% else %>
+  <%= arg_object.label :state,"State" %>
+  <% end %>
+  <%= arg_object.select :state, CodetableItem.item_list(104,"State List").collect { |p| ["#{p.long_description} ", p.id] },{ :include_blank => 'select a State' },title1: "Enter State", data: {tooltip1: '' } %>
+</li>
+<div class="row">
+  <div class="large-7 columns">
+<li class="required">
+  <% if arg_counter == 1%>
+   <%= arg_object.label :zip,"Zip" %>
+  <% else %>
+ <%= arg_object.label :zip,"Zip" %>
+  <% end %>
+
+  <%= arg_object.text_field :zip, title1: "Zip", maxlength: "5",onkeypress: "return isNumberKey(event)",title1: "Enter Zip code", data: {tooltip1: '' }  %>
+</li>
+</div>
+
+  <div class="large-5 columns">
+    <%= arg_object.label :zip_suffix," Zip Suffix"%>
+    <%= arg_object.text_field :zip_suffix, title1: "Zip suffix", maxlength: "4",onkeypress: "return isNumberKey(event)",title1: "Enter Zip Suffix", data: {tooltip1: '' }  %>
+  </div>
+  </div>
+
+
+
+<li  title="County">
+   <% if arg_counter == 1%>
+    <%= arg_object.label :county,"County" %>
+  <% else %>
+  <%= arg_object.label :county,"County" %>
+  <% end %>
+  <%= arg_object.select :county, CodetableItem.item_list(12,"County List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'select a county' }, title1: "Enter County", data: {tooltip1: '' } %>
+</li>
+
+
+
+
+
+
+ -->

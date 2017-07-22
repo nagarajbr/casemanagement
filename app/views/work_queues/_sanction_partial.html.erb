@@ -1,0 +1,53 @@
+
+<table>
+	<!-- <caption class='fontc'> <p><%#= "Approved CPP for clients" %></p></caption> -->
+  	<thead>
+    <tr>
+    	<% if arg_role_id == 5 || arg_role_id == 6 %>
+    		<th> Select </th>
+    	<% end %>
+    	<th> Client </th>
+    	<th> Service Program </th>
+    	<th> Sanction </th>
+		<th> Assigned Worker</th>
+		<th> Action</th>
+	</tr>
+  	</thead>
+    <tbody>
+		<% arg_subscribed_records.each do |each_queue_item| %>
+			<tr>
+				<% if arg_role_id == 5 || arg_role_id == 6 %>
+					<td>  <%= check_box_tag "work_queue_ids[]", each_queue_item.id %></td>
+				<% end %>
+				<td>  <%= each_queue_item.client_name %></td>
+				<td>  <%= get_service_program_name(each_queue_item.service_program_id) %></td>
+				<td>  <%= drop_down_value_description(each_queue_item.sanction_type) %></td>
+				<td>  <%=  each_queue_item.assigned_worker_name%></td>
+				<% if each_queue_item.assigned_worker_name.blank?%>
+					<td>  <%= link_to "Assign to me",assign_record_from_queue_to_me_path(arg_queue_type,arg_local_office_id,each_queue_item.id),id: "hyperlink" %> </td>
+				<% end %>
+			</tr>
+		<%end%>
+
+	</tbody>
+</table>
+ <%= paginate arg_subscribed_records %>
+ <% if arg_role_id == 5 || arg_role_id == 6 %>
+				<ul>
+
+				<div class="row">
+			    	<div class="large-6 columns">
+
+							 <li class="required"><%=label_tag 'Select worker'%>
+
+
+								<%#= text_field_tag :provider_invoice_number,params[:provider_invoice_number],maxlength: "200" %>
+								<%= select_tag("worker_id",options_from_collection_for_select(arg_user_list,"uid","name",arg_worker_id),{:include_blank => 'Select worker'} )%>
+
+							</li>
+
+					</div>
+				</div>
+				</ul>
+			<% end %>
+

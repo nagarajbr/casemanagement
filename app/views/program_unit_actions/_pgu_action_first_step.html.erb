@@ -1,0 +1,29 @@
+
+	<%#= f.collection_radio_buttons :pgu_action, @action_collections, :id, :short_description %>
+<!--
+<li>
+			<%#= arg_object.collection_radio_buttons :pgu_action, @action_collections, :id, :short_description do |cb|%>
+
+				<%#= debug("#{cb.text.inspect}") %>
+				<%#= debug("#{cb.value.inspect}") %>
+				<%# if cb.value == 6044 %>
+					<%#= cb.label {cb.radio_button({ disabled: true}) + " " + cb.text}  %>
+				<%# else %>
+					<%#= cb.label {cb.radio_button() + " " + cb.text }  %>
+				<%# end %>
+			<%# end %>
+</li>
+-->
+
+<li class="required">
+
+  <label for="pgu_action"> Action</label>
+
+  <%= arg_object.select :pgu_action, @action_collections.collect { |p| [p.short_description, p.id] },{ :include_blank => 'Select an Action ' } %>
+</li>
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+<fieldset>
+  <section class="solidbody">
+
+	<%= set_subheader("Edit employer information") %>
+	<fieldset>
+	    <%= form_for(@employer, url: employer_path,:method => :patch) do |f| %>
+		    <%= render "shared/common_error", object_argument: @employer %>
+		    <ul>
+		      <div class="row">
+		        <div class="large-4 columns">
+					<%= render 'form',arg_object: f,arg_employer:@employer,arg_notes: @notes  %>
+		        </div>
+		      </div>
+		    </ul>
+
+		    <p>
+		    	<%= link_to 'Cancel', employer_path(session[:EMPLOYER_ID]),class: "secondary button radius" %>
+		    	<%= f.submit "save", class: 'button radius' %>
+		    </p>
+
+	    <% end %>
+	  </fieldset>
+
+  </section >
+</fieldset>

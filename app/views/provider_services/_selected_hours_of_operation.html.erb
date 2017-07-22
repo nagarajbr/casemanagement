@@ -1,0 +1,20 @@
+<% if @provider_service_area_availability_collection.present? %>
+		<table>
+		<caption style="text-align:inherit"><b><%= "Weekly Hours of Operation"%></b><p></p></caption>
+		  <thead>
+		    <tr>
+		    	<th> Day </th>
+		    	<th> Hours of Operation </th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @provider_service_area_availability_collection.each do |pl| %>
+					<tr>
+						<td>  <%= drop_down_value_description(pl.day_of_the_week) %></td>
+						<td>  <%= pl.start_time.strftime("%I:%M %p") %>  <b>To</b>  <%= pl.end_time.strftime("%I:%M %p") %></td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+	<% end %>

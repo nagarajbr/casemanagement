@@ -1,0 +1,64 @@
+
+
+             <li class="required">
+              <%= f.label :incometype %>
+              <%= f.select :incometype, arg_income_types.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'select income type' }, title1: "select income type" , autofocus: true, data: {tooltip1: '' }  %>
+            </li>
+
+             <li>
+              <%= f.label :source%>
+              <%= f.text_field :source, alt: "Source",maxlength: "50" ,title1: "Enter source details", data: {tooltip1: true }  %>
+             </li>
+              <li >
+              <fieldset class="radio">
+              <legend class="radiolegend">Verified</legend>
+                <div class="button-group">
+                  <label class="radio-button"><%= f.radio_button :verified, "Y"%>Yes</label>
+                  <label class="radio-button"><%= f.radio_button :verified, "N"%>No</label>
+                </div>
+            </fieldset>
+            </li>
+             <li class="required">
+                 <%= f.label :frequency %>
+                 <%= f.select :frequency, CodetableItem.item_list(27,"Frequency").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'select income type' } %>
+             </li>
+
+             <li class="required">
+              <%= f.label :effective_beg_date %>
+              <%= f.date_field :effective_beg_date, alt: "effective begin date",title1: "Select an effective begin date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)"  %>
+             </li>
+
+             <li>
+              <%= f.label :effective_end_date %>
+              <%= f.date_field :effective_end_date, alt: "effective end date",title1: "Select an effective end date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+             </li>
+
+             <!-- <li> for now they are removed
+              <%#= f.label :intended_use_mos %>
+              <%#= f.number_field :intended_use_mos, min:"0",maxlength: "2",alt: "number of months",onkeypress: "return allow_only_numbers_and_max_upto_two_digits(event)",title1: "Enter number of months", data: {tooltip1: '' } %>
+             </li>
+             <li>
+
+              <%#= f.label :contract_amt %>
+             <span class="currencySpan">&dollar;</span>
+              <%#= f.text_field :contract_amt, maxlength: "9", placeholder:"$" ,id: "test_id",alt: "contract amount",onkeypress: "return isDecimal(event)"%>
+             </li>
+
+
+
+             <li>
+              <%#= f.label :inc_avg_beg_date %>
+              <%#= f.date_field :inc_avg_beg_date, alt: "average begin date",title1: "Select an average begin date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+             </li> -->
+
+                 <li >
+                <fieldset class="radio">
+                    <legend class="radiolegend">Recalculate Indicator</legend>
+                    <div class="button-group">
+                    <label class="radio-button"><%= f.radio_button :recal_ind, "Y"%>Yes</label>
+                    <label class="radio-button"><%= f.radio_button :recal_ind, "N"%>No</label>
+                  </div>
+                </fieldset>
+              </li>
+
+               <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>

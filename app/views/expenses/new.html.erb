@@ -1,0 +1,46 @@
+
+<fieldset>
+	<section class="solidbody">
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+
+				<p>
+					<%= (render 'households/selected_household_partial',arg_household: @household)if @household.present?%>
+				</p>
+				<legend><%= set_subheader("Enter expense information for: #{client_full_name(@client)}") %></legend>
+
+				<%= form_for(@expense, :url => create_household_member_expense_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :post) do |f| %>
+					<%= render "shared/common_error", object_argument: @expense %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-5 columns">
+				               <%= render 'form',f: f,arg_notes: @notes %>
+					 	  </div>
+					    </div>
+					</ul>
+					<p>
+	 					<%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+				   	 	<%= f.submit "Save", class: 'button radius' %>
+					</p>
+				<% end%>
+		<% else%>
+				<legend><%= set_subheader("Enter expense information for: #{client_full_name(@client)}") %></legend>
+
+				<%= form_for(@expense, :url => expenses_path, method: :post) do |f| %>
+					<%= render "shared/common_error", object_argument: @expense %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-5 columns">
+				               <%= render 'form',f: f,arg_notes: @notes %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+		 				<%= link_to 'Cancel', expenses_path,class: "secondary button radius" %>
+					    <%= f.submit "Save", class: 'button radius' %>
+				    </p>
+				<% end%>
+		<% end%>
+	</section>
+</fieldset>
+
+

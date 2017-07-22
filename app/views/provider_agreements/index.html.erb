@@ -1,0 +1,56 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Agreements for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+<% if @provider_agreements.present? %>
+	<table>
+		<caption style="text-align:inherit"> <b> Agreement Listing </b><p></p></caption>
+
+	  <thead>
+	    <tr>
+			<th> Service </th>
+			<th> Area Served </th>
+			<th> Start Date</th>
+			<th> End Date</th>
+			<th> Status</th>
+			<th> Actions</th>
+		</tr>
+	  </thead>
+	    <tbody>
+			<% @provider_agreements.each do |arg_provider| %>
+				<tr>
+					<td>  <%= get_service_name(arg_provider.provider_service_id) %></td>
+					<td>  <%= drop_down_value_description(arg_provider.dws_local_office_id) %></td>
+					<td>  <%= format_db_date(arg_provider.agreement_start_date) %></td>
+					<td>  <%= format_db_date(arg_provider.agreement_end_date) %></td>
+					<td>  <%= drop_down_value_description(arg_provider.state) %></td>
+					<td>  <%= link_to "Show",provider_agreements_show_path(arg_provider.id),id: "hyperlink" %>	</td>
+				</tr>
+				<% end %>
+		</tbody>
+	</table>
+     <% if validate_authorization(541) %>
+     <% unless @provider.status == 6157 %>
+	   <%= link_to("New", provider_agreement_wizard_initialize_path , class: 'button radius')%>
+	  <% end %>
+	 <% end %>
+<%else%>
+
+       <b></b><p></p>
+           <legend><%= set_subheader("Agreements for provider - #{@provider.provider_name}") %></legend>
+ 		<% if validate_authorization(541) %>
+		    <h5 <h5 class="subheader">No provider agreement information found. Click New to enter provider agreement information.</h5></h5>
+	        <p></p>
+
+	    <% unless @provider.status == 6157 %>
+	    <%= link_to("New", provider_agreement_wizard_initialize_path , class: 'button radius')%>
+	    <% end %>
+	  	<% else %>
+       		<h5 class="subheader">No provider agreement information to show.</h5>
+       	<%end%>
+<%end%>
+</section>
+</fieldset>
+
+
+

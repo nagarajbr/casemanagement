@@ -1,0 +1,36 @@
+
+ <li class="required">
+              <%= arg_object.label :trip_day %>
+              <%= arg_object.select :trip_day, arg_day_final.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a day' }%>
+ </li>
+
+<li>
+          <%= arg_object.label :trip_pick_up_time %>
+          <%= arg_object.time_select :trip_pick_up_time,
+                                            :combined => true,
+                                            :default => Time.now.change(:hour => 8, :min => 00),
+                                            :minute_interval => 15,
+                                            :time_separator => "",
+                                            :start_hour => 00,
+                                            :start_minute => 00,
+                                            :end_hour => 23,
+                                            :end_minute => 45,
+                                            :ampm => true,
+                                            :include_blank => true %>
+
+</li>
+
+<li>
+          <%= arg_object.label :return_trip_pick_up_time %>
+          <%= arg_object.time_select :return_trip_pick_up_time,
+                                            :combined => true,
+                                            :default => Time.now.change(:hour => 8, :min => 00),
+                                            :minute_interval => 15,
+                                            :time_separator => "",
+                                            :start_hour => 00,
+                                            :start_minute => 00,
+                                            :end_hour => 23,
+                                            :end_minute => 45,
+                                            :ampm => true,
+                                            :include_blank => 'Select Time' %>
+</li>

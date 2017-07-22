@@ -1,0 +1,26 @@
+<table>
+<caption class="fontc">
+<p> <%= "#{drop_down_value_description(arg_object.entity_type)} Information" %>
+</p> </caption>
+<thead>
+<tr>
+	<th> Entity Type </th>
+	<th> Activity Type </th>
+	<th> Start Date </th>
+	<th> End Date </th>
+	<th> Status </th>
+</tr>
+</thead>
+<tbody>
+
+	<tr>
+		<td>  <%= drop_down_value_description(arg_object.entity_type) %></td>
+		<td>  <%= drop_down_value_description(arg_object.activity_type) %></td>
+		<td>  <%= format_db_date arg_object.start_date %></td>
+		<td>  <%= format_db_date arg_object.end_date %></td>
+		<td>  <%= drop_down_value_description(arg_object.activity_status) %></td>
+	</tr>
+
+</tbody>
+</table>
+

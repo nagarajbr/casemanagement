@@ -1,0 +1,19 @@
+<fieldset>
+	<section class="solidbody">
+
+			<legend><%= set_subheader("Warrant information for provider: #{provider_name(@provider)}" ) %>
+			</legend><br>
+			<%= render "common_invoice_view_fields",arg_provider_invoice:@provider_invoice %>
+			<p>
+			    <b> Notes:</b>
+		    	<%= @provider_invoice.invoice_notes %>
+			</p>
+			<%= link_to "Back ",provider_invoice_index_path, class: "secondary button radius" %>
+			<% if @can_edit == true %>
+				<% if validate_authorization(548) %>
+					<%= link_to "Edit ",provider_invoice_edit_path(@provider_invoice.id), class: "button radius" %>
+				<% end %>
+			<% end %>
+
+	</section>
+</fieldset>

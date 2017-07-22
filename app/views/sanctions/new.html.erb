@@ -1,0 +1,13 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Enter sanction information for: #{client_full_name(@client)}") %></legend>
+	<%= form_for(@sanction, url: sanctions_path,method: :post) do |f| %>
+	  <%= render "shared/common_error", object_argument: @sanction %>
+	   <%= render 'form',arg_object:f,arg_sanction:@sanction,arg_sancton_month:@regular_payment_present_for_sanction_month,arg_program_list:@service_program_list,arg_reduction_list:@benefit_reducing_sanctions_list,arg_item_list:@inactive_item_list,arg_notes:@notes %>
+	     <p>
+	      <%= link_to 'Cancel', sanctions_path,class: "secondary button radius"%>
+	      <%= f.submit "Save", class: 'button radius'%>
+	    </p>
+	<% end %>
+</section>
+</fieldset>

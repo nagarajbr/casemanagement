@@ -1,0 +1,14 @@
+<% if !(arg_client_assessment.interest_profiler_last_step?) %>
+	<%#= link_to "Exit Wizard", provider_agreements_path,class: 'secondary button' %>
+<% end %>
+<% if arg_client_assessment.interest_profiler_first_step? %>
+ <%= link_to("Previous", new_common_assessment_path(7,session[:CLIENT_ASSESSMENT_ID]),class: 'button') %>
+<% else %>
+     <%= submit_tag "Previous", :name => "back_button",class: 'button'%>
+<% end %>
+
+<% if arg_client_assessment.interest_profiler_last_step? %>
+	<%= link_to "Generate Assessment Sheet", show_assessment_recommendations_path(session[:CLIENT_ASSESSMENT_ID]),class: 'button' %>
+<% else %>
+	<%= submit_tag "Next",:name => "next_button",class: 'button'unless arg_client_assessment.interest_profiler_third_step? %>
+<% end %>

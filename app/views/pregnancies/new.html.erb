@@ -1,0 +1,49 @@
+ <fieldset>
+ <section class="solidbody">
+ 		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+ 			<p>
+				<%= render 'households/selected_household_partial',arg_household: @household %>
+			</p>
+			<h6><%= ("Enter pregnancy information for household member: #{client_full_name(@client)}") %> </h6>
+				<%= form_for(@pregnancy, :url => create_household_member_pregnancy_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :post) do |f| %>
+					<%= render "shared/common_error", object_argument: @pregnancy %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-5 columns">
+				               <%= render '/pregnancies/form',arg_object: f,arg_notes:@notes %>
+					 	  </div>
+					    </div>
+					</ul>
+					<p>
+	 					<%= link_to 'Back', start_household_characteristics_data_entry_wizard_path,class: "secondary button radius" %>
+				   	 	<%= f.submit "Save", class: 'button radius' %>
+					</p>
+				<% end%>
+
+ 		<% else %>
+ 				<% if session[:CLIENT_ID].present? %>
+				 	<%= form_for(@pregnancy, :url => create_pregnancy_path) do |f| %>
+				        <legend><%= set_subheader("Enter pregnancy information for: #{@client.last_name}, #{@client.first_name}") %></legend>
+				        	  <%= render "shared/common_error", object_argument: @pregnancy %>
+
+					    <ul>
+				    	<div class="row">
+				    	 <div class="large-5 columns">
+						               <%= render '/pregnancies/form',arg_object: f,arg_notes:@notes %>
+							 	  	</div>
+							    </div>
+							</ul>
+							      <%= link_to "Cancel", show_pregnancy_path(@menu) ,class: 'button secondary'%>
+							      <%= f.submit "Save",class: 'button radius'%>
+					<% end %>
+			 	<% else %>
+			 	    <legend><%= set_subheader("Enter new pregnancy information" ) %></legend>
+			        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+			        <p></p>
+			        <%= render "shared/search_client_button" %>
+			 	<% end %>
+ 		<% end %>
+
+
+ </section>
+</fieldset>

@@ -1,0 +1,11 @@
+ <li  class="required">
+  <%= f.label :adjusted_amount,"Adjusted Amount" %>
+   <%= f.number_field :adjusted_amount, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+ </li>
+
+ <li  class="required">
+     <%= f.label :adjusted_reason,"Adjustment Reason" %>
+     <%= f.select :adjusted_reason, CodetableItem.item_list(82,"Adjusted Reason").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'select adjustment reason' } %>
+ </li>
+
+

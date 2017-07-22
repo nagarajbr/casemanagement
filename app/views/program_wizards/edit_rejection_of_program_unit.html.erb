@@ -1,0 +1,28 @@
+<!--Manoj Patil 06/02/2015  -->
+<fieldset>
+<section class="solidbody">
+  <%= form_for(@selected_program_unit, :url => update_rejection_of_program_unit_path(@selected_program_unit.id,@program_wizard_object.id), method: :put ) do |f| %>
+
+
+    <legend><%= set_subheader("Reject approval of first time benefit amount for Program Unit of client: #{client_full_name(@client)}") %></legend>
+    <p>
+  <%= render 'selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+  </p>
+    <%= render "shared/common_error", object_argument: @selected_program_unit %>
+      <ul>
+        <div class="row">
+              <div class="large-4 columns">
+          <li class="required">
+            <%= f.label :reason,"Rejection Reason" %>
+            <%= f.text_area :reason, cols: 40, rows: 7, maxlength: "255" %>
+          </li>
+        </div>
+         </div>
+    </ul>
+  <p>
+        <%= link_to "Cancel", index_eligibility_determination_runs_path(@selected_program_unit.id) ,class: 'button secondary'%>
+        <%= f.submit "Save ",class: 'button radius'%>
+  </p>
+<% end %>
+</section>
+</fieldset>

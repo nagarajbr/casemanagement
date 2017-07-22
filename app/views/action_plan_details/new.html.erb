@@ -1,0 +1,17 @@
+<fieldset>
+<section class="solidbody">
+<!-- <legend><%#= set_subheader("Enter #{drop_down_value_description(@action_plan.action_plan_type)} action plan detail for: #{client_full_name(@client)}") %> </legend> -->
+<legend><%= set_subheader("Enter supportive service information for: #{client_full_name(@client)}") %> </legend>
+<%= render "parent_action_plan",arg_action_plan: @action_plan,arg_emp_goal: @employment_goal  %>
+<%= render "parent_action_plan_detail", arg_object: @parent_action_plan_detail %>
+<% if  @barriers.present? %>
+	<%= render 'form', ,arg_action_plan:@action_plan,arg_action_plan_details:action_plan_details,arg_barriers:@barriers,
+	arg_activity_types:@activity_types,arg_activity_status:@activity_statuses %>
+<% else %>
+      <p><h5 class="subheader">There are no existing barriers to associate with the plan. Perform assessment as deemed necessary.</h5></p>
+      <p>
+      <%= link_to "Work Readiness Assessment", edit_common_assessment_path(14,session[:CLIENT_ASSESSMENT_ID].to_i), class: 'button radius' %>
+      </p>
+<% end %>
+</section>
+</fieldset>

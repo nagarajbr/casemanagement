@@ -1,0 +1,28 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+	<table>
+		<caption style="text-align:inherit"><%= set_subheader("Code tables ") %></caption>
+	  <thead>
+	      <tr>
+	      <th> Name </th>
+	      <th> Description </th>
+	      <th width=15%> Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @codetable.each do |code| %>
+			<tr>
+				<td>  <%=  code.name %></td>
+				<td>  <%=  code.description %>  </td>
+				<td>   <%= link_to "Show",code_table_path(code),id: "hyperlink" %> | <%= link_to("Edit", edit_code_table_path(code),id: "hyperlink") %> </td>
+			</tr>
+	    <% end %>
+	  </tbody>
+	</table>
+	<%= paginate @codetable %>
+	<%# if validate_authorization(358) %>
+		<%#= link_to("New ", new_code_table_path , class: 'button') %>
+	<%# end %>
+</section>
+</fieldset>

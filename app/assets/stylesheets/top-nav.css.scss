@@ -1,0 +1,42 @@
+@import "colors";
+nav#top-nav{
+
+ clear:right;
+ width: 100%;
+}
+nav ul#list-subnav {
+  list-style:none;
+  padding:0;
+   margin-left: 0;
+}
+nav ul#list-subnav li {
+  display:inline
+}
+nav ul#list-subnav li a {
+
+  padding:0px 15px;
+  width:auto;
+  background: darken($white-color,5%);
+  /*background: lighten(#2E8ACA,25%);*/
+
+  /*color: $white-color;*/
+  color: $black-color;
+  float:left;
+  text-align:center;
+  /*border:2px solid lighten(#2E8ACA,23%);*/
+  border:2px solid darken($white-color,5%);
+  border-top-left-radius:5px;
+border-top-right-radius:5px;
+}
+
+nav ul#list-subnav li a:hover {
+  background:lighten($top-nav-bg-color, 35%);
+  border:2px solid lighten($top-nav-bg-color,33%);
+  color:$black-color;
+}
+
+nav ul#list-subnav li a.selected{
+  background:lighten($top-nav-bg-color, 5%);
+  border:2px solid lighten($top-nav-bg-color,23%);
+  color: $white-color;
+}

@@ -1,0 +1,161 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+<legend>
+		<%= set_subheader("Application screening details for client: #{client_full_name(@client)}") %>
+</legend>
+<% if session[:APPLICATION_ID].present? %>
+
+	<% if @client_applications.present? %>
+
+
+
+		 	<p>
+			 	<!-- Application Review -->
+			 	<%= render 'selected_application_details',arg_selected_application: @selected_application %>
+
+			 </p>
+
+
+
+		 	<p>	<!-- Application Disposition Results -->
+
+		 		<% if @selected_application.application_disposition_status.present?%>
+		 				<table>
+		 				<caption style="text-align:inherit"><b> Application Disposition Results</b><p></p>
+		 				</caption>
+						  <thead>
+						    <tr>
+
+								<th>  Disposition  </th>
+								<th>  Service Program </th>
+								<th>  Disposition Date </th>
+								<th>  Disposition Reason </th>
+
+							</tr>
+						  </thead>
+						    <tbody>
+
+
+									<tr>
+
+
+										<td>  <%= drop_down_value_description(@selected_application.application_disposition_status) %></td>
+										<td>  <%= get_service_program_name(@selected_application.selected_service_program) %></td>
+										<td>  <%= format_db_date(@selected_application.disposition_date)  %></td>
+										<td>  <%= drop_down_value_description(@selected_application.application_disposition_reason) %></td>
+
+
+									</tr>
+
+							</tbody>
+					</table>
+					<!--
+				<%# else %>
+					<p>
+						<font color="red"><h6>Application Screening disposition result not found, complete Application screening by clicking Application Screening button</h6></font>
+
+					</p>
+				-->
+				<% end %>
+
+		 	</p>
+
+		 	 <p>
+			 	<%= render 'application_screening_first_step', :arg_object => @selected_application, arg_application_members: @application_members, arg_client_relationships: @client_relationships %>
+			 </p>
+
+		 	<!-- Application Data element verification Results -->
+		 	<p>
+		 		<%= render 'data_validation/client_application_validation_results',arg_clients: @data_validation_results,arg_application_id: @selected_application.id,arg_navigate: "SCREENING_SUMMARY" %>
+		 		<!-- <%# if @data_validation_results.present?%>
+		 			<table>
+		 				<caption style="text-align:inherit"><b> Required Application Information </b><p></p>
+		 				</caption>
+						  <thead>
+						    <tr>
+								<th> Name </th>
+								<th> Information </th>
+								<th> Availability </th>
+							</tr>
+						  </thead>
+						    <tbody>
+								<%# @data_validation_results.each do |client| %>
+									<tr>
+										<td>  <%#=  client_full_name(Client.find(client.client_id)) %> </td>
+										<td>  <%#=  CodetableItem.get_short_description(client.data_item_type) %> </td>
+										<td> <%#= get_application_validation_result(client.result).html_safe()%>	</td>
+									</tr>
+								 <%# end %>
+							</tbody>
+					</table> -->
+				<!--
+				<% #else %>
+					<p>
+						<label>  Application Data Elements Verification Results not found.</label>
+					</p>
+				-->
+				<%# end %>
+
+		 	</p>
+		 	<!-- Application Document Verification -->
+		 	<p>
+
+		 		<% if @client_doc_verification_list.present? %>
+		 				 <table>
+			 		 <caption 	><b> Application Verification Documents</b><p></p>
+		 			</caption>
+			                <thead>
+			                    <tr>
+			                      <th> Application Member </th>
+			                      <th> Document Type </th>
+			                      <th> Verification Date </th>
+			                    </tr>
+			                </thead>
+			                <tbody>
+			                     <% @client_doc_verification_list.each do |arg_doc| %>
+			                        <tr>
+			                          <td>  <%= get_client_full_name(arg_doc.client_id) %></td>
+			                          <td>  <%= drop_down_value_description(arg_doc.document_type) %></td>
+			                          <td>  <%=  format_db_date(arg_doc.document_verfied_date) %></td>
+			                        </tr>
+			                     <% end %>
+			                </tbody>
+			          </table>
+			          <!--
+			    <%# else %>
+			    	<p>
+						<label>  Application Verification Documents not found.</label>
+					</p>
+				-->
+			    <% end %>
+
+		 	</p>
+		 	 <!-- Application screening Results -->
+		 	 <p>
+		 		<%= render 'application_screening_result_no_data_fix', :arg_object => @app_elig_rslts %>
+		 	</p>
+
+
+		 	 <%= link_to "Back",client_applications_path, class: 'button radius secondary' %>
+
+		 	<% can_application_be_modified = ClientApplication.can_client_application_be_modified?(@selected_application.id)%>
+		 	<% if can_application_be_modified == true%>
+
+		 		 <%#= link_to "Application Screening",application_check_program_eligibility_wizard_initialize_path(@selected_application.id),class: 'button radius' %>
+		 		 <%= link_to "Next",by_pass_application_screenings_wizard_path,class: 'button radius' %>
+		 <% end %>
+
+	<%else%>
+		     <h5 class="subheader">No Completed Application details found.Complete the Application Intake by clicking  Application Intake button </h5>
+	        <p></p>
+	        <%= link_to 'Application Intake',client_application_path(session[:APPLICATION_ID].to_i), class: "button radius"%>
+	<%end%>
+<%else%>
+			<p>
+	           <h5 class="subheader">No Application ID selected.Select the Application ID by clicking  Client Applications button </h5>
+	        </p>
+	        <%= link_to 'Client Applications',client_applications_path, class: "button radius"%>
+<%end%>
+</section>
+</fieldset>

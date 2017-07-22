@@ -1,0 +1,39 @@
+
+
+<p>
+    <b>User: </b>
+    <%= arg_user_name %>
+</p>
+ <p>
+    <b>Users Local Office: </b>
+    <%= arg_user_local_office_name %>
+</p>
+
+<p></p>
+<fieldset>
+<div class="required">
+  <legend class="radiolegend"> Queue </legend>
+</div>
+
+<% if  arg_user_location_queus.present? %>
+	<div class="row">
+			<div class="large-10 column">
+		         <div class="checkbox-style">
+		        	<%= hidden_field_tag("work_queue_user_subscription[queue_types][]",nil) %>
+					<% arg_user_location_queus.each do |each_queue|%>
+						<%= check_box_tag("work_queue_user_subscription[queue_types][]",
+						                   each_queue.id,
+						                   arg_user_array.include?(each_queue.id)
+						                )
+						%>
+						<%= each_queue.short_description%>
+						<br>
+					<% end %>
+		        </div>
+		    </div>
+	</div>
+<% else %>
+		 <h5 class="subheader">No queues are subscribed for this local office.User Can only subscribe to queues belonging to local office.</h5>
+<% end %>
+
+</fieldset>

@@ -1,0 +1,74 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Income summary for: #{client_full_name(@client)}") %></legend>
+	<% if session[:CLIENT_ID].present? %>
+		<% if @income_Collection.present? %>
+		<% @income_Collection.each do |income| %>
+		<table>
+			<caption class="fontc"><p><%= "Income: #{drop_down_value_description(income.incometype)}"%></p></caption>
+		  <thead>
+		    <tr>
+				<th> Type of Income </th>
+				<th> Frequency </th>
+				<th > Begin Date </th>
+				<th > End Date </th>
+				<th colspan="2"> Recalculate Indicator </th>
+			</tr>
+		  </thead>
+		    <tbody>
+					<tr>
+						<td>  <%= drop_down_value_description(income.incometype) %></td>
+						<td>  <%= drop_down_value_description(income.frequency) %></td>
+						<td>  <%=  format_db_date income.effective_beg_date %></td>
+						<td>  <%=  format_db_date income.effective_end_date %></td>
+						<td>  <%= get_flag_description(income.recal_ind) %> </td>
+					</tr>
+			</tbody>
+
+			<%if @income_details_collection.present?%>
+				<thead>
+				    <tr>
+						<th width=10%> Date Received </th>
+						<th> check Type </th>
+						<th> Gross Amount </th>
+						<th> Adjusted Total </th>
+						<th> Adjusted Gross Income </th>
+						<th width=10%> Count for Converted </th>
+					</tr>
+				</thead>
+				<tbody>
+				  	<% @income_details_collection.each do |income_detail| %>
+						<%if income_detail.income_id == income.id %>
+						<tr>
+							<td>  <%= format_db_date income_detail.date_received %></td>
+							<td>  <%= drop_down_value_description(income_detail.check_type) %></td>
+							<td>  <%= number_to_currency_br(income_detail.gross_amt) %></td>
+							<td>  <%= number_to_currency_br(income_detail.adjusted_total) %></td>
+							<td>  <%= number_to_currency_br(income_detail.net_amt) %></td>
+							<td>  <%= get_flag_description(income_detail.cnt_for_convert_ind) %>  </td>
+						</tr>
+						<% end %>
+					<%end%>
+				</tbody>
+			<%end%>
+		</table>
+		<% end %>
+		<%= link_to 'Back', unearned_incomes_path("CLIENT"),class: "secondary button radius" %>
+		 <%else%>
+			<%# if validate_authorization(433) %>
+				<p>
+			    <h5 class="subheader">No income information found</h5>
+		        </p>
+		        <%#= link_to 'New',new_income_path(@menu), class: "button radius"%>
+	        <%# else %>
+	        	<!-- <h5 class="subheader">No income information to show.</h5> -->
+	        <%# end %>
+		<%end%>
+	<%else%>
+		    <p>
+	        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+	        </p>
+	        <%= render "shared/search_client_button" %>
+	<%end%>
+</section>
+</fieldset>

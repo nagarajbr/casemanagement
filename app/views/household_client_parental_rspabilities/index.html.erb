@@ -1,0 +1,58 @@
+<fieldset>
+<section class="solidbody">
+
+	<% if session[:HOUSEHOLD_ID].present? && session[:HOUSEHOLD_ID] != 0 %>
+		<% if@absent_parent_resp_list.present? %>
+			<caption><%= set_subheader("Absent Parental responsibility information for clients in the Household:  #{@household.name}") %></caption>
+			<%= render 'households/selected_household_partial',arg_household: @household %>
+
+				<table>
+					<caption style="text-align:inherit"><b>Children in the household with absent parent information </b><p></p> 	</caption>
+				  <thead>
+				    <tr>
+						<th> Child's Name </th>
+						<th> Child's SSN </th>
+						<th> Absent Parent's Name </th>
+						<th> Absent Parent's SSN </th>
+						<th> Deprivation </th>
+						<th> Good Cause </th>
+						<th> Action </th>
+
+					</tr>
+				  </thead>
+				  	<tbody>
+						<% @absent_parent_resp_list.each do |arg_resp| %>
+							<tr>
+
+								<td>  <%= arg_resp.childs_name %></td>
+								<td>  <%= arg_resp.child_ssn %></td>
+								<td>  <%= arg_resp.parents_name %></td>
+								<td>  <%= arg_resp.parent_ssn %></td>
+								<td>  <%= drop_down_value_description(arg_resp.deprivation_code) %></td>
+								<td>  <%= get_flag_description(arg_resp.good_cause) %></td>
+								<td>
+								 <%= link_to "Show",household_absent_parent_show_path(arg_resp.id),id: "hyperlink"%>|<%= link_to "Change Absent Parent",change_absent_parent_wizard_initialize_path(arg_resp.id),id: "hyperlink"%>|<%= link_to "Return to Household",absent_parent_return_to_household_path(@household.id,arg_resp.parent_client_id,arg_resp.id),id: "hyperlink"%>
+
+								</td>
+							</tr>
+						 <% end %>
+					</tbody>
+				</table>
+
+				    <%= link_to "Register absent parent", new_household_absent_parents_wizard_initialize_path , class: 'button radius'%>
+
+		<%else%>
+			   <legend><%= set_subheader("Absent Parental responsibility information for clients in the Household:  #{@household.name}") %></legend>
+		        <h5 class="subheader">No absent parent information found for this household. Click Register absent parent to enter absent parent information.</h5>
+		        <p></p>
+		        <%= link_to 'Register absent parent',new_household_absent_parents_wizard_initialize_path, class: "button radius"%>
+
+		<%end%>
+<%else%>
+	    <legend><%= set_subheader("Absent Parental responsibility information" ) %><legend>
+        <h5 class="subheader">Household is not selected, Select household by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+ <%end%>
+</section>
+</fieldset>

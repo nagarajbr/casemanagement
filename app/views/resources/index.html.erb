@@ -1,0 +1,58 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Resource information for:  #{client_full_name(@client)}" ) %> </legend>
+<% if session[:CLIENT_ID].present? %>
+	<% if @resources.present? %>
+		 <table>
+		<caption class="fontc"> <p><%=("#{pluralize_without_count(@resources.count,"Resource","")}") %></p></caption>
+		  <thead>
+		    <tr>
+				<th> Type of Resource </th>
+				<th> Account Number </th>
+				<th> Date Resource Acquired </th>
+				<th> Date Resource Disposed </th>
+				<!-- <th> Net Value </th> -->
+				<th>Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @resources.each do |resource| %>
+					<tr>
+						<td>  <%= drop_down_value_description(resource.resource_type) %></td>
+						<td>  <%= resource.account_number  %></td>
+						<td>  <%= format_db_date resource.date_assert_acquired %></td>
+						<td>  <%= format_db_date resource.date_assert_disposed %></td>
+						<!-- <td>  <%#= number_to_currency_br(resource.net_value)%> </td> -->
+						<td>
+						 <%= link_to "Show",resource_path(resource),id: "hyperlink" %> |
+						 <%= link_to("Resource Details",resource_resource_details_path(resource),id: "hyperlink") %>
+						 <%# if validate_authorization(699) %>
+						 	 | <%= link_to("Share", new_client_share_search_path("resource",resource),id: "hyperlink") %>
+					 	<%# end %>
+						</td>
+					</tr>
+				 <% end %>
+			</tbody>
+		</table>
+		<%= paginate @resources %>
+		<% if validate_authorization(562) %>
+		   <%= link_to("New", new_resource_path , class: 'button radius', title1:"Press Enter Key or Mouse Click to new resources details ", data: {tooltip1: '' } ) %>
+	    <% end %>
+		<%else%>
+			<%# if validate_authorization(562) %>
+				<p>
+		        <h5 class="subheader"> Resource information is not found. Click New to enter resource information.</h5>
+		        </p>
+		       <%= link_to 'New',new_resource_path, class: "button radius", title1:"Press Enter Key or Mouse Click to add resources details ", data: {tooltip1: '' }%>
+	        <%# else %>
+	        	<!-- <h5 class="subheader"> No resource information to show.</h5> -->
+	        <%# end %>
+		<%end%>
+<%else%>
+		<p>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+        <%= render "shared/search_client_button" %>
+<%end%>
+</section>
+  </fieldset>

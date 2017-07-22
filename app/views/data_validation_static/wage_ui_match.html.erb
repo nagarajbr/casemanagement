@@ -1,0 +1,147 @@
+<%# Wage and UI validation within DWS %>
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Wage and UI information for: #{client_full_name(@client)}") %></legend>
+<p>
+<h5 class="subheader"> <%= "Verification date-time: #{Time.now.strftime("%m/%d/%Y %H:%M:%S")}" %></h5>
+</p>
+<% if @incomes.present? %>
+	<table>
+	<caption style="text-align:inherit"> <p><b><%=("Wage verification") %></b></p></caption>
+	  <thead>
+	    <tr>
+
+			<th> Employer </th>
+			<th> Frequency </th>
+			<th> Last Check Date </th>
+			<th> Amount </th>
+			<th> Status </th>
+			<th> Action </th>
+		</tr>
+		  </thead>
+	    <tbody>
+			<% @incomes.each do |income| %>
+				<tr>
+					<td>  <%= income.source %></td>
+					<td>  <%= drop_down_value_description(income.frequency) %></td>
+					<td>  <%=  format_db_date income.date_received %></td>
+					<td>  <%=  income.gross_amt %></td>
+					<% if income.date_received.to_s == '2015-12-01' %>
+						<td> <font color="07b69c"> <%=  "Verified" %></font> </td>
+						<td> </td>
+					<% else %>
+						<% @un_verified = 'Y' %>
+						<td> <font color="red"> <%=  "Mis-match" %></font> </td>
+						<td> <%#= link_to 'Fix Data', edit_income_income_detail_path('CLIENT',income.income_id,income.id) ,id: "hyperlink" %></td>
+					<% end %>
+				</tr>
+
+			 <% end %>
+		</tbody>
+	</table>
+
+	<% if @un_verified == 'Y' %>
+	<table>
+	<caption style="text-align:inherit"> <p><b><%=("DWS wage verification") %></b></p></caption>
+	  <thead>
+	    <tr>
+
+			<th> Type of Income </th>
+			<th> Employer </th>
+			<th> Frequency </th>
+			<th> Pay Date </th>
+			<th> Amount </th>
+		</tr>
+	  </thead>
+	    <tbody>
+			<% @incomes.each do |income| %>
+
+				<tr>
+					<td>  <%= drop_down_value_description(income.incometype) %></td>
+					<td>  <%= income.source %></td>
+					<td>  <%= drop_down_value_description(income.frequency) %></td>
+					<td>  <%= "12/01/2015" %></td>
+					<% if income.gross_amt > 150 %>
+						<td>  <%=  "#{income.gross_amt + 301}" %></td>
+					<%else%>
+						<td>  <%=  "#{income.gross_amt + 722}" %></td>
+					<%end%>
+
+				</tr>
+				<tr>
+					<td>  <%= drop_down_value_description(income.incometype) %></td>
+					<td>  <%= income.source %></td>
+					<td>  <%= drop_down_value_description(income.frequency) %></td>
+					<td>  <%= "11/01/2015" %></td>
+					<% if income.gross_amt > 150 %>
+						<td>  <%=  "#{income.gross_amt + 0}" %></td>
+					<%else%>
+						<td>  <%=  "#{income.gross_amt + 0}" %></td>
+					<%end%>
+				</tr>
+				<tr>
+					<td>  <%= drop_down_value_description(income.incometype) %></td>
+					<td>  <%= income.source %></td>
+					<td>  <%= drop_down_value_description(income.frequency) %></td>
+					<td>  <%= "10/01/2015" %></td>
+					<% if income.gross_amt > 150 %>
+						<td>  <%=  "#{income.gross_amt + 0}" %></td>
+					<%else%>
+						<td>  <%=  "#{income.gross_amt + 0}" %></td>
+					<%end%>
+
+				</tr>
+
+			 <% end %>
+		</tbody>
+	</table>
+	<% end %>
+
+<%else%>
+	<%# if validate_authorization(433) %>
+	<p>
+    <h5 class="subheader">No wage information exists for verification.</h5>
+    </p>
+	<p>
+    <h5 class="subheader">No DWS wage information provided for verification.</h5>
+    </p>
+<%end%>
+
+<% if @ui_incomes.present? %>
+	<table>
+	<caption style="text-align:inherit"> <p><b><%=("Unemployment insurance payment verification") %></b></p></caption>
+	  <thead>
+	    <tr>
+
+			<th> Frequency </th>
+			<th> Last Check Date </th>
+			<th> Amount </th>
+			<th> Status </th>
+		</tr>
+	  </thead>
+	    <tbody>
+			<% @ui_incomes.each do |income| %>
+				<tr>
+
+					<td>  <%= drop_down_value_description(income.frequency) %></td>
+					<td>  <%=  format_db_date income.date_received %></td>
+					<td>  <%=  income.net_amt %></td>
+					<td> <font color="00FA9A"> <%=  "Verified" %></font> </td>
+				</tr>
+
+			 <% end %>
+		</tbody>
+	</table>
+<%else%>
+	<p style="text-align:inherit"><b><%=("Unemployment insurance payment verification") %></b></p>
+	<p>
+    <h5 class="subheader">No unemployment insurance information exists for verification.</h5>
+    </p>
+	<p>
+    <h5 class="subheader">No DWS unemployment insurance information provided for verification.</h5>
+    </p>
+<%end%>
+
+ <%= link_to("Back", program_unit_data_validation_results_path(@program_unit_id,1) , class: 'button radius secondary')%>
+</section>
+</fieldset>

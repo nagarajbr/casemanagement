@@ -1,0 +1,2 @@
+class AssessmentBarrierRecommendationsController < AttopAncestorController
+end

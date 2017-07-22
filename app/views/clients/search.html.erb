@@ -1,0 +1,59 @@
+<!-- Initial Serach page and search results with data-->
+<section class="solidbody">
+	<% if @clients.present? %>
+	<!-- search  Results -->
+      	<table>
+      		<caption><%= set_subheader("Search results") %></caption>
+      		<br>
+			<thead>
+				<tr>
+					<th> Household ID </th>
+					<th> Household Name </th>
+					<th> Member Name </th>
+					<th> Social Security Number </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+					<th> Member Status </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @clients.each do |each_object| %>
+				<% @household_name = Household.get_household_name(each_object.household_id) if each_object.household_id.present? %>
+				<tr>
+					<td>  <%=  each_object.household_id  if each_object.household_id.present?%></td>
+					<td>  <%=  @household_name  if @household_name.present?%></td>
+					<td>  <%=  each_object.get_full_name %></td>
+					<td>  <%=  format_SSN(each_object.ssn) %></td>
+					<td>  <%=  format_db_date each_object.dob %></td>
+					<td>  <%=  drop_down_value_description(each_object.gender) %></td>
+					<td>  <%=  drop_down_value_description(each_object.member_status) %></td>
+
+					<td>
+							<% if each_object.household_id.present? %>
+								<%= link_to "select",set_client_in_session_path(each_object.client_id,each_object.household_id),id: "hyperlink" %>
+							<% else %>
+								<%= link_to "select",set_client_in_session_path(each_object.client_id,0),id: "hyperlink" %>
+							<% end %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<div>  <%= paginate @clients %></div>
+		<% if @show_new_button %>
+		 	<%= link_to 'New Search',new_focus_client_search_path, class: "button radius"%>
+	        <%= link_to 'Begin Intake',new_household_wizard_initialize_path, class: "button radius"%>
+	    <% end %>
+	<% else %>
+		<!-- search  Criteria -->
+		<fieldset>
+			<legend><%= set_subheader("Search for an existing client or program unit id") %></legend><br>
+			<%= form_tag client_search_path, method: 'get' do %>
+		        	<%= render 'shared/common_client_search_criteria' %>
+				<%= submit_tag "Search", class: 'button radius' %>
+			<% end %>
+		</fieldset>
+	<% end %>
+
+</section>

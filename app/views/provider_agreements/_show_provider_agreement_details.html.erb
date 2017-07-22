@@ -1,0 +1,54 @@
+
+  <p>
+    <b>Service: </b>
+    <%= get_service_name(@provider_agreement.provider_service_id) %>
+  </p>
+
+  <p>
+    <b>Status: </b>
+    <%= drop_down_value_description(@provider_agreement.state) %>
+  </p>
+
+ <p>
+    <b> Agreement Service Area: </b>
+    <%= drop_down_value_description(@provider_agreement.dws_local_office_id)%>
+  </p>
+
+   <p>
+    <b>Local Office Manager: </b>
+    <%= get_user_name(@provider_agreement.dws_local_office_manager_id) %>
+  </p>
+
+  <p>
+    <b>Start Date: </b>
+    <%= format_db_date @provider_agreement.agreement_start_date %>
+  </p>
+
+  <p>
+    <b>End Date: </b>
+    <%= format_db_date @provider_agreement.agreement_end_date %>
+  </p>
+
+
+
+  <% if @provider_agreement.termination_date.present? %>
+
+ <p>
+    <b>Termination Date: </b>
+    <%= format_db_date @provider_agreement.termination_date %>
+  </p>
+  <%end%>
+
+ <% if @provider_agreement.termination_reason.present? %>
+  <p>
+    <b>Termination Reason: </b>
+    <%= drop_down_value_description(@provider_agreement.termination_reason) %>
+   </p>
+   <%end%>
+
+
+
+
+
+
+  <%#= link_to 'Delete', @provider, method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>

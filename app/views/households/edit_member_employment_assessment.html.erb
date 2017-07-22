@@ -1,0 +1,21 @@
+
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Employment assessment information for: #{client_full_name(@client)}") %> </legend>
+		<!-- <p><%#= render  "selected_assessment" %></p> -->
+		<%= form_for(@common_assessment_answer_object, :url => update_member_employment_assessment_path(@client.id,@assessment_id,@sub_section_id), method: :put) do |f| %>
+			<%= render "shared/common_error", object_argument: @common_assessment_answer_object %><br>
+			<ul>
+				<div class="row">
+				  <div class="large-12 columns">
+					   <%= render 'client_assessment_answers/form',arg_object: f,arg_assessment_que: @assessment_questions,arg_assessment_id:@assessment_id %>
+				  </div>
+				</div>
+			</ul>
+			<p>
+				<%= link_to "Back", start_household_member_registration_wizard_path,class: 'button radius secondary' %>
+				<%= f.submit "Save",:name => "save_button",class: 'button radius' %>
+			</p>
+		<% end %>
+	</section>
+</fieldset>

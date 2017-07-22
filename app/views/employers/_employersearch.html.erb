@@ -1,0 +1,51 @@
+
+	<legend><%= set_subheader("Search for an existing employer") %></legend><br>
+	<%= form_tag employer_search_path, method: 'get' do %>
+ 		<fieldset>
+	    <legend> By employer Name</legend><br>
+	    <div class="row">
+	    <div class="large-4 columns">
+	    	<ul>
+	     	<li>
+	     		<%#= label_tag :employer_name, "Provider Name"%>
+				<%= text_field_tag :employer_name,params[:employer_name], maxlength: "50"%>
+			</li>
+			</ul>
+		</div>
+		</div>
+		<p> </p>
+		</fieldset>
+
+		<fieldset>
+ 			<legend> Federal EIN </legend><br>
+ 			<div class="row">
+ 			<div class="large-4 columns">
+ 				<ul>
+	     		<li>
+				 <%#= label_tag :federal_ein, "Federal EIN"%>
+		 		<%= text_field_tag :federal_ein,params[:federal_ein] , maxlength: "10"%>
+		 		</li>
+				</ul>
+		 	</div>
+		 	</div>
+		</fieldset>
+
+		<fieldset>
+ 			<legend> State EIN </legend><br>
+ 			<div class="row">
+ 			<div class="large-4 columns">
+ 				<ul>
+	     		<li>
+				 <%#= label_tag :state_ein, "State EIN"%>
+		 		<%= text_field_tag :state_ein,params[:state_ein] , maxlength: "10"%>
+		 		</li>
+				</ul>
+		 	</div>
+		 	</div>
+		</fieldset>
+		<%= submit_tag "Search", class: 'button radius' %>
+			<% if arg_show_button %>
+		      	<%= link_to 'Register New Employer',new_employer_path, class: "button radius" %>
+		    <% end %>
+		<% end %>
+

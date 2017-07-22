@@ -1,0 +1,57 @@
+<body onload = "JS_Alien_Citizenship_Yes_No()">
+  <div class="row">
+<div class="large-5 columns">
+   <fieldset class="radio">
+          <div class="required">
+          <legend class="radiolegend"> US Citizenship</legend>
+          </div>
+          <div class="button-group">
+            <label class="radio-button"><%= arg_object.radio_button :citizenship, "Y",id: "citizen_yes",onclick:"JS_Alien_Citizenship_Yes_No(this)",autofocus: true %>Yes</label>
+            <label class="radio-button"><%= arg_object.radio_button :citizenship, "N",id: "citizen_no",onclick:"JS_Alien_Citizenship_Yes_No(this)" %>No</label>
+          </div>
+
+   </fieldset>
+      <div id="citizenship_div">
+       <%= arg_object.label :sves_type,"US Citizenship Verification Status"%>
+        <%if arg_object2.sves_type == 4658%>
+          <%= drop_down_value_description(arg_object2.sves_type)  %>
+        <%else%>
+          <%= arg_object.select :sves_type, CodetableItem.active_item_list(101,"Citizenship Verification Document List").collect { |p| ["#{p.short_description} ", p.id] }%>
+
+        <%end%>
+         </div>
+
+   <!-- On citizenship radio buttons on click java script JS_Alien_Citizenship_Yes_No(this) is called to make
+  Alien Div -id="alien_div" visible/invisible.
+  But In Edit Mode when the citizenship is selected - java script will not be triggered - so I am making DIV -visible/invisible in design time - Hence repetation of Alien divs based on If - else - condition.
+  Manoj-08/28/2014.
+  -->
+
+ <% if arg_object2.citizenship.present? %>
+    <% if arg_object2.citizenship == "Y"%>
+
+          <div id="alien_div" style="display: none">
+            <%= render 'aliens/alien_fields',arg_object:arg_object %>
+          </div>
+
+
+    <% else %>
+    <!-- show alien div -->
+        <div id="alien_div">
+          <%= render 'aliens/alien_fields',arg_object:arg_object %>
+         </div>
+    <% end %>
+  <% else %>
+  <!-- show alien div -->
+      <div id="alien_div">
+       <%= render 'aliens/alien_fields',arg_object:arg_object %>
+      </div>
+
+  <% end %>
+
+   <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+
+</div>
+</div>
+</body>
+

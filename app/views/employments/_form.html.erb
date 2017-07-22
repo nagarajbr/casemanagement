@@ -1,0 +1,71 @@
+
+
+			<li class="required">
+			 	<%= f.label :employer_id %>
+			 	<%= f.select :employer_id, arg_employer.collect { |p| ["#{p.employer_name} ", p.id ] },{ :include_blank => 'Select an Employer Name' }%>
+			</li>
+			<P>
+			<% if arg_menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+				<%= link_to "Register the employer when the client's employer is not included in the above list.",navigate_to_employer_creation_page_path('HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>
+			<% else %>
+				<%= link_to "Register the employer when the client's employer is not included in the above list.",navigate_to_employer_creation_page_path('CLIENT_MANAGEMENT'),id: "hyperlink" %>
+			<% end %>
+
+
+			</P>
+			<li>
+			 	<%= f.label :income_type %>
+			 	<%= f.select :income_type, arg_employment_income.collect { |p| ["#{p.short_description} ", p.id ] }%>
+			</li>
+
+			<li>
+			 	<%= f.label :employment_level %>
+			 	<%= f.select :employment_level, CodetableItem.item_list(29,"Employment Type").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select an Employment Type' }%>
+			</li>
+
+			<li>
+			 	<%= f.label :placement_ind %>
+			 	<%= f.select :placement_ind, CodetableItem.item_list(30,"Placement Indicator").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Placement Indicator' } %>
+			</li>
+
+	      <li class="required">
+			 	<%= f.label :effective_begin_date %>
+				<%= f.date_field :effective_begin_date, alt: "effective begin date", onkeyup:"validate_date_format(event)"  %>
+			</li>
+
+
+			<!-- <li >
+			 	<%#= f.label :position_title %>
+			 	<%#= f.text_field :position_title, maxlength: "35" %>
+			</li>
+
+			<li >
+			 	<%#= f.label :occupation_code%>
+			 	<%#= f.text_field :occupation_code, maxlength: "11" %>
+			</li> -->
+
+			<li>
+			 	<%= f.label :health_ins_covered%>
+			 	<%= f.select :health_ins_covered, CodetableItem.item_list(31,"Health Coverage").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select health coverage' }  %>
+			</li>
+
+			<li >
+			 	<%= f.label :duties %>
+			 	<%= f.text_area :duties, maxlength: "4000", cols:40, rows:70 %>
+			</li>
+
+
+			<li>
+			 	<%= f.label :effective_end_date %>
+
+				<%= f.date_field :effective_end_date, alt: "effective end date", onkeyup:"validate_date_format(event)"  %>
+
+			</li>
+
+			<li>
+			 	<%= f.label :leave_reason%>
+			 	<%= f.select :leave_reason, CodetableItem.item_list(25,"Reason for Leaving").collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select Reason for Leaving' } %>
+			</li>
+			 <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+
+

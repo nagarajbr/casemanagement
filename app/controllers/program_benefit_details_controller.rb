@@ -1,0 +1,2 @@
+class ProgramBenefitDetailsController < AttopAncestorController
+end

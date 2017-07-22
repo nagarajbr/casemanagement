@@ -1,0 +1,81 @@
+<fieldset>
+<section class="solidbody">
+	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+		<p>
+			<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+		</p>
+		<p>
+		<legend>
+			<%= set_subheader("#{drop_down_value_description(@income.incometype)} income information for: #{client_full_name(@client)}") %>
+		</legend>
+		</p>
+	<% else %>
+		<legend>
+			<%= set_subheader("#{drop_down_value_description(@income.incometype)} income information for: #{client_full_name(@client)}") %>
+		</legend>
+	<% end %>
+
+
+
+
+
+<%= render "parent_income",arg_income: @income %>
+
+<table>
+	<caption class="fontc">
+			<%= "Income details" %>
+	<p> </p> </caption>
+	<thead>
+	    <tr>
+			<th width=10%> Date Received </th>
+			<th> Check Type </th>
+			<th> Gross Amount </th>
+			<th> Adjusted Total </th>
+			<th> Adjusted Gross Income </th>
+			<th width=10%> Count for Converted </th>
+			<th> Action </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @income_details.each do |income_detail| %>
+			<tr>
+				<td>  <%= format_db_date income_detail.date_received %></td>
+				<td>  <%= drop_down_value_description(income_detail.check_type) %></td>
+				<td>  <%= number_to_currency_br(income_detail.gross_amt) %></td>
+				<td>  <%= number_to_currency_br(income_detail.adjusted_total) %></td>
+				<td>  <%= number_to_currency_br(income_detail.net_amt) %></td>
+				<td>  <%= get_flag_description(income_detail.cnt_for_convert_ind) %>  </td>
+				<td>
+					<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+						<%= link_to "show", show_household_member_unearned_income_detail_path(@client.id,@income.id,income_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>
+						|
+						<%= link_to("Adjustments", household_member_unearned_income_detail_adjust_reasons_index_path(@client.id,income_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),
+						id: "hyperlink") %>
+					<% else %>
+						<%= link_to "Show",unearned_income_income_detail_path(@menu,@income,income_detail),id: "hyperlink" %>
+					 	|
+						<%= link_to("Adjustments", unearned_income_detail_income_detail_adjust_reasons_path(@menu,income_detail.id),
+						id: "hyperlink") %>
+					<% end %>
+
+
+			    </td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= paginate @income_details %>
+
+<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+	<%= link_to 'Back', start_household_member_registration_wizard_path,class: " secondary button radius" %>
+	<%= link_to("Add unearned income detail", new_household_member_unearned_income_detail_path(@client.id,@income.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: 'button radius') %>
+	<%= link_to("Next", start_household_member_registration_wizard_path, class: 'button radius') if IncomeDetail.income_details_found_for_the_given_income?(@income.id)%>
+<% else %>
+	<%= link_to 'Back', unearned_incomes_path(@menu),class: "secondary button radius"%>
+	<%= link_to("Add Detail", new_unearned_income_income_detail_path(@menu,@income.id) , class: 'button radius') %>
+<% end %>
+
+
+
+</section>
+</fieldset>

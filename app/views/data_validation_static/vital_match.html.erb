@@ -1,0 +1,130 @@
+<%# Child support match with OCSE %>
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Birth certificate results for: #{client_full_name(@client)}") %></legend>
+<p>
+<h5 class="subheader"> <%= "Verification date-time: #{Time.now.strftime("%m/%d/%Y %H:%M:%S")}" %></h5>
+</p>
+<p>
+<h6 class="subheader"> <b><%= "Birth information found using SSN is provided below" %></b></h6>
+</p>
+<p>
+ <b><%= "Provided date of birth matches for client #{client_full_name(@client)}" %></b>
+</p>
+
+<% if @client.present? %>
+	<%if @client_age > 18 %>
+			<p>
+			    <b> Social Security Number:</b>
+			    <%= format_SSN(@client.ssn)  %>
+			</p>
+
+			<p>
+	    		<b> Date of Birth:</b>
+	   			 <%= format_db_date @client.dob %>
+	  		</p>
+
+			<p>
+			    <b> Gender:</b>
+			    <%= drop_down_value_description(@client.gender) %>
+			</p>
+			<p>
+			    <b> Birth City:</b>
+			    <%= 'Little Rock' %>
+			</p>
+						<p>
+			    <b> Birth County:</b>
+			    <%= 'Pulaski' %>
+			</p>
+			<p>
+			    <b> Birth State:</b>
+			    <%= 'Arkansas' %>
+			</p>
+			<p>
+			    <b> Hospital:</b>
+			    <%= 'UAMS' %>
+			</p>
+			<p>
+			    <b> Mother's name:</b>
+			    <%= 'Jackson Tonya Nicole' %>
+			</p>
+			<p>
+			    <b> Mother's maiden name:</b>
+			    <%= 'Smith' %>
+			</p>
+			<p>
+			    <b> Mother's date of birth:</b>
+			    <%=  %>
+			</p>
+			<p>
+			    <b> Father's name:</b>
+			    <%= 'Jackson Andrew Lee' %>
+			</p>
+			<p>
+			    <b> Father's date of birth:</b>
+			    <%=  %>
+			</p>
+	<%else%>
+			<p>
+			    <b> Social Security Number:</b>
+			    <%= format_SSN(@client.ssn)  %>
+			</p>
+
+			<p>
+	    		<b> Date of Birth:</b>
+	   			 <%= format_db_date @client.dob %>
+	  		</p>
+
+			<p>
+			    <b> Gender:</b>
+			    <%= drop_down_value_description(@client.gender) %>
+			</p>
+			<p>
+			    <b> Birth City:</b>
+			    <%= 'Little Rock' %>
+			</p>
+						<p>
+			    <b> Birth County:</b>
+			    <%= 'Pulaski' %>
+			</p>
+			<p>
+			    <b> Birth State:</b>
+			    <%= 'Arkansas' %>
+			</p>
+			<p>
+			    <b> Hospital:</b>
+			    <%= 'UAMS' %>
+			</p>
+			<p>
+			    <b> Mother's name:</b>
+			    <%= @parent_name %>
+			</p>
+			<p>
+			    <b> Mother's maiden name:</b>
+			    <%=  %>
+			</p>
+			<p>
+			    <b> Mother's date of birth:</b>
+			    <%= @parent_dob %>
+			</p>
+			<p>
+			    <b> Father's name:</b>
+			    <%= 'Davis John L' %>
+			</p>
+			<p>
+			    <b> Father's date of birth:</b>
+			    <%=  %>
+			</p>
+	<%end%>
+<%else%>
+	<%# if validate_authorization(433) %>
+	<p>
+    <h5 class="subheader">Birth records could not be verified at this time, please try again later. If issue persists
+    	notify system support to escalate issue.</h5>
+    </p>
+<%end%>
+
+
+ <%= link_to("Back", program_unit_data_validation_results_path(@program_unit_id,1) , class: 'button radius secondary')%>
+</section>
+</fieldset>

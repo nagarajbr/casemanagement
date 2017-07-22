@@ -1,0 +1,15 @@
+<fieldset>
+<section class="solidbody">
+  <%= form_for @in_state_payment, url: edit_in_state_payments_path do |f| %>
+  <legend><%= set_subheader("Payment history for: #{client_full_name(@client)}") %></legend>
+
+    <ul>
+     <%= render('edit_partial', arg_edit: f, arg_instate_payment:@in_state_payment) %>
+
+
+     <%= link_to("Back", show_in_state_payments_path , class: "secondary button radius") %>
+    <%= f.submit "Save", class: 'button radius' %>
+    </ul>
+<%end%>
+</section>
+  </fieldset>

@@ -1,0 +1,16 @@
+
+<section class="solidbody">
+<% if @clients.blank? %>
+
+    <caption><%= set_subheader("Search results") %></caption>
+ 	<legend><h5 class="subheader">No clients found with the search criteria, enter a new search or register absent parent.</h5><br>
+    <br>
+    <% if @show_add_button %>
+    	<%= link_to 'Back', start_household_absent_parents_wizard_path ,class: "secondary button radius" %>
+        <%= link_to 'New Search',new_household_absent_parent_search_path, class: "button radius"%>
+
+        	<%= link_to 'Register New Absent Parent',new_household_absent_parent_path(session[:HOUSEHOLD_ID]), class: "button radius"%>
+
+    <% end %>
+<% end %>
+</section>

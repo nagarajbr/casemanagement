@@ -1,0 +1,20 @@
+  <div class="row">
+  	 <div class="large-5 columns">
+
+  <li class="required">
+      <%= arg_object.label :provider_id %>
+      <%= arg_object.select :provider_id, @approved_providers_zip.collect { |p| ["#{p.provider_name} ", p.id] },{ :include_blank => 'Select Provider' } %>
+  </li>
+   </div>
+  </div>
+
+<%= render  "common_view_service_authorization", arg_srvc_object: @service_authorization,arg_srvc_line_item:@service_authorization_line_items,arg_view_mode:@view_mode,arg_service_schedule:@service_schedules  %>
+<input type="hidden" name="trip_start_address" id="trip_start_address" value = "<%= "#{@service_authorization.get_trip_start_address}"%>" >
+<input type="hidden" name="trip_end_address" id="trip_end_address" value = "<%= "#{@service_authorization.get_trip_end_address}"%>" >
+<body onload="calcRoute();">
+	<div style='width: 800px;'>
+    	<div id="directions" style='width: 800px; height: 400px;'></div>
+	</div>
+</body>
+
+

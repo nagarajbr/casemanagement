@@ -1,0 +1,61 @@
+namespace :populate_codetable13 do
+	desc "add_state"
+	task :states => :environment do
+
+		CodetableItem.where("code_table_id = 104 and id = 4667 ").destroy_all
+		CodetableItem.where("code_table_id = 104 and id = 4668 ").destroy_all
+		code_tables = CodeTable.where("id = 104 ").first
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"AL",long_description:"ALABAMA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"AK",long_description:"ALASKA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"AZ",long_description:"ARIZONA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"AR",long_description:"ARKANSAS",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"CA",long_description:"CALIFORNIA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"CO",long_description:"COLORADO",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"CT",long_description:"CONNECTICUT",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"DE",long_description:"DELAWARE",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"FL",long_description:"FLORIDA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"GA",long_description:"GEORGIA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"HI",long_description:"HAWAII",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"ID",long_description:"IDAHO",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"IL",long_description:"ILLINOIS",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"IN",long_description:"INDIANA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"IA",long_description:"IOWA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"KS",long_description:"KANSAS",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"KY",long_description:"KENTUCKY",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"LA",long_description:"LOUISIANA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"ME",long_description:"MAINE",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"MD",long_description:"MARYLAND",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"MA",long_description:"MASSACHUSETTS",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"MI",long_description:"MICHIGAN",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"MN",long_description:"MINNESOTA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"MS",long_description:"MISSISSIPPI",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"MO",long_description:"MISSOURI",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"MT",long_description:"MONTANA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"NE",long_description:"NEBRASKA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"NV",long_description:"NEVADA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"NH",long_description:"NEW HAMPSHIRE",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"NJ",long_description:"NEW JERSEY",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"NM",long_description:"NEW MEXICO",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"NY",long_description:"NEW YORK",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"NC",long_description:"NORTH CAROLINA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"ND",long_description:"NORTH DAKOTA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"OH",long_description:"OHIO",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"OK",long_description:"OKLAHOMA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"OR",long_description:"OREGON",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"PA",long_description:"PENNSYLVANIA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"RI",long_description:"RHODE ISLAND",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"SC",long_description:"SOUTH CAROLINA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"SD",long_description:"SOUTH DAKOTA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"TN",long_description:"TENNESSEE",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"TX",long_description:"TEXAS",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"UT",long_description:"UTAH",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"VT",long_description:"VERMONT",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"VA",long_description:"VIRGINIA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"WA",long_description:"WASHINGTON",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"WV",long_description:"WEST VIRGINIA",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"WI",long_description:"WISCONSIN",system_defined:"TRUE",active:"TRUE")
+		codetableitems = CodetableItem.create(code_table_id:code_tables.id,short_description:"WY",long_description:"WYOMING",system_defined:"TRUE",active:"TRUE")
+
+	end
+
+end

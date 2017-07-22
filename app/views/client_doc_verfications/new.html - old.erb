@@ -1,0 +1,19 @@
+<%= form_for(@client_doc_verification,:url => create_client_doc_verfication_path(@client_application.id), method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @client_doc_verification %>
+    <fieldset>
+    	<%= set_subheader("Document verification for selected Application") %>
+    	<ul>
+	     	<div class="row">
+	          <div class="large-6 columns">
+	               <%= render 'form_document_verification',arg_object: f %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+	    	<%= link_to "Cancel",client_doc_verfications_path,class: 'secondary button radius'%>
+
+	       <%= f.submit "Save",class: 'button radius'%>
+	        </p>
+
+    </fieldset>
+<% end %>

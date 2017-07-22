@@ -1,0 +1,55 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Enter address information for: #{client_full_name(@client)}") %></legend>
+
+		    <% if session[:CALLED_FROM_HOUSEHOLD_REGISTRATION_PAGE].present? && session[:CALLED_FROM_HOUSEHOLD_REGISTRATION_PAGE] == 'Y' %>
+		    		<%= form_for @address, url: create_household_member_address_path, method: :post do |f| %>
+					     	<%= render "shared/common_error", object_argument: @address %>
+					     	<% if @address.required_mailing_address_confirmation %>
+					     		<%= render "contacts/address_confirmation_partial", arg_object: f, arg_partial: "show_mailing_address", arg_flag: :overwrite_mailing_address, addr_type: "mailing", arg_address: @address, arg_ups_address: @usps_address %>
+				     		<% end %>
+
+				     		<% if @address.required_non_mailing_address_confirmation %>
+					     		<%= render "contacts/address_confirmation_partial", arg_object: f, arg_partial: "show_non_mailing_address", arg_flag: :overwrite_non_mailing_address, addr_type: "physical",arg_address: @address, arg_ups_address: @usps_address  %>
+				     		<% end %>
+
+					     	<%= render "contacts/contact_confirmation_partial",arg_object: f %>
+					     	 <p>
+						        <%= link_to 'Back', new_household_member_address_path, class: "secondary button radius" %>
+						        <%= f.submit "Save", class: 'button radius' %>
+						    </p>
+				    <% end %>
+		    <% else %>
+		    		<% if session[:CLIENT_ID].present? %>
+				  		<%= form_for @address, url: create_contact_path, method: :post do |f| %>
+					     	<%= render "shared/common_error", object_argument: @address %>
+					     	<% if @address.required_mailing_address_confirmation %>
+					     		<%= render "contacts/address_confirmation_partial", arg_object: f, arg_partial: "show_mailing_address", arg_flag: :overwrite_mailing_address, addr_type: "mailing",
+					     		    arg_address: @address, arg_ups_address: @usps_address  %>
+				     		<% end %>
+
+				     		<% if @address.required_non_mailing_address_confirmation %>
+					     		<%= render "contacts/address_confirmation_partial", arg_object: f, arg_partial: "show_non_mailing_address", arg_flag: :overwrite_non_mailing_address, addr_type: "physical",arg_address: @address, arg_ups_address: @usps_address  %>
+				     		<% end %>
+
+			     			<%#= render "show_non_mailing_address",arg_addr: @address %>
+					     	<%= render "contact_confirmation_partial",arg_object: f %>
+					     	 <p>
+						        <%= link_to 'Back', new_contact_path, class: "secondary button radius" %>
+						        <%= f.submit "Save", class: 'button radius' %>
+						    </p>
+				     	<% end %>
+				    <% else %>
+				    	<h5 class="subheader">Client is not selected, Select a client by clicking Search Client button.</h5><br>
+				    	<p></p>
+				    	<%= render "shared/search_client_button" %>
+					<% end %>
+		    <% end %>
+
+
+
+
+
+
+	</section>
+</fieldset>

@@ -1,0 +1,20 @@
+
+<%= form_for(@non_transport_authorization, :url => non_transportation_srvc_create_path, method: :post) do |f| %>
+<fieldset>
+  <section class="solidbody">
+        <legend><%= set_subheader("Enter new supportive service information for: #{client_full_name(@client)}") %> </legend>
+       <%= render "shared/common_error", object_argument: @non_transport_authorization %><br>
+        <ul>
+	     	<div class="row">
+	          <div class="large-5 columns">
+	               <%= render 'non_transport_supportive_service_attributes',arg_common_object: f,arg_support_service:@supportive_service_type,arg_service_date:@service_date,arg_non_transport_service_provider:@non_transport_service_provider %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+ 			<%= link_to 'Cancel', service_authorizations_index_path(session[:PROGRAM_UNIT_ID]),class: "secondary button radius" %>
+		    <%= f.submit "Save", class: 'button radius' %>
+	    </p>
+    </section>
+ </fieldset>
+<% end %>

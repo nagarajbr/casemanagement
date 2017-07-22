@@ -1,0 +1,44 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Barrier reduction plan information for: #{client_full_name(@client)}") %></legend>
+		<%= render "parent_action_plan",arg_action_plan:@action_plan,arg_emp_goal:@employment_goal %>
+		<% if @parent_action_plan_detail.present? %>
+			<%= render "parent_action_plan_detail",arg_object: @parent_action_plan_detail %>
+		<% end %>
+
+		<% if @supportive_services.present? %>
+			<table>
+				<caption class="fontc">
+						<%= "Supportive Services" %>
+				<p> </p> </caption>
+				<thead>
+				    <tr>
+						<th> Service Type </th>
+						<th> Start Date </th>
+						<th> End Date </th>
+						<th> Action </th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @supportive_services.each do |ss_detail| %>
+						<tr>
+							<td>  <%= drop_down_value_description(ss_detail.activity_type) %> </td>
+							<td>  <%= format_db_date ss_detail.start_date %> </td>
+							<td>  <%= format_db_date ss_detail.end_date %> </td>
+							<td>
+								<%= link_to "show", show_supportive_service_path(@action_plan,@action_plan_detail,ss_detail),id: "hyperlink" %>
+						    </td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<%= paginate @supportive_services %>
+			<%#= link_to 'Back', action_plan_action_plan_details_path(@action_plan),class: "secondary button radius" %>
+		<% else %>
+			<h5 class="subheader">There are no supportive services for this activity. Click Add to enter a supportive service.</h5>
+	        <p></p>
+		<% end %>
+		<%= link_to 'Back', action_plan_action_plan_details_path(@action_plan),class: "secondary button radius" %>
+        <%= link_to 'Add Non Transportation Service', new_supportive_service_action_plan_detail_path(@action_plan, @action_plan_detail),class: "button radius" %>
+        <%= link_to 'Add Transportation Service', new_supportive_service_action_plan_detail_path(@action_plan, @action_plan_detail),class: "button radius" %>	</section>
+	</section></fieldset>

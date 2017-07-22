@@ -1,0 +1,73 @@
+<fieldset>
+	<% if @work_tasks.present? %>
+			 <section class="solidbody">
+			 	<legend><%=set_subheader("Pending tasks for: #{current_user.name}") %></legend>
+			 	<%#= render 'selected_e mployer' %>
+			 	<!-- <body onload="highlight_table_fields()">
+				 	<table id="work_lists"> -->
+				 	<table>
+				 		<thead>
+				 			<tr>
+
+				 				 <th> Due date  </th>
+
+				 				 <th width="50%"> Task</th>
+				 				<th> Number of Days Due  </th>
+			                    <th> Client  </th>
+				 				<th> Action</th>
+				 			</tr>
+				 		</thead>
+				 		<tbody>
+				 			<% @work_tasks.each do |arg_detail| %>
+					 			<tr>
+
+					 				<td>  <%= format_db_date(arg_detail.due_date) %></td>
+
+					 				<td>  <%= arg_detail.action_text %></td>
+					 				<td>  <%=  (Date.parse(arg_detail.due_date.strftime("%Y-%m-%d")) - Date.parse(Date.today.strftime("%Y-%m-%d"))).to_i  %></td>
+					 				<td>
+					 				<% if arg_detail.client_id.present? %>
+					 					  <%= get_client_full_name(arg_detail.client_id) %>
+
+
+					 				<% end %>
+					 				</td>
+					 				<td> <%= link_to "Show", work_task_path(arg_detail),id: "hyperlink" %></td>
+
+
+					 			</tr>
+				 			<% end %>
+				 		</tbody>
+				 	</table>
+				 <!-- </body> -->
+				 	<%= paginate @work_tasks,:param_name => :work_task  %>
+				 <%# if validate_authorization(655) %>
+		        	<%= link_to 'New',new_work_task_path, class: "button radius"%>
+	        	<%# end %>
+			</section>
+
+	<%else%>
+			<section class="solidbody">
+				  	<legend><%=set_subheader("Pending tasks for: #{current_user.name}") %></legend>
+				  	<%# if validate_authorization(655) %>
+				        <h5 class="subheader">User <%= "#{current_user.name} does not have any pending work tasks." %> </h5>
+				        <p></p>
+				        <%= link_to 'New',new_work_task_path, class: "button radius"%>
+			        <%# else %>
+			        	<!-- <h5 class="subheader">User <%#= "#{current_user.name} does not have any Pending work task." %> </h5> -->
+			        <%# end %>
+			</section>
+
+	<%end%>
+</fieldset>
+
+
+
+	<%= render 'my_completed_tasks', arg_completed_tasks:@completed_work_tasks%>
+
+
+
+
+
+
+

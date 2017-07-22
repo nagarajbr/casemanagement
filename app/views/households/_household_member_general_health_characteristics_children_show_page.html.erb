@@ -1,0 +1,38 @@
+<!--NOT USED -->
+<!--
+<b>Household Member: <%#= "#{client_full_name(@client)}" %></b>
+<p></p>
+
+		<%# if ( @client.exempt_from_immunization.present?) || @client_immunization.present?  %>
+			<fieldset>
+
+				<p>
+		         	<b>Exempt from Immunization: </b>
+				    <%#=  @client.exempt_from_immunization.present? ? get_flag_description(@client.exempt_from_immunization) : "" %>
+				</p>
+				<p>
+		         	<b>Provided Immunization record: </b>
+				    <%#= @client_immunization.present? && @client_immunization.immunizations_record.present? ? get_flag_description(@client_immunization.immunizations_record) : "" %>
+				</p>
+				<%#= render "notes/notes_field_show", arg_notes: @notes %>
+				<%#= link_to 'Edit',edit_household_member_immunization_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: "button radius"%>
+				<%#= link_to 'Delete',delete_household_member_immunization_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+			</fieldset>
+		<%#else%>
+			<fieldset>
+
+					<h5 class="subheader">Immunization data not found.Do you want to add Immunization data?</h5>
+					<p></p>
+		            <fieldset class="radio">
+		                <div class="button-group">
+		                  <label class="radio_button_bigger_text" for="member_immunization_charcteristics_found_add_flag_y"><%#= arg_object.radio_button :member_immunization_charcteristics_found_add_flag, "Y"%>Yes</label>
+		                  <label class="radio_button_bigger_text" for="member_member_immunization_charcteristics_found_add_flag_n"><%#= arg_object.radio_button :member_immunization_charcteristics_found_add_flag, "N"%>No</label>
+		                  <label class="radio_button_bigger_text" for="member_immunization_charcteristics_found_add_flag_s"><%#= arg_object.radio_button :member_immunization_charcteristics_found_add_flag, "S"%>Skip for now</label>
+
+		                </div>
+		            </fieldset>
+					<%#= link_to 'New',new_household_member_immunization_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: "button radius"%>
+			</fieldset>
+		<%#end%>
+
+-->

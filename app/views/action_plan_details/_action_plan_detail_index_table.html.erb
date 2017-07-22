@@ -1,0 +1,65 @@
+<table>
+	<caption style="text-align:inherit">
+		<p><b>	<%= ("#{pluralize_without_count(action_plan_details.size,type,"")}") %>
+	 </b></p> </caption>
+	<thead>
+	    <tr>
+			<!-- <th width = "25%"> Barrier </th> -->
+			<th> Client Name </th>
+			<th width = "25%"> Activity </th>
+			<th> Status </th>
+			<th> Duration</th>
+			<th> Start Date </th>
+			<th> End Date </th>
+			<% if show_action %>
+				<th> Action </th>
+			<% end %>
+		</tr>
+	</thead>
+	<tbody>
+		<% action_plan_details.each do |ap_detail| %>
+			<%  li_duration = 0
+				schedule_collection = Schedule.where("reference_id = ?",ap_detail.id)
+				if schedule_collection.present?
+					li_duration = schedule_collection.first.duration
+				end
+			%>
+			<tr>
+				<!-- <td>  <%#= get_barrier_description(ap_detail.barrier_id) %> </td> -->
+				<td>  <%= ap_detail.client_full_name %> </td>
+				<td>  <%= drop_down_value_description(ap_detail.activity_type) %> </td>
+				<td>  <%= drop_down_value_description(ap_detail.activity_status) %> </td>
+				<td>  <%= li_duration%> Weeks </td>
+				<td>  <%= format_db_date ap_detail.start_date %> </td>
+				<td>  <%= format_db_date ap_detail.end_date %> </td>
+				<% if show_action %>
+					<td>
+						<%= link_to "show", action_plan_action_plan_detail_path(ap_detail.action_plan_id,ap_detail),id: "hyperlink" %>
+						<!--|<%#= link_to "supportive services", application_detail_supportive_services_path(ap_detail.action_plan_id,ap_detail),id: "hyperlink" %>
+					-->
+
+					<!-- <%# if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@action_plan.program_unit_id) %>
+						<%#= link_to "supportive services", service_authorizations_index_path(ap_detail.action_plan_id,ap_detail,session[:PROGRAM_UNIT_ID]),id: "hyperlink" %>
+					<%# else %>
+						<%# @show_security_message = " hyperlink is disabled because, you are not the case manager of the program unit." %>
+						<%#= link_to "supportive services","#",id: "disabled_hyperlink" %>
+					<%# end %> -->
+
+						<!-- | -->
+						<%#= link_to "activity hours", enter_participation_hours_path(ap_detail.action_plan_id,ap_detail),id: "hyperlink" %>
+				    </td>
+			    <% end %>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<p>
+	<% if  @show_security_message.present?%>
+		<h6 class="small text-left"><b>supportive services</b> <%= "#{@show_security_message}" %></h6>
+	<% end %>
+</p>
+
+<%= paginate action_plan_details %>
+
+
+

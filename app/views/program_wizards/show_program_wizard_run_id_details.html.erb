@@ -1,0 +1,164 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<fieldset>
+	<section class="solidbody">
+	<legend>
+			<%= set_subheader("Eligibility determination details for selected program unit of client: #{client_full_name(@client)} #{@run_month_description}") %>
+	</legend>
+ 	<p>
+	 	<%= render 'selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+ 	</p>
+ 	<p>
+ 		<%= render 'selected_program_wizard_run_id_details', arg_object: @selected_program_wizard %>
+ 	</p>
+ 	<p>
+ 		<%= render 'selected_program_benefit_members', arg_collection: @program_wizard_benefit_members%>
+ 	</p>
+ 	<p>
+		<% if @program_month_summary_collection.present? %>
+			<%= render 'program_month_summary', arg_object: @program_month_summary_collection.first %>
+		<% else %>
+			<b> Program Benefit Summary </b>
+			<label> No Program Month Summary data found</label>
+		<% end %>
+	</p>
+
+	<p>
+		<% if @eligibility_deterimine_results.present? %>
+			<%= render 'eligibility_determine_results', arg_object: @eligibility_deterimine_results,arg_selected_program_wizard:@selected_program_wizard %>
+		<% end %>
+	</p>
+
+ 	<p>
+		<%= render 'program_benefit_detail', arg_collection: @program_benefit_detail%>
+	</p>
+
+	<p>
+		<%= link_to 'Back', index_eligibility_determination_runs_path(@selected_program_unit.id),class: " secondary button radius" %>
+		<% if @eligible_indicator == 'Y'%>
+
+			<% participation_collection =@selected_program_unit.program_unit_participations %>
+			<% if @selected_program_unit.service_program_id == 3 %>
+			<!-- TEA DIVERSION -->
+				<% if participation_collection.blank? %>
+				<!-- First Time Activation-->
+					<% if @selected_program_unit.state == 6165 || @selected_program_unit.state == 6167%>
+						<% if @case_type != 6048 %>
+								<!-- Non Child Only Case-->
+								<% if @reference_id_state.present? && @reference_id_state == 6558 %>
+									<!-- IN READY FOR ELIGIBILITY DETERMINATION QUEUE-->
+										<%if can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id) %>
+											<%= link_to "Complete Eligibility Determination",new_submit_tea_diversion_payment_run_id_path(@selected_program_unit.id,@selected_program_wizard.id), class: "button radius"%>
+										<% else %>
+											<%= link_to "Complete Eligibility Determination","#", class: "disabled button"%>
+											<p>
+								        		<h6 class="subheader"><b>Complete Eligibility Determination</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can complete eligibility determination.</h6>
+								        	</p>
+										<% end %>
+								<% end %> <!--END OF  @reference_id_state.present? && @reference_id_state == 6558-->
+						<% end %> <!--END OF  @case_type != 6048-->
+					<% end %> <!--END OF  @selected_program_unit.state == 6165 || @selected_program_unit.state == 6167-->
+
+					<% if @show_approve_reject_button == true%>
+						<% if can_logged_in_user_edit?("REQUEST_TO_APPROVE_BENEFIT_AMOUNT",@selected_program_unit.id)%>
+							<%= link_to "Approve Benefit Amount",approve_program_wizard_run_id_path(@selected_program_unit.id,@selected_program_wizard.id), class: "button radius"%>
+							<!-- REJECTION ONLY FOR TEA DIVERSION-->
+							<%if @selected_program_unit.service_program_id == 3%>
+								<%= link_to "Reject Benefit Amount",edit_rejection_of_program_unit_path(@selected_program_unit.id,@selected_program_wizard.id), class: "button radius"%>
+							<%end%>
+						<% else%>
+							<%= link_to "Approve Benefit Amount","#", class: "disabled button"%>
+							<%if @selected_program_unit.service_program_id == 3%>
+								<%= link_to "Reject Benefit Amount","#", class: "disabled button"%>
+								<p>
+        							<h6 class="subheader"><b>Approve Benefit Amount </b> and <b>Reject Benefit Amount </b>buttons are disabled because, <%=@queue_message_to_user%>
+        							</h6>
+        						</p>
+							<%else%>
+								<p>
+        							<h6 class="subheader"><b>Approve Benefit Amount </b> button is disabled because, <%=@queue_message_to_user%>
+        							</h6>
+        						</p>
+							<%end%>
+						<% end %>
+					<% end %> <!--END OF  @show_approve_reject_button == true-->
+				<% end %> <!--END OF  participation_collection.blank?-->
+
+			<% else %>
+
+			<!-- Non TEA DIVERSION -->
+				<% if participation_collection.blank? %>
+
+					<!-- if program unit is not approved . -->
+
+
+						<% if @case_type == 6048 %>
+							<!-- Child Only Case-->
+							<% if @reference_id_state.present? && @reference_id_state == 6558 %>
+								<% if (can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id))%>
+									<%= link_to "Complete Eligibility Determination",ready_for_assessment_path(@selected_program_unit.id,@selected_program_wizard.id), class: "button radius"%>
+								<% else%>
+									<%= link_to "Complete Eligibility Determination","#", class: "disabled button"%>
+									<p>
+		        						<h6 class="subheader"><b>Complete Eligibility Determination</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can complete eligibility determination.</h6>
+		        					</p>
+								<% end %>
+							<% end %>
+						<% else %>
+							<!-- Non Child Only Case-->
+
+							<%# if @show_ready_for_assessment_button == true %>
+								<% if @reference_id_state.present? && @reference_id_state == 6558 %>
+									<% if can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id)%>
+											<%= link_to "Complete Eligibility Determination",ready_for_assessment_path(@selected_program_unit.id,@selected_program_wizard.id), class: "button radius"%>
+									<% else %>
+											<%= link_to "Complete Eligibility Determination","#", class: "disabled button"%>
+											<p>
+					        					<h6 class="subheader"><b>Complete Eligibility Determination</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can complete eligibility determination.</h6>
+					        				</p>
+									<% end %>
+								<% end %>
+						<% end %> <!-- END OF  @case_type == 6048-->
+
+
+
+						<% if @show_approve_reject_button == true%>
+							<% if can_logged_in_user_edit?("REQUEST_TO_APPROVE_BENEFIT_AMOUNT",@selected_program_unit.id)%>
+								<%= link_to "Approve Benefit Amount",approve_program_wizard_run_id_path(@selected_program_unit.id,@selected_program_wizard.id), class: "button radius"%>
+							<%else %>
+								<%= link_to "Approve Benefit Amount","#", class: "disabled button"%>
+								<p>
+	        						<h6 class="subheader"><b>Approve Benefit Amount</b> button is disabled because, <%=@queue_message_to_user%></h6>
+	        					</p>
+							<% end %>
+						<% end %>
+				<% else %>
+					<!-- AFTER PGU IS ACTIVATED SUBMIT BUTTON -->
+					<% if @selected_program_wizard.submit_date.blank? %>
+						<% if can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id) %>
+						 	<% unless @program_unit_closed_for_more_30_days == true %>
+						     	<%if @submit_payment_button_show == true%>
+							   		<%= link_to "Submit",submit_program_wizard_run_id_path(@selected_program_unit.id,@selected_program_wizard.id), class: "button radius"%>
+							 	<% end %>
+						 	<% end %>
+						<% else %>
+							<%= link_to "Submit","#", class: "disabled button"%>
+							<p>
+        						<h6 class="subheader"><b>Submit</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can Submit Payment.</h6>
+        					</p>
+						<% end %>
+					<% end %>
+				<% end %> <!-- END OF  participation_collection.blank?-->
+			<% end %> <!-- END OF  if @selected_program_unit.service_program_id == 3-->
+
+		<% end %>  <!-- END OF  if @eligible_indicator == 'Y'-->
+</p>
+<%# if @queue_message_to_user.present?%>
+	<p>
+		<h6 class="subheader"><%#= @queue_message_to_user %></h5>
+	</p>
+<%# end %>
+
+
+	</section>
+</fieldset>

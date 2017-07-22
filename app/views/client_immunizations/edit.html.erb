@@ -1,0 +1,30 @@
+<section class="solidbody">
+<fieldset>
+
+	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+				<p>
+					<%= render 'households/selected_household_partial',arg_household: @household %>
+				</p>
+				<h6><%= ("Edit Immunization information for household member: #{client_full_name(@client)}") %> </h6>
+				<%= form_for(@client_immunization, :url => update_household_member_immunization_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :put) do |f| %>
+					<%= render "shared/common_error", object_argument: @client_immunization %>
+					<%= render 'form',arg_object: @client_immunization ,arg_client: @client, arg_notes: @notes %>
+					<%= link_to 'Back', start_household_characteristics_data_entry_wizard_path,class: "secondary button radius" %>
+					<%= submit_tag "Save", class: "button radius" %>
+					</div>
+				<%end%>
+
+	<% else %>
+			<legend><%= set_subheader("Immunization information for: #{client_full_name(@client)}") %></legend><br>
+			<%= form_for(@client_immunization, :url => update_client_immunization_path(@menu), method: :put) do |f| %>
+			<%= render "shared/common_error", object_argument: @client_immunization %>
+				<%= render 'form',arg_object: @client_immunization ,arg_client: @client, arg_notes: @notes %>
+			<%= link_to 'Cancel', show_client_immunization_path(@menu),class: "secondary button radius"%>
+				<%= submit_tag "Save", class: "button radius" %>
+				</div>
+			<%end%>
+	<% end %>
+
+
+</fieldset>
+</section>

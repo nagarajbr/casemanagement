@@ -1,0 +1,23 @@
+
+	<li class="required" >
+  <%= arg_object.label :refugee_status,"Immigration Status" %>
+
+  <%= arg_object.select :refugee_status, CodetableItem.item_list(7,"Refugee Status List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Immigration status' } %>
+
+</li>
+<li >
+  <%= arg_object.label :country_of_origin, "Country of Origin" %>
+
+   <%= arg_object.select :country_of_origin, CodetableItem.item_list(6,"Country of Origin List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select country ' } %>
+</li>
+
+<li class="required">
+  <%= arg_object.label :alien_DOE, "Alien Date of Entry" %>
+  <%= arg_object.date_field :alien_DOE, title1: "Alien Date of Entry", onkeyup:"validate_date_format(event)" %>
+</li>
+<li >
+  <%= arg_object.label :alien_no, "Alien Number" %>
+  <%= arg_object.text_field :alien_no, title1: "Alien Number",maxlength: "12" %>
+</li>
+
+

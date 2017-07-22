@@ -1,0 +1,50 @@
+<fieldset>
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+	<legend><%= set_subheader("Sanction information for: #{client_full_name(@client)}" ) %></legend>
+	<% if @sanctions.present? %>
+<table>
+	<caption style="text-align:inherit"> <p><b><%=("#{pluralize_without_count(@sanctions.count,"Sanction","")}") %></b></p></caption>
+	<thead>
+	<tr>
+					<th> Service Program </th>
+					<th> Sanction Type </th>
+					<th> Infraction Begin Date </th>
+					<th> Infraction End Date </th>
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @sanctions.each do |arg_s| %>
+						<tr>
+							<td>  <%= get_service_program_name(arg_s.service_program_id) %></td>
+							<td>  <%= drop_down_value_description(arg_s.sanction_type)  %></td>
+							<td>  <%=  format_db_date(arg_s.infraction_begin_date) %></td>
+							<td>  <%=  format_db_date(arg_s.infraction_end_date) %></td>
+							<td>  <%= link_to "Show",sanction_path(arg_s),id: "hyperlink" %> |
+						 <%= link_to("Details", sanction_sanction_details_path(arg_s.id),id: "hyperlink") %> </td>
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+			<%# if validate_authorization(595) %>
+			    <%= link_to("New", new_sanction_path , class: 'button radius') %>
+		    <%# end %>
+	<%else%>
+		<%# if validate_authorization(595) %>
+			<p>
+	        <h5 class="subheader">Sanction information is not found. Click New to enter Sanction information.</h5>
+	        </p>
+	        <%= link_to 'New',new_sanction_path, class: "button radius" ,title1: "press enter or click mouse to enter Sanction information  ", data: {tooltip1: '' }%>
+        <%# else %>
+        	<!-- <h5 class="subheader">No sanction information to show.</h5> -->
+        <%# end %>
+	<%end%>
+<%else%>
+		<p>
+        <h5 class="subheader">Client is not selected. Select client by clicking Search Client button.</h5>
+        </p>
+        <%= render "shared/search_client_button" %>
+    <%end%>
+</section>
+</fieldset>

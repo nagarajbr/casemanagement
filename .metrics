@@ -1,0 +1,39 @@
+MetricFu.report_name # by default, your directory base name
+MetricFu.report_name = 'Petit jean Report'
+
+MetricFu.configuration.configure_graph_engine(:bluff)
+
+# To configure individual metrics...
+MetricFu::Configuration.run do |config|
+  config.configure_metric(:cane) do |cane|
+    cane.enabled = true
+    cane.abc_max = 15
+    cane.line_length = 80
+    cane.no_doc = 'y'
+    cane.no_readme = 'y'
+  end
+end
+
+# Or, alternative format
+MetricFu.configuration.configure_metric(:churn) do |churn|
+  churn.enabled = true
+  churn.ignore_files = 'HISTORY.md, TODO.md'
+  churn.start_date = '08/01/2014'
+end
+
+# Or, to (re)configure all metrics
+MetricFu.configuration.configure_metrics.each do |metric|
+  if [ :rails_best_practices,:reek,:roodi,:cane,:simplecov,:rcov,:flay, :flog].include?(metric.name)
+    metric.enabled = true
+  else
+    metric.enabled = false
+  end
+end
+
+MetricFu::Configuration.run do |config|
+  config.configure_metric(:rcov) do |rcov|
+    rcov.coverage_file = MetricFu.run_path.join("coverage/rcov/rcov.txt")
+    rcov.enable
+    rcov.activate
+  end
+end

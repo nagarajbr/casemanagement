@@ -1,0 +1,45 @@
+<fieldset>
+     <section class="solidbody">
+		<%= form_tag process_overwrite_wizard_path(@program_unit.id), method: :post do %>
+			<legend><%= set_subheader("Program Unit for Client: #{client_full_name(@client)}") %></legend>
+			<%= render 'program_units/selected_program_unit_details',arg_selected_program_unit: @program_unit %>
+
+			<% if  "#{@program_unit.overwrite_wizard_current_step}_step" == "overwrite_wizard_first_step" %>
+	            <h3>Step 1 of 6</h3>
+	            <h5><%= set_subheader("Add Program Unit Member") %></h5>
+	            <!-- <legend><%#= set_subheader("Add Program Unit Member") %></legend> -->
+	            <%#= render "shared/common_error", object_argument: @program_unit %>
+		    <!-- <%# end %> -->
+		    <% elsif  "#{@program_unit.overwrite_wizard_current_step}_step" == "overwrite_wizard_second_step" %>
+	            <h3>Step 2 of 6 </h3>
+                <h5><%= set_subheader("Select Primary Member of Program Unit") %></h5>
+              	<%#= render "shared/common_error", object_argument: @program_unit %>
+		    <!-- <%# end %> -->
+		    <% elsif  "#{@program_unit.overwrite_wizard_current_step}_step" == "overwrite_wizard_third_step" %>
+	            <h3>Step 3 of 6 </h3>
+                <h5><%= set_subheader("Data Verification") %></h5>
+            <% elsif  "#{@program_unit.overwrite_wizard_current_step}_step" == "overwrite_wizard_fourth_step" %>
+	            <h3>Step 4 of 6 </h3>
+                <h5><%= set_subheader("Document Verification") %></h5>
+            <% elsif  "#{@program_unit.overwrite_wizard_current_step}_step" == "overwrite_wizard_fifth_step" %>
+	            <h3>Step 5 of 6 </h3>
+                <h5><%= set_subheader("Program Unit Processing") %></h5>
+
+		    <% elsif  "#{@program_unit.overwrite_wizard_current_step}_step" == "overwrite_wizard_last_step" %>
+		            <h3>Step 6 of 6</h3>
+		            <h5><%= set_subheader("Review and Complete Program Unit:") %></h5>
+		    <% end %>
+		    <ul>
+        		<div class="row">
+        			<div class="large-12 columns">
+		    			<%= render "#{@program_unit.overwrite_wizard_current_step}_step" %>
+	    			</div>
+    			</div>
+			</ul>
+			<div>
+	      		<%= render "overwrite_wizard_buttons_next_back_save",arg_pgu:@program_unit %>
+	    	</div>
+    	<%= hidden_field_tag 'overwrite_wizard_current_step', @program_unit.overwrite_wizard_current_step %>
+    	<% end %>
+ 	</section>
+</fieldset>

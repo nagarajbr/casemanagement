@@ -1,0 +1,2 @@
+class LocalOfficeInformationsController < AttopAncestorController
+end

@@ -1,0 +1,30 @@
+
+<!--Manoj Patil 10/16/2014  -->
+    <fieldset>
+
+<section class="solidbody">
+	<legend><%= set_subheader("Add Program Unit Benefit Member") %></legend>
+	<p>
+	<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+	</p>
+	<%= render 'benefit_member_list',arg_pgu_benfit_members:@program_unit_benefit_members %>
+<%= form_for(@program_unit_benefit_member_object, :url => create_benefit_member_path(@program_wizard.id), method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @program_unit_benefit_member_object %>
+
+
+    	<ul>
+	     	<div class="row">
+	          <div class="large-4 columns">
+	               <%= render 'benefit_member_attributes',arg_object: f,arg_available_mem:@available_members,pgu_status:@program_unit_member_status %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+	    	<%= link_to 'Back',start_eligibility_determination_wizard_path(@selected_program_unit.id) ,class: "secondary button radius" %>
+	        <%= f.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+	        <%= f.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+	    </p>
+
+<% end %>
+</section>
+  </fieldset>

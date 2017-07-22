@@ -1,0 +1,29 @@
+<fieldset>
+<section class="solidbody">
+
+<legend><%= set_subheader("Edit supportive service information for: #{client_full_name(@client)}") %> </legend>
+	<P> <%= render "action_plan_details/parent_action_plan",arg_action_plan:@action_plan,arg_emp_goal:@employment_goal %> </p>
+	<p> <%= render "selected_action_plan_detail",arg_activity:@activity_detail_object %> </p>
+
+<%= form_for(@non_transport_authorization, :url => non_transportation_srvc_update_path(@non_transport_authorization.id), method: :put) do |f| %>
+
+
+       <%= render "shared/common_error", object_argument: @non_transport_authorization %><br>
+        <ul>
+	     	<div class="row">
+	          <div class="large-5 columns">
+	               <%= render 'non_transport_supportive_service_attributes_edit',arg_common_object: f, arg_non_transport_support_service:@non_transportation_supportive_service_collection,arg_non_transport_provider_service:@non_transport_service_provider %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+ 			<%= link_to 'Cancel', service_authorizations_index_path(session[:PROGRAM_UNIT_ID]),class: "secondary button radius" %>
+		    <%= f.submit "Save", class: 'button radius' %>
+	    </p>
+
+
+<% end %>
+
+</section>
+</fieldset>
+

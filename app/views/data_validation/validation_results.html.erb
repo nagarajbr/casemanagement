@@ -1,0 +1,15 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Missing information for members in the application for client: #{client_full_name(@client)}") %></legend>
+<%= render 'application_screenings/selected_application_details',arg_selected_application: @client_application %>
+
+<% if @failed_validations.present? %>
+
+	<%= render 'client_application_validation_results',arg_clients: @failed_validations,arg_application_id: @client_application.id,arg_navigate: "DATA_VALIDATIONS" %>
+
+<%else%>
+	   <p> <h5 class="subheader">Data Verification passed for all members of the selected application.</h5></p>
+<%end%>
+	<%= link_to("Back", view_screening_summary_path , class: 'button radius secondary')%>
+</section>
+</fieldset>

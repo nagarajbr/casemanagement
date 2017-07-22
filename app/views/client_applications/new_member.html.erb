@@ -1,0 +1,22 @@
+<!--Manoj Patil 10/16/2014  -->
+<section class="solidbody">
+<%= form_for(@client_for_application_member, :url => create_new_member_path, method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @client_for_application_member %>
+    <fieldset>
+    	<legend><%= set_subheader("Register a household member") %></legend><br>
+    	<ul>
+	     	<div class="row">
+	          <div class="large-4 columns">
+	               <%= render 'clients/form',arg_object: f, arg_client: @client_for_application_member %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+
+	    	<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius",title: "Press Enter Key or Mouse Click to go back to previous Page", data: {tooltip1: '' } %>
+	       <%= f.submit "Save",class: 'button radius', title: "Press Enter Key or Mouse Click to Save Client Demographics information", data: {tooltip1: '' }%>
+
+	    </p>
+    </fieldset>
+<% end %>
+</section>

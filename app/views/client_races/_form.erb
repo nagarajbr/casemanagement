@@ -1,0 +1,54 @@
+
+		<% if arg_show_race %>
+		     	<div class="row">
+		          	<div class="large-5 columns">
+		               	<li class="required">
+						      <%= arg_object.label :id,"Application Member" %>
+						      <%= arg_object.select :id, arg_app_members.collect { |p| ["#{get_client_full_name(p.client_id)}", p.client_id] },{ :include_blank => 'Select Application Member' } %>
+						</li>
+			 	  	</div>
+			    </div>
+
+		<% end %>
+
+		<div class="required">
+			<%= arg_object.label :ethnicity, "Hispanic or Latin-American Origin" %>
+
+			<div class="row">
+				<div class="large-5 column">
+
+				<%= arg_object.select :ethnicity, options_for_select([["Yes", "Y"], ["No", "N"], ["Unknown", "U"]], arg_client.ethnicity),{:include_blank => 'Select Hispanic or Latin-American'} %>
+
+				</div>
+		    </div>
+        </div>
+        <p></p>
+        <fieldset>
+        <div class="required">
+		  <legend class="radiolegend"> <%= "Race" %> </legend>
+		</div>
+
+        <!-- Manoj 02/06/2015-->
+        <div class="row">
+				<div class="large-5 column">
+			         <div class="checkbox-style">
+			        	<%= hidden_field_tag("client[race_ids][]",nil) %>
+						<% Race.all.each do |each_race|%>
+							<%= check_box_tag("client[race_ids][]",
+							                   each_race.id,
+							                   arg_client_array.include?(each_race.id)
+							                )
+							%>
+							<%= each_race.short_description%>
+							<br>
+						<% end %>
+			        </div>
+			    </div>
+		</div>
+		 <div class="row">
+			<div class="large-5 column">
+				<ul>
+					<p><%= render "notes/notes_field_new_edit", object_argument: arg_notes %></p>
+				</ul>
+			</div>
+		</div>

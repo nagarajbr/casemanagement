@@ -1,0 +1,26 @@
+<% if arg_user_list.present? %>
+<b><h6>Selected User Local Office List </h6></b>
+		<table>
+			<thead>
+				<tr>
+					<th> User ID </th>
+					<th> User Name </th>
+					<th> Local Office </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<%  arg_user_list.each do |arg_m| %>
+					 <tr>
+		                <td>  <%= arg_m.user_id %></td>
+		                <td>  <%= get_user_name(arg_m.user_id) %></td>
+
+		                <td>  <%= drop_down_value_description(arg_m.local_office_id) %></td>
+		                <td>
+		                   <%= link_to "Delete",user_local_offices_destroy_path(arg_m.id), method: :delete, data: { confirm: 'Are you sure you want to delete? '},id: "hyperlink_alert" %>
+		                </td>
+            		</tr>
+				<% end %>
+			</tbody>
+		</table>
+<%end%>

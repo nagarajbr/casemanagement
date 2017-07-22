@@ -1,0 +1,36 @@
+<fieldset>
+	<section class="solidbody">
+	 	<legend></legend>
+
+		<% if arg_alert.present?  %>
+		<table>
+		<caption style="text-align:inherit"><%= set_subheader("Current alerts") %></caption>
+		  <thead>
+		    <tr>
+		    	<th> Alert Text </th>
+		    	<th> Expiration Date </th>
+				<th> Action </th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% arg_alert.each do |alert| %>
+					<tr>
+						<td>  <%= alert.alert_text %></td>
+						<td>  <%= format_db_date(alert.expiration_date) %></td>
+						<td>
+						 <%= link_to "Show",system_alerts_show_path(alert.id),id: "hyperlink"%>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+		<%#= paginate arg_alert %>
+	<%= link_to("New", system_alerts_new_path , class: 'button radius')%>
+	<%else%>
+	        <h5 class="subheader">No current alert information found. Click New to enter alert information.</h5>
+	        <p></p>
+	        <%= link_to 'New',system_alerts_new_path, class: "button radius"%>
+	<%end%>
+   </section>
+</fieldset>

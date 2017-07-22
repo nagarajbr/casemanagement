@@ -1,0 +1,57 @@
+<p>
+			<b>Warrant number:  </b>
+                <%= arg_line_item.provider_invoice_id %>
+			</p>
+
+			<p>
+			    <b>Service Date:  </b>
+                <%= format_db_date(arg_line_item.service_date) %>
+			</p>
+				<p>
+			   <%= render  "service_authorization_line_items/common_start_address", arg_object: arg_line_item %>
+			</p>
+			<p>
+			   <%= render  "service_authorization_line_items/common_end_address", arg_object: arg_line_item %>
+			</p>
+
+
+			<p>
+			    <b>Service Begin Time:  </b>
+                <%= arg_line_item.service_begin_time.strftime("%I:%M %p") %>
+			</p>
+			<p>
+			    <b>Service End Time:  </b>
+                <%= arg_line_item.service_end_time.strftime("%I:%M %p") if arg_line_item.service_end_time.present?%>
+			</p>
+			<p>
+			    <b>Estimated Distance Travelled:  </b>
+                <%= arg_line_item.quantity %> <%= drop_down_value_description(arg_line_item.unit_of_measure) %>
+			</p>
+
+			<p>
+			    <b>Estimated Cost:  </b>
+                 <%= number_to_currency_br(arg_line_item.estimated_cost) %>
+			</p>
+			<p>
+			    <b>Actual Distance Travelled:   </b>
+                <%= arg_line_item.actual_quantity %> <%= drop_down_value_description(arg_line_item.unit_of_measure) %>
+			</p>
+
+			<p>
+			    <b>Actual Cost:  </b>
+                <%= number_to_currency_br(arg_line_item.actual_cost) %>
+			</p>
+			<p>
+			    <b>Override Reason:  </b>
+                <%= arg_line_item.override_reason %>
+			</p>
+			<p>
+			    <b>Line Item Status:  </b>
+                <%= drop_down_value_description(arg_line_item.line_item_status) %>
+			</p>
+
+
+
+			<b>Notes:  </b>
+                <%= arg_line_item.notes %>
+			</p>

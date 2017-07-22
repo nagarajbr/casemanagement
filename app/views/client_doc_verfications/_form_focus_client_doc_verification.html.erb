@@ -1,0 +1,10 @@
+   <li class="required">
+      <%= arg_object.label :document_type %>
+
+      <%= arg_object.select :document_type, CodetableItem.item_list(128,"Document Type List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Document Type' },autofocus: true%>
+
+  </li>
+   <li>
+      <%= arg_object.label :document_verfied_date %>
+      <%= arg_object.date_field :document_verfied_date, onkeyup:"validate_date_format(event)" %>
+  </li>

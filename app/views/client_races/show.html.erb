@@ -1,0 +1,51 @@
+      <% if session[:CLIENT_ID].present? %>
+
+  <section class="solidbody">
+      <% if @client.ethnicity? || @client.race_ids.count > 0 %>
+      <fieldset>
+           <legend><%= set_subheader("Race-ethnicity information for: #{@client.last_name}, #{@client.first_name}") %></legend><br>
+
+      <p>
+        <b>Hispanic or Latin-American Origin: </b>
+        <%=  get_flag_description(@client.ethnicity) %>
+      </p>
+       <p>
+        <b>Race: </b>
+        <%= @selected_races %>
+      </p>
+
+       <p>
+      <b>Worker: </b>
+        <%= get_user_name(@modified_by) if @modified_by.present?%>
+      </p>
+      <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+      <%# if validate_authorization(338) %>
+        <%= link_to 'Edit', edit_race_path,class: "button radius", title1: "Press Enter or click mouse to edit race details", data: {tooltip1: '' }%>
+      <%# end %>
+    </fieldset>
+   <%else%>
+        <fieldset>
+          <%# if validate_authorization(337) %>
+              <legend> <%= set_subheader("Race-Ethnicity information for: #{client_full_name(@client)}" ) %></legend>
+              <h5 class="subheader">No race-ethnicity information found. Click New to enter race-ethnicity information.</h5>
+              <p></p>
+              <%= link_to 'New',new_race_path, class: "button radius", title1: "Press Enter or click mouse to add race details", data: {tooltip1: '' }%>
+          <%# else %>
+             <!--  <h5 class="subheader">No race-ethnicity information to show.</h5> -->
+          <%# end %>
+        </fieldset>
+   <%end%>
+
+<%else%>
+  <fieldset>
+        <legend> <%= set_subheader("View Ethnicity-Race information" ) %></legend>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+  </fieldset>
+   </section>
+<%end%>
+
+

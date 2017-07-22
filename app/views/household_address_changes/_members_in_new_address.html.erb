@@ -1,0 +1,25 @@
+<b><h6>Household members moving to new address </h6></b>
+<table>
+	<thead>
+		<tr>
+			<th> Name </th>
+			<th> SSN </th>
+			<th> Gender </th>
+			<th> Date of Birth </th>
+			<th> Action </th>
+		</tr>
+	</thead>
+	<tbody>
+		<%  arg_collection.each do |arg_m| %>
+			<tr>
+				<td>  <%=  arg_m.get_full_name %></td>
+				<td>  <%=  format_SSN(arg_m.ssn) %></td>
+				<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+				<td>  <%=  format_db_date (arg_m.dob) %></td>
+				<td>
+					<%= link_to "Remove",deselect_member_from_moving_to_new_address_path(arg_address.id,arg_m.id),id: "hyperlink" %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

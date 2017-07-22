@@ -1,0 +1,55 @@
+<!-- <b><h4>Household Member: <%#= "#{client_full_name(@client)}" %></h4></b> -->
+<body onload = "household_registration_resource_step()">
+<p></p>
+<% if @resources.present? %>
+		 <table>
+		<caption class="fontc"> <p><%=("#{pluralize_without_count(@resources.count,"Resource","")}") %></p></caption>
+		  <thead>
+		    <tr>
+				<th> Type of Resource </th>
+				<th> Account Number </th>
+				<th> Date Resource Acquired </th>
+				<th> Date Resource Disposed </th>
+				<!-- <th> Net Value </th> -->
+				<th>Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @resources.each do |resource| %>
+					<tr>
+						<td>  <%= drop_down_value_description(resource.resource_type) %></td>
+						<td>  <%= resource.account_number  %></td>
+						<td>  <%= format_db_date resource.date_assert_acquired %></td>
+						<td>  <%= format_db_date resource.date_assert_disposed %></td>
+						<!-- <td>  <%#= number_to_currency_br(resource.net_value)%> </td> -->
+						<td>
+						 <%= link_to "Show",show_household_member_resource_path(@client.id,resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %> |
+						 <%= link_to("Resource Details",household_member_resource_detail_index_path(@client.id,resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink") %>
+						 	 | <%= link_to("Share", new_client_share_search_path("resource",resource.id),id: "hyperlink") %>
+						</td>
+					</tr>
+				 <% end %>
+			</tbody>
+		</table>
+		<%= link_to("New", new_household_member_resource_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') %>
+<%else%>
+    <h5 class="subheader">No resource information found.</h5><br>
+ 	<h5 class="subheader">Do you want to add resource information?(For example: Bank account, Vehicle, Cash, Stocks, Bonds, Burial-Space, etc..)</h5>
+        <p></p>
+        <fieldset class="radio">
+            <div class="button-group">
+                <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_resource_add_flag, "Y"%>Yes</label>
+                <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_resource_add_flag, "N"%>No</label>
+                <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_resource_add_flag, "S"%>Skip for now</label>
+            </div>
+        </fieldset>
+        <div id = "new_resource_button">
+
+	<%= link_to("New", new_household_member_resource_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') %>
+</div>
+<%end%>
+
+
+
+
+</body>

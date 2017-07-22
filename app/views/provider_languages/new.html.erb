@@ -1,0 +1,12 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Enter language information for provider:  #{@provider.provider_name}" ) %></legend>
+<%= render "providers/selected_provider" %>
+<%= form_for @providerlanguage, :url => provider_languages_path, :method => :post do |f| %>
+  <%= render "shared/common_error", object_argument: @providerlanguage %>
+	<%= render 'form',arg_object: f %>
+ 	<%= link_to 'Cancel', provider_languages_path,class: "secondary button radius" %>
+ 	<%= f.submit "Save", class: 'button radius'%>
+<% end %>
+</section>
+</fieldset>

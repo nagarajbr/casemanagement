@@ -1,0 +1,67 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<!--
+<%# if @application_screening.determined_case_type.present? %>
+	<li >
+	  <%#= arg_object.label :selected_service_program,"Service Program" %>
+	  <%#= arg_object.select :selected_service_program, ServiceProgram.item_list().collect { |p| ["#{p.title} ", p.id ] },{ :include_blank => 'Select Service Program' } %>
+	</li>
+<%# end %>
+-->
+
+<% if arg_srvc_prgm_to_be_displayed.present? %>
+	<table>
+		<caption style="text-align:inherit"><b>Available Service Programs</b><p></p></caption>
+		<thead>
+		    <tr>
+		    	<th> Select </th>
+				<th> Service Program </th>
+				<th> Message</th>
+
+			</tr>
+	    </thead>
+	    <tbody>
+			<% srvc_prgn_array = arg_srvc_prgm_to_be_displayed[:service_program_id] %>
+			<% srvc_prgn_message_array = arg_srvc_prgm_to_be_displayed[:message] %>
+			<% li = 0 %>
+			<% srvc_prgn_array.each do | arg_srvc_prgm| %>
+					<tr>
+						<% if srvc_prgn_message_array[li] == "Eligible" %>
+							<td><%=check_box_tag "service_program_ids[]", arg_srvc_prgm %></td>
+						<% else %>
+							<td><%=check_box_tag "service_program_ids[]", arg_srvc_prgm %></td>
+						<% end %>
+						<td><%= get_service_program_name(arg_srvc_prgm) %></td>
+						<td> <%= srvc_prgn_message_array[li]%> </td>
+
+
+					</tr>
+					<% li = li + 1 %>
+			<% end %>
+		</tbody>
+	</table>
+<% end %>
+	 <div class="row">
+	 	<div class="large-5 columns">
+
+<li class="required">
+  <%= arg_object.label :application_disposition_status,"Action" %>
+  <%= arg_object.select :application_disposition_status, arg_disposition_types.collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Application Disposition Status' }, id: "application_disposition_status" %>
+</li>
+
+<li class="required">
+  <%= arg_object.label :application_disposition_reason,"Disposition Reason" %>
+  <%= select_tag "client_application[application_disposition_reason]", grouped_options_for_select(arg_disposition_reasons, selected_key = arg_selected_application.application_disposition_status),{ :prompt => 'Select Disposition Reason', id: "application_disposition_reason" } %>
+  <%#= arg_object.select :application_disposition_reason, @application_disposition_reasons.collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Disposition Reason' } %>
+</li>
+
+<%# if session[:ANY_SERVICE_PROGRAM_ELIGIBLE] =="Y" %>
+	<!-- <li >
+
+	  <%#= arg_object.label :program_unit_processing_location,"Processing Office" %>
+	  <%#= arg_object.select :program_unit_processing_location, CodetableItem.item_list(2,"DWS Office List").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Processing Office' } %>
+
+	</li> -->
+<%# end %>
+</div>
+</div>

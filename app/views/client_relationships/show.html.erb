@@ -1,0 +1,21 @@
+<!--
+<section class="solidbody">
+	<table>
+		<caption> <%= set_subheader("Relationship information for: #{client_full_name(@client)}") %> </caption>
+		<tr>
+			<td>
+				<b> <%= get_client_full_name(@client_relationship.to_client_id) %></b> is
+				<b> <%= drop_down_value_description(@client_relationship.relationship_type) %></b> of
+				<b> <%= get_client_full_name(@client_relationship.from_client_id) %></b>
+
+			</td>
+		</tr>
+
+
+	</table>
+	<%= link_to 'Back', client_relationships_path,class: "secondary button radius" %>
+	<%= link_to 'Delete', @client_relationship, method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+	<%= link_to 'Edit', edit_client_relationship_path(@client_relationship.id),class: "button radius" %>
+
+</section>
+-->

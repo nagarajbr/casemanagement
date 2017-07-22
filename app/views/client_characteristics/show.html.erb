@@ -1,0 +1,63 @@
+
+  <fieldset>
+  <section class="solidbody">
+      <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+        <p>
+          <%= render 'households/selected_household_partial',arg_household: @household %>
+        </p>
+        <p><h6><%= set_subheader("#{@characteristic_table_name} for household member: #{@client.first_name}, #{@client.last_name}") %> </h6></p>
+      <% else %>
+          <legend><%= set_subheader("#{@characteristic_table_name} for: #{@client.first_name}, #{@client.last_name}") %></legend>
+
+      <% end %>
+
+
+
+
+
+
+     <p>
+        <b>Characteristic: </b>
+
+        <%= drop_down_value_description(@client_characteristic.characteristic_id) %>
+      </p>
+
+      <p>
+        <b>Start Date: </b>
+        <%= format_db_date @client_characteristic.start_date %>
+      </p>
+
+      <p>
+        <b>End Date: </b>
+        <%=  format_db_date @client_characteristic.end_date %>
+
+      </p>
+
+
+       <p>
+        <b>Worker: </b>
+        <%= get_user_name(@client_characteristic.updated_by)%>
+      </p>
+
+        <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+      <br>
+      <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+          <%= link_to 'Back', start_household_characteristics_data_entry_wizard_path,class: "secondary button radius" %>
+          <%= link_to 'Edit', edit_household_member_characteristic_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD',@characteristic_type,@client_characteristic.id),class: "button radius" %>
+          <%= link_to 'Delete', delete_household_member_characteristic_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD',@characteristic_type,@client_characteristic.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+      <% else %>
+          <%= link_to 'Back', index_client_characteristic_path(@menu,@characteristic_type),class: "secondary button radius" %>
+          <%= link_to 'Edit', edit_client_characteristic_path(@menu,@characteristic_type,@client_characteristic.id),class: "button radius" %>
+          <%= link_to 'Delete', delete_client_characteristic_path(@menu,@characteristic_type,@client_characteristic.id),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+
+
+      <% end %>
+
+
+
+
+
+</section>
+</fieldset>
+

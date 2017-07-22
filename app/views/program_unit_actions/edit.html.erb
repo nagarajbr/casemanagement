@@ -1,0 +1,66 @@
+
+<!-- Radio button collection solution  start-->
+<!--
+<%#= form_for(@selected_program_unit,:url => update_program_unit_action_path(@selected_program_unit.id), method: :put) do |f| %>
+	<%#= f.collection_radio_buttons :pgu_action, @action_collections, :id, :short_description %>
+	<%#= f.collection_radio_buttons :pgu_action, @action_collections, :id, :short_description do |cb|%>
+
+		<%#= debug("#{cb.text.inspect}") %>
+		<%#= debug("#{cb.value.inspect}") %>
+		<%# if cb.value == 6044 %>
+			<%#= cb.label {cb.radio_button({ disabled: true}) + " " + cb.text}  %>
+		<%# else %>
+			<%#= cb.label {cb.radio_button() + " " + cb.text }  %>
+		<%# end %>
+	<%# end %>
+	 <%#= f.submit "Save",class: 'button radius'%>
+ <%# end %>
+-->
+
+<!-- Radio button collection solution  end-->
+
+
+
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Actions on program unit for client: #{client_full_name(@client)}") %></legend>
+	<%= render 'program_unit_for_action',arg_object: @selected_program_unit %>
+
+	<%= form_for(@pgu_action,:url => update_program_unit_action_path(@selected_program_unit.id), method: :put) do |arg_pgu| %>
+		<%= render "shared/common_error", object_argument: @pgu_action %><br>
+		<% if  "#{@pgu_action.current_step}_step" == "pgu_action_first_step" %>
+          <b><h3>Step 1 of 2</h3></b>
+          <b><h5>Select action</h5><br>
+	    <% end %>
+
+	     <% if  "#{@pgu_action.current_step}_step" == "pgu_action_last_step" %>
+	           <b><h3>Step 2 of 2</h3></b>
+	           <b><h5>Complete action</h5><br>
+	    <% end %>
+
+
+	    <ul>
+	       	 <div class="row">
+
+					<% if  "#{@pgu_action.current_step}_step" == "pgu_action_first_step" %>
+						<div class="large-4 columns">
+		                    <%= render "#{@pgu_action.current_step}_step", :arg_object => arg_pgu %>
+		                </div>
+					<% else %>
+						<div class="large-5 columns">
+		                   <%= render "#{@pgu_action.current_step}_step", :arg_object => arg_pgu %>
+		                </div>
+					<% end %>
+	          </div>
+	    </ul>
+	    <div>
+      		<%= render "pgu_action_buttons_next_back_finish", :arg_object => arg_pgu , :arg_instance =>@pgu_action %>
+        </div>
+
+	<% end %>
+
+
+
+</section>
+</fieldset>

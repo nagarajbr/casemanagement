@@ -1,0 +1,23 @@
+<fieldset>
+  <section class="solidbody">
+<%= set_subheader("create a new alert") %>
+<fieldset>
+  <%= form_for(@alerts, url: system_alerts_create_path) do |f| %>
+  <%= render "shared/common_error", object_argument:@alerts %>
+    <ul>
+      <div class="row">
+        <div class="large-4 columns">
+			<%= render 'form',arg_object: f  %>
+        </div>
+      </div>
+    </ul>
+
+    <p>
+    	 <%= link_to 'Cancel', system_alerts_index_path,class: "secondary button radius" %>
+    	 <%= f.submit "Save", class: 'button radius' %>
+    </p>
+
+<% end %>
+  </fieldset>
+  </section>
+</fieldset>

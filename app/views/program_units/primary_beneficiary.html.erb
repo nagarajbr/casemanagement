@@ -1,0 +1,18 @@
+<fieldset>
+     <section class="solidbody">
+		<%= form_tag add_primary_beneficiary_path(@selected_program_unit.id), method: :post do %>
+			<h5><%= set_subheader("Select Primary Member of Program Unit") %></h5>
+			<%= render "shared/common_error", object_argument: @selected_program_unit %>
+			<ul>
+        		<div class="row">
+        			<div class="large-12 columns">
+						<%= render "overwrite_wizard_second_step" %>
+					</div>
+    			</div>
+			</ul>
+			<%= hidden_field_tag "program_unit_id", "#{@selected_program_unit.id}" %>
+			<%= submit_tag "Back",:name => "back_button",class: 'button radius secondary' %>
+			<%= submit_tag "Next",:name => "next_button",class: 'button radius primary' %>
+		<% end %>
+ 	</section>
+</fieldset>

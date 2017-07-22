@@ -1,0 +1,31 @@
+
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Agreement termination for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+<%= form_for(@provider_agreement,:url => provider_agreement_termination_date_reason_update_path, method: :patch) do |f| %>
+<!-- <%#=render "shared/common_error_from_controller", object_argument: @provider_agreement_error %> -->
+ <%= render "shared/common_error", object_argument: @provider_agreement %>
+  <ul>
+    <%= render "provider_agreement" %>
+       <div class="row">
+         <div class="large-4 columns">
+            <li class="required">
+        			  <%= f.label :termination_date%>
+        			  <%= f.date_field :termination_date, onkeyup:"validate_date_format(event)" %>
+			       </li>
+
+        			<li class="required">
+        			  <%= f.label :termination_reason %>
+        			  <%= f.select :termination_reason, CodetableItem.item_list(179 ,"Provider Termination Reasons").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Reason' }%>
+        			</li>
+          </div>
+       </div>
+
+    </ul>
+      <%= link_to 'Cancel',provider_agreements_show_path(@provider_agreement.id), class: "secondary button radius" %>
+      <%= f.submit "Save", class: 'button radius'%>
+
+<% end %>
+</section>
+</fieldset>

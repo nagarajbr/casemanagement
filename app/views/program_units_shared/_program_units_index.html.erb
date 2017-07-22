@@ -1,0 +1,58 @@
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+		<% if arg_client_pgu.present? %>
+			<caption><%= set_subheader("Completed #{pluralize_without_count(arg_client_pgu.count,"Program Unit","")}  for Client: #{client_full_name(arg_client)}") %></caption>
+				<table>
+				  <thead>
+				    <tr>
+						<th> Program Unit ID </th>
+						<th> Service Program </th>
+						<th> Status</th>
+						<th> Disposition </th>
+						<th> Disposition Date </th>
+						<th> Application ID </th>
+						<th> Application Primary Contact </th>
+						<th> Application Date </th>
+						<th> Action </th>
+
+					</tr>
+				  </thead>
+				    <tbody>
+						<% arg_client_pgu.each do |arg_pgu| %>
+
+							<tr>
+								<td>  <%= arg_pgu.id %></td>
+								<td>  <%= get_service_program_name(arg_pgu.service_program_id) %></td>
+								<td>  <%= drop_down_value_description(arg_pgu.program_unit_status) %></td>
+								<td>  <%= drop_down_value_description(arg_pgu.disposition_status) %></td>
+								<td>  <%= format_db_date(arg_pgu.disposition_date) %></td>
+								<td>  <%= arg_pgu.client_application_id %></td>
+								<td>   <%= get_primary_applicant_name(arg_pgu.client_application_id) %>  </td>
+								<td>   <%= format_db_date(get_application_date_helper(arg_pgu.client_application_id)) %>  </td>
+
+								<td><%= link_to "#{arg_link_heading}",arg_pgu.index_link_path,id: "hyperlink" %></td>
+
+
+							</tr>
+						 <% end %>
+					</tbody>
+				</table>
+
+
+		<%else%>
+			<fieldset>
+				<legend><%= set_subheader("Completed Program Units for Client: #{client_full_name(arg_client)}" ) %></legend>
+		        <h5 class="subheader">No Completed Program Unit details found.Complete the Application by clicking Client Application button </h5>
+		        <p></p>
+		        <%= link_to 'Program Unit',program_units_path, class: "button radius"%>
+			</fieldset>
+		<%end%>
+	<%else%>
+		<fieldset>
+			<legend><%= set_subheader("Application List" ) %></legend>
+	        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+	        <p></p>
+	        <%= render "shared/search_client_button" %>
+	    </fieldset>
+	<%end%>
+</section>

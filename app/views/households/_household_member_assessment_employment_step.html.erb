@@ -1,0 +1,28 @@
+
+
+
+<!-- S<b><h4>Household Member: <%#= "#{client_full_name(@client)}" %></h4></b> -->
+<p></p>
+
+
+	<% if @client_assessment_collection.present? &&  @client_assessment_answers.present? && (@client.currently_working_flag.present? )%>
+		<%# if @client_assessment_answers.present?%>
+			<p>
+				<% @assessment_questions.each do |arg_qstn|%>
+					<%= show_assessment_question_control(arg_qstn.id,@client_assessment_object.id).html_safe %>
+				<% end %>
+			</p>
+		<%# else %>
+			 <!-- <h5 class="subheader"> No Employment Assessment found. Click on Edit button to do employment assessment.</h5> -->
+		<%# end %>
+		<%= link_to "Manage Employment Assessment",edit_member_employment_assessment_path(@client.id,@client_assessment_object.id,2),class: 'button radius'%>
+	<% else %>
+		 <h5 class="subheader"> Member Employment step should be first completed before employment assessment.</h5>
+		 <br>
+		  <%#= link_to("Proceed to Employment", new_household_member_employment_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , id: "hyperlink") %>
+		   <%= link_to("Proceed to Employment", bread_crumbs_selected_path('household_member_employments_step') , id: "hyperlink") %>
+
+		<p></p>
+	<% end %>
+
+

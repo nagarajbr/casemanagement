@@ -1,0 +1,2 @@
+class AssessmentSubSectionsController < AttopAncestorController
+end

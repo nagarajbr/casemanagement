@@ -1,0 +1,25 @@
+<!-- #employemt goal for client -->
+<% if arg_short_term_goal.present? %>
+	<p>
+	    <b>Occupational Goal:</b>
+	    <%= arg_short_term_goal %>
+	</p>
+<%end%>
+
+<table>
+ <caption style="text-align:inherit"><p><b>Assessment progress</b></p></caption>
+  <thead>
+    <tr>
+		<th> Client </th>
+		<th> Assessment Status </th>
+	</tr>
+  </thead>
+    <tbody>
+
+			<tr>
+				<td>  <%= client_full_name(arg_client) %></td>
+				<td>  <%= drop_down_value_description(arg_assessment_object.assessment_status) %></td>
+			</tr>
+
+	</tbody>
+</table>

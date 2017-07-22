@@ -1,0 +1,42 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+  <section class="solidbody">
+  <legend><%= set_subheader("Local Office Work Queue Subscription List") %></legend>
+
+  <% if @all_distinct_work_queue_local_offices_list.present? %>
+
+      <table>
+        <caption style="text-align:inherit"> <b> Subscribed Queues <b><p></p><caption>
+        <thead>
+          <tr>
+          <th> Local Office </th>
+          <th> Subscribed Queue(s)</th>
+          <th> Action </th>
+
+        </tr>
+        </thead>
+          <tbody>
+          <% @all_distinct_work_queue_local_offices_list.each do |arg_local_office| %>
+
+            <tr>
+              <td>  <%= drop_down_value_description(arg_local_office.local_office_id) %></td>
+              <td>  <%= WorkQueueLocalOfficeSubscription.get_formatted_local_office_queues_for_local_office(arg_local_office.local_office_id) %></td>
+              <td>
+                <%= link_to "Edit",edit_work_queue_local_office_subscription_path(arg_local_office.local_office_id),id: "hyperlink" %> |
+                 <%= link_to "Delete",delete_work_queue_local_office_subscription_path(arg_local_office.local_office_id), method: :delete, data: { confirm: 'Are you sure you want to delete? '},id: "hyperlink_alert" %>
+              </td>
+
+            </tr>
+           <% end %>
+        </tbody>
+      </table>
+
+  <%else%>
+          <h5 class="subheader">No Queues are subscribed for Local Offices.Click New to subscribe queues to local offices. </h5>
+
+  <%end%>
+   <p></p>
+          <%= link_to 'New',new_work_queue_local_office_subscription_path, class: "button radius"%>
+
+</section >
+</fieldset>

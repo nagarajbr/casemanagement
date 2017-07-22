@@ -1,0 +1,31 @@
+<section class="solidbody">
+<fieldset>
+	<%= set_subheader("Service Program") %>
+	<table>
+	  <thead>
+	      <tr>
+	      <th> Id </th>
+	      <th> Description </th>
+	      <th> title</th>
+	      <th> Action</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% @serviceprogram.each do |program| %>
+			<tr>
+				<td>  <%=  program.id %></td>
+				<td>  <%=  program.description %></td>
+				<td>  <%=  program.title %></td>
+
+				<td>   <%= link_to "Show",service_program_path(program),id: "hyperlink" %>  </td>
+			</tr>
+	    <% end %>
+	  </tbody>
+	</table>
+		<%= paginate @serviceprogram %>
+	<% if validate_authorization(619) %>
+		<%= link_to("New ", new_service_program_path , class: 'button') %>
+	<% end %>
+</fieldset>
+</section>
+

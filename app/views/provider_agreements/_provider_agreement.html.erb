@@ -1,0 +1,25 @@
+<table>
+<caption style="text-align:inherit"> <b> Agreement for provider </b><p> </p></caption>
+
+	  <thead>
+	    <tr>
+			<th> Service </th>
+			<th> Start Date</th>
+			<th> End Date</th>
+			<th> Status</th>
+			<th> Local Office </th>
+		</tr>
+	  </thead>
+	    <tbody>
+			<!--<%# @provider_agreements.each do |arg_provider| %>-->
+				<tr>
+					<td>  <%= get_service_name(@provider_agreement.provider_service_id) %></td>
+					<td>  <%= format_db_date(@provider_agreement.agreement_start_date) %></td>
+					<td>  <%= format_db_date(@provider_agreement.agreement_end_date) %></td>
+					<td>  <%= drop_down_value_description(@provider_agreement.state) %></td>
+					<td>  <%= drop_down_value_description(@provider_agreement.dws_local_office_id) %></td>
+				</tr>
+			<!--<%#end%>-->
+		</tbody>
+	</table>
+

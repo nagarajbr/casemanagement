@@ -1,0 +1,38 @@
+<section class="solidbody">
+	<%= form_for(@client_relationship, :url => client_relationship_path, method: :put) do |f| %>
+	<ul>
+			<table>
+				<caption><%= set_subheader("Edit relationship information for: #{client_full_name(@client)}") %></caption><br>
+				<thead>
+					<tr>
+					<th width="200">Client</th>
+					<th width="200">Relationship</th>
+					<th width="200">Related Client</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+					<td>
+					<% if @target_client.present?%>
+						<%= "#{client_full_name(@target_client)}" %>
+					<% end %>
+					</td>
+					<td>
+						<%= f.select :relationship_type, CodetableItem.item_list(125,"Budget Relationship List").collect { |p| ["#{p.short_description} ", p.id] },prompt: "select a relationship" %>
+					</td>
+					<td>
+					<% if @from_client.present?%>
+						<%= "#{client_full_name(@from_client)}" %>
+					<% end %>
+					</td>
+
+					</tr>
+				</tbody>
+			</table>
+			<%= f.hidden_field :from_client_id %>
+	<%= f.hidden_field :to_client_id %>
+</ul>
+<%= link_to 'Cancel', client_relationships_path,class: "secondary button radius" %>
+<%= f.submit "Save",class: 'button radius'%>
+</fieldset>
+<%end%>

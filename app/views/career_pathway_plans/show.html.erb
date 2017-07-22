@@ -1,0 +1,41 @@
+<!-- APPROVED CPP FROM SNAPSHOT TABLES.-->
+
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Career Plan for client: #{client_full_name(@client)}") %></legend>
+		<p>
+			<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		</p>
+		<%= render "assessment_work_sheet_approved_cpp",
+	    	arg_sections: @assessed_sections_with_barriers_from_snapshot,
+	    	arg_barriers: @assessment_barriers_from_snap_shot,
+	    	arg_cpp_id: @career_pathway_plan_id
+		%>
+		<%= render "employment_plan_details",
+	    	arg_plan_details: @approved_employment_plan_details_from_snap_shot,
+	    	arg_pathway_plan: @career_pathway_plan_id
+		%>
+		<p>
+			<table>
+				<tr>
+					<td><b>Case Worker: </b><%=  get_user_name(@career_pathway_plan.case_worker_signature)%></td>
+					<td><b>Case Worker Review Date: </b><%=  format_db_date(@career_pathway_plan.case_worker_signed_date)%></td>
+				</tr>
+
+				<tr>
+					<td><b>Client Signature: </b><%= get_client_full_name(@career_pathway_plan.client_signature)%></td>
+					<td><b>Client Signed Date: </b><%= format_db_date(@career_pathway_plan.client_signed_date)%></td>
+				</tr>
+				<tr>
+					<td><b>Approved By: </b><%=  get_user_name(@career_pathway_plan.supervisor_signature)%></td>
+					<td><b>Approved Date: </b><%= format_db_date(@career_pathway_plan.supervisor_signed_date)%></td>
+				</tr>
+
+
+
+			</table>
+		</p>
+	<%= link_to 'Back', index_cpp_path(@assessment_id),class: "secondary button radius" %>
+
+	</section>
+</fieldset>

@@ -1,0 +1,106 @@
+<body onload = "set_frequency_menu(), set_action_plan_details_outcome(), onload_step2()">
+  <% if show_mult_add_buttons %>
+    <li class="required">
+      <% if @action_plan_detail.entity_type == 6253 %>
+        <%= arg_object.label :activity_type, "Service Type" %>
+      <% else %>
+          <%= arg_object.label :activity_type %>
+        <% end %>
+        <%= arg_object.select :activity_type, @activity_types.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select activity type'} %>
+        <%#= select_tag "action_plan_detail[activity_type]", grouped_options_for_select(@activity_type_grouped_options, selected_key = @action_plan_detail.activity_type),{ :prompt => 'Select activity type', id: "activity_type" } %>
+    </li>
+  <% else %>
+    <%= arg_object.hidden_field :barrier_id %>
+    <%= arg_object.hidden_field :activity_type %>
+    <%= arg_object.hidden_field :component_type %>
+    <%= arg_object.hidden_field :entity_type %>
+  <% end %>
+
+	  <li class="required">
+      	<%= arg_object.label :start_date %>
+      	<%= arg_object.date_field :start_date, id: "action_plan_detail_start_date", onkeyup:"validate_date_format(event)" %>
+    </li>
+
+    <%= arg_object.hidden_field :activity_status, id: "activity_status" %>
+    <%= arg_object.hidden_field :warning_count, id: "action_plan_detail_warning" %>
+
+
+    <!-- <%# unless @action_plan_detail.new_record? %>
+        <div id="action_plan_detail_outcome">
+            <li>
+              <%#= arg_object.label :end_date %>
+              <%#= arg_object.date_field :end_date, id: "action_plan_detail_end_date", onkeyup:"validate_date_format(event)" %>
+            </li>
+
+    	      <li class="required">
+    	        <%#= arg_object.label :outcome_code %>
+    	        <%#= arg_object.select :outcome_code, CodetableItem.item_list(57,"Outcome Code").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select outcome code' }, id: "action_plan_detail_outcome_code" %>
+    	      </li>
+
+    	      <li>
+    	        <%#= arg_object.label :outcome_notes %>
+    	        <%#= arg_object.text_area :outcome_notes, cols: 40, rows: 7, id: "action_plan_detail_outcome_notes" %>
+    	      </li>
+  	    </div>
+    <%# end %> -->
+
+
+
+    <li class="required">
+      	<%= arg_object.label :hours_per_day %>
+      	<%= arg_object.number_field :hours_per_day,id: "action_plan_detail_hours_per_day" %>
+    </li>
+
+    <li class="required">
+      	<%= arg_object.label :frequency_id %>
+      	<%= arg_object.select :frequency_id, CodetableItem.where(" id in (2320)").order(:short_description).collect { |p| ["#{p.short_description} ", p.id] }, id: "frequency_id" , :disabled => true %>
+    </li>
+
+    <!-- <div id="div_daily">
+    </div> -->
+
+    <div id="div_weekly">
+      <div class="checkbox-style">
+        <li>
+          <!-- <%#= arg_object.collection_check_boxes :days_of_week, CodetableItem.where("code_table_id = 153").order("id"), :id, :short_description do |cb| %>
+
+            <%# if cb.text.present? %>
+                <%# cb.label {cb.check_box + " " + cb.text} %>
+            <%# end %>
+          <%# end %> -->
+          <%#= debug("#{@selected_days.inspect}") %>
+          <%= hidden_field_tag("action_plan_detail[days_of_week][]",nil) %>
+            <% CodetableItem.where("code_table_id = 153").order("id").each do |day|%>
+              &nbsp;<%= check_box_tag("action_plan_detail[days_of_week][]",
+                                 day.id,
+                                 @selected_days.include?(day.id.to_s)
+                              )
+              %>
+              <%= day.short_description%>
+              <br>
+            <% end %>
+        </li>
+      </div>
+    </div>
+
+
+    <div id="div_duration">
+      <li class="required">
+       <!-- <div id= "num_of_days">
+            <%#= arg_object.label :duration, "Number of Days " %>
+        </div> -->
+
+         <div id= "num_of_weeks">
+            <%= arg_object.label :duration, "Number of Weeks " %>
+        </div>
+        <%= arg_object.number_field :duration,id: "action_plan_detail_duration" %>
+      </li>
+    </div>
+    <% if show_mult_add_buttons %>
+      <p>
+        <%= arg_object.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+        <%= arg_object.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+      </p>
+    <% end %>
+
+</body>

@@ -1,0 +1,22 @@
+<fieldset>
+	<legend><%= set_subheader("Search for School/Education Institute") %></legend><br>
+	<%= form_tag schools_search_path, method: 'get' do %>
+
+	    <legend> By school Name</legend><br>
+	    <div class="row">
+	    <div class="large-4 columns">
+	    	<ul>
+	     	<li>
+				<%= text_field_tag :school_name,params[:school_name]%>
+			</li>
+			</ul>
+		</div>
+		</div>
+
+
+		<%= submit_tag "Search", class: 'button radius' %>
+			<%# if arg_new_button %>
+		      	<%#= link_to 'Register New school',new_school_path, class: "button radius" %>
+		    <%# end %>
+		<% end %>
+		</fieldset>

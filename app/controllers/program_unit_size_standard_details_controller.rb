@@ -1,0 +1,2 @@
+class ProgramUnitSizeStandardDetailsController < AttopAncestorController
+end

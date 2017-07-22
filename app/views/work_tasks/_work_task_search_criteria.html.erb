@@ -1,0 +1,39 @@
+
+<fieldset>
+	<section class="solidbody">
+	 	<legend><%=set_subheader("Pending Work Task Search Criteria") %></legend>
+
+	 	<%= form_tag work_task_search_results_path, method: 'get' do %>
+
+	 		<%= render "shared/common_error", object_argument: arg_work_task %>
+			   <div class="row">
+				<div class="large-4 columns">
+				   	<ul>
+				   		<li class="required">
+						 	<%= label_tag :status,"Status" %>
+							<%= select_tag :status, options_for_select(arg_status.collect { |p| ["#{p.short_description}", p.id] }),prompt: "select Status"  %>
+						</li>
+						<li class="required">
+						 	<%= label_tag :assigned_to_type,"Assigned To Type" %>
+							<%= select_tag :assigned_to_type, options_for_select(arg_assigned_list.collect { |p| ["#{p.short_description}", p.id] }),prompt: "select Assigned To Type",onchange: "JS_WorkTask_Assignment_Type_User_Localoffice()"  %>
+						</li>
+						<div id="assigned_to_user_div">
+							 <li class="required">
+								<%= label_tag :assigned_to_user_id,"Assigned To User" %>
+							  	<%= select_tag :assigned_to_user_id, options_for_select(User.all.collect { |p| ["#{p.name} ", p.uid] }),prompt: "select user"  %>
+							</li>
+						</div>
+
+						<div id="assigned_to_local_office_div">
+							<li class="required">
+							 <%= label_tag :assigned_to_office_id, "Assigned To Local Office" %>
+							  <%= select_tag :assigned_to_office_id,options_for_select(arg_local_office_list.collect { |p| ["#{p.short_description}", p.id] }),prompt: "select Local Office"  %>
+							</li>
+						</div>
+					</ul>
+				</div>
+			  </div>
+			  <%= submit_tag "Search", class: 'button radius' %>
+		<% end %>
+	</section>
+</fieldset>

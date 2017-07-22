@@ -1,0 +1,37 @@
+<section class="solidbody">
+	<fieldset>
+		 <%= render 'program_units/selected_program_unit_details', arg_selected_program_unit:@selected_program_unit %>
+
+		<legend><%= set_subheader("Verified document details") %></legend>
+
+		<p>
+			<b>Application Member: </b>
+			<%= get_client_full_name(@client_doc_verification.client_id) %>
+		</p>
+
+		<p>
+			<b>Document Type: </b>
+			<%=  drop_down_value_description(@client_doc_verification.document_type) %>
+
+
+		</p>
+		<p>
+			<b>Verification Date: </b>
+			<%= format_db_date(@client_doc_verification.document_verfied_date) %>
+
+
+		</p>
+
+
+		<%= link_to 'Back', show_program_unit_documents_path(@selected_program_unit.id),class: "secondary button radius" %>
+		<%# if validate_authorization(671) %>
+			<%= link_to 'Edit', edit_program_unit_member_document_path(@selected_program_unit.id,@client_doc_verification.id),class: "button radius" %>
+		<%# end %>
+		<%# if validate_authorization(672) %>
+			<%= link_to 'Delete', destroy_program_unit_document_path(@selected_program_unit.id,@client_doc_verification.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+		<%# end %>
+		<%# if validate_authorization(673) %>
+			<%= link_to "Upload","#",class: 'button radius'%>
+		<%# end %>
+	</fieldset>
+</section>

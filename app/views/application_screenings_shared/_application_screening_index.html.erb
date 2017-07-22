@@ -1,0 +1,56 @@
+<% if session[:CLIENT_ID].present? %>
+	<% if arg_client_application.present? %>
+			<LEGEND></LEGEND>
+			<table>
+				<caption><%= set_subheader("Screening results completed #{pluralize_without_count(arg_client_application.count,"Application","")}  of Client: #{client_full_name(arg_client)}") %></caption>
+			  <thead>
+			    <tr>
+					<th>  ID </th>
+					<th> Primary Applicant </th>
+					<th> Application Date </th>
+
+					<th>  Status </th>
+					<th>  Disposition Status </th>
+					<th>  Service Program </th>
+					<th>  Disposition Date </th>
+					<th>  Disposition Reason </th>
+					<th> Action </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% arg_client_application.each do |arg_app| %>
+
+						<tr>
+							<td>  <%= arg_app.id %></td>
+							<td>   <%= get_primary_applicant_name(arg_app.id) %>  </td>
+							<td>  <%= format_db_date(arg_app.application_date)  %></td>
+
+							<td>  <%= drop_down_value_description(arg_app.application_status) %></td>
+							<td>  <%= drop_down_value_description(arg_app.application_disposition_status) %></td>
+							<td>  <%= get_service_program_name(arg_app.selected_service_program) %></td>
+							<td>  <%= format_db_date(arg_app.disposition_date)  %></td>
+							<td>  <%= drop_down_value_description(arg_app.application_disposition_reason) %></td>
+
+
+							<td><%= link_to "#{arg_link_heading}",arg_app.application_index_link_path,id: "hyperlink" %></td>
+
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+
+
+
+		<%else%>
+		    <legend><%= set_subheader("Completed application information for: #{client_full_name(arg_client)}" ) %></legend>
+	        <h5 class="subheader">No Completed Application information found.Complete the Application by clicking Client Application button </h5>
+	        <p></p>
+	        <%= link_to 'Client Application',client_applications_path, class: "button radius"%>
+		<%end%>
+<%else%>
+	    <legend><%= set_subheader("Application List" ) %></legend>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+ <%end%>

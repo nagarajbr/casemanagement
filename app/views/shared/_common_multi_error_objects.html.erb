@@ -1,0 +1,14 @@
+<section class="solidbody">
+<% if object_argument.present? && object_argument.errors.any? %>
+  <div id="error_explanation">
+
+    <h5 class="fi-alert subheader" id="alert-text-center">Please correct the following <%= pluralize(object_argument.errors.count, "error") %> </h5>
+    <br>
+    <ul>
+    <% object_argument.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+</section>

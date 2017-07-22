@@ -1,0 +1,87 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<b><h6>Program Unit Benefit Members </h6></b>
+
+<% if @program_unit_benefit_members.present? %>
+		<table>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> SSN </th>
+					<th> Gender </th>
+					<th> Date of Birth </th>
+					<th> Status </th>
+					<th> Primary Member</th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<%  @program_unit_benefit_members.each do |arg_m| %>
+					<tr>
+						<td>  <%=  arg_m.client_full_name %></td>
+						<td>  <%=  format_SSN(arg_m.ssn) %></td>
+						<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+						<td>  <%=  format_db_date (arg_m.dob) %></td>
+						<td>  <%=  drop_down_value_description(arg_m.member_status) %></td>
+						<td> <%= check_primary_member_flag(arg_m.program_wizard_id,arg_m.client_id)%></td>
+						<td>
+							<%= link_to "Delete",destroy_program_unit_benefit_member_path(@program_wizard.id,arg_m.id),id: "hyperlink_alert",method: :delete, data: { confirm: 'Are you sure?' } %>
+
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		 	 <%= link_to "Add Program Unit Benefit Member",new_benefit_member_path(@program_wizard.id), class: 'button radius' %>
+
+<% else %>
+<p>
+	 <%= link_to "Add Program Unit Benefit Member",new_benefit_member_path(@program_wizard.id), class: 'button radius' %>
+</p>
+
+<%end%>
+
+
+
+
+<!--Manoj Patil 10/16/2014  -->
+<!-- <table>
+	<caption style="text-align:inherit"><b> Program Unit Members</b><p></p></caption>
+	<thead>
+		<tr>
+			<th> Member </th>
+			<th> Select </th>
+			<th> Status</th>
+
+		</tr>
+    </thead>
+    <tbody>
+
+		<%# for arg_member in @program_unit_members %>
+
+				<tr>
+					<td><%#= get_client_full_name(arg_member.client_id) %>
+					</td>
+
+					<td><%#=check_box_tag("client_ids[]", arg_member.client_id,@program_unit_benefit_members_array.include?(arg_member.client_id)) %>
+					</td>
+
+					<td>
+						<%#= select_tag("benefit_member_status[]",
+							          options_for_select(@program_unit_member_status_drop_down_array,
+							                            selected: get_benefit_member_status(@program_wizard.id,arg_member.client_id)
+							                            ),
+							          prompt:"Select Status"
+							          ) %>
+					</td>
+
+
+				</tr>
+
+		<%# end %>
+	</tbody>
+</table>
+
+
+ -->

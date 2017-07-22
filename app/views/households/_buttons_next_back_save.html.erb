@@ -1,0 +1,23 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<%= link_to "Exit Wizard",household_index_path,class: 'secondary button' if session[:HOUSEHOLD_ID].present? && session[:HOUSEHOLD_ID].to_i != 0%>
+<%= arg_object.submit "Previous", :name => "back_button",class: 'secondary button' unless arg_instance.first_step? %>
+<% if arg_instance.last_step? %>
+	<% if arg_instance.current_step == 'household_member_address_search_results_step'%>
+		<!-- Next button is not shown for address search results-->
+	<% else %>
+		<%= arg_object.submit "Next",:name => "last_step_button",class: 'button' %>
+	<% end %>
+
+
+<% else %>
+		<% if arg_instance.current_step == 'household_member_address_search_results_step'%>
+		<!-- Next button is not shown address search results-->
+		<% else %>
+			<%= arg_object.submit "Next",:name => "next_button",class: 'button' %>
+		<% end %>
+
+<% end %>
+
+
+

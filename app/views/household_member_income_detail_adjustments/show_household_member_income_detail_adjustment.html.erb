@@ -1,0 +1,32 @@
+<fieldset>
+  <section class="solidbody">
+    <legend> <%= set_subheader("#{drop_down_value_description(@income.incometype)} income adjustment details for: #{client_full_name(@client)}") %> </legend>
+    <%= render "/income_details/parent_income",arg_income: @income %>
+    <%= render "income_detail_adjust_reasons/parent_income_detail", arg_income_detail:@income_detail %>
+
+     <p>
+      <b>Adjusted Amount: </b>
+      <%= number_to_currency_br(@adjust_reason.adjusted_amount) %>
+    </p>
+
+    <p>
+      <b>Adjusted Reason: </b>
+      <% if @adjust_reason.adjusted_reason.present? %>
+          <td>  <%= drop_down_value_description(@adjust_reason.adjusted_reason) %></td>
+        <% else %>
+          <td></td>
+        <% end %>
+    </p>
+
+    <% if @menu == 'CLIENT' %>
+      <%= link_to("Back", income_detail_income_detail_adjust_reasons_path(@menu,@income_detail.id) , class: 'secondary button radius') %>
+      <%= link_to 'Edit', edit_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id,@adjust_reason.id),class: "button radius" %>
+     <%= link_to 'Delete', delete_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id,@adjust_reason.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <%else%>
+        <%= link_to("Back", household_member_income_detail_adjustments_index_path(@client.id,@income_detail.id) , class: 'secondary button radius') %>
+        <%= link_to 'Edit', edit_household_member_income_detail_adjustment_path(@client.id,@income_detail.id,@adjust_reason.id),class: "button radius" %>
+        <%= link_to 'Delete', delete_household_member_income_detail_adjustment_path(@client.id,@income_detail.id,@adjust_reason.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <%end%>
+
+  </section>
+</fieldset>

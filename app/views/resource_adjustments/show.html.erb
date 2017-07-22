@@ -1,0 +1,67 @@
+<fieldset>
+  <section class="solidbody">
+     <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+          <legend><%= set_subheader("Adjustment resource detail for household member: #{client_full_name(@client)}") %></legend>
+        <p>
+          <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+           <%= render "parent_resource",arg_resource: @resource %>
+           <%= render "parent_resource_detail",arg_resource_detail:@resource_detail %>
+        </p>
+    <% else %>
+        <p>
+            <%= render "parent_resource",arg_resource: @resource %>
+            <%= render "parent_resource_detail",arg_resource_detail:@resource_detail %>
+        </p>
+        <legend><%= set_subheader("Adjustment resource detail for: #{client_full_name(@client)}") %> </legend>
+    <% end %>
+
+
+   <p>
+    <b>Reason: </b>
+    <%= CodetableItem.item_description(88,@resource_adjustment.reason_code,"Reason Code") %>
+  </p>
+
+  <p>
+    <b>Resource Adjustment Amount: </b>
+    <%= number_to_currency_br(@resource_adjustment.resource_adj_amt) %>
+  </p>
+
+  <p>
+    <b>Receipt Date: </b>
+    <%= format_db_date(@resource_adjustment.receipt_date) %>
+  </p>
+
+  <p>
+    <b>Adjustment Begin Date: </b>
+    <%= format_db_date(@resource_adjustment.adj_begin_date) %>
+  </p>
+
+  <p>
+    <b>Adjustment End Date: </b>
+    <%= format_db_date(@resource_adjustment.adj_end_date) %>
+  </p>
+
+  <p>
+    <b>Number of Months: </b>
+    <%= @resource_adjustment.adj_num_of_months %>
+  </p>
+  <p>
+    <b>Worker: </b>
+    <%= get_user_name(@resource_adjustment.updated_by)%>
+  </p>
+     <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+          <%= link_to 'Back',household_member_resource_detail_adjustments_index_path(@client.id,@resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "secondary button radius" %>
+          <%= link_to 'Edit',edit_household_member_resource_detail_adjustment_path(@client.id,@resource_detail.id,@resource_adjustment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+          <%= link_to 'Delete',delete_household_member_resource_detail_adjustment_path(@client.id,@resource_detail.id,@resource_adjustment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+     <% else %>
+          <%= link_to 'Back',index_resource_adjustment_path(@resource_adjustment.resource_detail_id),class: "secondary button radius" %>
+          <%= link_to 'Edit',edit_resource_adjustment_path(@resource_adjustment.id),class: "button radius" %>
+          <%= link_to 'Delete',destroy_resource_adjustments_path(@resource_adjustment.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+     <% end %>
+
+
+
+
+
+  </section>
+</fieldset>

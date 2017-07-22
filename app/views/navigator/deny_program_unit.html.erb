@@ -1,0 +1,26 @@
+<section class="solidbody">
+	<fieldset>
+		<%= form_for(@program_unit, :url => create_program_unit_denial_path, method: :post) do |f| %>
+	        <legend><%= set_subheader("Denial for household: #{get_household_name_from_application_id(@selected_application.id)}") %> </legend>
+		       <%= render "shared/common_error", object_argument: @program_unit %><br>
+		        <ul>
+			     	<div class="row">
+			          <div class="large-5 columns">
+			          	<li class="required">
+						  <%= f.label :service_program_id, "Service Program" %>
+						  <%= f.select(:service_program_id,@service_programs.collect { |p| ["#{p.description} ", p.id ] },{include_blank:'Select Service Program'}) %>
+						</li>
+			          	<li class="required">
+						  <%= f.label :disposition_reason, "Denial Reason" %>
+						  <%= f.select(:disposition_reason,@action_reasons.collect { |p| ["#{p.short_description} ", p.id ] },{include_blank:'Select Denial Reason'}) %>
+						</li>
+				 	  </div>
+				    </div>
+				</ul>
+			    <p>
+		      <%= link_to 'Back', eligible_program_units_path, class: "secondary button radius" %>
+		      <%= f.submit "Save", class: 'button radius'%>
+		    </p>
+		<% end %>
+	</fieldset>
+</section>

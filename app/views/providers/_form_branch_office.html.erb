@@ -1,0 +1,28 @@
+
+          <li class="required">
+              <%= arg_object.label :provider_name %>
+              <%= arg_object.text_field :provider_name, alt: "provider_name", maxlength: "100"%>
+          </li>
+
+          <li class="required">
+              <%= arg_object.label :contact_person %>
+              <%= arg_object.text_field :contact_person, alt: "contact_person",maxlength: "100" %>
+          </li>
+
+           <li>
+              <%= arg_object.label :license_number %>
+              <%= arg_object.text_field :license_number, maxlength: "10", alt: "Source",onkeypress: "return isNumberKey(event)" %>
+          </li>
+
+          <li>
+              <%= arg_object.label :license_expire_dt %>
+              <%= arg_object.date_field :license_expire_dt, title1: "Enter Client's Phone Number", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+          </li>
+
+          <li>
+              <%= arg_object.label :web_address %>
+              <%= arg_object.text_field :web_address, alt: "Source",title1: "Enter web_address details", data: {tooltip1: true }  %>
+          </li>
+
+        <%= render "notes/notes_field_new_edit", object_argument: @notes %>
+

@@ -1,0 +1,54 @@
+<fieldset>
+    <%#= debug("@action_plan_detail = #{@action_plan_detail.current_step}") %>
+     <section class="solidbody">
+        <legend><%= set_subheader("Enter #{drop_down_value_description(@action_plan_detail.entity_type)} information for client: #{client_full_name(@client)}") %></legend>
+        <%= render "parent_action_plan" %>
+        <!-- <p>
+          <%#= render "career_pathway_plans/expected_participation_hours"%>
+        </p> -->
+        <p>
+           <%= render "career_pathway_plans/planned_work_participation_hours_per_client", arg_activity_hours: @planned_client_activity_hours_collection %>
+        </p>
+
+        <%= form_for(@action_plan_detail,:url => process_action_plan_detail_wizard_path(@action_plan), method: :post) do |f| %>
+
+        <%#= debug("#{@barriers.inspect}") %>
+        <% if  @barriers.present? %>
+            <% if  "#{@action_plan_detail.current_step}_step" == "action_plan_detail_first_step" %>
+                    <h3>Add Actions(Core)</h3>
+                    <h5><%= ("Enter details for #{drop_down_value_description(@action_plan_detail.entity_type).camelize(:lower)}") %> </h5>
+            <% end %>
+            <% if  "#{@action_plan_detail.current_step}_step" == "action_plan_detail_second_step" %>
+                   <h3>Add Actions(Non core) </h3>
+                   <h5><%#= ("Manage schedule for #{drop_down_value_description(@action_plan_detail.entity_type).camelize(:lower)}: #{drop_down_value_description(@action_plan_detail.activity_type)}") %></h5>
+            <% end %>
+            <!-- <%# if  "#{@action_plan_detail.current_step}_step" == "action_plan_detail_last_step" %>
+                   <h3>Step 3 of 3</h3>
+                   <h5><%#= ("Review details for #{drop_down_value_description(@action_plan_detail.entity_type).camelize(:lower)}: #{drop_down_value_description(@action_plan_detail.activity_type)}") %></h5>
+            <%# end %> -->
+
+            <%= render "shared/common_error", object_argument: @action_plan_detail %>
+            <%= render "shared/common_warning", object_argument: @warnings %>
+
+            <ul>
+                <div class="row">
+                    <div class="large-5 columns">
+                        <%= render "#{@action_plan_detail.current_step}_step", :arg_object => f, show_mult_add_buttons: @multi_add_buttons %>
+                     </div>
+                </div>
+
+            </ul>
+
+            <div>
+              <%= render "action_plan_detail_buttons_next_back_save", :arg_object => f , :arg_instance =>@action_plan_detail %>
+            </div>
+
+        <% else %>
+          <p><h5 class="subheader"><%= ("There are no existing barriers to associate with the #{drop_down_value_description(@action_plan.action_plan_type)}. Click 'Work Readiness Assessment' to perform assessment.") %> </h5></p>
+          <p> <%= link_to "Work Readiness Assessment", edit_common_assessment_path(14,session[:CLIENT_ASSESSMENT_ID].to_i), class: 'button radius' %>
+          </p>
+        <% end %>
+
+        <% end %>
+      </section>
+ </fieldset>

@@ -1,0 +1,21 @@
+<fieldset>
+	<section class="solidbody">
+       <legend><%= set_subheader("Enter demographic information for a new client") %></legend>
+       <%= form_for(@client, :url => create_client_path, method: :post) do |f| %>
+	       <%= render "shared/common_error", object_argument: @client %><br>
+	        <ul>
+		     	<div class="row">
+		          <div class="large-5 columns">
+		               <%= render 'clients/form',arg_object: f , arg_client: @client %>
+		               <%= render "notes/notes_field_new_edit", object_argument: @notes %>
+			 	  </div>
+			    </div>
+			</ul>
+		    <p>
+		    	<%= link_to "Cancel",client_search_path,class: 'secondary button radius'%>
+	 	        <%= f.submit "Save",class: 'button radius'%>
+		    </p>
+	   <% end %>
+	</section>
+</fieldset>
+

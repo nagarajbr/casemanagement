@@ -1,0 +1,16 @@
+
+<section class="solidbody">
+<% if @clients.blank? %>
+
+    <caption><%= set_subheader("Search results") %></caption>
+ 	<legend><h5 class="subheader">No clients found with the search criteria, enter a new search or register household member.</h5><br>
+    <br>
+    <% if @show_add_button %>
+    	<%= link_to 'Back', start_household_member_registration_wizard_path ,class: "secondary button radius" %>
+        <%= link_to 'New Search',new_household_member_search_path(session[:HOUSEHOLD_ID]), class: "button radius"%>
+
+        	<%= link_to 'Register New Household Member',new_household_member_path(session[:HOUSEHOLD_ID]), class: "button radius"%>
+
+    <% end %>
+<% end %>
+</section>

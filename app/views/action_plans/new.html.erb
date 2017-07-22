@@ -1,0 +1,46 @@
+<fieldset>
+	<section class="solidbody">
+		<legend> <%= set_subheader("Enter #{(drop_down_value_description @arg_plan_type).camelize(:lower)} information for: #{client_full_name(@client)}") %> </legend>
+		<p>
+				<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		</p>
+
+		<% if @employment_readiness_id.present? %>
+
+			<% if @action_plan.present? %>
+						<!-- <p>
+						 	<%#= render "career_pathway_plans/expected_participation_hours"%>
+						</p> -->
+							<p>
+							 <%= render "career_pathway_plans/planned_work_participation_characteristics", arg_wp_characters_collection: @wp_characters_collection%>
+							 </p>
+							<p>
+							 <%= render "career_pathway_plans/planned_work_participation_hours_per_client", arg_activity_hours: @planned_client_activity_hours_collection %>
+							 </p>
+						<%= form_for(@action_plan, :url => action_plans_path, method: :post) do |f| %>
+							 <%= render "shared/common_error", object_argument: @action_plan %><br>
+			       			 <b>Enter Plan Details</b>
+			       			 <p></p>
+			       			 <ul>
+								<div class="row">
+					          		<div class="large-5 columns">
+										<%= render 'action_plan_new_edit_attributes',f: f,arg_short_term_goal: @action_plan_short_term_goals, arg_action_plan: @action_plan %>
+									</div>
+								</div>
+							</ul>
+							 <p>
+						      <%= link_to 'Cancel', (session[:BRP] ? barrier_action_plans_path : action_plans_path),class: "secondary button radius" %>
+						      <%= f.submit "Save", class: 'button radius' %>
+						    </p>
+						<% end %>
+			<% else %>
+				<h5 class="subheader"> An open <%="#{(drop_down_value_description @arg_plan_type).camelize(:lower)}" %> already exists, cannot create another <%="#{(drop_down_value_description @arg_plan_type).camelize(:lower)}" %>.</h5> <br>
+				<%= link_to 'Back', (session[:BRP] ? barrier_action_plans_path : action_plans_path),class: "secondary button radius" %>
+			<% end %>
+		<% else %>
+			<h5 class="subheader">Please complete assessment, before creating Employment/Barrier Reduction Plan.</h5><br>
+	        <%= link_to "Work Readiness Assessment", edit_common_assessment_path(14,session[:CLIENT_ASSESSMENT_ID].to_i), class: 'button radius' %>
+	        <p></p>
+		<% end %>
+	</section>
+</fieldset>

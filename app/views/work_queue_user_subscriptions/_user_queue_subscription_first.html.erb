@@ -1,0 +1,4 @@
+<li class="required">
+	<%= arg_object.label :user_id,"User" %>
+	<%= arg_object.select :user_id,arg_user_list.collect{ |p| ["#{p.name}", p.uid] },{ :include_blank => 'Select User' } %>
+</li>

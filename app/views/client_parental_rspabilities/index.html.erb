@@ -1,0 +1,57 @@
+<fieldset>
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+	<% if @client_resp_list.present? %>
+		<caption><%= set_subheader("Parental responsibility information for:  #{client_full_name(@client)}") %></caption>
+			<table>
+			  <thead>
+			    <tr>
+					<th> Parent Name </th>
+
+					<th> Status </th>
+					<th> SSN </th>
+					<th> Deprivation </th>
+					<th> Good Cause </th>
+					<th> Action </th>
+
+				</tr>
+			  </thead>			    <tbody>
+					<% @client_resp_list.each do |arg_resp| %>
+						<tr>
+								<% @relation = arg_resp.client_relationship %>
+
+							<td>  <%= get_client_full_name(@relation.to_client_id) %></td>
+							<td>  <%= drop_down_value_description(arg_resp.parent_status) %></td>
+							<td>  <%= get_ssn_with_client_id(@relation.to_client_id)%></td>
+
+							<td>  <%= drop_down_value_description(arg_resp.deprivation_code) %></td>
+							<td>  <%= get_flag_description(arg_resp.good_cause) %></td>
+							<td>
+							 <%= link_to "Show",client_parental_rspability_path(arg_resp),id: "hyperlink" , title1: "Press Enter Key or Mouse Click to show  ", data: {tooltip1: '' }%>
+
+							</td>
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+			<%# if validate_authorization(334) %>
+			    <%= link_to "New", new_client_parental_rspability_path , class: 'button radius' , title1: "Press Enter Key or Mouse Click to new parental responsibility information ", data: {tooltip1: '' }%>
+		    <%# end %>
+	<%else%>
+		<%# if validate_authorization(334) %>
+		   <legend><%= set_subheader("Parental responsibility information for: #{client_full_name(@client)}" ) %></legend>
+	        <h5 class="subheader">No parental responsibility information found. Click New to enter parental responsibility information.</h5>
+	        <p></p>
+	        <%= link_to 'New',new_client_parental_rspability_path, class: "button radius" , title1: "Press Enter Key or Mouse Click to go to new parental responsibility information ", data: {tooltip1: '' }%>
+        <%# else %>
+        	<!-- <h5 class="subheader">No parental responsibility information to show</h5> -->
+        <%# end %>
+	<%end%>
+<%else%>
+	    <legend><%= set_subheader("Parent responsibility information" ) %><legend>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+ <%end%>
+</section>
+</fieldset>

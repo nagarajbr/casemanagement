@@ -1,0 +1,21 @@
+<table>
+	<caption style="text-align:inherit"><p><b><%= "Employment information" %> </b></p></caption>
+	 		<thead>
+			    <tr>
+					<th> Employer Name </th>
+					<th> Begin Date </th>
+					<th> End Date </th>
+					<th> Reason for Leaving </th>
+
+				</tr>
+			  </thead>
+	 		<tbody>
+	 			<tr>
+	 				<td>  <%= arg_employer_name %></td>
+	 				<td>  <%= format_db_date(arg_employment.effective_begin_date) %></td>
+					<td>  <%= format_db_date(arg_employment.effective_end_date)  %></td>
+
+					<td>  <%= drop_down_value_description(arg_employment.leave_reason) %></td>
+	 			</tr>
+	 		</tbody>
+	 	</table>

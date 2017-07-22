@@ -1,0 +1,50 @@
+<!--   <fieldset>
+  <section class="solidbody">
+     <legend><%#= set_subheader("Employment detail at #{@employer_name} for household member: #{client_full_name(@client)}") %></legend>
+     <%#= render 'employment_details/selected_employer' %>
+    <p>
+      <h6><%#= "Employment detail" %></h6>
+    </p>
+
+
+  <p>
+    <b>Position Type: </b>
+    <%= drop_down_value_description(@employment_detail.position_type) %>
+  </p>
+
+  <p>
+    <b>Status: </b>
+    <%= drop_down_value_description(@employment_detail.current_status) %>
+  </p>
+
+  <p>
+     <b>Begin Date: </b>
+      <%= format_db_date (@employment_detail.effective_begin_date)  %>
+  </p>
+<p>
+    <b>End Date: </b>
+    <%= format_db_date(@employment_detail.effective_end_date) %>
+  </p>
+
+  <p>
+    <b>Payment Frequency: </b>
+    <%= drop_down_value_description(@employment_detail.salary_pay_frequency) %>
+  </p>
+
+   <p>
+    <b>Salary: </b>
+     <%= number_to_currency_br(@employment_detail.salary_pay_amt) %>
+  </p>
+
+  <p>
+    <b>Hours Per Week: </b>
+     <%= @employment_detail.hours_per_period %>
+  </p>
+
+
+   <%#= link_to 'Back', household_member_employment_detail_index_path(@client.id,@employment.id),class: " secondary button radius" %>
+   <%#= link_to 'Edit', edit_household_member_employment_detail_path(@client.id,@employment.id,@employment_detail.id),class: "button radius" %>
+   <%#= link_to "Delete", delete_household_member_employment_detail_path(@client.id,@employment.id,@employment_detail.id),  method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+
+</section>
+</fieldset> -->

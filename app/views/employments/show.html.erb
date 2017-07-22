@@ -1,0 +1,32 @@
+<fieldset>
+	<section class="solidbody">
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+				<p>
+					<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+				</p>
+				 <p><legend> <%= set_subheader("Employment information for: #{client_full_name(@client)}" ) %></legend></p>
+		<% else %>
+			<% if @client_assessment.present? %>
+				<legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+					<p>
+						<%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal:  @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+					</p>
+					<p><h6> <%= ("Employment at #{@employer_name} information for: #{client_full_name(@client)}") %> </h6></p>
+			<% else %>
+				 <legend><%= set_subheader("Employment at #{@employer_name} information for: #{client_full_name(@client)}") %> </legend>
+			<% end %>
+		<% end %>
+	 	<%= render 'show_employment', arg_employer_name:@employer_name,arg_employment:@employment,arg_notes:@notes%>
+	 	<% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+			<%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+			<%= link_to 'Edit', edit_household_member_employment_path(@client.id,@employment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+			<%= link_to 'Delete', delete_household_member_employment_path(@client.id,@employment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+		<% else %>
+		<!-- before hhmember step-->
+			<%= link_to 'Back', employments_path(@menu),class: "secondary button radius" %>
+			<%= link_to 'Edit', edit_employment_path(@menu,@employment.id),class: "button radius" %>
+			<%= link_to 'Delete', delete_employment_path(@menu,@employment.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+		<% end %>
+	</section>
+</fieldset>
+

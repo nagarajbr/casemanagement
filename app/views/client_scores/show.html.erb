@@ -1,0 +1,42 @@
+<fieldset>
+<section class="solidbody">
+ <legend>
+  <%= set_subheader("Score details for client: #{client_full_name(@client)}") %>
+    </legend>
+
+  <p>
+    <b>Test Type: </b>
+    <%= drop_down_value_description(@client_score.test_type) %>
+  </p>
+
+   <p>
+    <b>Referred date: </b>
+    <%= format_db_date @client_score.date_referred %>
+  </p>
+
+
+  <p>
+    <b>Test Taken Date: </b>
+    <%= format_db_date @client_score.date_test_taken_on %>
+  </p>
+
+   <p>
+    <b>Scores: </b>
+    <%= number_to_decimal(@client_score.scores) %>
+  </p>
+
+  <p>
+    <b>Worker: </b>
+    <%= get_user_name(@client_score.updated_by)%>
+  </p>
+
+
+    <%= link_to 'Back', client_scores_index_path,class: "secondary button radius" %>
+    <%# if validate_authorization(350) %>
+      <%= link_to 'Edit', client_scores_edit_path(@menu,@client_score.id),class: "button radius" %>
+    <%# end %>
+    <%# if validate_authorization(351) %>
+      <%= link_to 'Delete', client_scores_delete_path(@menu,@client_score.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <%# end %>
+</section>
+</fieldset>

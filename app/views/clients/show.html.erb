@@ -1,0 +1,134 @@
+<section class="solidbody">
+<% if session[:CLIENT_ID].present?  %>
+	<!-- record found so Normal View Page -->
+
+	<% if @client.present? %>
+			<fieldset>
+			<legend><%= set_subheader("Demographic information for: #{client_full_name(@client)}" ) %>
+			</legend><br>
+			<p>
+			     <b>Last Name:  </b>
+                 <%= @client.last_name %>
+			</p>
+            <p>
+			      <b>First Name:  </b>
+                 <%=@client.first_name %>
+			</p>
+		    <p>
+			    <b>Middle Name:</b>
+			    <%if @client.middle_name? %>
+			    	<%= @client.middle_name  %>
+			    <%end%>
+			</p>
+			<p>
+			    <b> Suffix:</b>
+			    <% if @client.suffix? %>
+			    <%=@client.suffix %>
+			    <% end %>
+		    </p>
+			<p>
+			    <b> Social Security Number:</b>
+			    <%= format_SSN(@client.ssn)  %>
+			</p>
+			<p>
+			    <b> Social Security Number Enumeration Status:</b>
+			    <%= drop_down_value_description(@client.ssn_enumeration_type)  %>
+			</p>
+			<p>
+	    		<b> Date of Birth:</b>
+	   			 <%= format_db_date @client.dob %>
+	  		</p>
+			<p>
+			    <b> Gender:</b>
+			    <%= drop_down_value_description(@client.gender) %>
+			</p>
+			<p>
+			    <b>Felon: </b>
+			    <%=get_flag_description(@client.felon_flag )%>
+			</p>
+			<p>
+			    <b>Received TANF payment in other state: </b>
+			    <%=get_flag_description(@client.rcvd_tea_out_of_state_flag )%>
+			</p>
+			<p>
+			    <b>Registered to Vote: </b>
+			    <%=get_flag_description(@client.register_to_vote_flag )%>
+			</p>
+
+			<p>
+			    <b>Veteran: </b>
+			    <%=get_flag_description(@client.veteran_flag )%>
+			</p>
+			<p>
+			    <b> Marital Status:</b>
+			    <%= drop_down_value_description(@client.marital_status) %>
+			</p>
+			<p>
+			    <b>Primary Language:</b>
+			    <%= drop_down_value_description(@client.primary_language) %>
+			</p>
+			 <p>
+			    <b> Provided Identification: </b>
+			    <%= drop_down_value_description(@client.identification_type)  %>
+			</p>
+             <p>
+             	<%if @client.other_identification_document? %>
+			    <b> Other identification document:</b>
+			    <%= @client.other_identification_document %>
+			    <%end%>
+		    </p>
+
+		    <p>
+			    <b> Arkansas Resident:</b>
+			     	<%=get_flag_description(@client.residency)%>
+
+		    </p>
+
+			<p>
+			    <b> Date of Death:</b>
+			    <%if @client.death_date? %>
+			    	<%= format_db_date @client.death_date %>
+			    <%end%>
+		    </p>
+		     <p>
+			    <b>Worker: </b>
+			    <%= get_user_name(@client.updated_by)%>
+			</p>
+		     <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+
+
+
+
+	    <%# if validate_authorization(296) %>
+			<%= link_to "Edit ",edit_client_path(@client.id), class: "button radius", title1: "Press Enter Key or Mouse Click to edit #{client_full_name(@client)}'s Demographic information", data: {tooltip1: '' }%>
+		<%# end %>
+
+
+		</fieldset>
+	<% else %>
+		<fieldset>
+		<legend><%= set_subheader("Demographic details") %></legend>
+		<%# if validate_authorization(295) %>
+			<h5 class="subheader">No Demographic Details found. You can register a new Client by clicking the New button.</h5>
+			<p></p>
+
+			<%= link_to 'New',new_client_path, class: "button radius",title1: "Press Enter or click mouse to start new client registration", data: {tooltip1: '' }%>
+		<%# else %>
+			<!-- <h5 class="subheader">No Demographic Details found.</h5> -->
+		<%# end %>
+		</fieldset>
+
+	<% end %>
+
+<% else %>
+	<fieldset>
+	<legend><%= set_subheader("Demographic details") %></legend>
+	<h5 class="subheader">No Client is selected.Search Client by clicking Search button.</h5>
+	<p></p>
+
+	 	<%= render "shared/search_client_button" %>
+	</fieldset>
+<% end %>
+</section>

@@ -1,0 +1,32 @@
+<section class="solidbody">
+	<fieldset>
+		<% if @selected_application.present? %>
+			<legend>
+			<%= set_subheader("Screening application of client: #{client_full_name(@client)}") %>
+			</legend>
+			<p>
+		 	<%= render 'selected_application_details',arg_selected_application: @selected_application %>
+		 	</p>
+			<%= form_for(@selected_application,:url => process_check_program_eligibility_wizard_path(@selected_application.id), method: :put) do |arg_appln| %>
+				<b><%= "Select Service Program" %></b>
+				<% if @application_screening_error.present? %>
+	    	       <%= render "shared/common_error", object_argument: @application_screening_error %><br>
+    	   		<% end %>
+    	   		<ul>
+			       	<div class="row">
+			       	 	<div class="large-12 columns">
+		                	<%= render "application_screenings/application_screening_last_step", :arg_object => arg_appln,arg_srvc_prgm_to_be_displayed: @srvc_prgm_to_be_displayed, arg_disposition_types:
+		                	@application_disposition_types, arg_disposition_reasons:@application_disposition_reasons ,
+		                	arg_selected_application: @selected_application %>
+		                </div>
+
+			        </div>
+			    </ul>
+			    <%= arg_appln.submit "Next",class: 'button radius' %>
+			<% end %>
+		<% else %>
+			<h5 class="subheader">Please select an application </h5><br>
+			<%= link_to "Applications List",client_applications_path,class: 'button radius'%>
+		<% end %>
+	</fieldset>
+</section>

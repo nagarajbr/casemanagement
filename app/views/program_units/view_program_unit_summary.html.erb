@@ -1,0 +1,19 @@
+<!--Manoj Patil 10/16/2014  -->
+	<fieldset>
+<section class="solidbody">
+
+	<legend><%= set_subheader("Program Unit information for: #{client_full_name(@client)}") %></legend>
+	  <%= render 'program_units/form_program_unit_review',arg_pgu:@program_unit,arg_selected_pgu:@selected_program_unit,arg_pgu_participation:@program_participations,arg_pgu_members:@program_unit_members, arg_client_relation:@client_relationships,arg_clients: @data_validation_results,arg_client_doc_list:@client_doc_verification_list,arg_family_type:@family_type_struct,arg_case_type:@case_type,arg_app_elig_rslt:@app_elig_rslts,arg_selected_pgu:@selected_program_unit%>
+	<%= link_to "Back",program_units_path, class: 'button radius secondary' %>
+
+	<% program_unit_link_visible = ProgramUnit.allow_program_unit_to_be_modified?(@selected_program_unit.id) %>
+	<% if program_unit_link_visible == true && @can_see_start_button == true %>
+		<% if validate_authorization(676) || current_user.uid == @selected_program_unit.eligibility_worker_id%>
+			<td><%= link_to "Start",edit_program_unit_wizard_initialize_path(@selected_program_unit.id),class: 'button radius' %></td>
+		<% end %>
+	<% end %>
+
+
+
+</section>
+	</fieldset>

@@ -1,0 +1,144 @@
+<fieldset>
+	<section class="solidbody">
+		<legend>
+			<caption style="text-align:inherit"> <%= set_subheader("Recommendations for Assessment of Client: #{client_full_name(@client)}") %></caption>
+		</legend>
+		<!-- #employemt goal for client -->
+	<% if @Occupational_goal.present? %>
+		<p>
+		    <b>Occupational Goal:</b>
+		    <%= @Occupational_goal %>
+		</p>
+	<%end%>
+
+		<% if @assessed_sub_sections_with_strengths.present? %>
+			<p>
+				<b>Employment Strengths</b><p></p>
+
+					<% @assessed_sub_sections_with_strengths.each do |each_sub_section| %>
+						<b><%= each_sub_section.title%></b>
+							<table>
+								<% @assessment_strengths_history.each do |each_assessment_strength| %>
+									<% if each_assessment_strength.assessment_sub_section_id == each_sub_section.id %>
+										<tr>
+											<td> <%= each_assessment_strength.comments %> </td>
+										</tr>
+									<% end %>
+								<%end%>
+							</table>
+					<% end %>
+
+			</p>
+
+		<% end %>
+
+
+		<% if @assessed_sections_with_barriers.present? %>
+			<p>
+			<b>Potential Barriers </b>
+			<table>
+			    <% @assessed_sections_with_barriers.each do |each_section| %>
+				     <tr>
+				     	<%if each_section.id == 15 %>
+				     		<td> <b><%= "Finance" %></b> </td>
+				     	<%else%>
+				     		<td> <b><%= each_section.title %></b> </td>
+				     	<%end%>
+					 </tr>
+					 <tr>
+					 	<td>
+					 		<table>
+					 			<% @assessment_barriers_history.each do |each_barrier|%>
+					 				<% if each_barrier.assessment_section_id == each_section.id %>
+							 			<tr>
+							 				<td><%= get_barrier_description(each_barrier.barrier_id)%></td>
+							 			</tr>
+						 			<% end %>
+					 			<% end %>
+					 		</table>
+
+					 	</td>
+					 </tr>
+				<% end %>
+
+			</table>
+			</p>
+			<p>
+				<b>Details </b>
+					<table>
+				    <% @assessed_sections_with_barriers.each do |each_section| %>
+					    <tr>
+							<%if each_section.id == 15 %>
+					     		<td> <b><%= "Finance" %></b> </td>
+					     	<%else%>
+					     		<td> <b><%= each_section.title %></b> </td>
+					     	<%end%>
+						</tr>
+						<tr>
+							<td>
+								<table>
+									<thead>
+									    <tr>
+											<th> Barrier </th>
+											<th> Assessed Section </th>
+											<th> Recommendation </th>
+
+										</tr>
+									</thead>
+								    <tbody>
+										<% @report_detail_data_history.each do |arg_record| %>
+
+												<% if arg_record.assessment_section_id == each_section.id %>
+												<tr>
+													<td>  <%= arg_record.barrier_name %></td>
+													<td>  <%= arg_record.assessment_sub_section_refers %></td>
+													<td>  <%= arg_record.recommendation_text %></td>
+												</tr>
+												<tr>
+													<% @assessment_detail_collection = AssessmentBarrierDetailHistory.get_barrier_details_history(arg_record.assessment_barrier_id,arg_record.client_assessment_history_id)%>
+													<td colspan="3" >
+														<table>
+															<thead>
+															    <tr>
+
+																	<th> Comments </th>
+																</tr>
+															</thead>
+															<tbody>
+																<% @assessment_detail_collection.each do |each_detail|%>
+																<tr>
+
+																	<td> <li><%= each_detail.comments%></li></td>
+																</tr>
+																<%end %>
+															</tbody>
+														</table>
+
+													</td>
+
+												</tr>
+
+												<% end %>
+										 <% end %>
+									</tbody>
+								</table>
+							</td>
+						</tr>
+					<% end %>
+					</table>
+
+
+
+
+			</p>
+
+		<% else %>
+
+			<h5 class="subheader">No Barriers found for this Assessment.</h5>
+
+		<% end %>
+		<p>
+			<%= link_to 'Back',client_assessment_histories_path,class: "secondary button radius" %>
+		</p>
+	</section>
+</fieldset>

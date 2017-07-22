@@ -1,0 +1,16 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Activities on weekly basis for: #{client_full_name(@client)}") %></legend>
+		<%#= render "shared/common_error", object_argument: @week_info %>
+		<% if @week_info.present? %>
+			<%= form_tag save_week_info_path(@action_plan.id, @action_plan_detail.id,@week_id), method: :post do %>
+				<%= render 'form_activity_index', week_info: @week_info, action_plan_detail: @action_plan_detail, work_participation_for_client: @work_participation_for_client, completed_hours_read_only_flag: @completed_hours_read_only_flag %>
+				<%= link_to 'Cancel', activity_index_path(@action_plan_detail.action_plan.id, @action_plan_detail.id),class: "secondary button radius" %>
+				<%= submit_tag @submit_button_name, class: "button radius" %>
+			<% end %>
+		<% else %>
+			<h5 class="subheader">No activity information found.</h5><br>
+			<%= link_to 'Back', activity_index_path(@action_plan_detail.action_plan.id, @action_plan_detail.id) ,class: "secondary button radius" %>
+	    <% end %>
+	</section>
+</fieldset>

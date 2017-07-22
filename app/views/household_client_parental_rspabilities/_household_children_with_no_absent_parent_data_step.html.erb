@@ -1,0 +1,19 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<% if @children_with_absent_parent_collection.present? %>
+	<%= render 'children_of_absent_parent_for_household',arg_collection:@children_with_absent_parent_collection,arg_absent_parent:@absent_parent %>
+	<% if session[:SELECTED_AP_RESPONSIBILITY_ID_FROM_CHANGE_AP].blank? %>
+   		 <%= link_to "Select Children",new_absent_parent_child_relation_path(@absent_parent.id), class: 'button radius' %>
+   	<% end %>
+
+<% else %>
+	<% if session[:SELECTED_AP_RESPONSIBILITY_ID_FROM_CHANGE_AP].blank? %>
+		<h5 class="subheader"> Add clients from the household who are children of absent parent: <%= "#{@absent_parent.get_full_name}"%>.</h5>
+		<p></p>
+		<p>
+
+			 	<%= link_to "Select Children",new_absent_parent_child_relation_path(@absent_parent.id), class: 'button radius' %>
+
+		</p>
+	<% end %>
+<%end%>

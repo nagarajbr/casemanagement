@@ -1,0 +1,28 @@
+<!--Manoj Patil 03/29/2016  -->
+<fieldset>
+  <section class="solidbody">
+      	<legend>
+        	  <%= set_subheader("Change physical address of household: #{@household.name}") %>
+        </legend>
+          <%= render 'households/selected_household_partial',arg_household: @household %>
+    <%= form_for(@change_address_step_object,:url => process_change_household_address_wizard_path(@new_household_address.id), method: :post) do |f| %>
+	    <ul>
+	        <% if  "#{@change_address_step_object.current_step}" == "household_new_address_step" %>
+	               <b><h3>Step 1-New household address </h3></b>
+	                <%= render "shared/common_error", object_argument: @change_address_step_object %>
+	          		<%= render "#{@change_address_step_object.current_step}", :arg_addr => @new_household_address, arg_household:@household%>
+	         <% end %>
+	         <% if  "#{@change_address_step_object.current_step}" == "household_members_moving_to_new_address_step" %>
+	               <b><h3>Step 2-Household members moving to new address</h3></b>
+	                <%= render "shared/common_error", object_argument: @change_address_step_object %>
+	          		<%= render "#{@change_address_step_object.current_step}", :arg_hh_members_in_new_address_collection => @members_moved_to_new_address_collection,:arg_new_address => @new_household_address %>
+	         <% end %>
+
+        </ul>
+	    <div>
+	      <%= render "buttons_next_back_save", :arg_object => f , :arg_instance =>@change_address_step_object, :arg_household_id => @household.id  %>
+	    </div>
+    <% end %>
+
+  </section>
+</fieldset>

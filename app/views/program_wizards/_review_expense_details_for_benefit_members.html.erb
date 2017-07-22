@@ -1,0 +1,25 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- used in 5th step -->
+<table>
+	<caption style="text-align:inherit"><b>Expense summary for selected members</b><p></p></caption>
+  	<thead>
+    	<tr>
+			<th> Name </th>
+			<th> Expense Type </th>
+			<th> Begin Date </th>
+			<th> End Date </th>
+
+		</tr>
+	</thead>
+	<tbody>
+		<% arg_collection.each do |arg_expense_detail| %>
+
+			<tr>
+				<td>  <%= get_client_full_name(arg_expense_detail.client_id) %></td>
+				<td><%=  drop_down_value_description(arg_expense_detail.expensetype)%></td>
+				<td><%= format_db_date(arg_expense_detail.effective_beg_date) %></td>
+				<td><%= format_db_date(arg_expense_detail.effective_end_date) %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

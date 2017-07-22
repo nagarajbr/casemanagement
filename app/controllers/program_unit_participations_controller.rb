@@ -1,0 +1,2 @@
+class ProgramUnitParticipationsController < AttopAncestorController
+end

@@ -1,0 +1,60 @@
+<fieldset>
+	<section class="solidbody">
+
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+			<p>
+				<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+			</p>
+		 	<p><legend><%= set_subheader("#{drop_down_value_description(@resource.resource_type)} resource details for: #{client_full_name(@client)}") %></legend></p>
+		<% else %>
+			<legend><%= set_subheader("#{drop_down_value_description(@resource.resource_type)} resource details for: #{client_full_name(@client)}") %></legend>
+			<p></p>
+		<% end %>
+		<%= render "parent_resource",arg_resource: @resource %>
+		<table>
+			<caption class="fontc"> Resource details <p></p></caption>
+			<thead>
+			    <tr>
+					<th> Resource Value Date </th>
+					<th> Current Resource Value </th>
+					<th> Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @resource_details.each do |resource_detail| %>
+					<tr>
+						<td>  <%= format_db_date resource_detail.resource_valued_date %></td>
+						<td>  <%= number_to_currency_br(resource_detail.resource_value) %></td>
+						<td>
+							<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+		 						<%= link_to "show", show_household_member_resource_detail_path(@client.id,@resource.id,resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>|
+		 						<%= link_to "Adjustments",  household_member_resource_detail_adjustments_index_path(@client.id,resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>|
+		 						<%= link_to "Resource Uses", household_member_resource_detail_uses_index_path(@client.id,resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>
+
+		 					<% else %>
+		 						<%= link_to "Show",resource_resource_detail_path(@resource,resource_detail),id: "hyperlink" %> |
+								<%= link_to("Adjustments", index_resource_adjustment_path(resource_detail.id),id: "hyperlink") %> |
+								<%= link_to("Resource Uses", index_resource_uses_path(resource_detail.id),id: "hyperlink") %>
+		 					<% end %>
+
+					    </td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+	 		<%= link_to 'Back', start_household_member_registration_wizard_path,class: " secondary button radius" %>
+	 		<%= link_to("Add resource detail", new_household_member_resource_detail_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: 'button radius') %>
+	 		<%= link_to("Next", start_household_member_registration_wizard_path, class: 'button radius') if ResourceDetail.resource_details_found_for_the_given_resource?(@resource.id)%>
+	 	<% else %>
+	 		<%= link_to 'Back', resources_path,class: "secondary button radius" %>
+			<%= link_to("Add Detail", new_resource_resource_detail_path(@resource) , class: 'button radius') %>
+	 	<% end %>
+
+
+
+
+	</section>
+ </fieldset>
+
+

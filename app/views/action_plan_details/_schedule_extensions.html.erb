@@ -1,0 +1,28 @@
+<%if arg_activity.present?%>
+<caption style="text-align:inherit">
+		<u><b>	Extension(s)
+	 </b></u></caption><p></p>
+
+      <table>
+	<thead>
+	    <tr>
+			<th> Extension Date </th>
+			<th>Extension Reason</th>
+			<th> Extension Duration</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% arg_activity.each do |schedule| %>
+		<tr>
+			<td>  <%= format_db_date(schedule.created_at)%> </td>
+			<td>  <%= schedule.extension_reason  %> </td>
+			<td>  <%= schedule.extension_duration %> </td>
+		</tr>
+		<%end%>
+	</tbody>
+</table>
+<%end%>
+
+
+
+

@@ -1,0 +1,42 @@
+<fieldset>
+	<legend></legend>
+	<section class="solidbody">
+	<caption><%= set_subheader("Employer information") %></caption>
+<% if @employers.present? %>
+
+
+	<table>
+	  <thead>
+	    <tr>
+			<th> Employer Name </th>
+			<th> Federal EIN </th>
+			<th> State EIN </th>
+			<th> Action </th>
+		</tr>
+	  </thead>
+	    <tbody>
+
+				<tr>
+					<td>  <%=  @employers.employer_name %></td>
+					<td>  <%=  @employers.federal_ein %></td>
+					<td>  <%=  @employers.state_ein  %></td>
+					<td>  <%= link_to "Show",employer_path(@employers),id: "hyperlink" %>	</td>
+				</tr>
+
+		</tbody>
+	</table>
+	<%# if validate_authorization(379) %>
+	   <%#= link_to("New", new_employer_path , class: 'button radius')%>
+   <%# end %>
+<%else%>
+	<%# if validate_authorization(379) %>
+       <h5 class="subheader">No employer details found. Click New to enter employer details.</h5>
+        <p></p>
+        <%= link_to 'New',new_employer_path, class: "button radius"%>
+    <%# else %>
+    	<!-- <h5 class="subheader">No employer details to show.</h5> -->
+    <%# end %>
+<%end%>
+</section>
+</fieldset>
+

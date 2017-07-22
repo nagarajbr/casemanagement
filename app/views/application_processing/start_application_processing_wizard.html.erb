@@ -1,0 +1,19 @@
+<section class="solidbody">
+	<fieldset>
+		<legend>
+			<%= set_subheader("Processing application of household: #{@household.name}") %>
+		</legend>
+		<% if @selected_application.new_record? == false %>
+			<p>
+		 		<%= render 'application_screenings/selected_application_details',arg_selected_application: @selected_application %>
+		 	</p>
+	 	<% end %>
+
+	 	<% if @form_type == "form_for" %>
+	 		<%= render "application_processing_form_for", arg_selected_application: @selected_application, arg_model_object: @model_object ,arg_object3: @selected_application,arg_div_class:@div_class,arg_partical:@partial,arg_app_elig_rslts:@app_elig_rslts, arg_called_from:@called_from,arg_family_comp:@family_comp%>
+		<% else %>
+			<%= render "application_processing_form_tag",arg_selected_application: @selected_application,arg_step_number: @step_number,arg_family_comp:@family_comp,arg_service_program:@service_programs,arg_application:@selected_application %>
+		<% end %>
+
+	</fieldset>
+</section>

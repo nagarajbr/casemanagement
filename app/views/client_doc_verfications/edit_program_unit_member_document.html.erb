@@ -1,0 +1,20 @@
+<%= form_for(@client_doc_verification,:url => update_program_unit_member_document_path(@selected_program_unit.id,@client_doc_verification.id), method: :put) do |f| %>
+  <%= render "shared/common_error", object_argument: @client_doc_verification %>
+    <fieldset>
+    	<%= set_subheader("Edit Document verification for selected Program Unit") %>
+    	<%= render 'program_units/selected_program_unit_details', arg_selected_program_unit:@selected_program_unit %>
+    	<ul>
+	     	<div class="row">
+	          <div class="large-6 columns">
+	               <%= render 'form_document_verification',arg_object: f ,arg_member_collection: @program_unit_members%>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+	    	<%= link_to "Cancel",show_program_unit_documents_path(@selected_program_unit.id),class: 'secondary button radius'%>
+
+	       <%= f.submit "Save",class: 'button radius'%>
+	        </p>
+
+    </fieldset>
+<% end %>

@@ -1,0 +1,31 @@
+<fieldset>
+<section class="solidbody">
+<% if @addresses.present? %>
+   <legend><%= set_subheader("Edit branch office information for provider: #{@provider.provider_name}" ) %></legend>
+ <% end %>
+<%= render "selected_head_provider" %>
+
+<%= form_for(@provider, url: update_branch_office_path(@provider.id),:method => :patch ) do |f| %>
+  <%= render "shared/common_error", object_argument: @provider %>
+  <ul>
+      <div class="row">
+        <div class="large-4 columns">
+			<%= render 'form_branch_office',arg_object: f %>
+			<% if  @provider.status == 6156 ||  @provider.status == 6157 %>
+				<li>
+		            <%= f.label :status %>
+		             <%= f.select :status, @edit_provider_status.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Status' } %>
+		        </li>
+
+			<% end %>
+			</div>
+      </div>
+    </ul>
+
+	 <p>
+      <%= link_to 'Cancel', show_provider_path(@provider.id),class: "secondary button radius" %>
+      <%= f.submit "Save", class: 'button radius'%>
+    </p>
+	<% end %>
+</section>
+</fieldset>

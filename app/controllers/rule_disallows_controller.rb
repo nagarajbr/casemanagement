@@ -1,0 +1,2 @@
+class RuleDisallowsController < AttopAncestorController
+end

@@ -1,0 +1,219 @@
+<%= form_tag(data_validation_screen_path, method: :get) do %>
+<div class="row">
+	<div class="large-4 columns">
+		<ul>
+			<li class="required"  >
+				<%= label_tag :selected_client, "Client" %>
+			  	<%= select_tag "selected_client",options_for_select(@members.collect { |p| ["#{get_client_full_name(p.client_id)}", p.client_id] })	 %>
+			</li>
+		</ul>
+	</div>
+</div>
+<p> <b>Select one or more to verify </b></p>
+<table>
+<thead>
+    <tr>
+    	<th>Select</th>
+		<th>State Inquiry of SSA Information (SOLQ)</th>
+		<th>Last verification date</th>
+		<th>Results</th>
+		<th>Action</th>
+	</tr>
+</thead>
+    <tbody>
+		<tr>
+			<td><%=check_box_tag "verify[]" %></td>
+			<td>
+				<br>
+				SOLQ searches are available to authorized personnel to obtain information necessary to perform DWS job functions. Due to the sensitive nature of the data, searches for people unrelated to DWS work are strictly prohibited. Users of this functionality are subject to DWS policies pertaining to: safegaurding of private information; appropriate use of state equipment and use of electronic communication services; sanctions for violations contained in DWS Conduct Standards; penalties provided for in state and federal law. Penalties may include discipline and/or prosecution.
+				<br><br>
+			</td>
+			<th> <%= @verify_date %> </th>
+			<td> NA</td>
+			<td>
+				<%= submit_tag "Review" ,:name => 'solq_button', class: "button radius" %>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+<table>
+<thead>
+    <tr>
+    	<th>Select</th>
+		<th>Department of Workforce Services Data (Wage and Unemployment Insurance)</th>
+		<th>Last verification date</th>
+		<th>Results</th>
+		<th>Action</th>
+	</tr>
+</thead>
+    <tbody>
+		<tr>
+			<td><%=check_box_tag "verify[]" %></td>
+			<td>
+				<br>
+				Wage and UI searches are available to authorized personnel to obtain information necessary to perform DWS job functions. Due to the sensitive nature of the data, searches for people unrelated to DWS work are strictly prohibited. Users of the functionality are subject to DWS policies pertaining to: safegaurding of private information; appropriate use of state equipment and use of electronic communication services; sanctions for violations contained in DWS Conduct Standards; penalties provided for in state and federal law. Penalties may include discipline and/or prosecution.
+				<br><br>
+			</td>
+			<th> <%= @income_date %> </th>
+			<% if @pass == 'Fail' %>
+				<td id = "col-result-fail">Fail</td>
+			<%else%>
+				<td id = "col-result-pass">Pass</td>
+			<%end%>
+			<td>
+
+				<%#= link_to("Verify", wage_ui_match_path(@focus_client.id) , class: 'button radius primary')%>
+				 <%= submit_tag "Review" ,:name => 'wage_button', class: "button radius" %>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+<thead>
+    <tr>
+    	<th>Select</th>
+		<th>Office of Child Support Enforcement Data (Child Support Income)</th>
+		<th>Last verification date</th>
+		<th>Results</th>
+		<th>Action</th>
+	</tr>
+</thead>
+    <tbody>
+		<tr>
+			<td><%=check_box_tag "verify[]" %></td>
+			<td>
+				<br>
+				Child support income information is available to authorized personnel to obtain information necessary to perform DWS job functions. Due to the sensitive nature of the data, searches for people unrelated to DWS work are strictly prohibited. Users of the functionality are subject to DWS policies pertaining to: safegaurding of private information; appropriate use of state equipment and use of electronic communication services; sanctions for violations contained in DWS Conduct Standards; penalties provided for in state and federal law. Penalties may include discipline and/or prosecution.
+				<br><br>
+			</td>
+			<th> <%= @verify_date %> </th>
+			<td id = "col-result-pass">Pass</td>
+			<td>
+
+				<%#= link_to("Verify", wage_ui_match_path(@focus_client.id) , class: 'button radius primary')%>
+				 <%= submit_tag "Review" ,:name => 'ocse_button', class: "button radius" %>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<table>
+<thead>
+    <tr>
+    	<th>Select</th>
+		<th>SSA income Data (SSI income)</th>
+		<th>Last verification date</th>
+		<th>Results</th>
+		<th>Action</th>
+	</tr>
+</thead>
+    <tbody>
+		<tr>
+			<td><%=check_box_tag "verify[]" %></td>
+			<td>
+				<br>
+				SSI income information is available to authorized personnel to obtain information necessary to perform DWS job functions. Due to the sensitive nature of the data, searches for people unrelated to DWS work are strictly prohibited. Users of the functionality are subject to DWS policies pertaining to: safegaurding of private information; appropriate use of state equipment and use of electronic communication services; sanctions for violations contained in DWS Conduct Standards; penalties provided for in state and federal law. Penalties may include discipline and/or prosecution.
+				<br><br>
+			</td>
+			<th> <%= @verify_date %> </th>
+			<td id = "col-result-pass">Pass</td>
+			<td>
+
+				<%#= link_to("Verify", wage_ui_match_path(@focus_client.id) , class: 'button radius primary')%>
+				 <%= submit_tag "Review" ,:name => 'ssi_button', class: "button radius" %>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table>
+<thead>
+    <tr>
+    	<th>Select</th>
+		<th>Vital Records (Birth information)</th>
+		<th>Last verification date</th>
+		<th>Results</th>
+		<th>Action</th>
+	</tr>
+</thead>
+    <tbody>
+		<tr>
+			<td><%=check_box_tag "verify[]" %></td>
+			<td>
+				<br>
+				Vital Records searches are available to authorized personnel to obtain information necessary to perform DWS job functions. Due to the sensitive nature of the data, searches for people unrelated to DWS work are strictly prohibited. Users of the functionality are subject to DWS policies pertaining to: safegaurding of private information; appropriate use of state equipment and use of electronic communication services; sanctions for violations contained in DWS Conduct Standards; penalties provided for in state and federal law. Penalties may include discipline and/or prosecution.
+				<br><br>
+			</td>
+			<th> <%= @verify_date %> </th>
+			<td id = "col-result-pass">Pass</td>
+			<td>
+				<%= submit_tag "Review" ,:name => 'vital_button', class: "button radius" %>
+			</td>
+		</tr>
+	</tbody>
+
+<table>
+<thead>
+    <tr>
+    	<th>Select</th>
+		<th>Arkansas Worker's Compensation Commision Data (Worker's Compensation income)</th>
+		<th>Last verification date</th>
+		<th>Results</th>
+		<th>Action</th>
+	</tr>
+</thead>
+    <tbody>
+		<tr>
+			<td><%=check_box_tag "verify[]" %></td>
+			<td>
+				<br>
+				Worker's sompensation income information is available to authorized personnel to obtain information necessary to perform DWS job functions. Due to the sensitive nature of the data, searches for people unrelated to DWS work are strictly prohibited. Users of the functionality are subject to DWS policies pertaining to: safegaurding of private information; appropriate use of state equipment and use of electronic communication services; sanctions for violations contained in DWS Conduct Standards; penalties provided for in state and federal law. Penalties may include discipline and/or prosecution.
+				<br><br>
+			</td>
+			<th> <%= @verify_date %> </th>
+			<td id = "col-result-pass">Pass</td>
+			<td>
+
+				<%#= link_to("Verify", wage_ui_match_path(@focus_client.id) , class: 'button radius primary')%>
+				 <%= submit_tag "Review" ,:name => 'wcomp_button', class: "button radius" %>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table>
+<thead>
+    <tr>
+
+		<th>Other Interfaces</th>
+		<th>Last verification date</th>
+		<th>Results</th>
+		<th>Action</th>
+	</tr>
+</thead>
+    <tbody>
+		<tr>
+
+			<td>
+				<br>
+				PARIS match, DMV verification, SNAP and Medicaid data and other programs/matches data are under construction
+				<br>
+			</td>
+			<th> NA </th>
+			<td>NA</td>
+			<td> NA
+
+				<%#= link_to("Verify", wage_ui_match_path(@focus_client.id) , class: 'button radius primary')%>
+				 <%#= submit_tag "Review" ,:name => 'wcomp_button', class: "button radius" %>
+
+			</td>
+		</tr>
+	</tbody>
+</table>
+<% end %>

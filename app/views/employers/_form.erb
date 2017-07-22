@@ -1,0 +1,142 @@
+
+          <li  class="required" >
+              <%= arg_object.label :employer_name %>
+              <%= arg_object.text_field :employer_name, alt: "employer_name",maxlength: "50",title1: "Enter employer_name details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+            <% if arg_employer.new_record? %>
+            <%= arg_object.label :flag, 'Do you wish to provide services to DWS' %>
+            <%= arg_object.check_box :flag %>
+            <%else%>
+            <%end%>
+          </li>
+
+          <li>
+              <%= arg_object.label :federal_ein %>
+              <%= arg_object.text_field :federal_ein, alt: "federal_ein",id: 'federal_ein', maxlength: "10", onkeypress: "return isNumberKey(event)" ,title1: "Enter federal_ein details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%= arg_object.label :state_ein %>
+              <%= arg_object.text_field :state_ein, alt: "state_ein",id: 'state_ein', maxlength: "10", onkeypress: "return isNumberKey(event)", title1: "Enter state_ein details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%= arg_object.label :employer_contact %>
+              <%= arg_object.text_field :employer_contact%>
+          </li>
+
+          <li>
+              <%= arg_object.label :employer_optional_contact %>
+              <%= arg_object.text_field :employer_optional_contact%>
+          </li>
+
+          <li>
+              <%= arg_object.label :employer_country_code %>
+              <%#= arg_object.text_field :employer_country_code, alt: "Source",title1: "Enter employer_country_code details", data: {tooltip1: true }  %>
+              <%= arg_object.select :employer_country_code, CodetableItem.item_list(6,"Country").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a country', :selected => "383" }  %>
+          </li>
+
+          <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+
+          <!-- <li>
+              <%#= arg_object.label :employer_address_line1 %>
+              <%#= arg_object.text_field :employer_address_line1, alt: "employer_address_line1",maxlength: "50",title1: "Enter employer_address_line1 details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_address_line2 %>
+              <%#= arg_object.text_field :employer_address_line2, alt: "employer_address_line2",maxlength: "50",title1: "Enter employer_address_line2 details", data: {tooltip1: true } %>
+          </li>
+
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_city %>
+              <%#= arg_object.text_field :employer_city, alt: "employer_city",maxlength: "50", title1: "Enter employer_city details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_state %>
+              <%#= arg_object.select :employer_state, CodetableItem.get_all_states_except_arkansas(104,"States").collect { |p| ["#{p.long_description} ", p.id] },{ :include_blank => 'Select State' } %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_postal_code %>
+              <%#= arg_object.text_field :employer_postal_code, maxlength: "5", onkeypress: "return isNumberKey(event)", alt: "Source",title1: "Enter employer_postal_code details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_zip_4 %>
+              <%#= arg_object.text_field :employer_zip_4, maxlength: "5", onkeypress: "return isNumberKey(event)", alt: "Source",title1: "Enter employer_zip_4 details", data: {tooltip1: true }  %>
+          </li> -->
+
+         <!--  <li>
+              <%#= arg_object.label :employer_phone_number %>
+              <%#= arg_object.text_field :employer_phone_number, id: 'phone', maxlength: "10", onkeypress: "return isNumberKey(event)",title1: "Enter Client's Phone Number", data: {tooltip1: '' } %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_phone_extension %>
+              <%#= arg_object.text_field :employer_phone_extension, maxlength: "4", onkeypress: "return isNumberKey(event)",title1: "Enter Client's Phone Number", data: {tooltip1: '' } %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_optional_contact %>
+              <%#= arg_object.text_field :employer_optional_contact, alt: "Source",title1: "Enter employer_optional_contact details", data: {tooltip1: true }  %>
+          </li>
+
+
+          <li>
+              <%#= arg_object.label :optional_employer_address_line1 %>
+              <%#= arg_object.text_field :optional_employer_address_line1, alt: "Source",title1: "Enter optinal_address_line1 details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :optional_employer_address_line2 %>
+              <%#= arg_object.text_field :optional_employer_address_line2, alt: "Source",title1: "Enter optinal_employer_address_line2 details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :optional_employer_address_line3 %>
+              <%#= arg_object.text_field :optional_employer_address_line3, alt: "Source",title1: "Enter optinal_employer_address_line3 details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :optional_employer_city %>
+              <%#= arg_object.text_field :optional_employer_city, alt: "Source",title1: "Enter optinal_employer_city details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :optional_employer_state %>
+              <%#= arg_object.select :optional_employer_state, CodetableItem.get_all_states_except_arkansas(104,"States").collect { |p| ["#{p.long_description} ", p.id] },{ :include_blank => 'Select State' } %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :optional_employer_postal_code %>
+              <%#= arg_object.text_field :optional_employer_postal_code, maxlength: "5", onkeypress: "return isNumberKey(event)", alt: "Source",title1: "Enter optinal_employer_postal_code details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :optional_employer_zip_4 %>
+              <%#= arg_object.text_field :optional_employer_zip_4, maxlength: "4", onkeypress: "return isNumberKey(event)", alt: "Source",title1: "Enter optinal_employer_zip_4 details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :optional_employer_country_code %>
+              <%#= arg_object.text_field :optional_employer_country_code, maxlength: "4", alt: "Source",title1: "Enter optinal_employer_country_code details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_optional_home_number %>
+              <%#= arg_object.text_field :employer_optional_home_number, id: 'home_phone', maxlength: "10", onkeypress: "return isNumberKey(event)", alt: "Source",title1: "Enter employer_optional_hone_number details", data: {tooltip1: true }  %>
+          </li>
+
+          <li>
+              <%#= arg_object.label :employer_optional_contact_extension %>
+              <%#= arg_object.text_field :employer_optional_contact_extension,  maxlength: "4", onkeypress: "return isNumberKey(event)", alt: "Source",title1: "Enter employer_optional_contact_extension details", data: {tooltip1: true }  %>
+          </li> -->
+
+
+

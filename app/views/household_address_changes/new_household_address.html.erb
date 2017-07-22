@@ -1,0 +1,14 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Enter new address information for household: #{@household.name}") %></legend>
+	    	<%= form_for @household_physical_address, url: validate_household_address_path(@household.id), method: :post do |f| %>
+					<%= render "shared/common_error", object_argument: @household_physical_address %>
+					<%= render 'household_physical_address_form',arg_object: f,arg_address: @household_physical_address %>
+					<p>
+					    <%= link_to 'Back', household_address_change_index_path, class: "secondary button radius" %>
+					    <%= f.submit "Save", class: 'button radius' %>
+					</p>
+			<% end %>
+
+	</section>
+</fieldset>

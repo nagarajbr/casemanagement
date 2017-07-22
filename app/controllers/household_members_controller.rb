@@ -1,0 +1,2 @@
+class HouseholdMembersController < AttopAncestorController
+end

@@ -1,0 +1,33 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Reject Payment for Service Plan line items for Provider:  #{provider_name(@provider)}" ) %>
+		</legend>
+		<br>
+		<%= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+		<p></p>
+		<p>
+			<%= render "selected_service_authorization_line_items_for_rejection" %>
+		</p>
+
+		<%= form_for(@provider_service_authorization_line_item,:url => reject_payment_line_item_approval_request_update_path(@provider_service_authorization.id), method: :put) do |f| %>
+			 <%= render "shared/common_error", object_argument: @provider_service_authorization_line_item %>
+			  <ul>
+			       <div class="row">
+			         <div class="large-4 columns">
+		        			<li class="required">
+		        			  <%= f.label :status_rejection_reason,"Rejection Reason" %>
+		        			   <%= f.text_area :status_rejection_reason, cols: 40, rows: 7, maxlength: "255" %>
+		        			</li>
+			          </div>
+			       </div>
+			    </ul>
+			    	<% if @provider_service_authorization.service_type == 6215 %>
+			    		<%= link_to 'Cancel',service_authorization_line_items_index_path(@provider_service_authorization.id), class: "secondary button radius" %>
+			    	<% else %>
+			    		<%= link_to 'Cancel',non_transport_service_authorization_line_items_index_path(@provider_service_authorization.id), class: "secondary button radius" %>
+			    	<% end %>
+
+			      <%= f.submit "Save", class: 'button radius'%>
+		<% end %>
+  	</section>
+</fieldset>

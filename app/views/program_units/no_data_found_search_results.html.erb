@@ -1,0 +1,16 @@
+
+<section class="solidbody">
+<% if @clients.blank? %>
+
+    <caption><%= set_subheader("Search results") %></caption>
+ 	<legend><h5 class="subheader">No clients found with the search criteria, enter a new search or register client.</h5><br>
+    <br>
+    <% if @show_add_button %>
+    	<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+        <%= link_to 'New Search',program_unit_member_search_path(@selected_program_unit.id), class: "button radius"%>
+        <%# if validate_authorization(295) %>
+        	<%= link_to 'Register New Client',new_program_unit_member_path(@selected_program_unit.id), class: "button radius"%>
+    	<%# end %>
+    <% end %>
+<% end %>
+</section>

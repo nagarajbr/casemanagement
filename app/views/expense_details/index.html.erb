@@ -1,0 +1,84 @@
+<fieldset>
+ 	<section class="solidbody">
+ 		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+			<p>
+				<%=(render 'households/selected_household_partial',arg_household: @household)if @household.present?%>
+			</p>
+		 	<p><h6><%= set_subheader("Expense details for household member: #{client_full_name(@client)} for expense:#{drop_down_value_description(@expense.expensetype)} ") %> </h6></p>
+		<% else %>
+			<legend> <%= set_subheader("#{drop_down_value_description(@expense.expensetype)} expense for: #{client_full_name(@client)}") %></legend>
+			<p></p>
+		<% end %>
+
+ 		<table>
+	 	<caption class="fontc"> Expense information <p></p></caption>
+	 		<thead>
+	 			<tr>
+	 				<th> Type of Expense </th>
+	 				<th> Frequency </th>
+	 				<th> Begin Date </th>
+	 				<th> End Date </th>
+	 				<th> Recalculate Indicator </th>
+	 			</tr>
+	 		</thead>
+	 		<tbody>
+	 			<tr>
+	 				<td>  <%= drop_down_value_description(@expense.expensetype) %></td>
+	 				<td>  <%= drop_down_value_description(@expense.frequency) %></td>
+			 		<td>  <%=  format_db_date @expense.effective_beg_date %></td>
+	 				<td>  <%=  format_db_date @expense.effective_end_date %></td>
+		 			<td>  <%= get_flag_description(@expense.budget_recalc_ind) %>   </td>
+	 			</tr>
+	 		</tbody>
+	 	</table>
+
+	 	<table>
+	 	<caption class="fontc"> Expense details <p></p> </caption>
+	 		<thead>
+	 			<tr>
+	 				<th> Date </th>
+	 				<th> Amount </th>
+	 				<th> Use </th>
+	 				<th> Payment Method </th>
+	 				<th> Payment Status </th>
+	 				<th> Count </th>
+	 				<th> Worker</th>
+	 				<th width="15%"> Action </th>
+	 			</tr>
+	 		</thead>
+	 		<tbody>
+	 			<% @expensedetails.each do |expensedetails| %>
+	 			<tr>
+	 				<td>  <%=  format_db_date expensedetails.expense_due_date %></td>
+	 				<td>  <%=  number_to_currency_br(expensedetails.expense_amount)%></td>
+	 				<td>  <%= drop_down_value_description(expensedetails.expense_use_code) %></td>
+	 				<td>  <%= drop_down_value_description(expensedetails.payment_method) %></td>
+	 				<td>  <%= drop_down_value_description(expensedetails.payment_status) %></td>
+	 				<td>  <%= get_flag_description(expensedetails.expense_calc_ind) %>  </td>
+	 				<td>  <%= get_user_name(expensedetails.updated_by) %>  </td>
+	 				<td>
+	 					<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+	 						<%= link_to "show", show_household_member_expense_detail_path(@client.id,@expense.id,expensedetails.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>
+
+	 					<% else %>
+	 						<%= link_to "show", expense_expense_detail_path(@expense.id,expensedetails.id),id: "hyperlink" %>
+
+	 					<% end %>
+
+
+	 				</td>
+	 			</tr>
+	 			<% end %>
+	 		</tbody>
+	 	</table>
+	 	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+	 		<%= link_to 'Back', start_household_member_registration_wizard_path,class: " secondary button radius" %>
+	 		<%= link_to("Add expense detail", new_household_member_expense_detail_path(@client.id,@expense.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: 'button radius') %>
+	 		<%= link_to("Next", start_household_member_registration_wizard_path, class: 'button radius') if ExpenseDetail.expense_details_found_for_the_given_expense?(@expense.id)%>
+	 	<% else %>
+	 		<%= link_to 'Back', expenses_path,class: " secondary button radius" %>
+	 		<%= link_to("New", new_expense_expense_detail_path(@expense), class: 'button radius') %>
+	 	<% end %>
+
+</section>
+</fieldset>

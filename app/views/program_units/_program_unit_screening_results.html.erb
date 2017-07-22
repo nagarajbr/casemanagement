@@ -1,0 +1,54 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- 7th step - Screening Results -->
+<% if arg_family_type.present? %>
+    <p>
+        <b> Case Type: </b><%= " #{arg_case_type}"  %>
+    </p>
+<% end %>
+
+<% if arg_app_elig_rslt.present? %>
+        <b>  Results </b>
+        <table>
+            <thead>
+                <tr>
+                    <th> Name </th>
+                    <th> Age </th>
+                    <th> Item Type </th>
+                    <th> Result </th>
+                    <th> Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% arg_app_elig_rslt.each do |app_elig_rslt| %>
+                    <tr>
+                        <td>  <%=  get_client_full_name(app_elig_rslt.client_id) %></td>
+                        <td>  <%= get_age(app_elig_rslt.client_id) %>
+                            <td>
+                            <% if app_elig_rslt.data_item_type == 6085 %>
+                                <%= get_violated_characteristics_messsage(app_elig_rslt.client_id) %>
+                            <% else %>
+                                <%=  CodetableItem.get_short_description(app_elig_rslt.data_item_type) %>
+                            <% end %>
+                        </td>
+
+                        <% if app_elig_rslt.result %>
+                            <td id = "col-result-pass">Pass</td>
+                        <% else %>
+                            <td id = "col-result-fail">Fail</td>
+                            <% if app_elig_rslt.data_item_type != 6085%>
+                                <td> <%= link_to 'Fix Data', program_unit_screening_correction_link_path(app_elig_rslt.id,arg_selected_pgu.id,"PROGRAM_UNIT_SCREENING_RESULTS_MENU") ,id: "hyperlink" %></td>
+                            <% end %>
+                        <% end %>
+                        <!--
+                        <td>  <%#=  app_elig_rslt.result ? "Pass" : "Fail" %></td>
+                    -->
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+<% else %>
+    <p>
+        <h5 class="subheader">Fix data validation errors to see the results.</h5>
+    </p>
+<% end %>
+

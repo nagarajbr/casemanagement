@@ -1,0 +1,34 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+	<table>
+		<caption style="text-align:inherit"><%= set_subheader("System parameters for: #{@systemparamcategory.description}") %></caption>
+	  <thead>
+	        <tr>
+	        <th> Description </th>
+	        <th>Key</th>
+	        <th> Value </th>
+	        <th> Action</th>
+	    </tr>
+	  </thead>
+	    <tbody>
+	    	<% @system_params.each do |system| %>
+			<tr>
+				<td>  <%=  system.description %>  </td>
+				<td>  <%=  system.key %>  </td>
+				<td>  <%=  system.value %></td>
+				<% if validate_authorization(638) %>
+					<td> <%= link_to("Edit", edit_system_param_category_system_param_path(@systemparamcategory,system),id: "hyperlink") %> </td>
+				<% end %>
+			</tr>
+		 <% end %>
+	    </tbody>
+	</table>
+	<%= paginate @system_params %>
+
+	<%= link_to 'Back',system_param_categories_path,class: "secondary button radius" %>
+	<% if validate_authorization(637) %>
+		<%= link_to("New", new_system_param_category_system_param_path(@systemparamcategory) , class: 'button' ) %>
+	<% end %>
+</section>
+</fieldset>

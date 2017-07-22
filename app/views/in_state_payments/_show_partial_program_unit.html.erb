@@ -1,0 +1,55 @@
+ <p>
+          <b> Service Program : </b>
+        <%= ServiceProgram.get_category(arg_instate_payment.service_program_id) %>
+        </p>
+
+        <p>
+          <b> Program unit id: </b>
+          <%=arg_instate_payment.program_unit_id %>
+        </p>
+
+        <p>
+            <b> Payment Month : </b>
+            <%=format_db_date(arg_instate_payment.payment_month ) %>
+        </p>
+
+        <p>
+            <b>Amount :</b>
+            <%=number_to_currency_br(arg_instate_payment.dollar_amount) %>
+        </p>
+
+        <p>
+            <b> Payment Type :</b>
+            <%=drop_down_value_description(arg_instate_payment.payment_type) %>
+        </p>
+
+        <p>
+            <b> Issue Date : </b>
+            <%=format_db_date(arg_instate_payment.issue_date) %>
+        </p>
+        <p>
+             <b>Avaliable Date :</b>
+             <%=format_db_date(arg_instate_payment.available_date) %>
+        </p>
+         <p>
+            <b> Sanction Type:</b>
+            <%= drop_down_value_description(arg_instate_payment.sanction )%>
+        </p>
+
+        <p>
+            <b>Recoup Amount :</b>
+             <%= number_to_currency_br(arg_instate_payment.recoup_amount) %>
+        </p>
+
+
+        <p>
+            <b>Action Date :</b>
+           <%=format_db_date(arg_instate_payment.action_date) %>
+        </p>
+
+        <p>
+            <b>Action Type : </b>
+
+            <%= drop_down_value_description(arg_instate_payment.action_type) %>
+
+        </p>

@@ -1,0 +1,46 @@
+<fieldset>
+<section class="solidbody">
+	<% if @provider_service_authorizations.present? %>
+			<caption style="text-align:inherit"> <%= set_subheader("List of Service Plans receiving service from Provider:  #{provider_name(@provider)}") %></caption>
+			<p></p>
+			<table>
+			  <thead>
+			    <tr>
+
+					<th> Program Unit ID </th>
+					<th> Client </th>
+					<th> Service Type </th>
+					<th> Service Date </th>
+					<th> Start Date </th>
+					<th> End Date </th>
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @provider_service_authorizations.each do |arg_auth| %>
+						<tr>
+							<td>  <%= arg_auth.program_unit_id%></td>
+							<td>  <%= get_client_full_name(arg_auth.client_id)%></td>
+							<td>  <%= drop_down_value_description(arg_auth.service_type)%></td>
+							<td>  <%= format_db_date(arg_auth.service_date) if arg_auth.service_date.present?%></td>
+							<td>  <%= format_db_date(arg_auth.service_start_date) %></td>
+							<td>  <%= format_db_date(arg_auth.service_end_date)  %></td>
+							<td>
+							 <%= link_to "Payments",service_authorization_line_items_index_path(arg_auth.id),id: "hyperlink" %>
+							</td>
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+
+
+
+	<%else%>
+		    <legend> <%= set_subheader("Service Plans for Provider:  #{provider_name(@provider)}" ) %></legend>
+	        <h5 class="subheader"> There are no Authorized service plans for this provider.</h5>
+
+
+	<%end%>
+
+</section>
+</fieldset>

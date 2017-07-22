@@ -1,0 +1,55 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Warrant details for provider:  #{provider_name(@provider)}" ) %>
+		</legend>
+		<br>
+		<%= render  "selected_invoice",arg_provider_invoice:@provider_invoice,arg_service_authorization_object:@service_authorization_object %>
+		<p></p>
+		<table>
+			<caption style="text-align:inherit"><b> Warrant Details</b>
+		<p></p></caption>
+			  <thead>
+			    <tr>
+					<th> Warrant Number </th>
+
+					<th> ID </th>
+					<th> Service Date </th>
+					<% if @service_authorization_object.service_type == 6215 %>
+					<th> Begin Time </th>
+					<% end %>
+					<th> Actual Quantity </th>
+					<th> Actual Cost </th>
+					<th> Action</th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @provider_invoice_line_items.each do |arg_line_item| %>
+						<tr>
+							<td>  <%= arg_line_item.provider_invoice_id %></td>
+							<td>  <%= arg_line_item.id %></td>
+							<td>   <%= format_db_date(arg_line_item.service_date)%></td>
+							<% if @service_authorization_object.service_type == 6215 %>
+								<td>  <%= arg_line_item.service_begin_time.strftime("%I:%M %p") %></td>
+								<td>  <%= arg_line_item.actual_quantity %>
+
+								<%= drop_down_value_description(arg_line_item.unit_of_measure) %>
+								</td>
+							<% else %>
+									<td>  <%= arg_line_item.actual_quantity %> </td>
+							<% end %>
+
+
+							<td>  <%= number_to_currency_br(arg_line_item.actual_cost) %></td>
+							<td><%= link_to "Details",provider_invoice_line_item_show_path(arg_line_item.provider_invoice_id,arg_line_item.id), id: "hyperlink" %></td>
+
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+		<%= link_to "Back ",provider_invoice_index_path, class: "secondary button radius" %>
+		<% if @provider_invoice.state == 6373 %>
+			<%= link_to "Approve ",provider_invoice_authorize_path(@provider_invoice.id), class: "button radius" %>
+			<%= link_to "Reject ",edit_provider_invoice_reject_path(@provider_invoice.id), class: "button radius" %>
+		<% end %>
+	</section>
+</fieldset>

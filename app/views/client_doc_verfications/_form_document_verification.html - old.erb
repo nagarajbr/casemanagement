@@ -1,0 +1,24 @@
+<section class="solidbody">
+
+			    <li class="required">
+			     <%= arg_object.label "Select Documents Verified"%>
+			   </li>
+			  <div class="checkbox-style">
+			    <% CodetableItem.item_list(128,"Document Verification List").each do |item| %>
+
+			      <%= check_box_tag 'client_doc_verification[codetable_item_ids][]', item.id,
+			          arg_object.object.codetable_items.include?(item),
+			          { :id => "client_doc_verification_codetable_item_ids_#{item.id}" } %>
+
+			      <label for="<%= "client_doc_verification_codetable_item_ids_#{item.id}" %>"><%= h(item.short_description) %></label>
+
+
+			    <% end %>
+			  </div>
+			</section>
+
+
+
+
+
+

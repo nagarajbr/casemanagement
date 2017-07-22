@@ -1,0 +1,26 @@
+<!--Manoj Patil 10/16/2014  -->
+<section class="solidbody">
+<%= form_for(@client, :url => create_new_household_member_path(@household_id), method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @client %>
+    <fieldset>
+    	<legend><%= set_subheader("Register a household member") %></legend><br>
+    	<ul>
+	     	<div class="row">
+	          <div class="large-4 columns">
+	               <%= render 'clients/form',arg_object: f , arg_client: @client%>
+	               <%= render "notes/notes_field_new_edit", object_argument: @notes %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+
+	    <% if session[:HOUSEHOLD_ID].present? && session[:HOUSEHOLD_ID].to_i != 0 %>
+	    	 <%= link_to 'Back', start_household_member_registration_wizard_path ,class: "secondary button radius" %>
+	    <% else %>
+	    	 <%= link_to 'Back', client_search_path ,class: "secondary button radius" %>
+	    <% end %>
+	    <%= f.submit "Save",class: 'button radius'%>
+	    </p>
+    </fieldset>
+<% end %>
+</section>

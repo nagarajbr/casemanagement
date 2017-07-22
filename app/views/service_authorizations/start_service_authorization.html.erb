@@ -1,0 +1,60 @@
+<fieldset>
+     <section class="solidbody">
+<legend> <%= set_subheader("Enter Transportation service for Client: #{client_full_name(@focus_client)}") %>
+            </legend>
+           <p>
+            <%= render "selected_action_plan_detail",arg_activity:@activity_detail_object %>
+           </p>
+
+<%= form_for(@service_authorization,:url => process_service_authorization_path, method: :post) do |f| %>
+    <% if  "#{@service_authorization.current_step}_step" == "service_authorizations_details_first_step" %>
+              <p>
+               <b><h3>Step 1 of 4</h3></b>
+              <h5>Enter Details</h5>
+              </p>
+    <% end %>
+    <% if  "#{@service_authorization.current_step}_step" == "service_authorizations_details_second_step" %>
+              <p>
+               <b><h3>Step 2 of 4</h3></b>
+              <h5>Provide start and end address information</h5>
+              </p>
+    <% end %>
+    <% if  "#{@service_authorization.current_step}_step" == "service_authorizations_schedule_third_step" %>
+            <p>
+               <b><h3>Step 3 of 4</h3></b>
+              <h5>Add Service Schedule</h5>
+            </p>
+    <% end %>
+    <% if  "#{@service_authorization.current_step}_step" == "service_authorizations_review_last_step" %>
+            <p>
+               <b><h3>Step 4 of 4</h3></b>
+              <h5>Review and complete</h5>
+            </p>
+    <% end %>
+     <%= render "shared/common_error", object_argument: @service_authorization %>
+    <ul>
+        <div class="row">
+
+
+         <% if  "#{@service_authorization.current_step}_step" == "service_authorizations_details_first_step" ||  "#{@service_authorization.current_step}_step" == "service_authorizations_details_second_step"%>
+             <div class="large-5 columns">
+                <%= render "#{@service_authorization.current_step}_step", :arg_object => f %>
+              </div>
+         <% else %>
+              <div class="large-12 columns">
+                <%= render "#{@service_authorization.current_step}_step", :arg_object => f %>
+              </div>
+         <% end %>
+       </div>
+
+    </ul>
+    <div>
+      <%= render "service_authorizations_buttons_next_back_save", :arg_object => f , :arg_instance =>@service_authorization %>
+    </div>
+
+
+
+<% end %>
+ </section>
+ </fieldset>
+

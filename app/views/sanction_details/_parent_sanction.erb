@@ -1,0 +1,24 @@
+<table>
+<caption class="fontc">
+<%= "Sanction information" %>
+<p> </p> </caption>
+<thead>
+<tr>
+	<th> Sanction Program </th>
+	<th> Infraction Begin Date </th>
+	<th> Infraction End Date </th>
+	<th>Type of Sanction </th>
+</tr>
+</thead>
+<tbody>
+
+	<tr>
+		<td>  <%= get_service_program_name(arg_sanction.service_program_id) %></td>
+		<td>  <%=  format_db_date arg_sanction.infraction_begin_date %></td>
+		<td>  <%=  format_db_date arg_sanction.infraction_end_date %></td>
+		<td>  <%= drop_down_value_description(arg_sanction.sanction_type) %></td>
+	</tr>
+
+</tbody>
+</table>
+

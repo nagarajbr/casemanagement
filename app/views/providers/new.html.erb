@@ -1,0 +1,20 @@
+<fieldset>
+	<section class="solidbody">
+<%= set_subheader("Enter new provider information") %>
+<%= form_for(@provider, url: create_provider_path) do |f| %>
+  <%= render "shared/common_error", object_argument: @provider %>
+    <ul>
+      <div class="row">
+        <div class="large-4 columns">
+	<%= render 'form',arg_object: f %>
+	 </div>
+      </div>
+    </ul>
+
+    <p>
+      <%= link_to 'Cancel', new_provider_search_path,class: "secondary button radius" %>
+      <%= f.submit "Save", class: 'button radius'%>
+    </p>
+	<% end %>
+    </section>
+</fieldset>

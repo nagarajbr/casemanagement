@@ -1,0 +1,28 @@
+<b><h6>clients from the household who are children of absent parent: <%= arg_absent_parent.get_full_name%> </h6></b>
+		<table>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> SSN </th>
+					<th> Gender </th>
+					<th> Date of Birth </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<%  arg_collection.each do |arg_m| %>
+					<tr>
+						<td>  <%=  arg_m.get_full_name %></td>
+						<td>  <%=  format_SSN(arg_m.ssn) %></td>
+						<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+						<td>  <%=  format_db_date (arg_m.dob) %></td>
+						<td>
+							<% if session[:SELECTED_AP_RESPONSIBILITY_ID_FROM_CHANGE_AP].blank? %>
+								<%= link_to "Remove",deselect_absent_parent_child_relation_path(arg_absent_parent.id,arg_m.id),id: "hyperlink" %>
+							<% end %>
+
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>

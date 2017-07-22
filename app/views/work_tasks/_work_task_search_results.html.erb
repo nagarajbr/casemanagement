@@ -1,0 +1,62 @@
+<fieldset>
+	 <section class="solidbody">
+	 		 	<legend><%=set_subheader("Work Task Search Results for: #{arg_user_or_office_name} ") %></legend>
+		<% if arg_work_task_result.present? %>
+			 	<%#= render 'selected_e mployer' %>
+			 	<body onload="highlight_table_fields()">
+				 	<table id="work_lists">
+				 		<thead>
+				 			<tr>
+								<th> Task</th>
+			                    <th> Urgency </th>
+			                    <th> Due date  </th>
+			                    <th> Status </th>
+			                    <th> Assigned To </th>
+			                    <th> Complete Date</th>
+			                  <!--   <th> Number of Days Due  </th> -->
+				 				<th> Action</th>
+				 				</tr>
+			               </thead>
+			              <tbody>
+				 			<% arg_work_task_result.each do |arg_detail| %>
+					 			<tr>
+					 				<td>  <%= arg_detail.action_text %></td>
+					 				<td>  <%= drop_down_value_description(arg_detail.urgency) %></td>
+					 				<td>  <%= format_db_date(arg_detail.due_date) %></td>
+					 				<td>  <%= drop_down_value_description(arg_detail.status) %></td>
+				 					<td> <%= get_user_name(arg_detail.assigned_to_id)%></td>
+					 				<td>  <%= format_db_date(arg_detail.complete_date) if arg_detail.complete_date.present? %></td>
+
+
+
+					 				<!-- <td>  <%#= drop_down_value_description(arg_detail.task_type) %></td> -->
+
+					 			<!-- 	<td>  <%#=  (Date.parse(arg_detail.due_date.strftime("%Y-%m-%d")) - Date.parse(Date.today.strftime("%Y-%m-%d"))).to_i  %></td> -->
+
+
+
+
+					 				<td> <%= link_to "Show", work_task_path(arg_detail.id),id: "hyperlink" %></td>
+					 			</tr>
+                             <% end %>
+				               </tbody>
+			                  </table>
+
+                             <div>  <%= paginate arg_work_task_result %></div>
+
+				 </body>
+			<% else %>
+
+				  <h5 class="subheader"> No Data found for the search criteria</h5>
+			<% end %>
+
+			</section>
+		</fieldset>
+
+
+
+
+
+
+
+

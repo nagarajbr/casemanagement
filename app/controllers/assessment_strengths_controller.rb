@@ -1,0 +1,2 @@
+class AssessmentStrengthsController < AttopAncestorController
+end

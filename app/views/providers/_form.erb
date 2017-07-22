@@ -1,0 +1,70 @@
+
+          <li class="required">
+              <%= arg_object.label :provider_name %>
+              <%= arg_object.text_field :provider_name, alt: "provider_name", maxlength: "100"%>
+          </li>
+
+          <li class="required">
+              <%= arg_object.label :provider_type %>
+              <%= arg_object.select :provider_type, CodetableItem.item_list(152,"Provider Type").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Provider Type' }%>
+          </li>
+          <% if @provider.new_record? %>
+              <li class="required">
+                  <%= arg_object.label :classification %>
+                  <%= arg_object.select :classification, CodetableItem.item_list(151,"Classification").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Classification Type' } %>
+              </li>
+          <%else%>
+
+              <% if @user_role == 6 %>
+                  <li class="required">
+                      <%= arg_object.label :classification %>
+                      <%= arg_object.select :classification, CodetableItem.item_list(151,"Classification").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Classification Type' } %>
+                  </li>
+
+              <% else %>
+                      <%if @provider.status == 6155%>
+                           <li class="required">
+                              <%= arg_object.label :classification %>
+                              <%= arg_object.select :classification, CodetableItem.item_list(151,"Classification").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Classification Type' } %>
+                          </li>
+                      <% else %>
+                           <p>
+                            <b>W9 Classification: </b>
+                            <%= drop_down_value_description(@provider.classification) %>
+                          </p>
+                      <% end %>
+
+
+              <% end %>
+
+
+
+          <%end%>
+
+          <li class="required">
+              <%= arg_object.label :contact_person %>
+              <%= arg_object.text_field :contact_person, alt: "contact_person",maxlength: "100" %>
+          </li>
+
+           <li class="required">
+              <%= arg_object.label :tax_id_ssn %>
+              <%= arg_object.text_field :tax_id_ssn, maxlength: "9", onkeypress: "return isNumberKey(event)" %>
+          </li>
+
+           <li>
+              <%= arg_object.label :license_number %>
+              <%= arg_object.text_field :license_number, maxlength: "10", alt: "Source",onkeypress: "return isNumberKey(event)" %>
+          </li>
+
+          <li>
+              <%= arg_object.label :license_expire_dt %>
+              <%= arg_object.date_field :license_expire_dt, title1: "Enter Client's Phone Number", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+          </li>
+
+          <li>
+              <%= arg_object.label :web_address %>
+              <%= arg_object.text_field :web_address, alt: "Source",title1: "Enter web_address details", data: {tooltip1: true }  %>
+          </li>
+
+
+<%= render "notes/notes_field_new_edit", object_argument: @notes %>

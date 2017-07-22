@@ -1,0 +1,22 @@
+<section class="solidbody">
+	<fieldset>
+		<%= form_for(@selected_application, :url => create_application_rejection_path, method: :post) do |f| %>
+	        <legend><%= set_subheader("Application rejection for household: #{get_household_name_from_application_id(@selected_application.id)}") %> </legend>
+		       <%= render "shared/common_error", object_argument: @selected_application %><br>
+		        <ul>
+			     	<div class="row">
+			          <div class="large-5 columns">
+			          	<li class="required">
+						  <%= f.label :application_disposition_reason, "Rejection Reason" %>
+						  <%= f.select(:application_disposition_reason,@action_reasons.collect { |p| ["#{p.short_description} ", p.id ] },{include_blank:'Select Rejection Reason'}) %>
+						</li>
+				 	  </div>
+				    </div>
+				</ul>
+			    <p>
+		      <%= link_to 'Back', navigator_validations_path, class: "secondary button radius" %>
+		      <%= f.submit "Save", class: 'button radius'%>
+		    </p>
+		<% end %>
+	</fieldset>
+</section>

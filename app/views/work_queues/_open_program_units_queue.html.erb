@@ -1,0 +1,64 @@
+
+<table>
+	<caption class='fontc'> <p><%= arg_caption %></p></caption>
+			  	<thead>
+			    <tr>
+			    	<% if arg_role_id == 5 || arg_role_id == 6 %>
+			    		<th> Select </th>
+			    	<% end %>
+			    	<th> Local Office </th>
+					<th> Self of Program Unit</th>
+					<th> Reference ID </th>
+					<th> Eligibility Worker</th>
+					<th> Case Manager</th>
+
+				</tr>
+			  	</thead>
+			    <tbody>
+					<% arg_subscribed_records.each do |each_queue_item| %>
+						<tr>
+							<% if arg_role_id == 5 || arg_role_id == 6 %>
+								<td>  <%= check_box_tag "work_queue_ids[]", each_queue_item.id, work_queue_ids.include?(each_queue_item.id) %></td>
+							<% end %>
+
+							<td>  <%= each_queue_item.queue_loal_office_name%></td>
+							<td>  <%= get_self_of_program_unit_from_queue(each_queue_item.id)%></td>
+							<td>  <%= each_queue_item.reference_id%></td>
+							<td>  <%=  get_ed_worker_name(each_queue_item.id)%></td>
+							<td>  <%=  get_user_name(each_queue_item.worker_id)%></td>
+
+
+
+						</tr>
+					<%end%>
+
+				</tbody>
+			</table>
+			<%= paginate arg_subscribed_records %>
+			<% if arg_role_id == 5 || arg_role_id == 6 %>
+				<ul>
+				<div class="row">
+			    	<div class="large-6 columns">
+			    		<% if arg_caption == "Check one or more program units to assign/reassign" %>
+			    			<li>
+			    				<%=label_tag 'Select Case Manager'%>
+									<%= select_tag("worker_id",options_from_collection_for_select(arg_user_list,"uid","name",arg_worker_id),{:include_blank => 'Select case manager'} )%>
+							</li>
+							<li>
+								<%=label_tag 'Select eligibility worker'%>
+								<%= select_tag("eligibility_worker_id",options_from_collection_for_select(arg_user_list,"uid","name",arg_eligibility_worker_id),{:include_blank => 'Select eligibility worker'} )%>
+							</li>
+			    		<% else %>
+							<li class="required"><%=label_tag 'Select worker'%>
+									<%#= text_field_tag :provider_invoice_number,params[:provider_invoice_number],maxlength: "200" %>
+									<%= select_tag("worker_id",options_from_collection_for_select(arg_user_list,"uid","name",arg_worker_id),{:include_blank => 'Select worker'} )%>
+							</li>
+						<% end %>
+					</div>
+				</div>
+				</ul>
+			<% end %>
+
+
+
+

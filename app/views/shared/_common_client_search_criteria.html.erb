@@ -1,0 +1,55 @@
+<ul>
+<fieldset>
+ 		<legend><%= "Search for an existing client" %> </legend>
+		<fieldset>
+ 			<legend> By SSN </legend>
+ 			<p> </p>
+ 			<div class="row">
+ 			<div class="large-4 columns">
+				 <%= label_tag :ssn, "SSN"%>
+		 		<%= text_field_tag :ssn, params[:ssn], maxlength: "11", onkeypress: "return isNumberKey(event)",autofocus: true, title1: "Enter Client's SSN", data: {tooltip1: '' } %>
+		 		<p> </p>
+		 	</div>
+		 	</div>
+		</fieldset>
+
+	<fieldset>
+	    <legend> Or by Name
+	    <p> Enter both last and first names to search by name. Either date of birth or gender or both can be used to refine search (Both first and last name should be at least two characters long).</p> </legend>
+	    <div class="row">
+	    <div class="large-4 columns">
+	     	<li>
+	     	<%= label_tag :last_name, "Last Name"%>
+			<%= text_field_tag :last_name, params[:last_name], maxlength: "35",title1: "Enter Client's Last Name", data: {tooltip1: '' } %>
+		</li>
+		<li>
+			<%= label_tag :first_name, "First Name"%>
+			<%= text_field_tag :first_name, params[:first_name], maxlength: "35",title1: "Enter Client's First Name", data: {tooltip1: '' } %>
+		</li>
+		<li>
+		 	<%= label_tag :dob, "Date of Birth"%>
+			<%= date_field_tag :dob, params[:dob],title1: "Enter Client's Date of Birth", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+		</li>
+			<li>
+			<%= label_tag :gender, "Gender"%>
+			  <%= select_tag "gender", options_for_select(CodetableItem.item_list(85,"Gender List").collect { |p| ["#{p.long_description} ", p.id] }),title1: "Enter Client's Gender", data: {tooltip1: '' },prompt:"Select a Gender" %>
+			</li>
+		</div>
+		</div>
+		<p> </p>
+	</fieldset>
+</fieldset>
+	<fieldset>
+			<legend><%= "Or search for an existing program unit id" %> <p> </p> </legend>
+			<div class="row">
+    		<div class="large-4 columns">
+    		<li >
+		 		<%= label_tag :bud_unit, "Program Unit id"%>
+				<%= text_field_tag :bud_unit, params[:bud_unit] %>
+
+			</li>
+			</div>
+		</div>
+	</fieldset>
+</ul>
+

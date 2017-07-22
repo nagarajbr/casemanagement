@@ -1,0 +1,56 @@
+<section class="solidbody">
+	<fieldset>
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+			<p>
+					<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+				</p>
+				<h6><%= ("Edit expense information for household member: #{client_full_name(@client)}") %> </h6>
+				<%= form_for(@education, :url => update_household_member_education_path(@client.id,@education.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :put) do |f| %>
+					<%= render "shared/common_error", object_argument: @education %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'form',f: f,arg_school_type:@school_types,arg_notes: @notes,arg_high_grade:@grade_level_grouped_options,arg_edu:@education,arg_group_option:@grouped_options%>
+					 	  </div>
+					    </div>
+					</ul>
+					<p>
+	 					<%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+				   	 	<%= f.submit "Save", class: 'button radius' %>
+					</p>
+				<% end%>
+		<% else %>
+				<% if @client_assessment.present? %>
+					<legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+					<p>
+						<%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal: @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+					</p>
+					<h6><%= ("Edit #{drop_down_value_description(@education.school_type)} education information for: #{client_full_name(@client)}") %> </h6>
+				<% else %>
+					<legend><%= set_subheader("Edit #{drop_down_value_description(@education.school_type)} education information for: #{client_full_name(@client)}") %> </legend>
+				<% end %>
+
+				<%= form_for(@education, :url => update_education_path(@menu,@education.id), method: :put) do |f| %>
+				   <%= render "shared/common_error", object_argument: @education %><br>
+				    <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				                <%= render 'form',f: f,arg_school_type:@school_types,arg_notes: @notes,arg_high_grade:@grade_level_grouped_options,arg_edu:@education,arg_group_option:@grouped_options%>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+						<%= link_to 'Cancel', education_path(@menu,@education.id),class: "secondary button radius" %>
+					    <%= f.submit "Save", class: 'button radius' %>
+				    </p>
+				<% end %>
+		<% end %>
+
+
+
+
+
+
+
+	</fieldset>
+</section>

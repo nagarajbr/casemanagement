@@ -1,0 +1,54 @@
+
+
+             <li class="required">
+              <%= f.label :resource_type %>
+              <%= f.select :resource_type, CodetableItem.item_list(34,"Resource Type").collect { |p| ["#{p.short_description} ", p.id] }, { :include_blank => 'select resource type' }  %>
+             </li>
+
+             <li>
+              <%= f.label :account_number %>
+              <%= f.text_field :account_number, maxlength: "12", alt: "Account Number",onkeypress: "return isNumberKey(event)"%>
+             </li>
+
+             <li>
+              <%= f.label :description %>
+              <%= f.text_area :description, maxlength: "50", cols: 40, rows: 7,alt: "Notes" %>
+             </li>
+
+             <li>
+
+              <%= f.label :date_assert_acquired %>
+              <%= f.date_field :date_assert_acquired, alt: "effective begin date", onkeyup:"validate_date_format(event)"  %>
+             </li>
+
+             <li>
+              <%= f.label :date_assert_disposed %>
+              <%= f.date_field :date_assert_disposed, alt: "effective end date", onkeyup:"validate_date_format(event)" %>
+             </li>
+
+             <li>
+              <%= f.label :number_of_owners %>
+
+              <%= f.number_field :number_of_owners,onkeypress: "return isLimitedNaturalNumber(event,2)"%>
+             </li>
+
+
+             <li>
+              <%= f.label :use_code %>
+              <%= f.number_field :use_code,placeholder:"%",:step => 0.01,onkeypress: "return ispercentage(event)"%>
+             </li>
+
+
+
+             <li >
+
+                <fieldset class="radio">
+                  <legend class="radiolegend"> Verified </legend>
+                    <div class="button-group">
+                      <label class="radio-button"><%= f.radio_button :verified, "1"%>&nbsp;Yes</label>
+                      <label class="radio-button"><%= f.radio_button :verified, "0"%>&nbsp;No</label>
+                    </div>
+                </fieldset>
+              </li >
+
+            <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>

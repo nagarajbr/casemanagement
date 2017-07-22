@@ -1,0 +1,26 @@
+<!-- <p>
+    <b>Barrier:  </b>
+  <%#=  get_barrier_description(@barrier_id) %>
+</p> -->
+<p>
+    <b>Supportive Service:  </b>
+  <%=  drop_down_value_description(arg_support_service) %>
+</p>
+<p>
+    <b>Service Date:  </b>
+  <%=  format_db_date(arg_service_date) %>
+</p>
+
+ <li >
+      <%= arg_common_object.label :notes %>
+      <%= arg_common_object.text_area :notes %>
+ </li>
+ <li class="required">
+      <%= arg_common_object.label :provider_id %>
+     <%= arg_common_object.select :provider_id, arg_non_transport_service_provider.collect { |p| ["#{p.provider_name} ", p.id] },{ :include_blank => 'Select Provider' } %>
+ </li>
+
+
+
+
+

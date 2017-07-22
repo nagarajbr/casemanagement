@@ -1,0 +1,25 @@
+<fieldset>
+	<section class="solidbody">
+<legend><%= set_subheader("Edit #{(drop_down_value_description(@action_plan.action_plan_type)).camelize(:lower)} information for: #{client_full_name(@client)}") %></legend>
+		<p>
+			<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		</p>
+		<p>
+			 	<%= render "career_pathway_plans/expected_participation_hours",arg_expected_hours:@expected_work_participation_hours_collection,arg_service_program_id:@service_program_id,arg_case_type:@case_type_id %>
+		</p>
+		<%= form_for(@action_plan, :url => action_plan_path(@action_plan.id), method: :put) do |f| %>
+			 <%= render "shared/common_error", object_argument: @action_plan %><br>
+				 <ul>
+				<div class="row">
+	          		<div class="large-5 columns">
+						<%= render 'action_plan_new_edit_attributes',f: f,arg_short_term_goal:@action_plan_short_term_goals %>
+					</div>
+				</div>
+			</ul>
+			 <p>
+		      <%= link_to 'Cancel', action_plans_path,class: "secondary button radius" %>
+		      <%= f.submit "Save", class: 'button radius' %>
+		    </p>
+		<% end %>
+	</section>
+</fieldset>

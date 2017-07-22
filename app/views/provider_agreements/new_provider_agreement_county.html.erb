@@ -1,0 +1,21 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Agreements for provider: #{@provider.provider_name}") %></legend>
+<%= form_for @provider_agreement_local_offices, url: create_provider_agreement_county_path, method: :post do |f|%>
+<%= render "shared/common_error", object_argument: @provider_agreement_local_offices %>
+
+	  <ul>
+      <div class="row">
+        <div class="large-4 columns">
+          <li class="required">
+              <%= f.label :served_local_office_id %>
+              <%= f.select :served_local_office_id, @available_local_offices.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select an area' }%>
+          </li>
+      	</div>
+      </div>
+  	</ul>
+<%= link_to 'Back', session[:CAME_FROM] ,class: "secondary button radius" %>
+<%= submit_tag "Save", class: "button radius"%>
+<% end %>
+</section>
+</fieldset>

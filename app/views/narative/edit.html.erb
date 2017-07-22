@@ -1,0 +1,22 @@
+<fieldset>
+	 <section class="solidbody">
+		<%= form_for(@notes, :url => narative_update_path(@notes.id), method: :put) do |f| %>
+		    <legend><%= set_subheader("Edit #{@long_description} notes for: #{client_full_name(@client)}") %> </legend>
+		       <%= render "shared/common_error", object_argument: @notes %><br>
+		        <ul>
+			     	<div class="row">
+			          <div class="large-4 columns">
+			             	<li>
+							  	<%=  label :notes, "Notes" %>
+							  	<%= text_area_tag :notes, @notes.notes %>
+							</li>
+				 	  </div>
+				    </div>
+				</ul>
+			    <p>
+		      <%= link_to 'Cancel', narative_show_path(@notes.entity_type,@notes.entity_id,@long_description), class: "secondary button radius" %>
+		      <%= f.submit "Save", class: 'button radius'%>
+		    </p>
+		<% end %>
+ 	</section>
+</fieldset>

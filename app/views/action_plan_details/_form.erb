@@ -1,0 +1,111 @@
+<%= form_for([arg_action_plan,arg_action_plan_details]) do |f| %>
+  <%= render "shared/common_error", object_argument: arg_action_plan_details %>
+  <body onload = "set_action_plan_details_outcome();set_activity_dropdown();">
+    <ul>
+
+
+        <div class="row">
+          <div class="large-4 columns">
+
+            <!-- <li class="required">
+              <%#= f.label :barrier_id %>
+              <%#= f.text_field :barrier_id, maxlength: "10", autofocus: true %>
+            </li> -->
+
+            <li class="required">
+                <%= f.label :barrier_id %>
+                <%= f.select :barrier_id,  arg_barriers.collect { |p| ["#{p.description} ", p.barrier_id ] }, { :include_blank => 'Select barrier'} %>
+            </li>
+
+            <!-- <%# if arg_action_plan_details.entity_type != 6252 %>
+              <li class="required">
+                <%#= f.label :provider_id %>
+                <%#= f.text_field :provider_id, maxlength: "10" %>
+              </li>
+            <%# end %> -->
+
+            <%= f.hidden_field :entity_type %>
+
+            <%= f.hidden_field :reference_id %>
+
+            <% if arg_action_plan_details.entity_type != 6294 %>
+              <li class="required">
+                <%= f.label :activity_classfication %>
+                <%= f.select :activity_classfication, CodetableItem.item_list(172,"Classification Type").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select classification type' }, id: "activity_classification", onchange: "set_activity_dropdown()" %>
+              </li>
+
+              <div id="div_activity_classification_core">
+                <li class="required">
+                  <%= f.label :component_type %>
+                  <%= f.select :component_type, CodetableItem.item_list(173,"Activity Type Core").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select component type' }, id: "activity_classification_core" %>
+                </li>
+              </div>
+
+              <div id="div_activity_classification_non_core">
+                <li class="required">
+                  <%= f.label :component_type %>
+                  <%= f.select :component_type, CodetableItem.item_list(174,"Activity Type Non Core").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select component type' }, id: "activity_classification_non_core" %>
+                </li>
+              </div>
+            <% end %>
+
+            <li class="required">
+              <%= f.label :activity_type %>
+              <%= f.select :activity_type, arg_activity_types.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select activity type' }, id: "activity_type" %>
+            </li>
+
+            <li class="required">
+              <%= f.label :activity_status %>
+              <%= f.select :activity_status,  arg_activity_status.collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select activity status'}, id: "activity_status", onchange: "set_action_plan_details_outcome()" %>
+            </li>
+
+            <% if arg_action_plan_details.entity_type != 6294 %>
+              <li class="required">
+                <%= f.label :duration %>
+                <%= f.number_field :duration %>
+              </li>
+            <% end %>
+
+            <li class="required">
+              <%= f.label :start_date %>
+              <%= f.date_field :start_date, onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <% unless arg_action_plan_details.new_record? %>
+              <li>
+                <%= f.label :end_date %>
+                <%= f.date_field :end_date, onkeyup:"validate_date_format(event)" %>
+              </li>
+            <% end %>
+
+            <li>
+              <%= f.label :client_agreement_date %>
+              <%= f.date_field :client_agreement_date, onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <li>
+              <%= f.label :notes %>
+              <%= f.text_area :notes, cols: 40, rows: 7 %>
+            </li>
+
+            <div id="action_plan_detail_outcome">
+              <li class="required">
+                <%= f.label :outcome_code %>
+                <%= f.select :outcome_code, CodetableItem.item_list(57,"Outcome Code").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select outcome code' }, id: "action_plan_detail_outcome_code" %>
+              </li>
+
+              <li>
+                <%= f.label :outcome_notes %>
+                <%= f.text_area :outcome_notes, cols: 40, rows: 7, id: "action_plan_detail_outcome_notes" %>
+              </li>
+            </div>
+
+          </div>
+        </div>
+    </ul>
+      <%= link_to 'Cancel', action_plan_action_plan_details_path(arg_action_plan),class: "secondary button radius" %>
+      <%= f.submit "Save", class: 'button radius'%>
+    </body>
+<% end %>
+
+

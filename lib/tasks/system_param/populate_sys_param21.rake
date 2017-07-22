@@ -1,0 +1,72 @@
+namespace :populate_sys_param21 do
+	desc "Action/Service Mapped to Federal Components"
+	task :action_service_mapping_to_federal_component => :environment do
+		systemParamCategories = SystemParamCategory.create(description:"Action/Service Mapped to Federal Components",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6269",value:"6242",description:"Become Self-Employed Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6269",value:"6243",description:"Become Self-Employed Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6269",value:"6244",description:"Become Self-Employed Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6270",value:"6242",description:"Increase Hours Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6270",value:"6243",description:"Increase Hours Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6270",value:"6244",description:"Increase Hours Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6271",value:"6242",description:"Increase Wages Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6271",value:"6243",description:"Increase Wages Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6271",value:"6244",description:"Increase Wages Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6272",value:"6242",description:"Obtain Benefits Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6272",value:"6243",description:"Obtain Benefits Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6272",value:"6244",description:"Obtain Benefits Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6273",value:"6242",description:"Obtain Full-time Employment Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6273",value:"6243",description:"Obtain Full-time Employment Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6273",value:"6244",description:"Obtain Full-time Employment Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6274",value:"6242",description:"Obtain Part-time Employment Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6274",value:"6243",description:"Obtain Part-time Employment Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6274",value:"6244",description:"Obtain Part-time Employment Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6275",value:"6242",description:"Obtain Temporary/Seasonal Employment Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6275",value:"6243",description:"Obtain Temporary/Seasonal Employment Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6275",value:"6244",description:"Obtain Temporary/Seasonal Employment Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6276",value:"6242",description:"Retain Employment Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6276",value:"6243",description:"Retain Employment Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6276",value:"6244",description:"Retain Employment Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6277",value:"6238",description:"Submit Job Search Daily Logs to Case Manager Mapped To Federal Component Job Search and Job Readiness (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6278",value:"6245",description:"Participate in community service. (add) Mapped To Federal Component Community Service(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6279",value:"6267",description:"Participate in providing childcare for another participant who is participating in a community service program (add) Mapped To Federal Component Providing child care services to a Community Service participant (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6327",value:"6240",description:"Participate in Advanced Degree Program Mapped To Federal Component Career and Technical Education (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6327",value:"6250",description:"Participate in Advanced Degree Program Mapped To Federal Component Job Skills Training(Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6321",value:"6240",description:"Participate in Bachelor's Degree Program Mapped To Federal Component Career and Technical Education (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6321",value:"6250",description:"Participate in Bachelor's Degree Program Mapped To Federal Component Job Skills Training(Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6326",value:"6240",description:"Participate in Two-year Degree Program Mapped To Federal Component Career and Technical Education(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6326",value:"6250",description:"Participate in Two-year Degree Program Mapped To Federal Component Job Skills Training(Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6283",value:"6240",description:"Submit Attendance record Mapped To Federal Component Career and Technical Education (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6283",value:"6250",description:"Submit Attendance record Mapped To Federal Component Job Skills Training(Non Core)",created_by: 1,updated_by: 1)
+
+		# Services to Federal Component Mapping
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6284",value:"6238",description:"Attend Job Readiness Workshop Mapped To Federal Component Job Search & Job Readiness Assistance (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6285",value:"6238",description:"Attend Life Skills Training Mapped To Federal Component Job Search & Job Readiness Assistance (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6286",value:"6241",description:"Gain Work Experience through Vocational Education Mapped To Federal Component Work Experience (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6287",value:"6240",description:"Participate in ESL Program Mapped To Federal Component Vocational Education Training (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6287",value:"6250",description:"Participate in ESL Program Mapped To Federal Component Job Skills Training Directly Related to Employment (Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6287",value:"6268",description:"Participate in ESL Program Mapped To Federal Component Education directly related to employment, in the case of a recipient who has not received a high school diploma or a certificate of high school equivalency (Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6288",value:"6247",description:"Participate in High School/GED Certificate Program Mapped To Federal Component Satisfactory attendance at secondary school or in a course of study leading to a certificate of general equivalence, in the case of a recipient who has not completed secondary school or received such a certificate (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6289",value:"6238",description:"Participate in Job Search Mapped To Federal Component Job Search & Job Readiness Assistance (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6315",value:"6238",description:"Participate in Job Search Mapped To Federal Component Job Search & Job Readiness Assistance (Core)",created_by: 1,updated_by: 1)
+
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6290",value:"6240",description:"Participate in Literacy Program Mapped To Federal Component Vocational Education Training (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6290",value:"6250",description:"Participate in Literacy Program Mapped To Federal Component Job Skills Training Directly Related to Employment (Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6290",value:"6268",description:"Participate in Literacy Program Mapped To Federal Component Education directly related to employment, in the case of a recipient who has not received a high school diploma or a certificate of high school equivalency (Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6291",value:"6239",description:"Participate in on-the-Job Training Placement Mapped To Federal Component On-The-Job Training (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6292",value:"6240",description:"Participate in Vocational Certification/Licensure Program Mapped To Federal Component Vocational Education Training (Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6292",value:"6250",description:"Participate in Vocational Certification/Licensure Program Mapped To Federal Component Job Skills Training Directly Related to Employment (Non Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6293",value:"6241",description:"Participate in Work Experience Placement Mapped To Federal Component  (Core)",created_by: 1,updated_by: 1)
+
+
+
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6323",value:"6242",description:"Particpate in subsidised private employment Mapped To Federal Component Subsidized Private Employment(Core)",created_by: 1,updated_by: 1)
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6322",value:"6243",description:"Particpate in subsidised public employment Mapped To Federal Component Subsidized Public Employment(Core)",created_by: 1,updated_by: 1)
+
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6317",value:"6247",description:"Participate in High School/GED Certificate Program Mapped To Federal Component Satisfactory attendance at secondary school or in a course of study leading to a certificate of general equivalence, in the case of a recipient who has not completed secondary school or received such a certificate (Core)",created_by: 1,updated_by: 1)
+
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6316",value:"6244",description:"Become Self-Employed Mapped To Federal Component Unsubsidized Employment(Core)",created_by: 1,updated_by: 1)
+
+
+		SystemParam.create(system_param_categories_id:systemParamCategories.id,key:"6328",value:"6267",description:"Participate in providing childcare for another participant who is participating in a community service program (add) Mapped To Federal Component Providing child care services to a Community Service participant (Core)",created_by: 1,updated_by: 1)
+	end
+end

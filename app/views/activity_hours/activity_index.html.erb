@@ -1,0 +1,43 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Activities on weekly basis for: #{client_full_name(@client)}") %></legend>
+
+		<%#= render "shared/common_error", object_argument: @activity_info %>
+		<% if @activity_info.present? %>
+			<fieldset>
+			  	<table>
+			   	<%= "Activity Type: #{drop_down_value_description(@action_plan_detail.activity_type)}" %> <br> <br>
+			    <thead>
+			      <tr>
+			      <th width="5%"> Week Ending </th>
+			      <th width="5%"> Work Participation Status </th>
+			      <th width="5%"> Assigned Hours</th>
+			      <th width="4%"> Completed Hours</th>
+			      <th width="4%"> Absent Hours</th>
+			      <th width="3%"> Action</th>
+			    </tr>
+			    </thead>
+			    <tbody>
+			    	<% week_id = 1 %>
+			      	<% @activity_info.each do |activity_hour| %>
+		                <tr>
+			                <td>  <%= format_db_date activity_hour.week_ending_date %></td>
+			                <td>  <%= @work_participation_for_client.present? ? drop_down_value_description(@work_participation_for_client) : "" %> </td>
+			                <td>  <%= activity_hour.assigned_hours_for_week %> </td>
+			                <td>  <%= activity_hour.completed_hours_for_week.present? ?  activity_hour.completed_hours_for_week : 0 %> </td>
+			                <td>  <%= activity_hour.absent_hours_for_week.present? ?  activity_hour.absent_hours_for_week : 0 %> </td>
+			                <td>  <%= link_to 'Edit', edit_week_info_path(@action_plan_detail.action_plan.id, @action_plan_detail.id, week_id),id: "hyperlink" %> </td>
+		                </tr>
+		                <% week_id += 1 %>
+			      	<% end %>
+			    </tbody>
+			  	</table>
+			  <%#= paginate @activity_info %>
+			</fieldset>
+
+		<% else %>
+		  <h5 class="subheader">No activity information found.</h5><br>
+	    <%end%>
+	    <%= link_to 'Back', client_activities_path ,class: "secondary button radius" %>
+	</section>
+</fieldset>

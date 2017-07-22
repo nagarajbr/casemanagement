@@ -1,0 +1,109 @@
+
+<fieldset>
+	<section class="solidbody">
+
+		<legend><%= set_subheader("#{drop_down_value_description(@action_plan.action_plan_type)} information for: #{client_full_name(@client)}") %></legend>
+			<p>
+				<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+			</p>
+				<!-- <p>
+			 		<%#= render "career_pathway_plans/expected_participation_hours"%>
+				</p> -->
+				<p>
+					 <%= render "career_pathway_plans/planned_work_participation_characteristics", arg_wp_characters_collection: @wp_characters_collection%>
+				 </p>
+				<p>
+					 <%= render "career_pathway_plans/planned_work_participation_hours_per_client", arg_activity_hours: @planned_client_activity_hours_collection%>
+				</p>
+		<!-- <p>
+			<b> Household: </b>
+			<%#= @action_plan.household_id %>
+		</p> -->
+
+		<p>
+			<b> Employment Goal: </b>
+			<%= @employment_goal %>
+		</p>
+
+		<p>
+			<b> Plan Type </b>
+			<%= drop_down_value_description(@action_plan.action_plan_type) %>
+		</p>
+
+
+
+		<p>
+			<b> Participation Hours: </b>
+			<%= @action_plan.required_participation_hours %>
+		</p>
+
+		<p>
+			<b> Start Date: </b>
+			<%= format_db_date(@action_plan.start_date) %>
+		</p>
+
+		<p>
+			<b> End Date: </b>
+			<%= format_db_date(@action_plan.end_date) %>
+		</p>
+
+		<p>
+			<b> Agreement Date: </b>
+			<%= format_db_date(@action_plan.client_agreement_date) %>
+		</p>
+
+
+		<p>
+			<b> Plan Status: </b>
+			<%= drop_down_value_description(@action_plan.action_plan_status) %>
+
+		</p>
+
+		<% if @action_plan.outcome_code.present? %>
+			<p>
+				<b> Outcome: </b>
+				<%= drop_down_value_description(@action_plan.outcome_code) %>
+			</p>
+
+			<p>
+				<b> Outcome Notes: </b>
+				<%= @action_plan.outcome_notes %>
+			</p>
+		<% end %>
+
+
+
+		<%= link_to 'Back',(session[:BRP] ? barrier_action_plans_path : action_plans_path), class: "secondary button radius" %>
+
+
+		<% if @action_plan.action_plan_status == 6044%>
+			<%# if @no_open_action_plan %>
+				<%#= link_to 'Reopen', reopen_action_plan_path(@action_plan), class: "button radius" %>
+			<%# end %>
+		<% else %>
+			<% if @action_plan.client_agreement_date.blank? == true %>
+				<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+					<%= link_to 'Edit', edit_action_plan_path(@action_plan), class: "button radius" %>
+					<%= link_to 'Delete', @action_plan, method: :delete, data: { confirm: 'Are you sure?' }, class: "button alert radius" %>
+				<% else %>
+					<%= link_to 'Edit',"#", class: "disabled button"%>
+					<%= link_to 'Delete',"#", class: "disabled button"%>
+    				<p>
+    					<h6 class="subheader"><b>Edit</b> and <b>Delete</b> buttons are disabled because, You are not the case manager of this program unit. Only case manager of this program unit can edit plan.</h6>
+    				</p>
+				<% end %>
+
+			<% else %>
+				<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+					<%= link_to 'Close', outcome_new_path(@action_plan.id), class: "button radius" %>
+				<% else %>
+					<%= link_to 'Close',"#", class: "disabled button"%>
+
+    				<p>
+    					<h6 class="subheader"><b>Close</b> button is disabled because, You are not the case manager of this program unit. Only case manager of this program unit can edit plan.</h6>
+    				</p>
+				<% end %>
+			<% end %>
+		<% end %>
+	</section>
+</fieldset>

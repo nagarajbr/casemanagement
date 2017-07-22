@@ -1,0 +1,68 @@
+
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+	<legend>
+	<%= set_subheader("Screening application of client: #{client_full_name(@client)}") %>
+	</legend>
+	<p>
+ 	<%= render 'selected_application_details',arg_selected_application: @selected_application %>
+ 	</p>
+	<%= form_for(@selected_application,:url => process_check_program_eligibility_wizard_path(@selected_application.id), method: :put) do |arg_appln| %>
+		<% if  "#{@application_screening.current_step}_step" == "application_screening_first_step" %>
+
+		   <b><h4>Step 1 of 5</h4><%= "Review application members and their relationships" %></b>
+           <% end %>
+	     <% if  "#{@application_screening.current_step}_step" == "application_screening_second_step" %>
+
+	           <b><h4>Step 2 of 5</h4><%= "Availability of required information" %></b><p></p>
+	           	<% if @application_screening_error.present? %>
+	    	       <%= render "shared/common_error", object_argument: @application_screening_error %><br>
+    	   		<% end %>
+	       <% end %>
+	    <% if  "#{@application_screening.current_step}_step" == "application_screening_third_step" %>
+
+	            <b><h4>Step 3 of 5</h4><%= "Document Verification" %></b>
+	    <% end %>
+	     <% if  "#{@application_screening.current_step}_step" == "application_screening_fourth_step" %>
+
+
+	          <b><h4>Step 4 of 5</h4><%= "Application Screening Results" %></b>
+	     <% end %>
+    	<% if  "#{@application_screening.current_step}_step" == "application_screening_last_step" %>
+
+
+    	       <!-- <b><h4>Step 5 of 5</h4><%#= "Select Service Program" %></b><p></p> -->
+    	       <b><%#= "Select Service Program" %></b><p></p>
+    	       <% if @application_screening_error.present? %>
+	    	       <%= render "shared/common_error", object_argument: @application_screening_error %><br>
+    	   		<% end %>
+	    <% end %>
+	    <ul>
+	       	 <div class="row">
+	       	 	<!--
+					<%# if  "#{@application_screening.current_step}_step" == "application_screening_last_step" %>
+						<div class="large-5 columns">
+		                    <%#= render "#{@application_screening.current_step}_step", :arg_object => arg_appln %>
+		                </div>
+					<%# else %>
+				-->
+						<div class="large-12 columns">
+		                   <%= render "#{@application_screening.current_step}_step", :arg_object => arg_appln %>
+		                </div>
+					<!--<%# end %> -->
+
+
+
+
+	          </div>
+
+	    </ul>
+	    <div>
+      		<%= render "application_screening_buttons_next_back_save", :arg_object => arg_appln , :arg_instance =>@application_screening, :arg_selected_application =>@selected_application %>
+        </div>
+
+	<% end %>
+
+</section>
+</fieldset>

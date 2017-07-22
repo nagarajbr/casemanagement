@@ -1,0 +1,26 @@
+<%if @provider_agreement_county_zip.present?%>
+<table>
+	<caption class="fontc">
+			<b><%= "List of service areas" %></b>
+	<p> </p> </caption>
+	<thead>
+	    <tr>
+			<th> County </th>
+			<th> Zip Code </th>
+			<th> Action </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @provider_agreement_county_zip.each do |county| %>
+			<tr>
+				<td><%= drop_down_value_description(county.served_county) %></td>
+				<td><%= county.served_area_zip %></td>
+				<td><%= link_to "Delete", delete_provider_agreement_zip_path(county.id), method: :delete,data: { confirm: 'Are you sure you want to delete? '},id: "hyperlink_alert" %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+<%= link_to 'Add Service Area', new_provider_agreement_zip_path,class: "button radius"%>
+<%else%>
+	<%= link_to 'Add Service Area', new_provider_agreement_zip_path,class: "button radius"%>
+<%end%>

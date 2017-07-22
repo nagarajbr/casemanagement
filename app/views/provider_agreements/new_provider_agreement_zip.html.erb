@@ -1,0 +1,20 @@
+<fieldset>
+<section class="solidbody">
+ <legend><%= set_subheader("Add a zip code where service is provided") %></legend>
+<%= form_for @provider_agreement_county_zip, url: create_provider_agreement_zip_path, method: :post do |f|%>
+	<fieldset>
+    <ul>
+      <div class="row">
+        <div class="large-4 columns">
+          <li class="required">
+              <%= f.label :served_area_zip %>
+              <%= f.text_field :served_area_zip, maxlength: "5"%>
+          </li>
+      	</div>
+      </div>
+  	</ul>
+<%= link_to 'Back', session[:CAME_FROM] ,class: "secondary button radius" %>
+<%= submit_tag "Save", class: "button radius"%>
+<% end %>
+</section>
+</fieldset>

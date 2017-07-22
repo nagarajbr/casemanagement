@@ -1,0 +1,19 @@
+<fieldset>
+<section class="solidbody">
+	<legend> <%= set_subheader(" Enter #{drop_down_value_description(@action_plan_detail.activity_status)} activity hours for: #{client_full_name(@client)}") %> </legend>
+
+	<%= render "shared/common_error", object_argument: @activity_hours_errors %>
+	<%= render "shared/common_warning", object_argument: @warnings %>
+	<%#= render "parent_action_plan_detail" %>
+	<% if @activity_hours.present? %>
+		<%= form_for :activity_hour, :url => save_week_activity_path(@action_plan_detail.action_plan_id,@action_plan_detail.id,@week_id), method: :post do |f| %>
+			<%= render 'form', activity_hours: @activity_hours, action_plan_detail: @action_plan_detail %>
+			<%= link_to 'Cancel', edit_week_info_path(@action_plan_detail.action_plan.id, @action_plan_detail.id, @week_id),class: "secondary button radius" %>
+			<%= f.submit "Save", class: 'button radius'%>
+		<%end%>
+	<% else %>
+	  <h5 class="subheader">No participation hours found.</h5><br>
+	  <%= link_to 'Back', edit_week_info_path(@action_plan_detail.action_plan.id, @action_plan_detail.id, @week_id) ,class: "secondary button radius" %>
+    <%end%>
+</section>
+</fieldset>

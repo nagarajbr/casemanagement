@@ -1,0 +1,28 @@
+<b><h6>Service Cost Summary </h6></b>
+<% if arg_object.present? %>
+	<table>
+			<thead>
+				<tr>
+
+					<th> Distance </th>
+					<th> Average Cost Per Service </th>
+					<th> Total Service Cost </th>
+					<th> Action</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+
+					<td>  <%= arg_object.distance %></td>
+					<td>  <%= number_to_currency_br(arg_object.average_service_cost)  %></td>
+					<td>  <%= number_to_currency_br(arg_object.total_service_cost)  %></td>
+					<td> <%= link_to "Service Line Items","#",id: "hyperlink",onclick:"toggle_visibility('srvc_line_items_toggle')" %>	</td>
+
+				</tr>
+			</tbody>
+		</table>
+<% else%>
+	No Service Schedules Found
+<% end %>
+

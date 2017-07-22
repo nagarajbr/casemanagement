@@ -1,0 +1,76 @@
+<!--Manoj Patil 11/03/2015  -->
+<fieldset>
+<section class="solidbody">
+		<legend><%= set_subheader("Household information") %></legend>
+	<% if @household.present? %>
+			<%= render 'households/selected_household_partial',arg_household: @household %>
+			<%= render "shared/common_error", object_argument: @household %>
+			<table>
+				<caption style="text-align:inherit">
+					<b>Household Members</b><p></p>
+				</caption>
+			  <thead>
+			    <tr>
+					<th> Client ID </th>
+					<th> Member Name </th>
+					<th> SSN </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+					<th> Status </th>
+					<th> Steps Completed</th>
+					<th> Action </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @household_members.each do |arg_member| %>
+						<%# @steps_completed_text = HouseholdMemberStepStatus.steps_completed_for_client(arg_member.client_id)%>
+						<% @completed_steps = HouseholdMemberStepStatus.get_steps_completed_for_client(arg_member.client_id, arg_member.household_id)%>
+						<% @all_steps = HouseholdMemberStepStatus.get_all_steps_for_client(arg_member.client_id,arg_member.household_id)%>
+						<tr>
+							<td>  <%= arg_member.client_id %>  </td>
+							<td>  <%= arg_member.client_full_name  %></td>
+							<td>  <%= format_SSN(arg_member.ssn) %></td>
+							<td>  <%= format_db_date(arg_member.dob) %></td>
+							<td>  <%=  drop_down_value_description(arg_member.gender) %></td>
+							<td>  <%=  drop_down_value_description(arg_member.member_status) %></td>
+
+							<%#if arg_member.steps_completed.blank?%>
+								<%# arg_member.steps_completed = 1 %>
+							<%#end%>
+
+							<% if arg_member.member_status == 6643%>
+								<td>
+
+										<% if @completed_steps != @all_steps  %>
+											<%= link_to("Continue from where you left", navigate_to_first_skiped_step_path(arg_member.client_id) , id: "hyperlink") %>
+										<% else %>
+											 <%= "All steps complete" %>
+										<% end %>
+
+								</td>
+
+								<td><%= link_to("Review from first step ", edit_household_wizard_initialize_path(arg_member.client_id) , id: "hyperlink") %>
+								</td>
+							<%end%>
+
+
+
+
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+
+				<%= link_to 'Add Household Member',new_household_member_search_path(session[:HOUSEHOLD_ID]), class: "button radius"%>
+				<%= link_to 'Proceed to Application Management',client_applications_path, class: "button radius"%>
+
+
+
+
+
+
+
+	<%end%>
+</section>
+</fieldset>

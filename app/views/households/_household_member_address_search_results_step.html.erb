@@ -1,0 +1,40 @@
+<b><h4>Household Member: <%= "#{client_full_name(@client)}" %></h4></b>
+<p></p>
+	<% if @address_search_results.present? %>
+		<table>
+			<caption style="text-align:inherit"> <p><b>Household(s) with Same address </b></p></caption>
+
+			<p> We found household(s) residing in the same residential address. click on <b>'Add to this household'</b> link to be added to this household.
+			</P>
+		    <thead>
+			    <tr>
+					<th> Household Name </th>
+					<th> Address </th>
+					<th> Action </th>
+				</tr>
+		   </thead>
+			    <tbody>
+					<% @address_search_results.each do |each_address| %>
+						<% if each_address.address_line2.present? %>
+							<% @address_text = "#{each_address.address_line1},#{each_address.address_line2},#{each_address.address_city},#{each_address.address_state},#{each_address.address_zip} "%>
+						<% else %>
+							<% @address_text = "#{each_address.address_line1},#{each_address.address_city},#{each_address.address_state},#{each_address.address_zip} "%>
+						<% end %>
+
+						<tr>
+							<td>  <%= "#{each_address.household_name}(#{each_address.household_id})" %></td>
+							<td>  <%= @address_text %></td>
+							<td>
+							 <%= link_to "Add client to this household",add_client_to_selected_household_address_path(@client.id,each_address.household_id,each_address.address_id),id: "hyperlink" %>
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+		</table>
+		<p>
+			<b>Or</b><br>
+			If you are not part of this household, click on <b>'Create New Household'</b> button to create separate household.
+		</p>
+		 <%= link_to("Create New Household", create_new_household_after_address_search_path(@client.id) , class: 'button radius') %>
+	<% end %>
+

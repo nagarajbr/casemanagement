@@ -1,0 +1,17 @@
+<p>
+    <b>User: </b>
+    <%= arg_user_name %>
+</p>
+
+<% if @user_local_office_list.present?%>
+	<li class="required">
+		<%= arg_object.label :local_office_id,"User's Local Office" %>
+		<%= arg_object.select :local_office_id, arg_user_local_office.collect{ |p| ["#{p.short_description}", p.id] },{ :include_blank => 'Select Local Office' } %>
+	</li>
+<% else %>
+	<p>
+		User is not associated with any local offices.  <%= link_to 'Assign Local Office to User',user_local_offices_index_path, id: "hyperlink"%>
+	</p>
+<% end %>
+
+

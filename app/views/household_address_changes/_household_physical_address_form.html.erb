@@ -1,0 +1,63 @@
+
+<ul>
+  <fieldset>
+
+    <div class="row" id = "<%= @css_id %>">
+      <div class="large-4 columns">
+        <legend><h4 class="fontc"> Household physical address</h4></legend>
+        <li>
+          <%= arg_object.label :in_care_of %>
+          <%= arg_object.text_field :in_care_of, maxlength: "20" %>
+        </li>
+
+        <li class="required">
+            <%= arg_object.label :address_line1 %>
+            <%= arg_object.text_field :address_line1, maxlength: "50" %>
+        </li>
+
+        <li>
+            <%= arg_object.label :address_line2 %>
+            <%= arg_object.text_field :address_line2, maxlength: "50" %>
+        </li>
+
+
+        <li class="required">
+            <%= arg_object.label :city %>
+            <%= arg_object.text_field :city, maxlength: "50" %>
+        </li>
+
+        <li  class="required">
+          <%= arg_object.label :state %>
+          <%= arg_object.select :state, CodetableItem.item_list(104,"state list").collect { |p| ["#{p.long_description} ", p.id] }, { :include_blank => 'Select a state' } %>
+        </li>
+
+        <div class="row">
+          <div class="large-7 columns">
+             <li class="required">
+                <%= arg_object.label :zip %>
+                <%= arg_object.number_field :zip, title1: "Zip", min: 0,min: 0,onkeypress: "return isLimitedNaturalNumber(event,5)" %>
+              </li>
+          </div>
+          <div class="large-5 columns">
+            <li>
+                <%= arg_object.label :zip_suffix %>
+                <%= arg_object.number_field :zip_suffix,onkeypress: "return isLimitedNaturalNumber(event,4)"  %>
+            </li>
+          </div>
+        </div>
+
+        <%= arg_object.label :effective_begin_date %>
+        <%= arg_object.date_field :effective_begin_date,onkeyup:"validate_date_format(event)" %>
+
+        <%= arg_object.label :living_arrangement %>
+        <%= arg_object.select :living_arrangement, CodetableItem.item_list(209,"Living Arrangement").collect { |p| ["#{p.short_description} ", p.id] }, { :include_blank => 'Select living arrangement' } %>
+
+
+
+
+      </div>
+    </div>
+
+
+  </fieldset>
+</ul>

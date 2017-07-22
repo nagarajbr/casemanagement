@@ -1,0 +1,112 @@
+<fieldset>
+  <section class="solidbody">
+    <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+        <p>
+          <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+        </p>
+         <p><h6><%= set_subheader("#{drop_down_value_description(@expense.expensetype)} expense information for household member: #{client_full_name(@client)}") %> </h6></p>
+
+    <% else %>
+        <legend><%= set_subheader("#{drop_down_value_description(@expense.expensetype)} expense information   for: #{client_full_name(@client)}") %></legend><br>
+    <% end %>
+
+  <p>
+    <b>Expense Type: </b>
+    <%= drop_down_value_description(@expense.expensetype) %>
+  </p>
+
+  <p>
+    <b>Frequency: </b>
+    <%= drop_down_value_description(@expense.frequency) %>
+  </p>
+
+  <p>
+    <b>Begin Date: </b>
+    <%= format_db_date(@expense.effective_beg_date) %>
+  </p>
+
+   <p>
+    <b>End Date: </b>
+    <%= format_db_date(@expense.effective_end_date) %>
+  </p>
+
+  <p>
+    <b>Policy/Acct#: </b>
+    <%= @expense.creditor_name %>
+  </p>
+
+  <p>
+    <b>Creditor Name: </b>
+    <%= @expense.creditor_contact %>
+  </p>
+
+  <p>
+    <b>Creditor Phone: </b>
+    <%= format_phone_number(@expense.creditor_phone) %>
+    <%= format_phone_number_extn(@expense.creditor_ext) %>
+
+  </p>
+
+  <p>
+    <b>Verified: </b>
+      <%= get_flag_description(@expense.verified) %>
+  </p>
+
+
+  <p>
+    <b>Number of Months: </b>
+    <%= @expense.exp_calc_months %>
+  </p>
+
+  <p>
+    <b>Recalculate Indicator: </b>
+      <%= get_flag_description(@expense.budget_recalc_ind) %>
+  </p>
+
+
+
+  <p>
+  <b>Worker: </b>
+  <%= get_user_name(@expense.updated_by)%>
+</p>
+  <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+<% if  @client_expenses.present?%>
+    <table>
+      <caption class="text-left" ><b> Expense shared by: </b> <p></p> </caption>
+      <thead>
+        <tr>
+        <th> Client Name </th>
+        <th>Action</th>
+      </tr>
+      </thead>
+        <tbody>
+        <% @client_expenses.each do |client| %>
+          <tr>
+            <td>  <%=  client_full_name(client) %></td>
+            <td>
+
+               <%= link_to 'Delete', delete_share_path("expense",@expense,client.id) ,data: { confirm: 'Are you sure?' },method: :delete, class: "alert", id: "hyperlink_alert" %>
+
+
+            </td>
+          </tr>
+         <% end %>
+      </tbody>
+    </table>
+<% end %>
+
+  <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+      <%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+      <%= link_to 'Edit', edit_household_member_expense_path(@client.id,@expense.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+      <%= link_to 'Delete', delete_household_member_expense_path(@client.id,@expense.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+  <% else %>
+      <%= link_to 'Back', expenses_path,class: " secondary button radius"%>
+      <%= link_to 'Edit', edit_expense_path(@expense),class: "button radius"%>
+      <%= link_to 'Delete',  expense_path(@expense),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+  <% end %>
+
+
+
+  </section>
+</fieldset>

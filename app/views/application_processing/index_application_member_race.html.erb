@@ -1,0 +1,19 @@
+<section class="solidbody">
+ 	<fieldset>
+		<p>
+			<%= render 'application_screenings/selected_application_details',arg_selected_application: @selected_application %>
+		</p>
+		<b><h4><%= @step_number %></h4><%#= "Select Service Program" %></b>
+ 		<% if @application_members_with_race.present? %>
+ 			<%= render 'application_members_with_race_info',application_members_with_race: @application_members_with_race %>
+ 		<% else %>
+ 			<p>
+		    <h5 class="subheader">Race information is not available for any of the application members. Click New to enter race information.</h5>
+	        </p>
+ 		<% end %>
+ 		<p><%= link_to 'Add Race',new_application_member_race_path, class: "button radius"%></p>
+ 		<%= link_to "Exit Wizard", client_applications_path,class: 'secondary button' %>
+		<%= link_to "Back",back_to_application_processing_wizard_path,class: 'secondary button radius'%>
+		<%= link_to 'Next',new_application_member_race_path, class: "button radius"%>
+	</fieldset>
+</section>

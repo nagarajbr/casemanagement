@@ -1,0 +1,9 @@
+<!--Manoj Patil 10/16/2014  -->
+<%= link_to "Cancel", cancel_pgu_action_wizard_path(arg_instance.program_unit_id,arg_instance.id),class: 'secondary button' %>
+<%= arg_object.submit "Back", :name => "back_button",class: 'secondary button' unless arg_instance.first_step? %>
+<% if arg_instance.last_step? %>
+	<%= arg_object.submit "Save",class: 'button' %>
+
+<% else %>
+	<%= arg_object.submit "Next",:name => "next_button",class: 'button' %>
+<% end %>

@@ -1,0 +1,25 @@
+  <table>
+   <br><caption class="fontc"> Resource Information <p></p> </caption>
+      <thead>
+        <tr>
+       		<th> Type of Resource </th>
+			<th> Account Number </th>
+			<th> Begin Date </th>
+			<th> End Date </th>
+			<th> Usage Percent </th>
+			<th> Verified </th>
+	    </tr>
+	  </thead>
+      <tbody>
+
+			<tr>
+				<td>  <%= drop_down_value_description(arg_resource.resource_type) %></td>
+				<td>  <%= arg_resource.account_number %></td>
+				<td>  <%= format_db_date arg_resource.date_assert_acquired %></td>
+				<td>  <%= format_db_date arg_resource.date_assert_disposed %></td>
+				<td>  <%= number_to_percentage_br(arg_resource.use_code) %></td>
+				<td>  <%= get_flag_description(arg_resource.verified) %>  </td>
+			</tr>
+
+      </tbody>
+	</table>

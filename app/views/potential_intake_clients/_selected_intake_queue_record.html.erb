@@ -1,0 +1,29 @@
+
+<b> Selected Record from Intake Queue</b>
+<p></p>
+<table>
+	  <thead>
+	    <tr>
+
+			<th> Last Name </th>
+			<th> First Name </th>
+			<th> SSN </th>
+			<th> Date of Birth </th>
+			<th> Pre-Screen Date</th>
+		</tr>
+	</thead>
+	 <tbody>
+
+				<tr>
+
+					<td>  <%= arg_object.last_name %></td>
+					<td>   <%= arg_object.first_name %>  </td>
+					<td>  <%= format_SSN(arg_object.ssn)  %></td>
+					<td>  <%= format_db_date(arg_object.date_of_birth) %></td>
+					<td>  <%= format_db_date(arg_object.created_at) %></td>
+
+
+				</tr>
+
+		</tbody>
+</table>

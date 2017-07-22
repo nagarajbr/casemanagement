@@ -1,0 +1,64 @@
+
+
+
+<body onload = "household_registration_employment_step()">
+<% if @employments.present? %>
+		<caption style="text-align:inherit"> <p><b><%=("#{pluralize_without_count(@employments.count,"Employment","")}") %></b></p></caption>
+		<table>
+		  <thead>
+		    <tr>
+				<th> Employer Name </th>
+				<th> Begin Date </th>
+				<th> End Date </th>
+				<th> Action </th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @employments.each do |arg_emp| %>
+					<tr>
+						<td>  <%= employer_name(arg_emp.employer_id)%></td>
+						<td>  <%= format_db_date(arg_emp.effective_begin_date) %></td>
+						<td>  <%= format_db_date(arg_emp.effective_end_date)  %></td>
+						<td>
+						 <%= link_to "Show",show_household_member_employment_path(@household_member.id,arg_emp.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>|
+						 <%= link_to("Employment details", household_member_employment_detail_index_path(@client.id,arg_emp.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink") %>
+						</td>
+					</tr>
+				 <% end %>
+			</tbody>
+		</table>
+		    <%= link_to("New", new_household_member_employment_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') %>
+<%else%>
+	    <p>
+        	<h5 class="subheader"> Employment information is not found. </h5>
+      	</p>
+
+
+		<p>
+		  	<h5 class="subheader"> Are you currently working?</h5>
+            <fieldset class="radio">
+                <div class="button-group">
+                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_currently_working_flag, "Y"%>Yes</label>
+                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_currently_working_flag, "N"%>No</label>
+
+                </div>
+            </fieldset>
+        </p>
+        <div id = "employment_earned_income_step_job_offer_flag" >
+
+	            <p>
+	            	<h5 class="subheader"> Do you have a future job offer?</h5>
+	              	<fieldset class="radio">
+	                	<div class="button-group">
+		                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_job_offer_flag, "Y"%>Yes</label>
+		                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_job_offer_flag, "N"%>No</label>
+	                	</div>
+	            	</fieldset>
+	            </p>
+        </div>
+
+        <div id="new_employment_button">
+        	<%= link_to 'New',new_household_member_employment_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: "button radius"%>
+        </div>
+<% end %>
+</body>

@@ -1,0 +1,28 @@
+    <ul>
+        <div class="row">
+
+         <div class="large-4 columns">
+            <li class="required">
+              <%= arg_object.label :service_type %>
+              <%= arg_object.select :service_type, @services_drop_down.collect { |p| ["#{p.long_description} ", p.id] },{ :include_blank => 'Select a service' }%>
+            </li>
+
+            <li>
+              <%= arg_object.label :service_units %>
+              <%= arg_object.number_field :service_units, min: "1",onkeypress: "return isLimitedNaturalNumber(event,4)"%>
+            </li>
+
+            <li  class="required" >
+              <%= arg_object.label :start_date %>
+              <%= arg_object.date_field :start_date, alt: "start date", onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <li>
+              <%= arg_object.label :end_date %>
+              <%= arg_object.date_field :end_date, alt: "end date", onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <%= render "notes/notes_field_new_edit", object_argument: @notes %>
+         </div>
+      </div>
+    </ul>

@@ -1,0 +1,47 @@
+<!-- NOT USED -->
+<!--
+
+<b>Household Member: <%#= "#{client_full_name(@client)}" %></b>
+<p></p>
+
+    <%# if @pregnancy.present? %>
+
+          <p>
+            <b>Pregnancy Due Date:</b>
+            <%= format_db_date(@pregnancy.pregnancy_due_date) %>
+          </p>
+
+          <p>
+            <b>Expected Number of Children:</b>
+            <%= @pregnancy.number_of_unborn %>
+          </p>
+
+
+           <p>
+            <b>Worker: </b>
+            <%= get_user_name(@pregnancy.updated_by)%>
+          </p>
+
+          <%#= render "notes/notes_field_show", arg_notes: @notes %>
+
+            <%#= link_to 'Edit', edit_household_member_pregnancy_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD',@pregnancy.id), class: "button radius" %>
+
+            <%#= link_to 'Delete', delete_household_member_pregnancy_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD',@pregnancy.id),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+
+    <%#else%>
+              <h5 class="subheader">Pregnancy information not found.Do you want to add pregnancy information?</h5>
+              <p></p>
+            <fieldset class="radio">
+                <div class="button-group">
+                  <label class="radio_button_bigger_text" for="member_pregnancy_charcteristics_found_add_flag_y"><%#= arg_object.radio_button :member_pregnancy_charcteristics_found_add_flag, "Y"%>Yes</label>
+                  <label class="radio_button_bigger_text" for="member_pregnancy_charcteristics_found_add_flag_n"><%#= arg_object.radio_button :member_pregnancy_charcteristics_found_add_flag, "N"%>No</label>
+                  <label class="radio_button_bigger_text" for="member_pregnancy_charcteristics_found_add_flag_s"><%#= arg_object.radio_button :member_pregnancy_charcteristics_found_add_flag, "S"%>Skip for now</label>
+
+                </div>
+            </fieldset>
+            <%#= arg_object.submit 'New',:name => "new_pregnancy_char_button", class: "button radius" %>
+             <%#= link_to "New",new_household_member_pregnancy_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: 'button radius' %>
+
+    <%#end%>
+
+-->

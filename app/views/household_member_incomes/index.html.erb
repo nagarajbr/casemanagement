@@ -1,0 +1,64 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Earned income information for: #{client_full_name(@client)}") %></legend>
+
+	<% if session[:CLIENT_ID].present? %>
+	<% if @incomes.present? %>
+		<table>
+		<caption style="text-align:inherit"> <p><b><%=("#{pluralize_without_count(@incomes.count,"Income","")}") %></b></p></caption>
+		  <thead>
+		    <tr>
+
+				<th> Type of Income </th>
+				<th> Frequency </th>
+				<th width="10%"> Begin Date </th>
+				<th width="10%"> End Date </th>
+				<th width="10%"> Recalculate Indicator </th>
+				<th width="30%">Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @incomes.each do |income| %>
+					<tr>
+						<td>  <%= drop_down_value_description(income.incometype) %></td>
+						<td>  <%= drop_down_value_description(income.frequency) %></td>
+						<td>  <%=  format_db_date income.effective_beg_date %></td>
+						<td>  <%=  format_db_date income.effective_end_date %></td>
+						<td>  <%= get_flag_description(income.recal_ind) %> </td>
+
+						<td>
+
+						 <%= link_to "Show",income_path(@menu,income.id),id: "hyperlink"  %> |
+						 <%= link_to("Income details", income_income_details_path(@menu,income.id),id: "hyperlink") %>
+						  <%# if validate_authorization(675) %>|
+							 <%= link_to("Share", new_client_share_search_path("income",income.id),id: "hyperlink") %>
+						 <%# end %>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+
+			<%= paginate @incomes %>
+		   <%= link_to("New", new_income_path(@menu) , class: 'button radius')%>
+
+
+	<%else%>
+
+			<p>
+		    <h5 class="subheader">No earned income information found. Click New to enter income information.</h5>
+	        </p>
+	        <%= link_to 'New',new_income_path(@menu), class: "button radius"%>
+
+
+
+	<%end%>
+<%else%>
+	    <p>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+        <%= render "shared/search_client_button" %>
+<%end%>
+</section>
+</fieldset>

@@ -1,0 +1,21 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Enter details to issue payment to program unit of client: #{@client.first_name}, #{@client.last_name}") %></legend>
+<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+<% if session[:CLIENT_ID].present? %>
+	<%= form_for @supplement_payment, url: supl_retro_bns_payments_path, method: :post do |f| %>
+	     <%= render "shared/common_error", object_argument: @supplement_payment %>
+        <%= render 'form', arg_object: f,arg_payment_types:@payment_types,arg_payment_status:@payment_status,arg_current_date:@current_date,arg_payment_amount:@payment_amount  %>
+        <br>
+
+       	<%= link_to 'Cancel', supl_retro_bns_payments_path,class: "button secondary radius" %>
+	    <%= f.submit "Save", class: 'button radius' %>
+
+	<% end %>
+<% else %>
+		<h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+<% end %>
+</section>
+</fieldset>

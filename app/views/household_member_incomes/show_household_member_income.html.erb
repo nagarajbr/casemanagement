@@ -1,0 +1,94 @@
+<fieldset>
+<section class="solidbody">
+  <%if @menu == 'CLIENT'%>
+     <legend><%= set_subheader("#{drop_down_value_description(@income.incometype)} income information for client: #{client_full_name(@client)}") %>
+      </legend>
+
+  <%else%>
+      <legend><%= set_subheader("#{drop_down_value_description(@income.incometype)} income information for household member: #{client_full_name(@client)}") %>
+      </legend>
+  <%end%>
+
+
+
+   <p>
+    <b>Income Type: </b>
+
+    <%= drop_down_value_description(@income.incometype) %>
+  </p>
+
+  <p>
+    <b>Source: </b>
+    <%= @income.source %>
+  </p>
+
+  <p>
+    <b>Verified: </b>
+    <%=  get_flag_description(@income.verified) %>
+
+  </p>
+
+  <p>
+    <b>Frequency: </b>
+    <%= drop_down_value_description(@income.frequency) %>
+  </p>
+
+  <p>
+    <b>Begin Date: </b>
+    <%= format_db_date @income.effective_beg_date %>
+  </p>
+
+   <p>
+    <b>End Date: </b>
+    <%= format_db_date @income.effective_end_date %>
+   </p>
+
+
+  <p>
+    <b>Recalculate Indicator: </b>
+    <%=  get_flag_description(@income.recal_ind) %>
+  </p>
+
+<%= render "notes/notes_field_show", arg_notes: @notes %>
+
+<% if  @client_incomes.present?%>
+      <table>
+      <caption style="text-align:inherit"> <b> <%= "Income shared by:" %> <p></p> </b> </caption>
+      <thead>
+        <tr>
+        <th> Client Name </th>
+        <th> Action </th>
+      </tr>
+      </thead>
+        <tbody>
+        <% @client_incomes.each do |client| %>
+          <tr>
+            <td>  <%=  client_full_name(client) %></td>
+            <td>
+             <%= link_to 'Delete',  delete_share_path("income",@income,client.id),data: { confirm: 'Are you sure?' },method: :delete, class: "alert", id: "hyperlink_alert"%>
+
+            </td>
+          </tr>
+         <% end %>
+      </tbody>
+    </table>
+<%end%>
+
+
+  <%if @menu == 'CLIENT'%>
+      <%= link_to 'Back', incomes_path(@menu),class: "secondary button radius" %>
+      <%= link_to 'Edit', edit_income_path(@menu,@income.id),class: "button radius"  %>
+      <%= link_to 'Delete', delete_income_path(@menu,@income.id),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+  <%else%>
+      <%= link_to 'Back',  start_household_member_registration_wizard_path,class: "secondary button radius" %>
+      <%= link_to 'Edit Income', edit_household_member_income_path(@client.id,@income.id),class: "button radius" %>
+      <%= link_to 'Delete Income',delete_household_member_income_path(@client.id,@income.id), method: :delete, data: { confirm: 'Are you sure you want to delete? '},class: "button alert radius" %>
+  <%end%>
+
+
+
+
+
+
+</section>
+</fieldset>

@@ -1,0 +1,87 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+
+	<legend><%= set_subheader("Program Unit for Client: #{client_full_name(@client)}") %></legend>
+ 	<%= render 'selected_program_unit_details',arg_selected_program_unit: @selected_program_unit %>
+
+	<%= form_for(@selected_program_unit,:url => update_program_unit_wizard_path(@selected_program_unit.id), method: :put) do |arg_pgunit| %>
+
+		<% if  "#{@selected_program_unit.current_step}_step" == "program_unit_first_step" %>
+			<% if @selected_program_unit.pgu_family_comp_same_as_application.blank? || @selected_program_unit.pgu_family_comp_same_as_application == "N" %>
+			 <b><h3>Step 1 of 8</h3></b><b>Select Processing Office </b><p></p>
+			 <% else %>
+			 	<% if  @selected_program_unit.pgu_family_comp_same_as_application == "Y" %>
+			 		<b><h3>Step 1 of 3</h3></b><b>Select Processing Office </b><p></p>
+			 	<% end %>
+			 <% end %>
+		<% end %>
+
+
+	    <% if @selected_program_unit.pgu_family_comp_same_as_application == "N" %>
+
+	    	<% if  "#{@selected_program_unit.current_step}_step" == "program_unit_second_step" %>
+		           <b><h3>Step 2 of 6</h3></b><b>Add Members to Program Unit</b><p></p>
+		    <% end %>
+
+		    <% if  "#{@selected_program_unit.current_step}_step" == "program_unit_third_step" %>
+		           <b><h3>Step 3 of 6</h3></b><b>Select Primary Member of Program Unit</b><p></p>
+		     <% end %>
+
+		     <% if  "#{@selected_program_unit.current_step}_step" == "program_unit_fourth_step" %>
+		           <b><h3>Step 4 of 6</h3></b><b>Manage relationship between Program Unit members</b><p></p>
+		    <% end %>
+
+		    <% if  "#{@selected_program_unit.current_step}_step" == "program_unit_fifth_step" %>
+		          <b><h3>Step 5 of 8</h3></b><b>Data Verification</b><p></p>
+		    <% end %>
+
+		    <% if  "#{@selected_program_unit.current_step}_step" == "program_unit_sixth_step" %>
+		          <b><h3>Step 6 of 8</h3></b><b>Document Verification</b><p></p>
+		    <% end %>
+
+		    <% if  "#{@selected_program_unit.current_step}_step" == "program_unit_seventh_step" %>
+		          <b><h3>Step 5 of 6</h3></b><b>Program Unit Processing </b><p></p>
+		    <% end %>
+
+	    	<% if  "#{@selected_program_unit.current_step}_step" == "program_unit_last_step" %>
+		          <b><h3>Step 6 of 6</h3></b><b>Review and Complete Program Unit</b><p></p>
+		    <% end %>
+		<% else %>
+			<!-- 4 steps -->
+			   	<% if  "#{@selected_program_unit.current_step}_step" == "program_unit_third_step" %>
+		           <b><h3>Step 2 of 3</h3></b><b>Select Primary Member of Program Unit</b><p></p>
+		    	<% end %>
+
+		    	<%# if  "#{@selected_program_unit.current_step}_step" == "program_unit_fifth_step" %>
+		          <!-- <b><h3>Step 3 of 4</h3></b><b>Data Verification</b><p></p> -->
+		    	<%# end %>
+
+		    	<% if  "#{@selected_program_unit.current_step}_step" == "program_unit_last_step" %>
+		          <b><h3>Step 3 of 3</h3></b><b>Review and Complete Program Unit</b><p></p>
+		    	<% end %>
+
+	    <% end %>
+	    <% if @selected_program_unit.errors.any? %>
+	    <%= render "shared/common_error", object_argument: @selected_program_unit %><br>
+	    <% end %>
+	     <ul>
+	       	 <div class="row">
+	       	 		<% if  ("#{@selected_program_unit.current_step}_step" == "program_unit_third_step") || ("#{@selected_program_unit.current_step}_step" == "program_unit_first_step") %>
+	       	 			<div class="large-6 columns">
+		                   <%= render "#{@selected_program_unit.current_step}_step", :arg_object => arg_pgunit %>
+		                </div>
+	       	 		<% else %>
+	       	 			<div class="large-12 columns">
+		                   <%= render "#{@selected_program_unit.current_step}_step", :arg_object => arg_pgunit %>
+		                </div>
+	       	 		<% end %>
+	          </div>
+	    </ul>
+	    <div>
+      		<%= render "program_unit_buttons_next_back_save", :arg_object => arg_pgunit , :arg_instance =>@selected_program_unit %>
+        </div>
+	<% end %>
+
+</section>
+</fieldset>

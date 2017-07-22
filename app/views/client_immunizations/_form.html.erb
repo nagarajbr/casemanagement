@@ -1,0 +1,34 @@
+<body  onload = "js_exempt_from_immunization_div();">
+		<div class="row">
+			<div class="large-5 columns">
+
+			<ul>
+
+		      		<li>
+		      			<fieldset class="radio">
+							<legend class="radiolegend">Provided Immunization record</legend>
+								<div class="button-group">
+									<label class="radio-button"><%= radio_button_tag :immunizations_record, "Y", checked = arg_object.immunizations_record == "Y" ? true : false,id: "provided_immunization_y",onclick:"js_exempt_from_immunization_div()" %>&nbsp;Yes</label>
+									<label class="radio-button"><%= radio_button_tag :immunizations_record, "N" , checked = arg_object.immunizations_record == "N" ? true : false ,id: "provided_immunization_n",onclick:"js_exempt_from_immunization_div()" %>&nbsp;No</label>
+								</div>
+						</fieldset>
+					</li >
+
+					<div id = "cm_exempt_from_immunization_div">
+						<li >
+			            	<fieldset class="radio">
+								<legend class="radiolegend">Exempt from Immunization</legend>
+									<div class="button-group">
+										<label class="radio-button"><%= radio_button_tag :exempt_from_immunization, "Y", checked = arg_client.exempt_from_immunization == "Y" ? true : false ,id: "excempt_immunization_y" %>&nbsp;Yes</label>
+										<label class="radio-button"><%= radio_button_tag :exempt_from_immunization, "N",checked = arg_client.exempt_from_immunization == "N" ? true : false, id: "excempt_immunization_n" %>&nbsp;No</label>
+									</div>
+							</fieldset>
+
+			      		</li >
+		      		</div>
+
+		      	<%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+		    </ul>
+			</div>
+		</div>
+</body>

@@ -1,0 +1,22 @@
+<!--Manoj Patil 10/16/2014  -->
+<li class="required">
+  <%= arg_object.label :application_date %>
+  <%= arg_object.date_field :application_date, alt: "application date", onkeyup:"validate_date_format(event)"  %>
+</li>
+
+
+
+<li>
+  <%= arg_object.label :application_origin %>
+  <%= arg_object.select :application_origin, CodetableItem.item_list(98,"Application Origin List").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Application Origin' },title1: "Select Application Origin from list", data: {tooltip1: '' } %>
+</li>
+
+<li  class="required">
+
+  <%= arg_object.label :application_received_office %>
+  <%= arg_object.select :application_received_office, CodetableItem.item_list(2,"DWS Office List").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Application Received At' } %>
+
+</li>
+
+
+

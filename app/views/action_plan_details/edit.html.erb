@@ -1,0 +1,7 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Edit #{drop_down_value_description(@action_plan.action_plan_type)} income details for: #{client_full_name(@client)} ") %></legend>
+<%= render 'form', arg_action_plan:@action_plan,arg_action_plan_details:action_plan_details,arg_barriers:@barriers,
+	arg_activity_types:@activity_types,arg_activity_status:@activity_statuses %>
+</section>
+</fieldset>

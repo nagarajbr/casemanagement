@@ -1,0 +1,32 @@
+<fieldset>
+<section class="solidbody">
+<% if session[:HOUSEHOLD_ID].present? %>
+	<%= form_tag(household_narative_create_path(session[:HOUSEHOLD_ID]), method: :post) do |f| %>
+	        <legend><%= set_subheader("Enter comments for household: #{@household.name}") %> </legend>
+	       <%= render "shared/common_error", object_argument: @notes %><br>
+	        <ul>
+		     	<div class="row">
+		          	<div class="large-5 columns">
+		                <li>
+		                	<%= label_tag "Comments Type" %>
+		                	<%= select_tag :notes_type, options_for_select(CodetableItem.item_list_related_to_notes.collect { |p| ["#{p.long_description} ", p.id] }),{ :prompt => 'Select Comment Type' } %>
+		             	</li>
+		             	<li>
+						  	<%=  label :notes, "Comments" %>
+						  	<%= text_area_tag :notes%>
+						</li>
+
+			 	  	</div>
+			    </div>
+			</ul>
+		    <p>
+	      <%= link_to 'Cancel',household_narative_index_path,class: "secondary button radius" %>
+	      <%= submit_tag "Save", class: 'button radius'%>
+	    </p>
+	<% end %>
+<% else %>
+  <h5 class="subheader">Household is not selected, Select a household.</h5>
+  <p></p>
+<% end %>
+</section>
+</fieldset>

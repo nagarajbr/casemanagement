@@ -1,0 +1,27 @@
+<ul>
+        <div class="row">
+
+         <div class="large-4 columns">
+            <li class="required">
+              <%= arg_object.label :test_type %>
+              <%= arg_object.select :test_type, CodetableItem.active_item_list(59,"Test Type").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a Test' }%>
+            </li>
+
+            <li  class="required" >
+              <%= arg_object.label :date_referred %>
+              <%= arg_object.date_field :date_referred, onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <li  class="required" >
+              <%= arg_object.label :date_test_taken_on %>
+              <%= arg_object.date_field :date_test_taken_on, onkeyup:"validate_date_format(event)" %>
+            </li>
+
+            <li class="required">
+              <%= arg_object.label :scores %>
+              <%= arg_object.number_field :scores,placeholder:"0.00" ,:step => 0.01, onkeypress: "return allow_only_numbers_5_digits_2_decimals(event)", onkeyup: "setDecimalValue_3_digits_2_decimals(event)"%>
+            </li>
+
+         </div>
+      </div>
+    </ul>

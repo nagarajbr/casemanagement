@@ -1,0 +1,72 @@
+namespace :assessment_questions_multi_response_transportation_driver_licence_task35 do
+
+	desc "Assessment Transportation Driver Licence"
+	task :assessment_questions_multi_response_transportation_driver_licence => :environment do
+
+		AssessmentQuestionMultiResponse.create(assessment_question_id:57,txt:"Yes",val:"Y",display_order: 1,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:57,txt:"No",val:"N",display_order: 2,created_by: 1,updated_by: 1)
+
+		AssessmentQuestionMultiResponse.create(assessment_question_id:58,txt:"Private passenger vehicle",val:"Private passenger vehicle",display_order: 1,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:58,txt:"Commercial Driver License (CDL)",val:"Commercial Driver License (CDL)",display_order: 2,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:58,txt:"Motorcycle",val:"Motorcycle",display_order: 3,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:58,txt:"Other",val:"Other",display_order: 4,created_by: 1,updated_by: 1)
+
+		AssessmentQuestionMultiResponse.create(assessment_question_id:512,txt:"Yes",val:"Y",display_order: 1,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:512,txt:"No",val:"N",display_order: 2,created_by: 1,updated_by: 1)
+
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"Select a State",val:"",display_order: 0,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"ALABAMA",val:"ALABAMA",display_order: 2,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"ALASKA",val:"ALASKA",display_order: 3,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"ARIZONA",val:"ARIZONA",display_order: 1,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"ARKANSAS",val:"ARKANSAS",display_order: 4,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"CALIFORNIA",val:"CALIFORNIA",display_order: 5,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"COLORADO",val:"COLORADO",display_order: 6,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"CONNECTICUT",val:"CONNECTICUT",display_order: 7,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"DELAWARE",val:"DELAWARE",display_order: 8,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"FLORIDA",val:"FLORIDA",display_order: 9,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"GEORGIA",val:"GEORGIA",display_order: 10,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"HAWAII",val:"HAWAII",display_order: 11,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"IDAHO",val:"IDAHO",display_order: 12,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"ILLINOIS",val:"ILLINOIS",display_order: 13,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"INDIANA",val:"INDIANA",display_order: 14,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"IOWA",val:"IOWA",display_order: 15,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"KANSAS",val:"KANSAS",display_order: 16,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"KENTUCKY",val:"KENTUCKY",display_order: 17,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"LOUISIANA",val:"LOUISIANA",display_order: 18,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MAINE",val:"MAINE",display_order: 19,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MARYLAND",val:"MARYLAND",display_order: 20,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MASSACHUSETTS",val:"MASSACHUSETTS",display_order: 21,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MICHIGAN",val:"MICHIGAN",display_order: 22,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MINNESOTA",val:"MINNESOTA",display_order: 23,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MISSISSIPPI",val:"MISSISSIPPI",display_order: 24,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MISSOURI",val:"MISSOURI",display_order: 25,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"MONTANA",val:"MONTANA",display_order: 26,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NEBRASKA",val:"NEBRASKA",display_order: 27,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NEVADA",val:"NEVADA",display_order: 28,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NEW HAMPSHIRE",val:"NEWHAMPSHIRE",display_order: 29,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NEW JERSEY",val:"NEWJERSEY",display_order: 30,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NEW MEXICO",val:"NEWMEXICO",display_order: 31,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NEW YORK",val:"NEWYORK",display_order: 32,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NORTH CAROLINA",val:"NORTHCAROLINA",display_order: 33,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"NORTH DAKOTA",val:"NORTHDAKOTA",display_order: 34,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"OHIO",val:"OHIO",display_order: 35,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"OKLAHOMA",val:"OKLAHOMA",display_order: 36,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"OREGON",val:"OREGON",display_order: 37,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"PENNSYLVANIA",val:"PENNSYLVANIA",display_order: 38,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"RHODE ISLAND",val:"RHODEISLAND",display_order: 39,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"SOUTH CAROLINA",val:"SOUTHCAROLINA",display_order: 40,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"SOUTH DAKOTA",val:"SOUTHDAKOTA",display_order: 41,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"TENNESSEE",val:"TENNESSEE",display_order: 42,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"TEXAS",val:"TEXAS",display_order: 43,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"UTAH",val:"UTAH",display_order: 44,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"VERMONT",val:"VERMONT",display_order: 45,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"VIRGINIA",val:"VIRGINIA",display_order: 46,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"WASHINGTON",val:"WASHINGTON",display_order: 47,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"WEST VIRGINIA",val:"WESTVIRGINIA",display_order: 48,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"WISCONSIN",val:"WISCONSIN",display_order: 49,created_by: 1,updated_by: 1)
+		AssessmentQuestionMultiResponse.create(assessment_question_id:60,txt:"WYOMING",val:"WYOMING",display_order: 50,created_by: 1,updated_by: 1)
+
+
+
+    end
+end

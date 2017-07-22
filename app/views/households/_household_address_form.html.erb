@@ -1,0 +1,179 @@
+
+<!-- No longer used -->
+<!--
+<ul>
+    <fieldset>
+        <div class="row">
+          <div class="large-4 columns">
+            <legend><h4 class="fontc"><%#= "#{drop_down_value_description(@address.address_type)} Address" %></h4></legend>
+            <%# if @entity_type == 6150 %>
+              <li>
+                <%#= arg_object.label :in_care_of %>
+                <%#= arg_object.text_field :in_care_of, autofocus: true,title1: "Care of", maxlength: "20"  %>
+              </li>
+            <%# end %>
+            <li class="required">
+              <%#= arg_object.label :address_line1 %>
+              <%#= arg_object.text_field :address_line1, title1: "Address Line1", maxlength: "50" %>
+            </li>
+
+            <li>
+                <%#= arg_object.label :address_line2 %>
+                <%#= arg_object.text_field :address_line2, title1: "Address Line2", maxlength: "50"  %>
+            </li>
+
+
+            <li class="required">
+                <%#= arg_object.label :city %>
+                 <%# if @entity_type == 6150 %>
+                    <%#= arg_object.select :city, CodetableItem.item_list(10,"city list").collect { |p| ["#{p.short_description} ", p.short_description] }, { :include_blank => 'Select a city' } %>
+                <%#else%>
+                    <%#= arg_object.text_field :city, title1: "City", maxlength: "50" %>
+                 <%#end%>
+            </li>
+
+            <li  class="required">
+              <%#= arg_object.label :state %>
+                <%# if @entity_type == 6150 %>
+                  <%= arg_object.text_field :state, :value => get_state(5793), :disabled => true %>
+                <%#else%>
+                     <%#= arg_object.select :state, CodetableItem.item_list(104,"state list").collect { |p| ["#{p.long_description} ", p.id] }, { :include_blank => 'Select a state' } %>
+                <%#end%>
+            </li>
+
+            <div class="row">
+              <div class="large-7 columns">
+                 <li class="required">
+                    <%#= arg_object.label :zip %>
+                    <%#= arg_object.number_field :zip, min: 0,onkeypress: "return isLimitedNaturalNumber(event,5)" %>
+                  </li>
+              </div>
+              <div class="large-5 columns">
+                <li>
+                    <%#= arg_object.label :zip_suffix %>
+                    <%#= arg_object.number_field :zip_suffix,min: 0, title1: "Zip suffix",onkeypress: "return isLimitedNaturalNumber(event,4)" %>
+                </li>
+              </div>
+            </div>
+
+            < <li>
+              <%#= arg_object.label :county %>
+              <%#= arg_object.select :county, CodetableItem.item_list(12,"County List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'select a county' }, title1: "Enter County", data: {tooltip1: '' } %>
+            </li>
+
+            <%#= arg_object.hidden_field :address_type %>
+
+            <%# unless @address.new_mailing_address %>
+
+                <fieldset class="radio">
+                  <legend class="radiolegend"><%#="Save Prior #{drop_down_value_description(@address.address_type)} Address" %>
+                   <div class="button-group">
+                       <label class="radio-button" for="address_save_prior_mailing_address_y"><%#= arg_object.radio_button :save_prior_mailing_address, "Y"%>&nbsp;Yes</label>
+                        <label class="radio-button" for="address_save_prior_mailing_address_n"><%#= arg_object.radio_button :save_prior_mailing_address, "N"%>&nbsp;No</label>
+                    </div>
+                </fieldset>
+            <%# end %>
+
+          </div>
+        </div>
+      </fieldset>
+
+      <%# if @household_member.head_of_household_flag == 'Y' %>
+
+        <fieldset class="radio">
+            <legend class="radiolegend"><%#="#{drop_down_value_description(@address.non_mailing_address_type)} Address Same as #{drop_down_value_description(@address.address_type)} Address?"%></legend>
+            <div class="button-group">
+                <label class="radio-button" for="non_mailing_addr_same_as_mailing"><%#= arg_object.radio_button :non_mailing_addr_same_as_mailing, "Y" %>Yes</label>
+                <label class="radio-button" for="non_mailing_addr_same_as_mailing"><%#= arg_object.radio_button :non_mailing_addr_same_as_mailing, "N"%>No</label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="row">
+              <div class="large-4 columns">
+                <legend><h4 class="fontc"><%#= "#{drop_down_value_description(@address.non_mailing_address_type)} Address" %></h4></legend>
+                <%# if @entity_type == 6150 %>
+                  <li>
+                    <%#= arg_object.label :non_mailing_in_care_of %>
+                    <%#= arg_object.text_field :non_mailing_in_care_of, title1: "Care Of", maxlength: "20" %>
+                  </li>
+                <%# end %>
+
+                <li class="required">
+                    <%#= arg_object.label :non_mailing_address_line1 %>
+                    <%#= arg_object.text_field :non_mailing_address_line1, title1: "Address Line1", maxlength: "50" %>
+                </li>
+
+                <li>
+                    <%#= arg_object.label :non_mailing_address_line2 %>
+                    <%#= arg_object.text_field :non_mailing_address_line2, title1: "Address Line2", maxlength: "50" %>
+                </li>
+
+
+                <li class="required">
+                    <%#= arg_object.label :non_mailing_city %>
+                     <%# if @entity_type == 6150 %>
+                        <%#= arg_object.select :non_mailing_city, CodetableItem.item_list(10,"city list").collect { |p| ["#{p.short_description} ", p.short_description] }, { :include_blank => 'Select a city' } %>
+                    <%#else%>
+                        <%#= arg_object.text_field :non_mailing_city, title1: "City", maxlength: "50" %>
+                     <%#end%>
+                </li>
+
+                <li  class="required">
+                  <%#= arg_object.label :non_mailing_state %>
+                    <%# if @entity_type == 6150 %>
+                      <%#= arg_object.text_field :non_mailing_state, :value => get_state(5793), :disabled => true %>
+                    <%#else%>
+                         <%#= arg_object.select :non_mailing_state, CodetableItem.item_list(104,"state list").collect { |p| ["#{p.long_description} ", p.id] }, { :include_blank => 'Select a state' } %>
+                    <%#end%>
+                </li>
+
+
+
+                <div class="row">
+                  <div class="large-7 columns">
+                     <li class="required">
+                        <%#= arg_object.label :non_mailing_zip %>
+                        <%#= arg_object.number_field :non_mailing_zip, title1: "Zip", min: 0,min: 0,onkeypress: "return isLimitedNaturalNumber(event,5)" %>
+                      </li>
+                  </div>
+                  <div class="large-5 columns">
+                    <li>
+                        <%#= arg_object.label :non_mailing_zip_suffix %>
+                        <%#= arg_object.number_field :non_mailing_zip_suffix,onkeypress: "return isLimitedNaturalNumber(event,4)"  %>
+                    </li>
+                  </div>
+                </div>
+
+                <li>
+                  <%#= arg_object.label :non_mailing_county %>
+                  <%#= arg_object.select :non_mailing_county, CodetableItem.item_list(12,"County List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'select a county' }, title1: "Enter County", data: {tooltip1: '' } %>
+                </li>
+
+                <%#= arg_object.hidden_field :non_mailing_address_type %>
+
+                <%# unless @address.new_non_mailing_address %>
+                    <fieldset class="radio">
+                    <legend class="radiolegend">
+                        <%#= "Save Prior #{drop_down_value_description(@address.non_mailing_address_type)} Address" %>
+                    </legend>
+                        <div class="button-group">
+                           <label class="radio-button" for="address_save_prior_non_mailing_address_y"><%#= arg_object.radio_button :save_prior_non_mailing_address, "Y"%>&nbsp;Yes</label>
+                            <label class="radio-button" for="address_save_prior_non_mailing_address_n"><%#= arg_object.radio_button :save_prior_non_mailing_address, "N"%>&nbsp;No</label>
+                        </div>
+                    </fieldset>
+                <%# end %>
+
+                <li>
+                    <%#= arg_object.label :notes %>
+                    <%#= arg_object.text_area :notes, maxlength: "255" %>
+                </li>
+
+               </div>
+            </div>
+         </fieldset>
+
+  <%# end %>
+
+ </ul> -->
+

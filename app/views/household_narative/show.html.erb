@@ -1,0 +1,11 @@
+<fieldset>
+<section class="solidbody">
+  <legend><%= set_subheader("#{@long_description} comments for household: #{@household.name}") %></legend>
+
+  <p>
+  	<%= render 'notes/notes_field_show', arg_notes: @notes_for_type %>
+  </p>
+
+	<%= link_to 'Back', household_narative_index_path,class: "secondary button radius" %>
+</section>
+</fieldset>

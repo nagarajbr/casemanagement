@@ -1,0 +1,14 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Warrant Line Item details for Provider:  #{provider_name(@provider)} " ) %>
+			</legend>
+			<br>
+			<%= render  "selected_invoice",arg_provider_invoice:@provider_invoice,arg_service_authorization_object:@service_authorization_object %>
+			<P></P>
+			<% if @service_authorization_object.service_type == 6215 %>
+				<%= render  "service_authorization_line_items/common_view_service_authorization_line_item" ,arg_line_item:@service_authorization_line_item%>
+			<% else%>
+				<%= render  "service_authorization_line_items/common_view_non_transportation_service_authorization_line_item",arg_line_item:@service_authorization_line_item %>
+			<% end%>
+			<P></P>
+			<%= link_to "Back ",provider_invoice_line_items_index_path(@provider_invoice.id), class: "secondary button radius" %>

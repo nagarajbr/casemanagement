@@ -1,0 +1,111 @@
+<%= form_for(@service_authorization_line_item, :url => transport_service_authorization_line_item_update_path(@provider_service_authorization.id,@service_authorization_line_item.id), method: :put ) do |f| %>
+
+  <section class="solidbody">
+  <fieldset>
+  	<legend> <%= set_subheader("Edit Service Plan Line Item for Provider:  #{provider_name(@provider)}") %> </legend><br>
+  		<%= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+			<P></P>
+  	 <%= render "shared/common_error", object_argument: @service_authorization_line_item %><br>
+  	 <br>
+    <ul>
+     <div class="row">
+          <div class="large-5 columns">
+		   <p>
+			    <b>Line Item Status:  </b>
+                <%= drop_down_value_description(@service_authorization_line_item.line_item_status) %>
+			</p>
+			<p>
+			    <b>Service Date:  </b>
+                <%= format_db_date(@service_authorization_line_item.service_date) %>
+			</p>
+			<p>
+			   <%= render  "common_start_address", arg_object: @service_authorization_line_item %>
+			</p>
+			<p>
+			   <%= render  "common_end_address", arg_object: @service_authorization_line_item %>
+			</p>
+
+
+            <li>
+			    <%= f.label :service_begin_time%>
+
+			     <%= f.time_select :service_begin_time,
+                                            :combined => true,
+                                            :default => Time.now.change(:hour => 8, :min => 00),
+                                            :minute_interval => 15,
+                                            :time_separator => "",
+                                            :start_hour => 00,
+                                            :start_minute => 00,
+                                            :end_hour => 23,
+                                            :end_minute => 45,
+                                            :ampm => true,
+                                            :include_blank => true %>
+			</li>
+			 <li>
+			    <%= f.label :service_end_time%>
+
+			      <%= f.time_select :service_end_time,
+                                            :combined => true,
+                                            :default => Time.now.change(:hour => 8, :min => 00),
+                                            :minute_interval => 15,
+                                            :time_separator => "",
+                                            :start_hour => 00,
+                                            :start_minute => 00,
+                                            :end_hour => 23,
+                                            :end_minute => 45,
+                                            :ampm => true,
+                                            :include_blank => true %>
+			</li>
+			<p>
+			    <b>Estimated Distance Travelled:  </b>
+                <%= @service_authorization_line_item.quantity %><%= drop_down_value_description(@service_authorization_line_item.unit_of_measure) %>
+			</p>
+			<p>
+			    <b>Estimated Cost:  </b>
+                <%= number_to_currency_br(@service_authorization_line_item.estimated_cost) %>
+			</p>
+
+			 <li>
+			    <%= f.label :provider_invoice%>
+			    <%= f.text_field :provider_invoice,  maxlength: "50" %>
+			</li>
+
+			 <li>
+			    <%= f.label "Actual Distance Travelled"%>
+			    <table>
+			    	<tr>
+			    		<td><%= f.number_field :actual_quantity, :step => 0.01, onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %></td>
+			    		<td>  <%= f.submit "Recalculate Cost ",:name => "recalculate_cost",class: 'button radius'%></td>
+			    	</tr>
+			    </table>
+
+			</li>
+
+
+			 <li>
+			    <%= f.label :actual_cost%>
+			    <%= f.number_field :actual_cost,:disabled => true %>
+			</li>
+			 <li>
+			    <%= f.label :override_reason%>
+			    <%= f.text_field :override_reason,maxlength: "250" %>
+			</li>
+			 <li>
+			    <%= f.label :notes%>
+			    <%= f.text_area :notes,maxlength: "250"  %>
+			</li>
+
+
+
+
+	 	  </div>
+
+	     </div>
+	   </ul>
+	    <p>
+	      <%= link_to "Cancel", service_authorization_line_item_show_path(@provider_service_authorization.id,@service_authorization_line_item.id) ,class: 'button secondary'%>
+	      <%= f.submit "Save ",:name => "save",class: 'button radius'%>
+	    </p>
+	  </fieldset>
+	</section>
+	<% end %>

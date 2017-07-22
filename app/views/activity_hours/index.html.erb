@@ -1,0 +1,51 @@
+<!-- wrong object not used
+
+
+<fieldset>
+<section class="solidbody">
+	<legend> <%= set_subheader("#{drop_down_value_description(@action_plan_detail.incometype)} income adjustment details for: #{client_full_name(@client)}") %> </legend>
+<%= render "parent_income_detail", arg_income_detail:@income_detail %>
+<p></p>
+<table>
+	<caption style="text-align:inherit">
+	<div class="fontc">
+	<%= "Adjustment details" %>
+	</div>
+	<p> </p> </caption>
+	<thead>
+	    <tr>
+			<th> Adjustment Amount </th>
+			<th> Adjustment Reason </th>
+			<th> Action </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @adjust_reasons.each do |adjust_reason| %>
+		 <tr>
+		  <td>  <%=  number_to_currency_br(adjust_reason.adjusted_amount) %></td>
+		  <% if adjust_reason.adjusted_reason.present? %>
+		  	<td>  <%= drop_down_value_description(adjust_reason.adjusted_reason) %></td>
+		  <% else %>
+		    <td></td>
+		  <% end %>
+		  <td>
+		  	<% if validate_authorization(218) %>
+		  		<%#= link_to 'Edit', edit_income_detail_income_detail_adjust_reason_path(@income_detail,adjust_reason),id: "hyperlink" %> |
+		  	<% end %>
+		  	<% if validate_authorization(219) %>
+		  		<%#= link_to 'Delete', income_detail_income_detail_adjust_reason_path(@income_detail,adjust_reason), method: :delete, data: { confirm: 'Are you sure?' },class: "alert", id: "hyperlink_alert" %>
+		  	<% end %>
+			</td>
+		 </tr>
+		<% end %>
+	</tbody>
+</table>
+<%= paginate @adjust_reasons %>
+<%= link_to("Back", income_income_details_path(@income_detail.income_id) , class: 'secondary button radius') %>
+<% if validate_authorization(439) %>
+	<%#= link_to("Add Adjustment", new_income_detail_income_detail_adjust_reason_path(@income_detail) , class: 'button radius') %>
+<% end %>
+</section>
+</fieldset>
+
+-->

@@ -1,0 +1,25 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- used as partial in other steps -->
+<table>
+	<caption style="text-align:inherit"><b> Program Benefit Members in Eligibility Determination</b><p></p></caption>
+  	<thead>
+    	<tr>
+			<th> Name </th>
+			<th> SSN </th>
+			<th> Gender</th>
+			<th> Date of Birth </th>
+			<th> Status </th>
+		</tr>
+	</thead>
+	<tbody>
+		<% arg_collection.each do |arg_member| %>
+			<tr>
+				<td>  <%= arg_member.client_full_name %></td>
+				<td><%= format_SSN(arg_member.ssn) %></td>
+				<td><%=  drop_down_value_long_description(arg_member.gender)%></td>
+				<td><%= format_db_date(arg_member.dob) %></td>
+				<td><%=  drop_down_value_description(arg_member.member_status)%></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

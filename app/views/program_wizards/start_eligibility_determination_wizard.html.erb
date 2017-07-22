@@ -1,0 +1,52 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+
+	<legend><%= set_subheader("Eligibility determination for selected program unit of client: #{client_full_name(@client)} #{@run_month_description}") %></legend>
+
+ 	<%= render 'selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+
+	<%= form_for(@program_wizard,:url => process_eligibility_determination_wizard_path(@selected_program_unit.id), method: :put) do |arg_wizard| %>
+		<%= render "shared/common_error", object_argument: @program_wizard %>
+		<% if  "#{@program_wizard.current_step}_step" == "program_wizard_first_step" %>
+
+          <b><h4>Step 1 of 3</h4></b>
+      		</b><h5>Select eligibility determination month </h5></b>
+	    <% end %>
+
+	     <% if  "#{@program_wizard.current_step}_step" == "program_wizard_second_step" %>
+
+	           <b><h4>Step 2 of 3</h4></b>
+	           <% if @program_unit_benefit_members.blank?%>
+	           <b><h5> Add program benefit members </h5></b>
+	           <% end %>
+	    <% end %>
+
+	    <% if  "#{@program_wizard.current_step}_step" == "program_wizard_last_step" %>
+
+	          <b><h4>Step 3 of 3</h4></b>
+	          <b><h5>Review financial information of selected members</h5></b>
+	    <% end %>
+
+	    <ul>
+	       	 <div class="row">
+
+					<% if  "#{@program_wizard.current_step}_step" == "program_wizard_first_step" %>
+						<div class="large-5 columns">
+		                    <%= render "#{@program_wizard.current_step}_step", :arg_object => arg_wizard %>
+		                </div>
+					<% else %>
+						<div class="large-12 columns">
+		                   <%= render "#{@program_wizard.current_step}_step", :arg_object => arg_wizard %>
+		                </div>
+					<% end %>
+	          </div>
+
+	    </ul>
+	    <div>
+      		<%= render "program_wizard_buttons_next_back_finish", :arg_object => arg_wizard , :arg_instance =>@program_wizard %>
+        </div>
+
+	<% end %>
+</section>
+</fieldset>

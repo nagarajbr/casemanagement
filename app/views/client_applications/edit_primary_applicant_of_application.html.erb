@@ -1,0 +1,28 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+	<legend>
+			<%= set_subheader("Edit primary applicant for the application of client: #{client_full_name(@client)}") %>
+		</legend><br>
+		<%= form_for(@primary_applicant,:url => update_primary_applicant_of_application_path(@client_application.id), method: :put) do |f| %>
+			  <%= render "shared/common_error", object_argument: @primary_applicant %>
+
+				    <ul>
+					    <div class="row">
+					        <div class="large-5 columns">
+								 <li class="required">
+								  <%= f.label :client_id,"Primary Applicant" %>
+								  <%= f.select :client_id, @application_members.collect { |p| ["#{get_client_full_name(p.client_id)} ", p.client_id ] },{ :include_blank => 'Choose Primary Applicant' },title: "Choose Primary Applicant from List of Application Members", data: {tooltip: '' } %>
+								</li>
+
+							</div>
+					    </div>
+				    </ul>
+				    <p>
+				      <%= link_to 'Cancel', client_application_path(@client_application.id),class: "secondary button radius" %>
+				      <%= f.submit "Save", class: 'button radius'%>
+				    </p>
+
+		<% end %>
+</section>
+</fieldset>

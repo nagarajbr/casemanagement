@@ -1,0 +1,62 @@
+
+<fieldset>
+	<section class="solidbody">
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+			<p>
+				<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+			</p>
+		 	<p><legend><%= set_subheader("Resource adjustment information for: #{client_full_name(@client)}") %></legend></p>
+		<% else %>
+			<legend><%= set_subheader("Resource adjustment information for: #{client_full_name(@client)}") %></legend>
+			<p></p>
+		<% end %>
+
+	<%= render "parent_resource",arg_resource: @resource %>
+    <%= render "parent_resource_detail",arg_resource_detail:@resource_detail %>
+		<table>
+		<caption class="fontc"> Resource Detail Adjustments <p></p></caption>
+		<thead>
+		    <tr>
+				<th> Reason Code </th>
+				<th> Resource Adjustment Amount </th>
+				<th> Receipt Date</th>
+				<th> Adjustment Begin Date </th>
+				<th> Adjustment End Date </th>
+				<th> Adjustment number of Months</th>
+				<th> Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @resource_adjustments.each do |resource_adjustment| %>
+				<tr>
+					<td>  <%= drop_down_value_description(resource_adjustment.reason_code) %></td>
+					<td>  <%= number_to_currency_br(resource_adjustment.resource_adj_amt) %></td>
+					<td>  <%= format_db_date resource_adjustment.receipt_date %></td>
+					<td>  <%= format_db_date resource_adjustment.adj_begin_date %></td>
+					<td>  <%= format_db_date resource_adjustment.adj_end_date %></td>
+					<td>  <%= resource_adjustment.adj_num_of_months %></td>
+					<td>
+						<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+							<%= link_to "Show",show_household_member_resource_detail_adjustment_path(@client.id,@resource_detail.id,resource_adjustment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>
+						<% else %>
+							<%= link_to "Show",show_resource_adjustment_path(resource_adjustment.id),id: "hyperlink" %>
+						<% end %>
+
+				    </td>
+				</tr>
+			<% end %>
+		</tbody>
+		</table>
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+			<%= link_to 'Back', household_member_resource_detail_index_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "secondary button radius" %>
+			<%= link_to("Add resource detail adjustment", new_household_member_resource_detail_adjustment_path(@client.id,@resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') %>
+			<%= link_to("Next", household_member_resource_detail_index_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') if ResourceAdjustment.resource_details_adjustments_found_for_the_given_resource_detail_id?(@resource_detail.id) %>
+		<% else %>
+			<%= link_to 'Back', resource_resource_details_path(@resource),class: "secondary button radius" %>
+			<%= link_to("Add Adjustment", new_resource_adjustment_path , class: 'button radius') %>
+		<% end %>
+
+
+</section>
+  </fieldset>
+

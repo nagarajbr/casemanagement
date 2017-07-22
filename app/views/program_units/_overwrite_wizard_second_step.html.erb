@@ -1,0 +1,11 @@
+<%= render "shared/common_error", object_argument: @program_unit %>
+<ul>
+ 	<div class="row">
+      	<div class="large-5 columns">
+			<li class="required">
+		  		<%= label_tag :beneficiary_client_id,"#{@label_name}" %>
+		  		<%= select_tag "beneficiary_client_id", options_for_select(@program_unit_members.collect { |p| ["#{get_client_full_name(p.client_id)} ", p.client_id] },"#{@primary_contact}"),{ :prompt => "#{@prompt_msg}" } %>
+			</li>
+		</div>
+	</div>
+</ul>

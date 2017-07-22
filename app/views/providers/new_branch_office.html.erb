@@ -1,0 +1,21 @@
+<fieldset>
+	<section class="solidbody">
+<legend><%= set_subheader("Enter information for a new branch office for provider: #{@head_provider.provider_name}") %></legend>
+<%= render "selected_head_provider" %>
+<%= form_for(@provider, url: create_branch_office_path(@head_provider_id)) do |f| %>
+  <%= render "shared/common_error", object_argument: @provider %>
+    <ul>
+      <div class="row">
+        <div class="large-4 columns">
+	<%= render 'form_branch_office',arg_object: f %>
+	 </div>
+      </div>
+    </ul>
+
+    <p>
+      <%= link_to 'Cancel', provider_index_path,class: "secondary button radius" %>
+      <%= f.submit "Save", class: 'button radius'%>
+    </p>
+	<% end %>
+    </section>
+</fieldset>

@@ -1,0 +1,15 @@
+
+<!--Manoj Patil 10/16/2014  -->
+<p>
+		<%#= render 'household_physical_address', arg_addr:arg_new_address %>
+</p>
+<% if arg_hh_members_in_new_address_collection.present? %>
+	<%= render 'members_in_new_address',arg_collection:arg_hh_members_in_new_address_collection,arg_address:arg_new_address %>
+   		 <%= link_to "Select Member",add_member_to_new_household_address_path(arg_new_address.id), class: 'button radius' %>
+<% else %>
+		<h5 class="subheader"> select members from the household who are moving to new address.</h5>
+		<p></p>
+		<p>
+		 	 <%= link_to "Select Member",add_member_to_new_household_address_path(arg_new_address.id), class: 'button radius' %>
+		</p>
+<%end%>

@@ -1,0 +1,33 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Program Unit for Client: #{client_full_name(@client)}") %></legend>
+		<%= render 'program_units/selected_program_unit_details',arg_selected_program_unit: @program_unit %>
+		<h5><%= set_subheader("Add Program Unit Member") %></h5>
+		<%= render 'program_unit_member_list',arg_pgu_members:@program_unit_members, arg_pgu:@program_unit,arg_from:@from %>
+		<%= form_for(@program_unit_member, :url => add_program_unit_member_path(@program_unit.id,@from), method: :post) do |f| %>
+	  		<%= render "shared/common_error", object_argument: @program_unit_member %>
+	    	<ul>
+		     	<div class="row">
+		          <div class="large-4 columns">
+		               	<li class="required">
+						      <%= f.label :client_id %>
+						      <%= f.select :client_id, @household_members.collect { |p| ["#{get_client_full_name(p.client_id)}", p.client_id] },{ :include_blank => 'Select Program Unit Member' } %>
+						</li>
+
+						<li class="required">
+						      <%= f.label :member_status%>
+						      <%= f.select :member_status, @program_unit_member_status.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Status' } %>
+						</li>
+			 	  </div>
+			    </div>
+			</ul>
+		    <p>
+		    	<%= link_to 'Cancel',@cancel_url ,class: "secondary button radius" %>
+		        <%= f.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+		        <%= f.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+		    </p>
+
+		<% end %>
+
+	</section>
+</fieldset>

@@ -1,0 +1,58 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- 6th step - Document Verification -->
+
+
+
+  <% if @client_doc_verification_list.present? %>
+  <b> Verified Documents of Members</b>
+  <p></p>
+    <table>
+                <thead>
+                    <tr>
+                      <th> Program Unit Member </th>
+                      <th> Document Type </th>
+                      <th> Verification Date </th>
+                      <th>                   </th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <% @client_doc_verification_list.each do |arg_doc| %>
+                        <tr>
+                          <td>  <%= get_client_full_name(arg_doc.client_id) %></td>
+                          <td>  <%= drop_down_value_description(arg_doc.document_type) %></td>
+                          <td>  <%=  format_db_date(arg_doc.document_verfied_date) %></td>
+                            <td><%= link_to "Delete",delete_program_unit_verification_document_path(@selected_program_unit.id,arg_doc.id), method: :delete, data: { confirm: 'Are you sure?' },id: "hyperlink_alert" %></td>
+
+
+                        </tr>
+                     <% end %>
+                </tbody>
+          </table>
+  <% else %>
+         <h5 class="subheader">No verification documents are added for program unit members.Click Add Document button to add verification document</h5>
+  <% end %>
+
+     <%= link_to 'Add Document',new_program_unit_verification_document_path(@selected_program_unit.id), class: "button radius"%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

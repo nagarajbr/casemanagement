@@ -1,0 +1,51 @@
+<%= form_for arg_service_authorization, url: generate_provider_invoice_path(arg_service_authorization.id), method: :get do |f| %>
+<b> Submitted <%= arg_service_name %> Service Plan Line Item(s) Pending Approval</b>
+		<p></p>
+		<table>
+			  <thead>
+			    <tr>
+			    	<th> Select </th>
+					<th> Service Date </th>
+					<% if arg_service_authorization.service_type == 6215 %>
+						<th> Day </th>
+						<th> Begin Time </th>
+						<th> Actual Distance </th>
+					<% end %>
+					<th> Actual Cost</th>
+					<th> Provider submitted Invoice</th>
+
+
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% arg_authorization_line_item.each do |arg_line_item| %>
+					<%if arg_line_item.line_item_status == 6169 %>
+						<tr>
+							<td>  <%= check_box_tag "lineitem_ids[]", arg_line_item.id %></td>
+							<td>  <%= format_db_date(arg_line_item.service_date)%></td>
+							<% if arg_service_authorization.service_type == 6215 %>
+								<td>  <%= day_name_for_the_date(arg_line_item.service_date)%></td>
+								<td>  <%= arg_line_item.service_begin_time.strftime("%I:%M %p") %></td>
+								<td>  <%= "#{arg_line_item.actual_quantity} #{drop_down_value_description(arg_line_item.unit_of_measure)}" %></td>
+							<% end %>
+							<td>  <%= number_to_currency_br(arg_line_item.actual_cost) %></td>
+							<td>  <%= arg_line_item.provider_invoice %></td>
+
+
+							<td>
+							 <%= link_to "Show",service_authorization_line_item_show_path(arg_service_authorization.id,arg_line_item.id),id: "hyperlink" %>
+							</td>
+						</tr>
+						<%end%>
+					 <% end %>
+				</tbody>
+			</table>
+		<%= link_to "Back ",provider_service_authorizations_index_path, class: "secondary button radius" %>
+		<% if validate_authorization(729) %>
+		   <%#= f.submit "Approve", class: 'button radius' %>
+		<% end %>
+		<% if validate_authorization(742) %>
+		   <%#= f.submit "Reject", class: 'button radius' %>
+		<% end %>
+<%end%>

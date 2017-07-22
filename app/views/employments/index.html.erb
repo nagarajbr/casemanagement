@@ -1,0 +1,79 @@
+<fieldset>
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+
+		<legend> <%= set_subheader("Employment information for: #{client_full_name(@client)}" ) %></legend>
+
+	<% if @employment.present? %>
+
+
+			<caption style="text-align:inherit"> <p><b><%=("#{pluralize_without_count(@employment.count,"Employment","")}") %></b></p></caption>
+			<table>
+			  <thead>
+			    <tr>
+					<th> Employer Name </th>
+					<th> Begin Date </th>
+					<th> End Date </th>
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @employment.each do |arg_emp| %>
+						<tr>
+							<td>  <%= employer_name(arg_emp.employer_id)%><%=(arg_emp.employer_id)%></td>
+							<td>  <%= format_db_date(arg_emp.effective_begin_date) %></td>
+							<td>  <%= format_db_date(arg_emp.effective_end_date)  %></td>
+							<td>
+							 <%= link_to "Show",employment_path(@menu,arg_emp.id),id: "hyperlink" %>|
+							 <%= link_to("Employment details", employment_employment_details_path(@menu,arg_emp),id: "hyperlink") %>
+							</td>
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+			<%= paginate @employment %>
+			<%# if validate_authorization(388) %>
+			    <%= link_to("New", new_employment_path(@menu) , class: 'button radius') %>
+		    <%# end %>
+		    <%# if validate_authorization(731) %>
+			     <% if @client_assessment.present? %>
+					 <%if !(@client_assessment.first_step?)%>
+						 <%= link_to "Previous", process_previous_step_path,class: 'button radius' %>
+					 <%end%>
+					 <%if !(@client_assessment.last_step?)%>
+						<%= link_to "Next",process_next_step_path,class: 'button' %>
+					<%end%>
+					<%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+				<% end %>
+			<%# end %>
+
+	<%else%>
+		<%# if validate_authorization(388) %>
+		     <p>
+	        <h5 class="subheader"> Employment information is not found. Click New to enter employment information.</h5>
+	      </p>
+	        <%= link_to 'New',new_employment_path(@menu), class: "button radius"%>
+        <%# else %>
+        	<!-- <h5 class="subheader">No Employment information to show.</h5> -->
+        <%# end %>
+        <%# if validate_authorization(731) %>
+		        <% if @client_assessment.present? %>
+					<%if !(@client_assessment.first_step?)%>
+						 <%= link_to "Previous", process_previous_step_path,class: 'button ' %>
+					<%end%>
+					<%if !(@client_assessment.last_step?)%>
+						<%= link_to "Next",process_next_step_path,class: 'button' %>
+					<%end%>
+					<%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+		 	  	<% end %>
+		<%#end%>
+	<% end %>
+<%else%>
+	<legend> <%= set_subheader("Employment information for: #{client_full_name(@client)}" ) %></legend>
+   		<p>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+   			<%= render "shared/search_client_button" %>
+<%end%>
+</section>
+</fieldset>

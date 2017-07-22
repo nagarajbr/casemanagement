@@ -1,0 +1,36 @@
+<!-- NOT USED
+
+
+<%# if @employments.present? %>
+		<caption style="text-align:inherit"> <p><b><%#=("#{pluralize_without_count(@employments.count,"Employment:","")}") %></b></p></caption>
+		<table>
+		  <thead>
+		    <tr>
+				<th> Employer Name </th>
+				<th> Begin Date </th>
+				<th> End Date </th>
+				<th> Action </th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<%# @employments.each do |arg_emp| %>
+					<tr>
+						<td>  <%= employer_name(arg_emp.employer_id)%></td>
+						<td>  <%= format_db_date(arg_emp.effective_begin_date) %></td>
+						<td>  <%= format_db_date(arg_emp.effective_end_date)  %></td>
+						<td>
+						 <%#= link_to "Show",show_household_member_employment_path(@client.id,arg_emp.id,'HOUSEHOLD_MEMBER_STEP_WIZARD',@income.id),id: "hyperlink" %>|
+						 <%#= link_to("Employment details", household_member_employment_detail_index_path(@client.id,arg_emp.id,'HOUSEHOLD_MEMBER_STEP_WIZARD',@income.id),id: "hyperlink") %>
+						</td>
+					</tr>
+				 <%# end %>
+			</tbody>
+		</table>
+		<p>
+    		<h5 class="subheader"><%#=@display_add_employment_detail_records_text  if @display_add_employment_detail_records_text != 'NONE'%></h5>
+    	</p>
+
+		    <%#= link_to("New Employment", new_household_member_employment_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD',@income.id) , class: 'button radius') %>
+<%# end %>
+
+-->

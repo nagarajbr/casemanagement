@@ -1,0 +1,80 @@
+
+  <!--
+  Author : Manoj Patil
+  Date : 11/20/2015
+
+  -->
+  <fieldset>
+  <section class="solidbody">
+    <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+         <legend><%= set_subheader("Employment detail for household member: #{client_full_name(@client)}") %></legend>
+        <p>
+          <%= (render 'households/selected_household_partial',arg_household: @household)if @household.present?%>
+        </p>
+    <% else %>
+        <% if @client_assessment.present? %>
+            <legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+          <p>
+            <%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal:  @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+          </p>
+        <% else %>
+          <legend><%= set_subheader("Employment detail for client: #{client_full_name(@client)}") %></legend>
+        <% end %>
+    <% end %>
+    <%= render 'selected_employer',arg_employer_name:@employer_name,arg_employment:@employment %>
+
+
+  <p>
+    <b>Position Type: </b>
+    <%= @employment_detail.position_type_desc %>
+  </p>
+
+  <p>
+    <b>Status: </b>
+    <%= drop_down_value_description(@employment_detail.current_status) %>
+  </p>
+
+  <p>
+     <b>Begin Date: </b>
+      <%= format_db_date (@employment_detail.effective_begin_date)  %>
+  </p>
+<p>
+    <b>End Date: </b>
+    <%= format_db_date(@employment_detail.effective_end_date) %>
+  </p>
+
+  <p>
+    <b>Payment Frequency: </b>
+    <%= drop_down_value_description(@employment_detail.salary_pay_frequency) %>
+  </p>
+
+   <p>
+    <b>Salary: </b>
+     <%= number_to_currency_br(@employment_detail.salary_pay_amt) %>
+  </p>
+
+  <p>
+    <b>Hours Per Week: </b>
+     <%= @employment_detail.hours_per_period %>
+  </p>
+
+  <p>
+    <b>Worker: </b>
+    <%= get_user_name(@employment_detail.updated_by)%>
+  </p>
+
+  <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+     <%= link_to 'Back', household_member_employment_detail_index_path(@client.id,@employment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+    <%= link_to 'Edit', edit_household_member_employment_detail_path(@client.id,@employment.id,@employment_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+    <%= link_to "Delete", delete_household_member_employment_detail_path(@client.id,@employment.id,@employment_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),  method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+  <% else %>
+      <%= link_to 'Back', employment_employment_details_path(@menu,@employment.id),class: " secondary button radius" %>
+      <%= link_to 'Edit', edit_employment_employment_detail_path(@menu,@employment.id,@employment_detail.id),class: "button radius" %>
+      <%= link_to "Delete", delete_employment_employment_detail_path(@menu,@employment,@employment_detail),  method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+  <% end %>
+
+
+
+
+</section>
+</fieldset>

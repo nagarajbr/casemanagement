@@ -1,0 +1,20 @@
+<section class="solidbody">
+	<%= render 'selected_intake_queue_record',arg_object: @potential_client_object %>
+
+    <%= set_subheader("Search results") %>
+            <P>
+
+                 <label> This Applicant is not found in our system, register this Applicant first to proceed with Application process
+                 	</label>
+
+           </P>
+
+              <p>
+				<%= link_to "Back",intake_queue_path, class: 'button radius secondary' %>
+        <%# if validate_authorization(295) %>
+				  <%= link_to 'Register New Client',new_client_path, class: "button radius"%>
+        <%# end %>
+			</p>
+
+
+</section>

@@ -1,0 +1,38 @@
+      <li class="required">
+        <%= f.label :expense_due_date, "Expense Due Date" %>
+        <%= f.date_field :expense_due_date, autofocus: true, onkeyup:"validate_date_format(event)" %>
+      </li>
+
+      <li class="required">
+        <%= f.label :expense_amount,"Amount"%>
+         <%= f.number_field :expense_amount, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+      </li>
+
+      <li >
+        <%= f.label "Use" %>
+       <%= f.select :expense_use_code, arg_code_table_list.collect{ |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'select expense use' } %>
+      </li>
+
+      <li >
+        <%= f.label "Payment Method" %>
+        <%= f.select :payment_method, CodetableItem.item_list(38,"Debt Expense Method").collect { |p| ["#{p.short_description} ", p.id ] }, prompt: "select method" %>
+      </li>
+
+      <li >
+        <%= f.label "Payment Status" %>
+        <%= f.select :payment_status, CodetableItem.item_list(39,"Debt Expense Payment Status").collect { |p| ["#{p.short_description} ", p.id ] }, prompt: "select status" %>
+      </li>
+
+        <li >
+          <fieldset class="radio">
+            <legend class="radiolegend">Count</legend>
+              <div class="button-group">
+                <label class="radio-button"><%= f.radio_button :expense_calc_ind, "Y"%>&nbsp;Yes</label>
+                <label class="radio-button"><%= f.radio_button :expense_calc_ind, "N"%>&nbsp;No</label>
+              </div>
+          </fieldset>
+
+      </li>
+
+
+<%= render "notes/notes_field_new_edit", object_argument: arg_notes %>

@@ -1,0 +1,64 @@
+<fieldset>
+<section class="solidbody">
+<% if session[:SCHOOLS_ID].present? %>
+
+    <% if @addresses.present? %>
+      <!-- record found so Normal View Page -->
+
+        <legend><%= set_subheader("Address information for school: #{@school.school_name}" ) %></legend>
+         <% for arg_addr in @addresses   %>
+                    <P>
+                       <fieldset style="width: 50%" id = "test_fieldset">
+                      <legend style=" width: auto " class="legend_group">
+                        <b><%= drop_down_value_description(arg_addr.address_type) %> Address:</b><br>
+                      </legend>
+                      <% if arg_addr.in_care_of.present? %>
+                  <%= " C/O #{arg_addr.in_care_of}"%><br>
+                  <% end %>
+                      <%= arg_addr.address_line1%><br>
+                       <% if arg_addr.address_line2.present? then %>
+                        <%= arg_addr.address_line2 %><br>
+               <% end %>
+                      <%= " #{arg_addr.city}, #{drop_down_value_description(arg_addr.state)}"%>
+                  <% if arg_addr.zip_suffix.present? %>
+                  <%= "#{arg_addr.zip}-#{arg_addr.zip_suffix}"%>
+                  <%else%>
+                  <%= "#{arg_addr.zip}"%>
+                  <% end %><br>
+                  <% if arg_addr.county.present? %>
+                  <%= drop_down_value_long_description(arg_addr.county) %><br>
+                  <% end %>
+                </fieldset>
+
+             <% end %>
+             <p>
+              <% if @notes.present? %>
+                <br><br><b>Notes: </b>
+                <%=  @notes %>
+              <%end%>
+            </p>
+             <p></p>
+        <%= link_to 'Cancel', school_index_path(session[:SCHOOLS_ID]),class: "secondary button radius"  %>
+        <%# if validate_authorization(605) %>
+          <%= link_to 'Edit',edit_schools_address_path, class: "button radius" %>
+        <%# end %>
+     <% else %>
+      <!-- record not found , so show New button. -->
+      <legend><%= set_subheader("Address information for school: #{@school.school_name}" ) %></legend>
+        <%# if validate_authorization(604) %>
+          <h5 class="subheader">No address information found. Click New to add address information.</h5>
+          <p></p>
+          <%= link_to 'New',new_schools_address_path, class: "button radius" %>
+        <%# else %>
+          <!-- <h5 class="subheader">No address information to show.</h5> -->
+        <%# end %>
+     <% end %>
+
+<% else %>
+        <legend><%= set_subheader("View Address information" ) %></legend>
+      <h5 class="subheader">School is not selected, Select a school by clicking Search button.</h5><br>
+        <p></p>
+        <%= link_to 'Search', schools_search_path,class: "button radius" %>
+  <% end %>
+</section>
+</fieldset>

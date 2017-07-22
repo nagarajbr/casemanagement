@@ -1,0 +1,22 @@
+<fieldset>
+	<section class="solidbody">
+		<legend> <%= set_subheader("Enter #{(drop_down_value_description(@action_plan.action_plan_type)).camelize(:lower)} outcome information for: #{client_full_name(@client)}") %> </legend>
+				<p>
+				<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+			</p>
+				<%= form_for(@action_plan, :url => outcome_create_path(@action_plan.id), method: :post) do |f| %>
+					 <%= render "shared/common_error", object_argument: @action_plan %><br>
+	       			 <ul>
+						<div class="row">
+			          		<div class="large-5 columns">
+								<%= render 'action_plan_close_attributes',f: f %>
+							</div>
+						</div>
+					</ul>
+					 <p>
+				      <%= link_to 'Cancel', action_plan_path(@action_plan.id),class: "secondary button radius" %>
+				      <%= f.submit "Save", class: 'button radius' %>
+				    </p>
+				<% end %>
+	</section>
+</fieldset>

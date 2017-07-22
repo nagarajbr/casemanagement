@@ -1,0 +1,59 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Case Manager: #{@ls_logged_in_user}'s Program units") %></legend>
+
+	<% if @my_program_units.present? %>
+
+			<table>
+				<caption style="text-align:inherit"> <b> Program Units <b><p></p><caption>
+			  <thead>
+			    <tr>
+					<th> Program Unit ID </th>
+
+					<th> Primary Contact</th>
+					<th> Service Program </th>
+					<th> Disposition </th>
+					<th> Disposition Date </th>
+					<th> Current Participation Status </th>
+
+					<th> Action </th>
+					<!-- <th> Reassign/Transfer </th> -->
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @my_program_units.each do |arg_pgu| %>
+
+						<tr>
+							<td>  <%= arg_pgu.id %></td>
+
+							<td> <%= get_primary_beneficiary_of_program_unit(arg_pgu.id)%></td>
+							<td>  <%= get_service_program_name(arg_pgu.service_program_id) %></td>
+
+							<td>  <%= drop_down_value_description(arg_pgu.disposition_status) %></td>
+							<td>  <%= format_db_date(arg_pgu.disposition_date) %></td>
+							<td>  <%=  ProgramUnit.get_current_participation_status(arg_pgu.id)%></td>
+							<%#= link_to "Select",view_program_unit_summary_path(arg_pgu.id),id: "hyperlink" %>
+							<td><%= link_to "Select",index_eligibility_determination_runs_path(arg_pgu.id),id: "hyperlink" %></td>
+
+                      <!--  <%# if arg_pgu.show_case_transfer_link == true %>
+							<td><%#= link_to "Reassign/Transfer",case_transfer_new_path(arg_pgu.id),id: "hyperlink" %></td>
+
+							<%#end%> -->
+
+
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+			<div>  <%= paginate @my_program_units %></div>
+
+	<%else%>
+	        <h5 class="subheader">Currently No Program units are assigned to you. </h5>
+	        <p></p>
+
+	<%end%>
+
+</section >
+</fieldset>

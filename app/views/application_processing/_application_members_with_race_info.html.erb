@@ -1,0 +1,23 @@
+<b><h6>Application Members with race information</h6></b>
+<table>
+	<thead>
+		<tr>
+			<th> Name </th>
+			<th> Social Security Number </th>
+			<th> Date of Birth </th>
+			<th> Gender </th>
+			<!-- <th> Ethnicity </th> -->
+		</tr>
+	</thead>
+	<tbody>
+		<% application_members_with_race.each do |arg_m| %>
+			<tr>
+				<td>  <%=  arg_m.client_full_name %></td>
+				<td>  <%=  format_SSN(arg_m.ssn) %></td>
+				<td>  <%=  format_db_date (arg_m.dob) %></td>
+				<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+				<!-- <td>  <%#=  drop_down_value_description(client_object.ethnicity) %></td> -->
+			</tr>
+		<% end %>
+	</tbody>
+</table>

@@ -1,0 +1,21 @@
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+		<%= form_for @supplement_payment, url: supl_retro_bns_payment_path(@supplement_payment.id), method: :patch do |f| %>
+			<fieldset>
+				<legend><%= set_subheader("Supplement Payments for client: #{@client.first_name}, #{@client.last_name}") %></legend>
+				<br>
+		        <%= render "shared/common_error", object_argument: @supplement_payment %>
+		        <%= render 'form', arg_object: f,arg_payment_types:@payment_types,arg_payment_status:@payment_status,arg_current_date:@current_date,arg_payment_amount:@payment_amount  %>
+		        <%= link_to 'Cancel', supl_retro_bns_payment_path(@supplement_payment.id),class: "button secondary radius" %>
+				<%= f.submit "Save", class: 'button radius' %>
+		        <br>
+				</fieldset>
+		<% end %>
+	<% else %>
+		<fieldset>
+	        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+	        <p></p>
+	        <%= render "shared/search_client_button" %>
+	    </fieldset>
+ 	<% end %>
+</section>

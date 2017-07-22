@@ -1,0 +1,64 @@
+
+	<% if arg_activity_hours.present? %>
+		<b>  Planned Work participation hours for clients in the Program unit </b>
+			<p>
+				<table>
+					 <thead>
+					    <tr>
+							<th> Client Name</th>
+							<th> Activity Name</th>
+							<th> Duration</th>
+							<th> Start Date</th>
+							<th> Core Activities (Hours/Week)</th>
+							<th> Non Core Activities (Hours/Week) </th>
+							<th> Total (Hours/Week) </th>
+						</tr>
+					  </thead>
+					    <tbody>
+					    	<% footer_total_core_hours = footer_total_non_core_hours = footer_total_hours = 0 %>
+					    	<%  arg_activity_hours.each do |each_activity|%>
+								<tr>
+									<td> <%= get_client_full_name_with_id(each_activity.client_id) %></td>
+									<td> <%= each_activity.activity_description %></td>
+									<td> <%= each_activity.number_of_weeks %> Weeks</td>
+									<td> <%= format_db_date(each_activity.start_date) %></td>
+									<td> <%= each_activity.core_hours.to_i %></td>
+									<td> <%= each_activity.non_core_hours.to_i  %></td>
+										<% total = 0
+											if each_activity.core_hours.present? && each_activity.non_core_hours.present?
+												total =  each_activity.core_hours +  each_activity.non_core_hours
+											else
+												if each_activity.core_hours.present?
+													total =  each_activity.core_hours
+												end
+												if each_activity.non_core_hours.present?
+													total =  each_activity.non_core_hours
+												end
+											end
+										%>
+									<td> <%= total  %></td>
+								</tr>
+								<%
+								if each_activity.core_hours.present?
+									footer_total_core_hours = footer_total_core_hours + each_activity.core_hours
+								end
+								if each_activity.non_core_hours.present?
+									footer_total_non_core_hours = footer_total_non_core_hours + each_activity.non_core_hours
+								end
+
+								footer_total_hours = footer_total_hours + total
+
+								%>
+							<% end %>
+						</tbody>
+						<!-- <tfoot>
+							<td>Grand Total</td>
+							<td></td>
+							<td><%#= footer_total_core_hours%></td>
+							<td><%#= footer_total_non_core_hours%></td>
+							<td><%#= footer_total_hours%></td>
+						</tfoot> -->
+
+				</table>
+			</p>
+	<% end %>

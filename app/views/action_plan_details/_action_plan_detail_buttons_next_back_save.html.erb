@@ -1,0 +1,18 @@
+<%# if !(arg_instance.last_step?) %>
+	<%#= link_to "Exit Wizard", action_plan_action_plan_details_path(@action_plan) ,class: 'secondary button' %>
+<%# end %>
+
+<%= arg_object.submit "Back", :name => "back_button",class: 'secondary button' unless arg_instance.first_step? %>
+<%= link_to "Exit Wizard", action_plan_action_plan_details_path(@action_plan) ,class: 'secondary button' %>
+<%# if arg_instance.last_step? %>
+	<%#= arg_object.submit "Finish",class: 'button' %>
+<%# else %>
+	<% if arg_instance.first_step? %>
+		<%= arg_object.submit "Next",:name => "next_button",class: 'button',id: "action_plan_detail_next" %>
+	<% else %>
+		<%= arg_object.submit "Skip Warnings",:name => "skip_warnings_button",class: 'button',id: "action_plan_detail_skip_warnings" %>
+		<%#= arg_object.submit "Next",:name => "next_button",class: 'button',id: "action_plan_detail_next" %>
+	<% end %>
+	<%#= arg_object.submit "Skip Warnings",:name => "skip_warnings_button",class: 'button',id: "action_plan_detail_skip_warnings" %>
+
+<%# end %>

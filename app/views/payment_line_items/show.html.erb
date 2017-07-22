@@ -1,0 +1,70 @@
+<fieldset>
+  <section class="solidbody">
+  <legend><%= set_subheader("Payment details for selected warrant number for client: #{client_full_name(@client)}") %></legend>
+  <% if session[:CLIENT_ID].present? %>
+  <% if @client_payment_line_item_show.present? %>
+
+    <p>
+       <b>Warrant number:</b>
+       <%= @client_payment_line_item_show.determination_id %>
+    </p>
+
+    <p>
+       <b>Service program:</b>
+       <%= @client_payment_line_item_show.title %>
+    </p>
+
+    <p>
+        <b>Program unit id:</b>
+         <%= @client_payment_line_item_show.programunitid %>
+    </p>
+
+    <p>
+      <b>Date issued:</b>
+        <%= format_db_date(@client_payment_line_item_show.payment_date) %>
+    </p>
+
+    <p>
+      <b>Check amount:</b>
+         <%= number_to_currency_br(@client_payment_line_item_show.payment_amount)%>
+    </p>
+
+    <p>
+      <b>Check status:</b>
+         <%= drop_down_value_description(@client_payment_line_item_show.payment_status) %>
+    </p>
+
+    <p>
+      <b>AASIS warrant number:</b>
+         <%= @client_payment_line_item_show.aasis_warrant_number %>
+    </p>
+
+    <p>
+      <b>AASIS payment date:</b>
+          <%= format_db_date(@client_payment_line_item_show.paid_date) %>
+    </p>
+
+    <p>
+      <b>Provider Name:</b>
+         <%= @client_payment_line_item_show.provider_name%>
+    </p>
+
+    <p>
+      <b>Case Manager:</b>
+         <%= @client_payment_line_item_show.name %>
+    </p>
+    <!--  <p>
+      <b>over ride information:</b>
+
+
+    </p> -->
+
+
+
+    <%= link_to 'Back', payment_line_items_path,class: "secondary button radius" %>
+
+    <%end%>
+    <%end%>
+
+</section>
+</fieldset>

@@ -1,0 +1,72 @@
+<fieldset>
+	<section class="solidbody">
+		<caption style="text-align:inherit"> <%= set_subheader("Career Plans for: #{client_full_name(@client)}") %></caption>
+		<p></p>
+		<p>
+			<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		</p>
+		<% if   @assessment_id.present?%>
+				<% if @approved_career_pathway_plans.present? || @not_approved_career_pathway_plans.present? %>
+					<% if @approved_career_pathway_plans.present? %>
+						<b>Approved Career Plans</b>
+						<p></p>
+							<%= render 'cpp_plans_list',arg_object: @approved_career_pathway_plans %>
+						<p></p>
+					<% end %>
+
+					<% if @not_approved_career_pathway_plans.present? %>
+						<b>Not Approved Career  Plans</b>
+						<p></p>
+						<%= render 'cpp_plans_list',arg_object: @not_approved_career_pathway_plans %>
+						<p></p>
+					<% end %>
+
+					<%if @notes.present?%>
+							<%= render "notes/notes_field_show", arg_notes: @notes %>
+					<%end%>
+
+					<p>
+						<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+							<%= form_tag create_comments_for_career_pathway_plan_path, method: :post do %>
+								<div class="row">
+									<div class="large-5 columns">
+									<ul>
+										<li >
+							              <%= label_tag :comments %>
+							              <%= text_area_tag :notes%>
+							            </li>
+						        	</ul>
+					        		</div>
+					        	</div>
+				        	<%= submit_tag "Add comment", class: "button radius" %>
+						<%end%>
+							<%= link_to "New",manage_cpp_path(@assessment_id),class: "button radius" %>
+						<%else%>
+							<%= link_to 'New',"#", class: "disabled button"%>
+		    				<p>
+		    					<h6 class="subheader"><b>New</b> button is disabled because, You are not the case manager of this program unit. Only case manager of this program unit can add career plan.</h6>
+		    				</p>
+						<% end %>
+					</p>
+				<% else %>
+					<p>
+					      <h5 class="subheader"> Career Plan is not found. Click <b>New</b> to create career plan.</h5>
+				     </p>
+					<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+						<%= link_to "New",manage_cpp_path(@assessment_id),class: "button radius"%>
+					<% else %>
+						<%= link_to "New","#",class: "disabled button"%>
+						<p>
+					        <h6 class="subheader"> <b>New</b> button is disabled because, you are not the case manager of this program unit.Only case manager of this program unit can create career plan.</h6>
+				        </p>
+					<% end %>
+				<% end %>
+		<%else%>
+			<p>
+			    <h5 class="subheader"> Assessment not found for this client.Assessment should be completed before creating career plan.</h5>
+			    <p></p>
+			    <%= link_to "Work Readiness Assessment",selected_sections_for_short_assessment_path(@client.id),class: "button radius" %>
+		    </p>
+		<%end%>
+</section>
+</fieldset>

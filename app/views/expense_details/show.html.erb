@@ -1,0 +1,67 @@
+<fieldset>
+  <section class="solidbody">
+    <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+        <legend><%= set_subheader("Expense detail  of expense: #{drop_down_value_description(@expense.expensetype)} for household member: #{client_full_name(@client)}") %></legend>
+        <p>
+          <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+          <%= render 'header',arg_expense: @expense %>
+        </p>
+    <% else %>
+        <p>
+          <%= render 'header',arg_expense: @expense %>
+        </p>
+        <legend><%= set_subheader("Expense detail of expense: #{drop_down_value_description(@expense.expensetype)} for client:#{client_full_name(@client)}") %></legend>
+    <% end %>
+
+
+
+
+
+   <b>Date: </b>
+    <%= format_db_date(@expensedetail.expense_due_date)  %>
+  </p>
+
+  <p>
+    <b>Amount: </b>
+    <%= number_to_currency_br(@expensedetail.expense_amount) %>
+  </p>
+
+  <p>
+    <b>Use: </b>
+    <%= drop_down_value_description(@expensedetail.expense_use_code) %>
+  </p>
+
+  <p>
+    <b>Payment Method: </b>
+    <%= drop_down_value_description(@expensedetail.payment_method) %>
+  </p>
+
+  <p>
+    <b>Payment Status: </b>
+    <%= drop_down_value_description(@expensedetail.payment_status) %>
+  </p>
+
+
+  <p>
+    <b>Count: </b>
+     <%= get_flag_description(@expensedetail.expense_calc_ind) %>
+  </p>
+
+
+<%= render "notes/notes_field_show", arg_notes: @notes %>
+
+   <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+
+      <%= link_to 'Back', household_member_expense_detail_index_path(@client.id,@expense.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+      <%= link_to 'Edit', edit_household_member_expense_detail_path(@client.id,@expense.id,@expensedetail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+      <%= link_to "Delete", delete_household_member_expense_detail_path(@client.id,@expense.id,@expensedetail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),  method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+   <% else %>
+        <%= link_to 'Back', expense_expense_details_path,class: " secondary button radius" %>
+        <%= link_to 'Edit', edit_expense_expense_detail_path(@expense.id,@expensedetail.id),class: "button radius" %>
+        <%= link_to "Delete", expense_expense_detail_path(@expense.id,@expensedetail.id),  method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+   <% end %>
+
+
+
+</section >
+</fieldset>

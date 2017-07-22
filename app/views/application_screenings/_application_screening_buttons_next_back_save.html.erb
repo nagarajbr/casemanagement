@@ -1,0 +1,14 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- <%#= link_to "Exit Wizard", client_applications_path,class: 'secondary button' %>
+<%#= arg_object.submit "Back", :name => "back_button",class: 'secondary button' unless arg_instance.first_step? %> -->
+<%= link_to "Back", view_screening_summary_path(arg_selected_application.id),class: 'secondary button' unless arg_instance.first_step? %>
+<% if arg_instance.last_step? %>
+	<%= arg_object.submit "Complete Application",class: 'button' %>
+
+
+
+<%# else %>
+	<%#= arg_object.submit "Next",:name => "next_button",class: 'button' %>
+<% end %>
+
+

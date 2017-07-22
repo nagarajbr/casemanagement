@@ -1,0 +1,54 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Hours of operation for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+<% if session[:PROVIDER_ID].present? %>
+<%= render 'selected_provider_service_type_location' %>
+	<% if @provider_service_area_availability_collection.present? %>
+		<table>
+		<caption style="text-align:inherit"><b><%= "Weekly Hours of Operation"%></b><p></p></caption>
+		  <thead>
+		    <tr>
+		    	<th> Day </th>
+		    	<th> Hours of Operation </th>
+
+				<th>Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @provider_service_area_availability_collection.each do |pl| %>
+					<tr>
+						<td>  <%= drop_down_value_description(pl.day_of_the_week) %></td>
+						<td>  <%= pl.start_time.strftime("%I:%M %p") %>  <b>To</b>  <%= pl.end_time.strftime("%I:%M %p") %></td>
+
+						<td>
+						 <%= link_to "Show",show_provider_service_area_availability_path(pl),id: "hyperlink"%>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+		<%= link_to("Back", provider_service_areas_path(@provider_service_area.provider_service_id) , class: 'secondary button radius')%>
+		<% if validate_authorization(693) %>
+			<%= link_to("New", new_provider_service_area_availability_path , class: 'button radius')%>
+		<% end %>
+	<%else%>
+			<b><%= "Weekly Hours of Operation"%></b><p></p>
+			<% if validate_authorization(693) %>
+			    <h5 class="subheader">No available times found. Click New to enter available time information.</h5>
+		        <p></p>
+		        <%= link_to("Back", provider_service_areas_path(@provider_service_area.provider_service_id) , class: 'secondary button radius')%>
+		        <%= link_to 'New',new_provider_service_area_availability_path, class: "button radius"%>
+	        <% else %>
+	        	<h5 class="subheader">No available time information to show.</h5>
+	        <% end %>
+	<%end%>
+<%else%>
+	    <%= set_subheader("Provider service area Index" ) %>
+        <h5 class="subheader">Provider is not selected, Select provider by clicking Search Provider button.</h5>
+        <p></p>
+        <%= link_to 'Search Provider',new_provider_search_path , class: "button radius"%>
+<%end%>
+</section>
+</fieldset>

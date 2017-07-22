@@ -1,0 +1,31 @@
+
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Edit assessment information for: #{client_full_name(@client)}") %> </legend>
+		<p><%#= render  "selected_assessment" %></p>
+		<%= form_for(@common_assessment_answer_object, :url => update_common_assessment_path(@sub_section_id,@assessment_id), method: :put) do |f| %>
+			<%= render "shared/common_error", object_argument: @common_assessment_answer_object %><br>
+			<ul>
+				<div class="row">
+				  <div class="large-12 columns">
+					   <%= render 'form',arg_object: f ,arg_assessment_que: @assessment_questions,arg_assessment_id:@assessment_id%>
+				  </div>
+				</div>
+			</ul>
+			<p>
+				  	<%if !(@client_assessment.first_step?)%>
+						 <%= link_to "Previous", process_previous_step_path,class: 'button' %>
+				 	<%end%>
+
+					<%= f.submit "Save",:name => "save_button",class: 'button radius' %>
+
+					<%if !(@client_assessment.last_step?)%>
+					  <%= f.submit "Next", :name => "next_button",class: 'button radius' %>
+					<%end%>
+
+					<%#= f.submit "Generate Assessment Sheet",:name => "generate_assessment_button",class: 'button radius' %>
+
+			</p>
+		<% end %>
+	</section>
+</fieldset>

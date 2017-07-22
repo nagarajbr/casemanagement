@@ -1,0 +1,38 @@
+<section class="solidbody">
+		<% if @employers.present? %>
+      	<table>
+      		<caption><%= set_subheader("Search results") %></caption>
+      		<br>
+			<thead>
+				<tr>
+					<th> Employer Name </th>
+					<th> Federal EIN </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @employers.each do |employer| %>
+				<tr>
+					<td>  <%=  employer.employer_name %></td>
+					<td>  <%=  employer.federal_ein %></td>
+					<td>
+							<%= link_to "select",set_selected_employer_in_session_path(employer.id),id: "hyperlink"%>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		 <%= paginate @employers %>
+
+		<% if @show_new_button %>
+		 	<%= link_to 'New Search',employer_new_search_path, class: "button radius"%>
+	 		<%# if validate_authorization(379) %>
+	        	<%= link_to 'Register New Employer',new_employer_path, class: "button radius"%>
+        	<%# end %>
+	    <% end %>
+
+	<% else %>
+       <%= render 'employers/employersearch', arg_show_button:@show_new_button %>
+	<% end %>
+
+</section>

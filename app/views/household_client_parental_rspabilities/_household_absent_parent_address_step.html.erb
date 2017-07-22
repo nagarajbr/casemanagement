@@ -1,0 +1,11 @@
+    <% if @addresses.present? %>
+          <%= render "addresses/show_address_partial" %>
+          <%= render "phones/show_partial",arg_primary:@primary_phone,arg_secondary: @secondary_phone,arg_other:@other_phone,arg_email:@client_email,arg_entity_type:@entity_type,arg_notes:@notes,arg_modified:@modified_by %>
+            <p></p>
+            <%= link_to 'Edit',edit_household_absent_parent_address_path(@absent_parent.id), class: "button radius" %>
+    <% else %>
+      <!-- record not found , so show New button. -->
+          <h5 class="subheader">No address information found. Click New to add address information.</h5>
+          <p></p>
+           <%= link_to 'New',new_household_absent_parent_address_path(@absent_parent.id), class: "button radius"%>
+    <% end %>

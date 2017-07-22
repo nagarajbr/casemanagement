@@ -1,0 +1,14 @@
+    <ul>
+      <div class="row">
+        <div class="large-4 columns">
+          <%= arg_object.label :description %>
+          <%= arg_object.text_area :description %>
+          <%= arg_object.label :key %>
+          <%= arg_object.text_field :key, maxlength: "255" %>
+          <%= arg_object.label :value %>
+          <%= arg_object.text_field :value,  autofocus: true , maxlength: "255"%>
+
+        </div>
+      </div>
+   </ul>
+

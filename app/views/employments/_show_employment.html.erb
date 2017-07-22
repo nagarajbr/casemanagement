@@ -1,0 +1,68 @@
+	<p>
+		<b>Employer name: </b>
+		<%= arg_employer_name %>
+
+	</p>
+	<p>
+		<b>Income Type: </b>
+		<%= drop_down_value_description(arg_employment.income_type) if arg_employment.income_type?%>
+
+	</p>
+	<p>
+		<b>Employment Type: </b>
+		<%= drop_down_value_description(arg_employment.employment_level) %>
+
+	</p>
+	<p>
+		<b>Placement type: </b>
+		<%= drop_down_value_description(arg_employment.placement_ind) %>
+
+	</p>
+	<p>
+		<b>Employment begin date: </b>
+		<%= format_db_date(arg_employment.effective_begin_date) %>
+
+	</p>
+	<!-- <p>
+		<b>Position title: </b>
+		<%#= arg_employment.position_title %>
+
+	</p> -->
+	<!-- <p>
+		<b>Job code: </b>
+		<%#= arg_employment.occupation_code %>
+
+	</p> -->
+	<p>
+		<b>Health coverage: </b>
+		<%= drop_down_value_description(arg_employment.health_ins_covered) %>
+
+	</p>
+
+		<p>
+		<b>Duties: </b>
+		<%= arg_employment.duties %>
+
+	</p>
+
+
+	<p>
+		<b>Employment end date: </b>
+		<%= format_db_date(arg_employment.effective_end_date) %>
+
+	</p>
+	<p>
+		<b>Reason for leaving employer: </b>
+		<%= drop_down_value_description(arg_employment.leave_reason) %>
+
+	</p>
+
+<p>
+  <b>Worker: </b>
+  <%= get_user_name(arg_employment.updated_by)%>
+</p>
+
+<%= render "notes/notes_field_show", arg_notes: arg_notes %>
+
+
+

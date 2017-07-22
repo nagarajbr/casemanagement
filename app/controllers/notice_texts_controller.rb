@@ -1,0 +1,2 @@
+class NoticeTextsController < AttopAncestorController
+end

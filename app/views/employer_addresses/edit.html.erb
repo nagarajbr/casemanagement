@@ -1,0 +1,20 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Edit address information for employer: #{@employer.employer_name}") %></legend>
+
+	    <% if session[:EMPLOYER_ID].present? %>
+	  		<%= form_for @address, url: update_employer_address_path, method: :put do |f| %>
+		     	<%= render "shared/common_error", object_argument: @addresses_error_messages %>
+		     	<%= render './addresses/form',arg_object: f,arg_address:@address,arg_entity_type: @entity_type %>
+		     	 <p>
+			        <%= link_to 'Cancel', show_employer_address_path, class: "secondary button radius" %>
+			        <%= f.submit "Save", class: 'button radius' %>
+			    </p>
+	     	<% end %>
+	    <% else %>
+	    	<legend><h5 class="subheader">Employer is not selected, Select a employer by clicking Search button.</h5><br></legend>
+	    	<p></p>
+	    	<%= link_to 'Search', employer_new_search_path,class: "button radius" %>
+		<% end %>
+</section>
+</fieldset>

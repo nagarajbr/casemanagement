@@ -1,0 +1,37 @@
+<!--Manoj Patil 10/16/2014  -->
+<body onload="calcRoute();">
+	<b><h6>Service Schedule </h6></b>
+	<% if @service_schedules.present? %>
+		<table>
+				<thead>
+					<tr>
+
+						<th> Day of Service </th>
+						<th> Pick Up Time </th>
+						<th> Return Pick Up Time </th>
+						<th> Action </th>
+					</tr>
+				</thead>
+				<tbody>
+					<%  @service_schedules.each do |arg_schedule| %>
+					<tr>
+
+						<td>  <%=  drop_down_value_description(arg_schedule.trip_day) %></td>
+						<td>  <%=  arg_schedule.trip_pick_up_time.strftime("%I:%M %p") if arg_schedule.trip_pick_up_time.present? %></td>
+						<td>  <%=  arg_schedule.return_trip_pick_up_time.strftime("%I:%M %p") if arg_schedule.return_trip_pick_up_time.present? %></td>
+						<td>
+							<%= link_to "Delete",destroy_service_schedule_path(arg_schedule.id),id: "hyperlink_alert",method: :delete, data: { confirm: 'Are you sure?' } %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		 	 <%= link_to "Add Service Schedule",new_service_authorization_schedule_path, class: 'button radius' %>
+	<% else %>
+		 <%= link_to "Add Service Schedule",new_service_authorization_schedule_path, class: 'button radius' %>
+	<% end %>
+	<input type="hidden" name="trip_start_address" id="trip_start_address" value = "<%= "#{@service_authorization.get_trip_start_address}"%>" >
+	<input type="hidden" name="trip_end_address" id="trip_end_address" value = "<%= "#{@service_authorization.get_trip_end_address}"%>" >
+	<input type="hidden" name="arg_distance" id="arg_distance" value = "<%= "#{@service_authorization.distance}"%>" >
+</body>
+

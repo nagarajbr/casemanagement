@@ -1,0 +1,47 @@
+<section class="solidbody">
+	<% if @potential_clients_for_intake.present? %>
+		<caption style="text-align:inherit"> <%= set_subheader("List of Potential Clients ") %></caption>
+	<p>
+
+			<table>
+				  <thead>
+				    <tr>
+						<th> Pre-Screen Date</th>
+						<th> Last Name </th>
+						<th> First Name </th>
+						<th> SSN </th>
+						<th> Date of Birth </th>
+						<th>  Action </th>
+						<th> Status </th>
+
+
+
+					</tr>
+				  </thead>
+				    <tbody>
+				    		<% @potential_clients_for_intake.each do |arg_hh_member| %>
+							<tr>
+								<td>  <%= format_db_date(arg_hh_member.created_at) %></td>
+								<td>  <%= arg_hh_member.last_name %></td>
+								<td>   <%= arg_hh_member.first_name %>  </td>
+								<td>  <%=  format_SSN(arg_hh_member.ssn)  %></td>
+								<td>  <%= format_db_date(arg_hh_member.date_of_birth) %></td>
+								<%# if validate_authorization(478) %>
+									<td>  <%= link_to "Process",process_for_intake_path(arg_hh_member.id),id: "hyperlink" %></td>
+								<%# end %>
+								<%# if validate_authorization(479) %>
+									<td>  <%= link_to "Mark as Complete",mark_as_complete_path(arg_hh_member.id),id: "hyperlink" %></td>
+								<%# end %>
+							</tr>
+							<% end %>
+					</tbody>
+				</table>
+
+	</p>
+	<% else %>
+		<p>
+			No records found in the Intake Queue.
+		</p>
+	<% end %>
+
+</section>

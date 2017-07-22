@@ -1,0 +1,26 @@
+<table>
+<caption class="fontc">
+<%= "Income Information" %>
+<p> </p> </caption>
+<thead>
+<tr>
+	<th>Type of Income </th>
+	<th>Frequency </th>
+	<th width="15%" >Begin Date </th>
+	<th width="15%" >End Date </th>
+	<th width="15%" >Recalculate Indicator </th>
+</tr>
+</thead>
+<tbody>
+
+	<tr>
+		<td>  <%= drop_down_value_description(arg_income.incometype) %></td>
+		<td>  <%= drop_down_value_description(arg_income.frequency) %></td>
+		<td>  <%=  format_db_date arg_income.effective_beg_date %></td>
+		<td>  <%=  format_db_date arg_income.effective_end_date %></td>
+		<td>  <%=  get_flag_description(arg_income.recal_ind) %>  </td>
+	</tr>
+
+</tbody>
+</table>
+

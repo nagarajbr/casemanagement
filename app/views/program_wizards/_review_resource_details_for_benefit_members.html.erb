@@ -1,0 +1,27 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- Used in the last step-->
+<table>
+	<caption style="text-align:inherit"><b>Resource summary for selected members</b><p></p></caption>
+  	<thead>
+    	<tr>
+			<th> Name </th>
+			<th> Resource Type </th>
+			<th> Value</th>
+			<th> Resource Valued Date </th>
+
+
+		</tr>
+	</thead>
+	<tbody>
+		<% arg_collection.each do |arg_resource_detail| %>
+
+			<tr>
+				<td>  <%= get_client_full_name(arg_resource_detail.client_id) %></td>
+				<td><%=  drop_down_value_description(arg_resource_detail.resource_type)%></td>
+				<td>  <%= number_to_currency_br(arg_resource_detail.resource_value) %></td>
+				<td><%= format_db_date(arg_resource_detail.resource_valued_date) %></td>
+
+			</tr>
+		<% end %>
+	</tbody>
+</table>

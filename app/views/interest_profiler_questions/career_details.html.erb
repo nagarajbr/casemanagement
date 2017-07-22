@@ -1,0 +1,154 @@
+<fieldset>
+    <section class="solidbody">
+    	<h5><%= @career_details["report"]["career"]["title"] %></h5>
+    	<p><b>Also Called:</b> <%= @career_details["report"]["career"]["also_called"]["title"].join(", ") %></p>
+    	<p><b>What they do:</b><br> <%= @career_details["report"]["career"]["what_they_do"] %></p>
+    	<p><b>On the job, you would:</b>
+            <% if @career_details["report"]["career"]["on_the_job"]["task"].kind_of?(Array) %>
+        		<% @career_details["report"]["career"]["on_the_job"]["task"].each do |duty| %>
+        			<li>
+        			<%= duty %>
+        			</li><br>
+        		<% end %>
+            <% else %>
+                    <li>
+                        <%= @career_details["report"]["career"]["on_the_job"]["task"] %>
+                    </li><br>
+            <% end %>
+
+    	</p>
+        <fieldset  id = "test_fieldset">
+            <legend style=" width: auto " class="legend_group">Job Outlook</legend>
+             <ul><%= @career_details["report"]["job_outlook"]["outlook"]["category"] %></ul>
+            <ul><%= @career_details["report"]["job_outlook"]["outlook"]["description"] %></ul>
+            <% if @career_details["report"]["job_outlook"]["salary"].present? %>
+              <ul><b>Salary:</b> <%= number_to_currency @career_details["report"]["job_outlook"]["salary"]["annual_median"] %> per year, on average</ul>
+            <% end %>
+        </fieldset><br>
+
+    	<fieldset id = "test_fieldset">
+    		<legend style=" width: auto " class="legend_group">Knowledge</legend>
+    		<% @career_details["report"]["knowledge"]["group"].each do |knowledge_domain| %>
+            <ul><b><%= knowledge_domain["title"] %></b></ul>
+    			<% if knowledge_domain["element"].kind_of?(Array) %>
+	    			<% knowledge_domain["element"].each do |element| %>
+		    			<li>
+		    				<%= element %>
+		    			</li><br>
+	    			<% end %>
+    			<% else %>
+    				<li>
+	    				<%= knowledge_domain["element"] %>
+	    			</li><br>
+    			<% end %>
+    		<% end %>
+    	</fieldset><br>
+
+
+    	<fieldset  style=" width: auto " id = "test_fieldset" >
+    		<legend style=" width: auto " class="legend_group">Skills</legend>
+    		<% @career_details["report"]["skills"]["group"].each do |skill_domain| %>
+            <ul><b><%= skill_domain["title"] %></b></ul>
+    			<% if skill_domain["element"].kind_of?(Array) %>
+	    			<% skill_domain["element"].each do |element| %>
+		    			<li>
+		    				<%= element %>
+		    			</li><br>
+	    			<% end %>
+    			<% else %>
+    				<li>
+	    				<%= skill_domain["element"] %>
+	    			</li><br>
+    			<% end %>
+    		<% end %>
+    	</fieldset><br>
+
+    	<fieldset  id = "test_fieldset">
+    		<legend style=" width: auto " class="legend_group">Abilities</legend>
+    		<% @career_details["report"]["abilities"]["group"].each do |ability_domain| %>
+    			<ul><b><%= ability_domain["title"] %></b></ul>
+    			<% if ability_domain["element"].kind_of?(Array) %>
+	    			<% ability_domain["element"].each do |element| %>
+		    			<li>
+		    				<%= element %>
+		    			</li><br>
+	    			<% end %>
+    			<% else %>
+    				<li>
+	    				<%= ability_domain["element"] %>
+	    			</li><br>
+    			<% end %>
+    		<% end %>
+    	</fieldset><br>
+
+    	<fieldset  id = "test_fieldset">
+    		<legend style=" width: auto " class="legend_group">Personality</legend>
+    		<ul><%= @career_details["report"]["personality"]["top_interest"]["description"] %></ul>
+    		<ul>They do well at the jobs that need: </ul>
+            <% if @career_details["report"]["personality"]["work_styles"]["element"].kind_of?(Array) %>
+        		<% @career_details["report"]["personality"]["work_styles"]["element"].each do |personality| %>
+        				<li>
+    	    				<%= personality %>
+    	    			</li><br>
+        		<% end %>
+            <% else %>
+                    <li>
+                        <%= @career_details["report"]["personality"]["work_styles"]["element"] %>
+                    </li><br>
+            <% end %>
+    	</fieldset><br>
+
+    	<fieldset  id = "test_fieldset">
+    		<legend style=" width: auto " class="legend_group">Technology</legend>
+    		<ul>You might use software like this on the job: </ul>
+    		<% @career_details["report"]["technology"]["category"].each do |technology| %>
+    			<b><ul><%= technology["title"] %></ul></b>
+    			<% if technology["example"].kind_of?(Array) %>
+	    			<% technology["example"].each do |example| %>
+	    				<li>
+		    				<%= example %>
+		    			</li><br>
+	    			<% end %>
+    			<% else %>
+    				<li>
+	    				<%= technology["example"] %>
+	    			</li><br>
+    			<% end %>
+    		<% end %>
+    	</fieldset><br>
+
+    	<fieldset  id = "test_fieldset">
+    		<legend style=" width: auto " class="legend_group">Education</legend>
+            <ul><b>Education usually needed for the job:</b>
+                <% if @career_details["report"]["education"]["education_usually_needed"].present? %>
+                    <% if @career_details["report"]["education"]["education_usually_needed"]["category"].kind_of?(Array) %>
+                        <%= @career_details["report"]["education"]["education_usually_needed"]["category"].to_sentence %>
+                    <% else %>
+                        <%= @career_details["report"]["education"]["education_usually_needed"]["category"] %>
+                    <% end %>
+                <% end %>
+            </ul>
+
+            <ul><b>Apprenticeships usually needed for the job:</b>
+                <% if  @career_details["report"]["education"]["apprenticeships"].present? %>
+                    <% if @career_details["report"]["education"]["apprenticeships"]["title"].kind_of?(Array) %>
+                        <%= @career_details["report"]["education"]["apprenticeships"]["title"].to_sentence %>
+                    <% end %>
+                 <% end %>
+            </ul>
+
+
+             <%# @career_details["report"]["education"].each do |education| %>
+            <%#= education %>
+
+            <%# end %>
+
+    	</fieldset><br>
+
+
+
+    	<%= link_to 'Back', navigate_to_second_step_path ,class: "secondary button radius"%>
+		<%= link_to("Select", save_career_details_path(@report_code.gsub(/[^0-9]/, '')) , class: 'button radius') %>
+
+	</section>
+ </fieldset>

@@ -1,0 +1,31 @@
+<li class="required">
+  <%= arg_object.label :pgu_action_reason,"Action Reason" %>
+  <%= arg_object.select(:pgu_action_reason,@action_reasons.collect { |p| ["#{p.short_description} ", p.id ] },{ include_blank:'Select Action Reason' }, :onchange => 'JS_tea_close_bonus_display(this);') %>
+</li>
+<%if @current_action == 6100 %>
+	<li class="required">
+	  <%= arg_object.label :pgu_action_date,"Action Date" %>
+	  <%= arg_object.date_field :pgu_action_date, alt: "action date", onkeyup:"validate_date_format(event)"  %>
+	</li>
+<% end%>
+<%if @current_action == 6099 %>
+		<fieldset class="radio">
+	        <div class="required">
+	          <legend class="radiolegend">Generate Notice</legend>
+	        </div>
+            <div class="button-group">
+              <label class="radio-button"><%= arg_object.radio_button :pgu_deny_notice_generation_flag, "Y",checked: true,autofocus: true %>Yes</label>
+              <label class="radio-button"><%= arg_object.radio_button :pgu_deny_notice_generation_flag, "N"%>No</label>
+            </div>
+        </fieldset>
+<% end%>
+
+
+ <div id="tea_close_bonus_div" style="display: none">
+        <p><b> Based on the selected Close Reason Client is eligible for following Bonus Payments </b></p>
+        <p> 1. Bonus Payment equal to monthly payment will be issued</p>
+        <p> <%="2. Transportation Bonus $#{@transportation_bonus_amount} will be issued"%></p>
+ </div>
+
+ <%= hidden_field_tag 'service_program', @selected_program_unit.service_program_id %>
+ <%= hidden_field_tag 'participation_status_close', session[:SELECTED_PGU_ACTION] %>

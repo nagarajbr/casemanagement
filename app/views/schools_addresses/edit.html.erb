@@ -1,0 +1,20 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Edit address information for school: #{@school.school_name}") %></legend>
+
+	    <% if session[:SCHOOLS_ID].present? %>
+	  		<%= form_for @address, url: update_schools_address_path, method: :put do |f| %>
+		     	<%= render "shared/common_error", object_argument: @addresses_error_messages %>
+		     	<%= render './addresses/form',arg_object: f,arg_address:@address,arg_entity_type: @entity_type %>
+		     	 <p>
+			        <%= link_to 'Cancel', show_schools_address_path, class: "secondary button radius" %>
+			        <%= f.submit "Save", class: 'button radius' %>
+			    </p>
+	     	<% end %>
+	    <% else %>
+	    	<legend><h5 class="subheader">School is not selected, Select a school by clicking Search button.</h5><br></legend>
+	    	<p></p>
+	    	<%= link_to 'Search', schools_search_path,class: "button radius" %>
+		<% end %>
+</section>
+</fieldset>

@@ -1,0 +1,156 @@
+<fieldset>
+	<section class="solidbody">
+		<% if @assessment_validation_results.present? %>
+			<%= render 'data_validation/client_application_validation_results',arg_clients: @assessment_validation_results,arg_application_id: @application.id,arg_navigate: "ASSESSMENT_SUMMARY" %>
+		<% else %>
+			<legend>
+				<caption style="text-align:inherit"> <%= set_subheader("Recommendations for assessment of client: #{client_full_name(@client)}") %></caption>
+			</legend>
+			<%= render "shared/common_error", object_argument: @assessment_object %>
+			<%if @assessment_object.assessment_status == 6265 || @assessment_object.assessment_status == 6365  %>
+				<p>
+					<%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal: @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+				</p>
+			<%end%>
+
+			<% if @assessed_sub_sections_with_strengths.present? %>
+				<p>
+					<b>Employment Strengths</b><p></p>
+
+						<% @assessed_sub_sections_with_strengths.each do |each_sub_section| %>
+							<b><%= each_sub_section.title%></b>
+								<table>
+									<% @assessment_strengths.each do |each_assessment_strength| %>
+										<% if each_assessment_strength.assessment_sub_section_id == each_sub_section.id %>
+											<tr>
+												<td> <%= each_assessment_strength.comments %> </td>
+											</tr>
+										<% end %>
+									<%end%>
+								</table>
+						<% end %>
+
+				</p>
+
+			<% end %>
+
+
+			<% if @assessed_sections_with_barriers.present? %>
+				<p>
+				<b>Potential Barriers </b>
+				<table>
+				    <% @assessed_sections_with_barriers.each do |each_section| %>
+					     <tr>
+					     	<%if each_section.id == 15 %>
+					     		<td> <b><%= "Finance" %></b> </td>
+					     	<%else%>
+					     		<td> <b><%= each_section.title %></b> </td>
+					     	<%end%>
+						 </tr>
+						 <tr>
+						 	<td>
+						 		<table>
+						 			<% @assessment_barriers.each do |each_barrier|%>
+						 				<% if each_barrier.assessment_section_id == each_section.id %>
+								 			<tr>
+								 				<td><%= get_barrier_description(each_barrier.barrier_id)%></td>
+								 			</tr>
+							 			<% end %>
+						 			<% end %>
+						 		</table>
+
+						 	</td>
+						 </tr>
+					<% end %>
+
+				</table>
+				</p>
+				<p>
+					<b>Details </b>
+						<table>
+					    <% @assessed_sections_with_barriers.each do |each_section| %>
+						    <tr>
+								<%if each_section.id == 15 %>
+						     		<td> <b><%= "Finance" %></b> </td>
+						     	<%else%>
+						     		<td> <b><%= each_section.title %></b> </td>
+						     	<%end%>
+							</tr>
+							<tr>
+								<td>
+									<table>
+										<thead>
+										    <tr>
+												<th> Barrier </th>
+												<th> Assessed Section </th>
+												<th> Recommendation </th>
+
+											</tr>
+										</thead>
+									    <tbody>
+											<% @report_detail_data.each do |arg_record| %>
+													<% if arg_record.assessment_section_id == each_section.id %>
+													<tr>
+														<td>  <%= arg_record.barrier_name %></td>
+														<td>  <%= arg_record.assessment_sub_section_refers %></td>
+														<td>  <%= arg_record.recommendation_text.html_safe %></td>
+													</tr>
+													<tr>
+
+														<% @assessment_detail_collection = AssessmentBarrierDetail.get_barrier_details(arg_record.assessment_barrier_id)%>
+														<td colspan="3" >
+															<table>
+																<thead>
+																    <tr>
+
+																		<th> Comments </th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<% @assessment_detail_collection.each do |each_detail|%>
+																	<tr>
+
+																		<td> <li><%= each_detail.comments%></li></td>
+																	</tr>
+																	<%end %>
+																</tbody>
+															</table>
+
+														</td>
+
+													</tr>
+
+													<% end %>
+											 <% end %>
+										</tbody>
+									</table>
+								</td>
+							</tr>
+						<% end %>
+						</table>
+
+
+
+
+				</p>
+
+			<% else %>
+
+				<h5 class="subheader">No Barriers found for this Assessment.</h5>
+
+			<% end %>
+			<p>
+			 <%if @assessment_object.assessment_status != 6365%>
+				<%= link_to 'Back',:back ,class: "secondary button radius" %>
+				<%end%>
+				<%#= link_to 'Manage Career Pathway Plan', manage_cpp_path(@assessment_object.id),class: "button radius" %>
+				<%if @assessment_object.assessment_status == 6265 #&& validate_authorization(662) %>
+					<%= link_to 'Complete Assessment',complete_assessment_path(@assessment_object.id),method: :patch,class: "button radius" %>
+					<%= link_to 'Withdraw Assessment', withdraw_assessment_path(@assessment_object.id),method: :get,class: "button radius" %>
+				<%end%>
+
+			</p>
+		<% end %>
+
+	</section>
+</fieldset>

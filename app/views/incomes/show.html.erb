@@ -1,0 +1,118 @@
+<fieldset>
+<section class="solidbody">
+  <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+      <p>
+          <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+      </p>
+      <p>
+        <legend>
+            <%= set_subheader("#{drop_down_value_description(@income.incometype)} income information for: #{client_full_name(@client)}") %>
+        </legend>
+      </p>
+  <% else %>
+        <legend>
+            <%= set_subheader("#{drop_down_value_description(@income.incometype)} income information for: #{client_full_name(@client)}") %>
+        </legend>
+  <% end %>
+
+
+   <p>
+    <b>Income Type: </b>
+
+    <%= drop_down_value_description(@income.incometype) %>
+  </p>
+
+  <p>
+    <b>Source: </b>
+    <%= @income.source %>
+  </p>
+
+  <p>
+    <b>Verified: </b>
+    <%=  get_flag_description(@income.verified) %>
+
+  </p>
+
+  <p>
+    <b>Frequency: </b>
+    <%= drop_down_value_description(@income.frequency) %>
+  </p>
+
+  <p>
+    <b>Begin Date: </b>
+    <%= format_db_date @income.effective_beg_date %>
+  </p>
+
+   <p>
+    <b>End Date: </b>
+    <%= format_db_date @income.effective_end_date %>
+   </p>
+
+  <!-- <p> as per form these feilds are removed
+    <b>Number of Months: </b>
+    <%= @income.intended_use_mos %>
+  </p>
+
+  <p>
+    <b>Contract amount: </b>
+    <%=number_to_currency_br@income.contract_amt %>
+  </p>
+
+  <p>
+    <b>Average Begin Date: </b>
+    <%= format_db_date @income.inc_avg_beg_date %>
+  </p> -->
+
+
+  <p>
+    <b>Recalculate Indicator: </b>
+    <%=  get_flag_description(@income.recal_ind) %>
+  </p>
+
+
+   <p>
+  <b>Worker: </b>
+  <%= get_user_name(@income.updated_by)%>
+</p>
+  <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+<% if  @client_incomes.present?%>
+      <table>
+      <caption style="text-align:inherit"> <b> <%= "Income shared by:" %> <p></p> </b> </caption>
+      <thead>
+        <tr>
+        <th> Client Name </th>
+        <th> Action </th>
+      </tr>
+      </thead>
+        <tbody>
+        <% @client_incomes.each do |client| %>
+          <tr>
+            <td>  <%=  client_full_name(client) %></td>
+            <td>
+
+             <%#= link_to 'Delete',  delete_share_path("income",@income,client.id),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+
+             <%= link_to 'Delete',  delete_share_path("income",@income,client.id),data: { confirm: 'Are you sure?' },method: :delete, class: "alert", id: "hyperlink_alert"%>
+
+            </td>
+          </tr>
+         <% end %>
+      </tbody>
+    </table>
+<%end%>
+
+    <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+        <%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+        <%= link_to 'Edit', edit_household_member_unearned_income_path(@client.id,@income.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+        <%= link_to 'Delete', delete_household_member_unearned_income_path(@client.id,@income.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <% else %>
+      <%= link_to 'Back', unearned_incomes_path(@menu),class: "secondary button radius" %>
+      <%= link_to 'Edit', edit_unearned_income_path(@menu,@income.id),class: "button radius"  %>
+      <%= link_to 'Delete', delete_unearned_income_path(@menu,@income.id),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+    <% end %>
+
+
+
+</section>
+</fieldset>

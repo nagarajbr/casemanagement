@@ -1,0 +1,73 @@
+<!-- only show_pending-cpp calls this partial -->
+<legend><%= set_subheader("Career Plan for client: #{client_full_name(arg_client)}") %></legend>
+	<p>
+		<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: arg_selected_program_unit %>
+	</p>
+
+	<%= render "assessment_work_sheet_pending_cpp",
+	    arg_sections: arg_sections,
+	    arg_barriers: arg_barriers,
+	    arg_client_id: arg_client.id,
+	    arg_plan_id: arg_action_plan.id
+	%>
+	<!-- SHOW ACTION PLAN PARTIALS START-->
+	<p>
+	 	<%= render "action_plans/active_plan_summary",
+	 	    action_plan: arg_action_plan,
+	 	    arg_work_participation: arg_work_participation,
+	 	    employment_goal: arg_employment_goal
+	 	%>
+ 	</p>
+
+ 	<%# if completed_activities.present? %>
+		<%#= render "action_plan_details/action_plan_detail_index_table",
+		    action_plan_details: completed_activities,
+		    type: "Completed Activity",
+		    show_action: false
+		%>
+	<%# end %>
+
+	<%# if scheduled_activities.present? %>
+		<%#= render "action_plan_details/action_plan_detail_index_table",
+		    action_plan_details: scheduled_activities,
+		    type: "Scheduled Activity",
+		    show_action: false
+		%>
+	<%# end %>
+	<!-- SHOW ACTION PLAN PARTIALS END-->
+
+	<%= render "career_pathway_plans/planned_work_participation_hours_per_client",
+		    arg_activity_hours: planned_activity_for_clients_in_pgu
+	%>
+
+	<%= render "employment_plan_details",
+	    arg_plan_details: arg_plan_details,
+	    arg_pathway_plan: arg_pathway_plan
+	%>
+	<%= render "shared/common_warning", object_argument: arg_warnings %>
+
+
+<p>
+	<table>
+		<tr>
+			<td><b>Case Worker: </b><%=  get_user_name(arg_career_pathway_plan.case_worker_signature)%></td>
+			<td><b>Case Worker Review Date: </b><%=  format_db_date(arg_career_pathway_plan.case_worker_signed_date)%></td>
+		</tr>
+
+		<tr>
+			<td><b>Client Signature: </b><%= get_client_full_name(arg_career_pathway_plan.client_signature)%></td>
+			<td><b>Client Signed Date: </b><%= format_db_date(arg_career_pathway_plan.client_signed_date)%></td>
+		</tr>
+		<tr>
+			<td><b>Approved By: </b><%=  get_user_name(arg_career_pathway_plan.supervisor_signature)%></td>
+			<td><b>Approved Date: </b><%= format_db_date(arg_career_pathway_plan.supervisor_signed_date)%></td>
+		</tr>
+
+
+
+	</table>
+</p>
+<%= link_to 'Back', index_cpp_path(arg_assessment_id),class: "secondary button radius" %>
+
+
+

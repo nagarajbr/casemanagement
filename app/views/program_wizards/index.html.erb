@@ -1,0 +1,74 @@
+<!-- This object is not used - manoj Patil 10/16/2014 -->
+<!--
+<%# if session[:CLIENT_ID].present? %>
+	<%# if @client_program_units.present? %>
+		<fieldset>
+			<%#= set_subheader(" completed Program #{pluralize_without_count(@client_program_units.count,"Unit","")}  for Client: #{client_full_name(@client)}") %>
+
+			<table>
+			  <thead>
+			    <tr>
+					<th> Program Unit ID </th>
+					<th> Primary Contact </th>
+					<th> Service Program </th>
+					<th> Status</th>
+					<th> Disposition </th>
+					<th> Disposition Date </th>
+					<th> Disposition Reason </th>
+					<th> Current Participation Status </th>
+
+
+
+					<th>                                </th>
+					<th>                                </th>
+					<th>                                </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<%# @client_program_units.each do |arg_pgu| %>
+
+						<tr>
+							<td>  <%= arg_pgu.id %></td>
+							<td> <%= get_primary_beneficiary_of_program_unit(arg_pgu.id)%></td>
+							<td>  <%= get_service_program_name(arg_pgu.service_program_id) %></td>
+							<td>  <%= drop_down_value_description(arg_pgu.program_unit_status) %></td>
+							<td>  <%= drop_down_value_description(arg_pgu.disposition_status) %></td>
+							<td>  <%= format_db_date(arg_pgu.disposition_date) %></td>
+							<td>  <%= drop_down_value_description(arg_pgu.disposition_reason) %></td>
+							<td>  <%#=  ProgramUnit.get_current_participation_status(arg_pgu.id)%></td>
+
+							<td><%#= link_to "Determine Eligibility",program_unit_eligibility_wizard_initialize_path(arg_pgu.id),id: "hyperlink" %></td>
+							<%# approve_deny_link_visible = ProgramUnit.allow_program_unit_to_be_modified?(arg_pgu) %>
+
+							<% #if approve_deny_link_visible == true %>
+
+
+								<td><%#= link_to "Activate",index_program_unit_run_ids_path(arg_pgu.id),id: "hyperlink" %></td>
+							<%# end %>
+
+
+
+
+						</tr>
+					 <%# end %>
+				</tbody>
+			</table>
+
+		</fieldset>
+	<%#else%>
+		<fieldset>
+	        <%#= set_subheader("Completed Program Units for Client: #{client_full_name(@client)}" ) %>
+	        <h5 class="subheader">No Completed Program Units found.Complete the Program Unit by clicking Program Unit button </h5>
+	        <p></p>
+	        <%#= link_to 'Program Unit',program_units_path, class: "button radius"%>
+		</fieldset>
+	<%#end%>
+<%#else%>
+	<fieldset>
+        <%#= set_subheader("Application List" ) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%#= render "shared/search_client_button" %>
+    </fieldset>
+<%#end%>
+-->

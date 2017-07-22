@@ -1,0 +1,51 @@
+<fieldset>
+	  <section class="solidbody">
+	  	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+	  		<legend><%= set_subheader("Edit employment detail for household member:#{client_full_name(@client)} with employer: #{@employment.employer_name}") %> </legend>
+	  		<p>
+				<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+			</p>
+
+	  		 <%= render 'employment_details/selected_employer',arg_employer_name:@employer_name,arg_employment:@employment  %>
+			 <%= render "shared/common_error", object_argument: @employment_detail %><br>
+	  		<%= form_for(@employment_detail, :url => update_household_member_employment_detail_path(@client.id,@employment.id,@employment_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :put) do |f| %>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'employment_details/form',f: f, arg_position_type:@position_types %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+			 			 <%= link_to 'Back', show_household_member_employment_detail_path(@client.id,@employment.id,@employment_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+			       		<%= f.submit "Save",class: "button radius" %>
+				    </p>
+			<% end %>
+	  	<%else %>
+	  			<%= form_for(@employment_detail, :url => update_employment_employment_detail_path(@menu,@employment.id,@employment_detail.id), method: :put) do |f| %>
+				  	<% if @client_assessment.present? %>
+						<legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+						<p>
+							<%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal:  @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+						</p>
+						<h6><%= ("Edit employment detail at employer: #{@employment.employer_name} for client: #{client_full_name(@client)}")  %> </h6>
+					<% else %>
+						<legend><%= set_subheader("Edit employment detail at employer: #{@employment.employer_name} for client: #{client_full_name(@client)}") %> </legend>
+					<% end %>
+				     <%= render "shared/common_error", object_argument: @employment_detail %><br>
+				     <%= render 'selected_employer',arg_employer_name:@employer_name,arg_employment:@employment  %>
+				        <ul>
+					     	<div class="row">
+						          <div class="large-4 columns">
+						               <%= render 'form',f: f, arg_position_type:@position_types %>
+							 	  </div>
+						    </div>
+						</ul>
+					    <p>
+				 			 <%= link_to 'Back', employment_employment_details_path(@menu,@employment.id),class: " secondary button radius" %>
+				       		<%= f.submit "Save",class: "button radius" %>
+					    </p>
+				<% end %>
+	  	<% end %>
+	</section>
+ </fieldset>

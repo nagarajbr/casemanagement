@@ -1,0 +1,40 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Review Payments for Service Plan line items for Provider:  #{provider_name(@provider)}" ) %>
+		</legend>
+		<br>
+		<%= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+		<p></p>
+
+		<%# if @rejected_line_items_found == true %>
+			<%#= render "service_authorization_line_items_rejected" %>
+		<%# end %>
+
+		<% if @generated_line_items_found == true %>
+			<%= render "service_authorization_line_items_generate",arg_provider_authorization:@provider_service_authorization,arg_service_name:@service_name,arg_authorization_line_item:@service_authorization_line_items %>
+		<% end %>
+
+
+
+		<%#= link_to "Authorize ",service_authorization_line_item_approve_path(@provider_service_authorization.id,@service_authorization_line_item.id), class: "button radius" %>
+		<% if @submitted_line_items_found == true %>
+	       <br>
+			<%= render "service_authorization_line_items_submitted", arg_service_authorization: @provider_service_authorization,arg_service_name:@service_name,arg_authorization_line_item:@service_authorization_line_items  %>
+		<% end %>
+
+		<% if @processed_line_items_found == true %>
+			<br>
+			<%= render "service_authorization_line_items_processed", arg_service_authorization: @provider_service_authorization,arg_authorization_line_item:@service_authorization_line_items, arg_show_button:@show_new_button %>
+
+		<% end %>
+		<p></p>
+
+		<% if @show_new_button %>
+			<p>
+		       <h5 class="subheader"> Click Add Payment Line item to enter new payment information.</h5>
+		    </p>
+	    	<%= link_to "Back ",provider_service_authorizations_index_path, class: "secondary button radius" %>
+			<%= link_to "Add Payment Line item",non_transport_service_payment_record_new_path(@provider_service_authorization.id), class: "button radius" %>
+		<% end %>
+	</section>
+</fieldset>

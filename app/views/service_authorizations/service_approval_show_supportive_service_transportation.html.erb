@@ -1,0 +1,29 @@
+  	<fieldset>
+		<section class="solidbody">
+
+<body onload="calcRoute();">
+
+			<legend><%= set_subheader("Service plan details for client: #{client_full_name(@focus_client)}" ) %>
+				</legend>
+				<%= render "selected_action_plan_detail",arg_activity:@activity_detail_object %>
+			<%= render  "common_view_service_authorization", arg_srvc_object: @service_authorization,arg_srvc_line_item:@service_authorization_line_items,arg_view_mode:@view_mode,arg_service_schedule:@service_schedules  %>
+			<input type="hidden" name="trip_start_address" id="trip_start_address" value = "<%= "#{@service_authorization.get_trip_start_address}"%>" >
+			<input type="hidden" name="trip_end_address" id="trip_end_address" value = "<%= "#{@service_authorization.get_trip_end_address}"%>" >
+
+				<div style='width: 800px;'>
+			    	<div id="directions" style='width: 800px; height: 400px;'></div>
+				</div>
+				<br>
+
+	        <%= link_to 'Back', service_approval_index_path(session[:PROGRAM_UNIT_ID].to_i),class: "secondary button radius" %>
+	        <!-- Only Completed service authorizations can be approved-->
+	        <% if @service_authorization.status == 6161 %>
+	        	<% if validate_authorization(704) %>
+					<%= link_to "Approve",service_approval_approve_path(@service_authorization.id), class: "button radius" %>
+				<% end %>
+	        <% end %>
+
+
+</body>
+	</section>
+	</fieldset>

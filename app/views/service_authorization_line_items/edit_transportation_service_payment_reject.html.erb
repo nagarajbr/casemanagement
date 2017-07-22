@@ -1,0 +1,28 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Reject Payment for Service Plan line items for Provider:  #{provider_name(@provider)}" ) %>
+		</legend>
+		<br>
+		<%= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+		<p></p>
+		<p>
+			<%= render "selected_service_authorization_line_items_for_rejection" %>
+		</p>
+
+		<%= form_for(@provider_service_authorization_line_item,:url => update_service_payment_reject_path(@provider_service_authorization.id), method: :put) do |f| %>
+			 <%= render "shared/common_error", object_argument: @provider_service_authorization_line_item %>
+			  <ul>
+			       <div class="row">
+			         <div class="large-4 columns">
+		        			<li class="required">
+		        			  <%= f.label :reason,"Rejection Reason" %>
+		        			   <%= f.text_area :reason, cols: 40, rows: 7, maxlength: "255" %>
+		        			</li>
+			          </div>
+			       </div>
+			    </ul>
+		    		<%= link_to 'Cancel',service_authorization_line_items_index_path(@provider_service_authorization.id), class: "secondary button radius" %>
+			      <%= f.submit "Save", class: 'button radius'%>
+		<% end %>
+  	</section>
+</fieldset>

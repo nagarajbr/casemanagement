@@ -1,0 +1,61 @@
+<%= form_for(@absent_parent_rspability, :url => client_parental_rspability_path, method: :put) do |f| %>
+<fieldset>
+  <section class="solidbody">
+	   <legend><%= set_subheader("Edit parental responsibility information for: #{client_full_name(@client)}") %></legend>
+       <%= render "shared/common_error", object_argument: @absent_parent_rspability %>
+        <ul>
+	     	<div class="row">
+	          <div class="large-4 columns">
+	               <%= render 'form',arg_object: f,arg_dropdown: @parent_dropdown_values,arg_notes: @notes  %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+	     	<%= link_to 'Cancel', client_parental_rspabilities_path,class: "secondary button radius" %>
+	     	<%= f.submit "Save",class: 'button radius'%>
+	    </p>
+
+    </section>
+</fieldset>
+<% end %>
+
+
+
+
+
+<!--
+
+
+
+<section class="solidbody">
+	<fieldset>
+    <legend><%#= set_subheader("Edit #{client_full_name(@target_client)}'s responsibility information towards: #{@client.last_name}, #{@client.first_name}") %> </legend><br>
+	<%#= form_for(@form, :url => client_parental_rspability_path, method: :put) do |f| %>
+
+   <%# if @absent_parent_relationship.errors.full_messages.count > 0 %>
+	  	<%#= render "shared/common_error", object_argument: @absent_parent_relationship %>
+	  <%# else %>
+	  		<%#= render "shared/common_error", object_argument: @form %>
+	  <%# end %>
+
+ 	<p class="fontc">
+ 		 		Parent Name:
+ 	        <%= client_full_name(@target_client) %>
+    </p>
+
+    <ul>
+     <div class="row">
+          <div class="large-4 columns">
+               <%#= render 'form',arg_object: f %>
+	 	  </div>
+	     </div>
+	   </ul>
+	    <p>
+	      <%#= link_to 'Cancel', client_parental_rspability_path(@absent_parent_rspability.id),class: "secondary button radius" , title1: "press enter or click mouse to cancel ", data: {tooltip1: '' }%>
+	      <%#= f.submit "Save",class: 'button radius' ,title1: "press enter or click mouse to save ", data: {tooltip1: '' } %>
+	    </p>
+	  </fieldset>
+	<%# end %>
+</section>
+
+-->

@@ -1,0 +1,19 @@
+<% if arg_wp_characters_collection.present? %>
+	<b>  Work participation characteristics for Program Unit Members</b>
+		<table>
+			 <thead>
+			    <tr>
+					<th> Client Name</th>
+					<th> Work Participation Characteristics </th>
+				</tr>
+			  </thead>
+			    <tbody>
+			    	<% arg_wp_characters_collection.each do |each_character|%>
+						<tr>
+							<td> <%= get_client_full_name_with_id(each_character.client_id) %></td>
+							<td> <%= each_character.wp_character %></td>
+						</tr>
+					<% end %>
+				</tbody>
+		</table>
+<% end %>

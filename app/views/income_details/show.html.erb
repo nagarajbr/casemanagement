@@ -1,0 +1,61 @@
+<fieldset>
+<section class="solidbody">
+   <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+      <legend><%= set_subheader("Checks details") %><legend>
+      <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+      <%= render "parent_income",arg_income: @income %>
+
+
+   <% else %>
+       <legend><%= set_subheader("Checks details") %><legend>
+      <%= render "parent_income",arg_income: @income %>
+   <% end %>
+
+   <p>
+    <b>Date Received: </b>
+    <%= format_db_date @income_detail.date_received %>
+  </p>
+
+  <p>
+    <b>Type of Income: </b>
+    <%= drop_down_value_description(@income_detail.check_type) %>
+  </p>
+
+  <p>
+    <b>Gross Amount: </b>
+    <%= number_to_currency_br(@income_detail.gross_amt) %>
+  </p>
+
+  <!-- <p>
+    <b>Adjusted Total: </b>
+    <%= @income_detail.adjusted_total %>
+  </p> -->
+
+  <p>
+    <b>Count for converted: </b>
+    <%=  get_flag_description(@income_detail.cnt_for_convert_ind) %>
+  </p>
+
+
+
+ <p>
+  <b>Worker: </b>
+  <%= get_user_name(@income_detail.updated_by)%>
+</p>
+
+<%= render "notes/notes_field_show", arg_notes: @notes %>
+
+    <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+        <%= link_to 'Back', household_member_unearned_income_detail_index_path(@client.id,@income.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+        <%= link_to 'Edit', edit_household_member_unearned_income_detail_path(@client.id,@income.id,@income_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+        <%= link_to "Delete", delete_household_member_unearned_income_detail_path(@client.id,@income.id,@income_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),  method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+
+    <% else %>
+         <%= link_to 'Back', unearned_income_income_details_path(@menu,@income.id),class: "secondary button radius" %>
+        <%= link_to 'Edit', edit_unearned_income_income_detail_path(@menu,@income.id,@income_detail.id),class: "button radius" %>
+        <%= link_to 'Delete', delete_unearned_income_income_detail_path(@menu,@income.id,@income_detail.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <% end %>
+
+
+</section>
+</fieldset>

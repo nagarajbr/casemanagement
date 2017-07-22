@@ -1,0 +1,65 @@
+<fieldset>
+<section class="solidbody">
+
+<legend> <%= set_subheader("Supportive Services for client: #{get_client_full_name(session[:CLIENT_ID].to_i)}") %></legend>
+
+			<% if @service_authorizations.present? %>
+				<table>
+						<caption style="text-align:inherit"><p>	<b> <%= ("Supportive #{pluralize_without_count(@service_authorizations.size,"Service","")}") %></b></p></caption>
+					  <thead>
+					    <tr>
+
+							<th> Activity Type </th>
+							<th> Supportive Service </th>
+							<th> Provider </th>
+							<th> Service Date </th>
+							<th> Status </th>
+							<th> Start Date </th>
+							<th> End Date </th>
+							<th> Action </th>
+						</tr>
+					  </thead>
+					    <tbody>
+							<% @service_authorizations.each do |arg_auth| %>
+
+								<tr>
+
+									<td>  <%= drop_down_value_description(arg_auth.activity_type) %>  </td>
+									<td>  <%= drop_down_value_description(arg_auth.service_type)  %></td>
+									<td>  <%= get_provider_name(arg_auth.provider_id) %></td>
+									<td>  <%= format_db_date(arg_auth.service_date) if arg_auth.service_date.present? %></td>
+									<td>  <%= drop_down_value_description(arg_auth.status)  %></td>
+									<td>  <%= format_db_date(arg_auth.service_start_date) %></td>
+									<td>  <%= format_db_date(arg_auth.service_end_date)  %></td>
+									<td> <%= link_to "Show",check_ts_or_nts_ss_show_path(arg_auth.id),id: "hyperlink" %>	</td>
+								</tr>
+							 <% end %>
+						</tbody>
+					</table>
+						<%= link_to 'Back', action_plan_action_plan_details_path(session[:ACTION_PLAN_ID].to_i),class: "secondary button radius" %>
+
+						<% if validate_authorization(613) %>
+						    <%= link_to("New", check_ts_or_nts_supportive_service_path , class: 'button radius') %>
+					    <% end %>
+
+			<% else %>
+				<%# if validate_authorization(613) %>
+			        <p>
+			        <h5 class="subheader">There are no supportive services for the client. </h5>
+			        </p>
+
+						<p>
+						<h5 class="subheader"> Click New to add a supportive service.</h5>
+						</p>
+						<%= link_to 'Back', action_plan_action_plan_details_path(session[:ACTION_PLAN_ID].to_i),class: "secondary button radius" %>
+					    <%= link_to("New", check_ts_or_nts_supportive_service_path , class: 'button radius') %>
+
+				<%# else %>
+					<!-- <h5 class="subheader">There are no supportive services to show.</h5> -->
+				<%# end %>
+			<% end %>
+
+
+</section>
+</fieldset>
+

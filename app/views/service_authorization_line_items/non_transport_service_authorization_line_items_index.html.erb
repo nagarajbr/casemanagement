@@ -1,0 +1,30 @@
+<!-- <fieldset>
+<section class="solidbody">
+		<legend><%#= set_subheader("Review Payments for Service Plan line items for Provider:  #{provider_name(@provider)}" ) %>
+		</legend>
+		<br>
+		<%#= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+			<%# if @service_authorization_line_item.blank? %>
+				<b>Service Line Item</b>
+					<p>
+				       <h5 class="subheader"> Payment records not found. Click Submit Payment to enter and submit Payment information.</h5>
+				    </p>
+
+			    	<%#= link_to "Back ",provider_service_authorizations_index_path, class: "secondary button radius" %>
+
+					<%#= link_to "Add Payment Line item",non_transport_service_payment_record_new_path(@provider_service_authorization.id), class: "button radius" %>
+			<%# elsif  @service_authorization_line_item.line_item_status == 6369 %>
+				<br>
+				<%#= render "non_transport_service_authorization_line_item", arg_object: @provider_service_authorization %>
+				<%#= link_to "Request for Approval",non_transport_service_payment_record_new_path(@provider_service_authorization.id), class: "button radius" %>
+			<%# end %>
+
+
+
+
+
+</section>
+</fieldset>
+
+
+ -->

@@ -1,0 +1,30 @@
+<b>Selected Service Plan</b>
+<p></p>
+<table>
+  <thead>
+    <tr>
+		<th> Service Plan ID </th>
+		<th> Status </th>
+		<th> Program Unit ID </th>
+		<th> Client </th>
+		<th> Service Type </th>
+		<th> Start Date </th>
+		<th> End Date </th>
+
+	</tr>
+  </thead>
+    <tbody>
+
+			<tr>
+				<td>  <%= arg_object.id%></td>
+				<td>  <%= drop_down_value_description(arg_object.status) %></td>
+				<td>  <%= arg_object.program_unit_id%></td>
+				<td>  <%= get_client_full_name(arg_object.client_id)%></td>
+				<td>  <%= drop_down_value_description(arg_object.service_type)%></td>
+				<td>  <%= format_db_date(arg_object.service_start_date) %></td>
+				<td>  <%= format_db_date(arg_object.service_end_date)  %></td>
+
+			</tr>
+
+	</tbody>
+</table>

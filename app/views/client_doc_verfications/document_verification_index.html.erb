@@ -1,0 +1,40 @@
+  <fieldset>
+<section class="solidbody">
+
+ <caption><%= set_subheader("Document verification for members in the application for client: #{client_full_name(@client)}" ) %></caption>
+ <%= render 'application_screenings/selected_application_details', arg_selected_application:@client_application %>
+ <br>
+  <% if @client_doc_verification_list.present? %>
+     <b> Verified Documents for selected Application's Members</b>
+    <p></p>
+    <table>
+                <thead>
+                    <tr>
+                      <th> Application Member </th>
+                      <th> Document Type </th>
+                      <th> Verification Date </th>
+                      <th>  Action  </th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <% @client_doc_verification_list.each do |arg_doc| %>
+                        <tr>
+                          <td>  <%= get_client_full_name(arg_doc.client_id) %></td>
+                          <td>  <%= drop_down_value_description(arg_doc.document_type) %></td>
+                          <td>  <%=  format_db_date(arg_doc.document_verfied_date) %></td>
+                            <td><%= link_to "Show",show_client_doc_verfication_path(@client_application.id,arg_doc.id),id: "hyperlink" %></td>
+                        </tr>
+                     <% end %>
+                </tbody>
+          </table>
+  <% else %>
+         <legend><h5 class="subheader">No documents are added for members within the application. Click Add button to add documents.</h5></legend>
+  <% end %>
+    <br>
+  <P>
+   <%= link_to "Back", view_screening_summary_path ,class: 'button secondary' %>
+  <%= link_to 'Add Document',new_client_doc_verfication_path(@client_application.id), class: "button radius"%>
+  </P>
+
+</section>
+</fieldset>

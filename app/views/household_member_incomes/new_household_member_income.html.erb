@@ -1,0 +1,50 @@
+<fieldset>
+	 <section class="solidbody">
+	 	<% if  @menu == 'CLIENT'%>
+	 	<!-- CLIENT MANAGEMENT EARNED INCOME-->
+	 		<%= form_for(@income, :url => create_income_path(@menu), method: :post) do |f| %>
+			        <legend><%= set_subheader("Enter income information for client: #{client_full_name(@client)}") %> </legend>
+			       <%= render "shared/common_error", object_argument: @income %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'new_household_member_income_fields_partial',
+				                   f: f,
+				                   arg_earned_income_types:@earned_income_types,
+				                   arg_income:@income,
+				                   arg_client:@client,
+				                   arg_notes: @notes
+				                %>
+					 	  </div>
+					    </div>
+					</ul>
+				<p>
+			    	<%= link_to 'Cancel', incomes_path(@menu), class: "secondary button radius" %>
+		    		<%= f.submit "Save", class: 'button radius',id: 'new_income_save_button'%>
+			    </p>
+			<% end %>
+
+	 	<%else%>
+	 	<!-- HH REGISTRATION EARNED INCOME-->
+	 		<%= form_for(@income, :url => create_household_member_income_path(@client.id), method: :post) do |f| %>
+			        <legend><%= set_subheader("Enter income information for household member: #{client_full_name(@client)}") %> </legend>
+			       <%= render "shared/common_error", object_argument: @income %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'new_household_member_income_fields_partial',f: f,arg_earned_income_types:@earned_income_types,arg_income:@income,arg_client:@client,arg_notes: @notes %>
+
+					 	  </div>
+					    </div>
+					</ul>
+				<p>
+			    	<%= link_to "Back", start_household_member_registration_wizard_path ,class: 'button secondary'%>
+
+		    		<%= f.submit "Save", class: 'button radius',id: 'new_income_save_button'%>
+
+			    </p>
+			<% end %>
+	 	<%end%>
+
+ 	</section>
+</fieldset>

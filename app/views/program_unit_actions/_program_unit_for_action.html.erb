@@ -1,0 +1,32 @@
+
+<table>
+	<caption style="text-align:inherit"><b>Selected Program Unit</b><p></p></caption>
+				  <thead>
+				    <tr>
+						<th> Program Unit ID </th>
+						<th> Status</th>
+						<th> Primary Contact</th>
+						<th> Service Program </th>
+						<th> Disposition </th>
+						<th> Current Participation Status </th>
+						<th> Application Primary Contact </th>
+
+					</tr>
+				  </thead>
+				   <tbody>
+				   	<tr>
+						<td>  <%= arg_object.id %></td>
+						<td>  <%= drop_down_value_description(arg_object.program_unit_status) %></td>
+						<td> <%= get_primary_beneficiary_of_program_unit(arg_object.id)%></td>
+						<td>  <%= get_service_program_name(arg_object.service_program_id) %></td>
+
+						<td>  <%= drop_down_value_description(arg_object.disposition_status) %></td>
+						<td>  <%=  ProgramUnit.get_current_participation_status(arg_object.id)%></td>
+
+
+						<td>   <%= get_primary_applicant_name(arg_object.client_application_id) %>  </td>
+
+							</tr>
+
+					</tbody>
+				</table>

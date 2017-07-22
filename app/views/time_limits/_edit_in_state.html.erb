@@ -1,0 +1,51 @@
+<%= form_for(arg_time_limit) do |f| %>
+<fieldset>
+  		<%= render "shared/common_error", object_argument: arg_time_limit %>
+
+	  		<p>
+				<b>Payment State: </b>
+				<%= drop_down_value_description(arg_time_limit.state) %>
+
+			</p>
+			<p>
+				<b>payment Month: </b>
+				<%= format_db_date_YYYY_MM(arg_time_limit.payment_date) %>
+
+			</p>
+
+			<p>
+				<b>payment Issue Date: </b>
+				<%= format_db_date(arg_time_limit.issue_date) %>
+
+			</p>
+
+			<p>
+				<b>Payment Amount: </b>
+				<%= number_to_currency_br(arg_time_limit.payment_amount) %>
+
+			</p>
+			<p>
+				<b>Payment Type: </b>
+				<%= drop_down_value_description(arg_time_limit.payment_type) %>
+
+			</p>
+	    <ul>
+	    <div class="row">
+	        <div class="large-5 columns">
+
+
+
+				<li class="required">
+				 	<%= f.label :work_participation_reason %>
+				 	<%= f.select :work_participation_reason, CodetableItem.item_list(104,"State List").collect { |p| ["#{p.short_description} ", p.id ] }, prompt:"select work participation reason" %>
+				</li>
+
+			</div>
+	    </div>
+	    </ul>
+	    <p>
+	      <%= link_to 'Cancel', time_limits_path,class: "secondary button radius" %>
+	      <%= f.submit "Save", class: 'button radius'%>
+	    </p>
+		</fieldset>
+<% end %>

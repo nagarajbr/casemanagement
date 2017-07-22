@@ -1,0 +1,30 @@
+<fieldset>
+	<section class="solidbody">
+	 	<legend><%=set_subheader(" General information system alerts") %></legend>
+
+	<% if arg_object.present? %>
+	 	<table >
+	 		<thead>
+	 			<tr>
+                    <th> Alert </th>
+
+	 			</tr>
+	 		</thead>
+	 		<tbody>
+	 			<% arg_object.each do |arg_detail| %>
+		 			<tr>
+		 				<td>  <%= arg_detail.alert_text %></td>
+
+		 			</tr>
+	 			<% end %>
+	 		</tbody>
+	 	</table>
+	 	<%= paginate arg_object,:param_name => :general_information  %>
+	<%else%>
+	        <h5 class="subheader">No general information alerts found. </h5>
+	        <p></p>
+
+
+	<%end%>
+   </section>
+</fieldset>

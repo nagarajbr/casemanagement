@@ -1,0 +1,43 @@
+<fieldset>
+	<section class="solidbody">
+<legend><%= set_subheader("Create a new out of program participation record for client: #{client_full_name(@client)}") %></legend>
+	<%= form_for(@time_limit) do |f| %>
+  		<%= render "shared/common_error", object_argument: @time_limit %>
+	  	<fieldset>
+	    <ul>
+	    <div class="row">
+	        <div class="large-4 columns">
+
+
+	        	<li class="required">
+				 	<%= f.label :state %>
+				 	<%= f.select :state, CodetableItem.item_list(104,"State List").collect { |p| ["#{p.long_description} ", p.id ] }, prompt:"select out of state Payment State" %>
+				</li>
+
+				<li class="required">
+				 	<%= f.label :payment_date,"Payment Begin Month" %>
+					<%= f.date_field :payment_date, alt: "Payment Begin Date",title1: "Payment Begin Date.", data: {tooltip1: true }, onkeyup:"validate_date_format(event)"  %>
+				</li>
+
+				<li class="required">
+				 	<%= f.label :payment_end_date %>
+					<%= f.date_field :payment_end_date, alt: "Payment End Month",title1: "Payment End Date.", data: {tooltip1: true }, onkeyup:"validate_date_format(event)"  %>
+				</li>
+
+				<li class="required">
+				 	<%= f.label :work_participation_reason %>
+				 	<%= f.select :work_participation_reason, CodetableItem.item_list(113,"Work Participation characteristics").collect { |p| ["#{p.short_description} ", p.id ] }, prompt:"select work participation reason" %>
+				</li>
+
+
+			</div>
+	    </div>
+	    </ul>
+	    <p>
+	      <%= link_to 'Cancel', time_limits_path,class: "secondary button radius" %>
+	      <%= f.submit "Save", class: 'button radius'%>
+	    </p>
+		</fieldset>
+<% end %>
+</section >
+</fieldset>

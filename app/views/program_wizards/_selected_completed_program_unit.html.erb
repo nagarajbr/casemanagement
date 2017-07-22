@@ -1,0 +1,38 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- Used as partial in all steps-->
+<p>
+		<table>
+			<caption style="text-align:inherit"><b>Selected Program Unit </b><p></p></caption>
+			  <thead>
+			    <tr>
+					<th> Program Unit ID </th>
+					<th> Service Program </th>
+					<th> Case Type </th>
+					<th> Primary Contact </th>
+					<th> Current Participation Status </th>
+					<th> Disposition </th>
+					<th> Disposition Date</th>
+					<th> Processing Office </th>
+					<th> Eligibility Determination Worker</th>
+					<th> Case Manager</th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+						<tr>
+							<td>  <%= arg_selected_program_unit.id %></td>
+							<td>  <%= get_service_program_name(arg_selected_program_unit.service_program_id) %></td>
+							<td><%= drop_down_value_description(arg_selected_program_unit.case_type) if arg_selected_program_unit.case_type.present?%></td>
+							<td> <%= get_primary_beneficiary_of_program_unit(arg_selected_program_unit.id)%></td>
+							<td><%=  ProgramUnit.get_current_participation_status(arg_selected_program_unit.id)%></td>
+
+							<td>  <%= drop_down_value_description(arg_selected_program_unit.disposition_status) %></td>
+							<td>  <%= format_db_date(arg_selected_program_unit.disposition_date) %></td>
+							<td> <%= drop_down_value_description(arg_selected_program_unit.processing_location) %></td>
+							<td>   <%= get_user_name(arg_selected_program_unit.eligibility_worker_id) if arg_selected_program_unit.eligibility_worker_id.present?%>  </td>
+							<td>   <%= get_user_name(arg_selected_program_unit.case_manager_id) if arg_selected_program_unit.case_manager_id.present?%>  </td>
+						</tr>
+				</tbody>
+			</table>
+
+	</p>

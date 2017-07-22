@@ -1,0 +1,39 @@
+<div class="row" id="body" >
+    <%if session[:CLIENT_ID].present? %>
+        &nbsp;&nbsp;&nbsp;&nbsp;<b><%="Client: #{get_client_full_name(session[:CLIENT_ID])}" %></b>
+        <%if session[:PROGRAM_UNIT_ID].present? %>
+          &nbsp;&nbsp;&nbsp;&nbsp;<b><%="Program Unit : #{session[:PROGRAM_UNIT_ID]}" %></b>
+        <% end %>
+        <%if session[:HOUSEHOLD_ID].present? %>
+          <a class= "right" class="button" data-dropdown="ChangeClient" aria-controls="ChangeClient" aria-expanded="false">Change Client &raquo;</a>
+          <ul id="ChangeClient" class="f-dropdown" data-dropdown-content tabindex="-1" aria-hidden="true" aria-autoclose="false" tabindex="-1">
+            <% members = HouseholdMember.sorted_household_members_with_names(session[:HOUSEHOLD_ID])  %>
+              <% members.each do |mem|%>
+                <li>
+                  <a href= <%="/client/#{mem.client_id}/#{mem.household_id}/set_session"%>>
+                    <%= "#{mem.name} - #{CodetableItem.get_short_description(mem.status)}" %>
+                  </a>
+                </li>
+            <% end %>
+
+          </ul>
+        <%end%>
+    <%end%>
+
+      <div class="large-3 columns">
+        <nav id="side-nav">
+              <%= render_navigation(level: 1..2) %>
+        </nav>
+      </div>
+
+      <div class="large-9 columns">
+        <nav id="top-nav">
+          <%= render_navigation(:level => 3) %>
+        </nav>
+      </div>
+
+    <div class="large-9 columns" >
+        <%= render "layouts/flash_messages" %>
+        <%= yield %>
+    </div>
+</div>

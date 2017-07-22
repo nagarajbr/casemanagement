@@ -1,0 +1,23 @@
+<fieldset>
+<section class="solidbody">
+<%= form_for(@work_task, :url => work_task_path, method: :patch) do |f| %>
+<legend><%= set_subheader("Edit to do list :  #{get_client_full_name(@client)}") %> </legend>
+<%= render "shared/common_error", object_argument: @work_task %>
+<ul>
+			<div class="row">
+				<div class="large-5 columns">
+						<%= render 'form', arg_object: f,arg_work_task:@work_task,arg_work_task_status:@work_task_status,
+						arg_work_task_created:@work_task_created, arg_work_task_category:@work_task_category,arg_work_task_type:@work_task_type%>
+			    </div>
+			</div>
+		</ul>
+
+<p>
+<%= link_to "Cancel",work_task_path(@work_task.id),class: 'secondary button radius' %>
+
+<%= f.submit "Save",class: 'button radius'%>
+</p>
+
+<%end%>
+</section>
+</fieldset>

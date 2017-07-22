@@ -1,0 +1,12 @@
+<fieldset>
+	<section class="solidbody">
+
+		<p>
+	        <h5 class="subheader"> Complete planning step before activating or submitting Program Unit.There is no signed career plan found for client:<%= "#{client_full_name(@client_object)}"%>.Please create career plan by clicking career plan button.</h5>
+	      </p>
+				<%= link_to "Back",show_program_wizard_run_id_details_path(@selected_program_unit_id,@program_wizard_id),class: "secondary button radius"%>
+				<%= link_to "career plan",manage_cpp_path(@assessment_id),class: "button radius"%>
+
+
+</section>
+</fieldset>

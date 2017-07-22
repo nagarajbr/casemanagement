@@ -1,0 +1,25 @@
+	<% if @head_provider.present? %>
+		<p>
+		<table>
+			<caption style="text-align:inherit"><b> Selected Provider </b> <p></p></caption>
+		  <thead>
+		    <tr>
+				<th> Provider Name </th>
+				<th> Provider Type </th>
+				<th> Tax ID/ SSN </th>
+				<th> Action </th>
+
+			</tr>
+		  </thead>
+		    <tbody>
+
+					<tr>
+						<td>  <%= @head_provider.provider_name %></td>
+						<td>  <%= drop_down_value_description(@head_provider.provider_type) %></td>
+						<td>  <%= @head_provider.tax_id_ssn %></td>
+						<td>  <%= link_to "Select",show_provider_path(@head_provider.id),id: "hyperlink" %>	</td>
+					</tr>
+			</tbody>
+		</table>
+		</p>
+	<% end %>

@@ -1,0 +1,35 @@
+<section class="solidbody">
+ 	<fieldset>
+ 		<%= form_tag(create_program_units_path, method: :post) do %>
+			<b><h4><%= "Eligible Program Units for household: #{get_household_name_from_application_id(@selected_application.id)}"%></h4></b>
+			<!-- <legend>
+				<%#= set_subheader("Select Program Units to apply") %>
+			</legend> -->
+			<% if @family_comp.any_eligible_program_units %>
+				<%= render "possible_family_compositions",arg_family_comp:@family_comp,arg_service_program:@service_programs,arg_application:@selected_application  %>
+				<!-- <div>
+			  		<%#= render "application_processing_buttons_next_back_save", arg_object: "", arg_instance: @selected_application %>
+			    </div> -->
+			    <%= submit_tag "Apply",:name => "apply",class: 'button' %>
+			    <%#= submit_tag "Create New",:name => "create_new",class: 'button' %>
+			    <%= link_to 'Create New', new_program_unit_path, class: "button radius" %>
+		    <% else %>
+		    	<p>
+		        	<h5 class="subheader">No eligible programs are available for this household. Click Create New to crate a new Program Unit.</h5>
+		        </p>
+		        <p>
+		        <h6 class="subheader"><b>Possible reasons for Ineligibility.</b></h6>
+		        <% @screeningineligiblecode.each do |ineligibile_codes| %>
+		        	<b><%= ServiceProgram.service_program_name(ineligibile_codes.service_program) %></b><br>
+		        	<% ineligibile_codes.ineligible_codes.each do |code| %>
+						<%= CodetableItem.get_short_description(code) %><br>
+					<% end %>
+				<% end %>
+				</p>
+		    	<%= link_to 'Create New', new_program_unit_path, class: "button radius" %>
+		    <% end %>
+		    <!-- Program Unit Denial with Service program drop down-->
+		    <%= link_to 'Deny', deny_program_unit_path, class: "button radius alert" %>
+		<% end %>
+	</fieldset>
+</section>

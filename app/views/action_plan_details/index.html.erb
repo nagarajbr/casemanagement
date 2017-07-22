@@ -1,0 +1,82 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("#{drop_down_value_description(@action_plan.action_plan_type)} information for: #{client_full_name(@client)}") %></legend>
+		<%#= render "parent_action_plan" %>
+		<!-- <p>
+			 <%#= render "career_pathway_plans/expected_participation_hours"%>
+		</p> -->
+
+		<!-- <p>
+			 <%#= render "career_pathway_plans/planned_work_participation_hours_per_client"%>
+		 </p> -->
+
+		<p>
+		 	<%= render "action_plans/active_plan_summary", action_plan: @action_plan, arg_work_participation: @work_participation, employment_goal: @employment_goal %>
+	 	</p>
+
+		<% if @completed_activities.present? %>
+			<%= render "action_plan_detail_index_table", action_plan_details: @completed_activities, type: "Completed Activity", show_action: true %>
+		<% end %>
+
+		<% if @scheduled_activities.present? %>
+			<%= render "action_plan_detail_index_table", action_plan_details: @scheduled_activities, type: "Scheduled Activity", show_action: true %>
+			<!-- <table>
+				<caption class="fontc">
+						<%#= "Activity Details" %>
+				<p> </p> </caption>
+				<thead>
+				    <tr>
+						<th> Activity Type </th>
+						<th> Start Date </th>
+						<th> End Date </th>
+						<th> Action </th>
+					</tr>
+				</thead>
+				<tbody>
+					<%# @action_plan_details.each do |ap_detail| %>
+						<tr>
+							<td>  <%#= drop_down_value_description(ap_detail.activity_type) %> </td>
+							<td>  <%#= format_db_date ap_detail.start_date %> </td>
+							<td>  <%#= format_db_date ap_detail.end_date %> </td>
+							<td>
+								<%#= link_to "show", action_plan_action_plan_detail_path(@action_plan,ap_detail),id: "hyperlink" %> |
+								<%#= link_to "supportive services", application_detail_supportive_services_path(@action_plan,ap_detail),id: "hyperlink" %> |
+								<%#= link_to "activity hours", enter_participation_hours_path(@action_plan,ap_detail),id: "hyperlink" %>
+						    </td>
+						</tr>
+					<%# end %>
+				</tbody>
+			</table> -->
+			<%#= paginate @action_plan_details %>
+		<% else %>
+
+				<% if @action_plan.action_plan_status == 6043 %>
+					<h5 class="subheader">No activity information for <%= "#{drop_down_value_description(@action_plan.action_plan_type)}" %>. Click Add Action / Add Service  to enter activity information.</h5>
+				<% else %>
+					<h5 class="subheader">No activity information for <%= "#{drop_down_value_description(@action_plan.action_plan_type)}" %>.</h5>
+				<% end %>
+
+
+
+	        	<p></p>
+		<% end %>
+
+		<%= link_to 'Back', (session[:BRP] ? barrier_action_plans_path : action_plans_path),class: "secondary button radius" %>
+			<% if @action_plan.action_plan_status != 6044 %>
+				<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@action_plan.program_unit_id) %>
+					<%#= link_to "Add Action", new_action_plan_action_plan_detail_path(@action_plan), class: 'button radius' %>
+					<%#= link_to "Add Service", new_service_action_plan_detail_path(@action_plan), class: 'button radius' %>
+					<%= link_to "Core Activities", new_activity_path(@action_plan,"core"), class: 'button radius' %>
+					<%= link_to "Non Core Activities", new_activity_path(@action_plan,"non_core"), class: 'button radius' %>
+				<% else %>
+					<%#= link_to "Add Action", "#", class: "disabled button" %>
+					<%#= link_to "Add Service", "#", class: "disabled button" %>
+					<%= link_to "Core Activities", "#", class: "disabled button" %>
+					<%= link_to "Non Core Activities", "#", class: "disabled button" %>
+					<p>
+        				<h6 class="subheader"><b>Core Activities and Non Core Activities</b> buttons are disabled because, You are not the case manager of this program unit. Only case manager of this program unit edit the plan details.</h6>
+        			</p>
+				<% end %>
+			<% end %>
+	</section>
+</fieldset>

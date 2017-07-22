@@ -1,0 +1,38 @@
+<% if arg_completed_tasks.present? %>
+		<fieldset>
+			 <section class="solidbody">
+			 	<legend><%=set_subheader("Completed tasks for: #{current_user.name}") %></legend>
+			 	<%#= render 'selected_e mployer' %>
+
+				 	<table id="work_lists">
+
+				 		<thead>
+				 			<tr>
+
+			                    <th> Due date  </th>
+			                    <th> Task</th>
+			                    <th> Complete Date  </th>
+			                        <th> Client  </th>
+				 				<th> Action</th>
+				 			</tr>
+				 		</thead>
+				 		<tbody>
+				 			<% arg_completed_tasks.each do |arg_detail| %>
+					 			<tr>
+
+					 				<td>  <%= format_db_date(arg_detail.due_date) %></td>
+					 				<td>  <%= arg_detail.action_text %></td>
+									<td>  <%= format_db_date(arg_detail.complete_date) %></td>
+									<td>  <%= get_client_full_name(arg_detail.client_id) if arg_detail.client_id.present? %></td>
+					 				<td> <%= link_to "Show", work_task_path(arg_detail),id: "hyperlink" %></td>
+					 			</tr>
+				 			<% end %>
+				 		</tbody>
+				 	</table>
+				 	<%= paginate arg_completed_tasks,:param_name => :completed_task  %>
+
+
+
+			</section>
+		</fieldset>
+		<% end%>

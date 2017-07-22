@@ -1,0 +1,9 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+<%= form_for(@client_relationship, :url => client_relationships_path, method: :post) do |f| %>
+<%= render "shared/common_error", object_argument: @client_relationship %>
+<%= render 'form' ,arg_object:f,arg_client: @client,arg_target_client: @target_client, %>
+<% end %>
+</section>
+</fieldset>

@@ -1,0 +1,20 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Enter address information for: #{client_full_name(@client)}") %></legend>
+
+	    <% if session[:CLIENT_ID].present? %>
+	  		<%= form_for @address, url: create_address_path, method: :post do |f| %>
+		     	<%= render "shared/common_error", object_argument: @addresses_error_messages %>
+		     	<%= render 'form',arg_object: f ,arg_address:@address,arg_entity_type: @entity_type  %>
+		     	 <p>
+			        <%= link_to 'Cancel', show_address_path, class: "secondary button radius" %>
+			        <%= f.submit "Save", class: 'button radius' %>
+			    </p>
+	     	<% end %>
+	    <% else %>
+	    	<h5 class="subheader">Client is not selected, Select a client by clicking Search Client button.</h5><br>
+	    	<p></p>
+	    	<%= render "shared/search_client_button" %>
+		<% end %>
+</section>
+</fieldset>

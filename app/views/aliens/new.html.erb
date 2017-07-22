@@ -1,0 +1,45 @@
+<fieldset>
+  <section class="solidbody">
+        <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+            <p>
+              <%=(render 'households/selected_household_partial',arg_household: @household)if @household.present?%>
+            </p>
+            <%= set_subheader("Enter citizenship information for: #{client_full_name(@client)}") %>
+            <%= form_for(@form, :url => create_household_member_citizenship_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :post) do |f| %>
+                 <% if @alien.errors.full_messages.count > 0 %>
+                      <%= render "shared/common_error", object_argument: @alien %>
+                 <% else %>
+                      <%= render "shared/common_error", object_argument: @form %>
+                 <% end %>
+                <ul>
+                       <%= render 'form',arg_object: f, arg_object2: @client,arg_notes: @notes  %>
+                </ul>
+                  <p>
+                    <%= link_to "Back", start_household_member_registration_wizard_path ,class: 'button secondary'%>
+                    <%= f.submit "Save",class: 'button radius'%>
+                  </p>
+            <% end %>
+
+
+        <% else %>
+                <%= set_subheader("Enter citizenship information for: #{client_full_name(@client)}") %>
+              <%= form_for(@form, :url => create_alien_path, method: :post) do |f| %>
+                 <% if @alien.errors.full_messages.count > 0 %>
+                      <%= render "shared/common_error", object_argument: @alien %>
+                 <% else %>
+                      <%= render "shared/common_error", object_argument: @form %>
+                 <% end %>
+                <ul>
+                       <%= render 'form',arg_object: f ,arg_object2: @client,arg_notes: @notes  %>
+                </ul>
+                  <p>
+                    <%= link_to "Cancel", show_alien_path ,class: 'button secondary'%>
+                    <%= f.submit "Save",class: 'button radius'%>
+                  </p>
+            <% end %>
+        <% end %>
+
+
+
+    </section>
+</fieldset>

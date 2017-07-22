@@ -1,0 +1,43 @@
+<!--Manoj Patil 11/03/2015  -->
+<!-- NOT USED
+<fieldset>
+<section class="solidbody">
+	<legend><%#= set_subheader("Household Finance") %></legend>
+	<%#= render 'selected_household_partial' %>
+		<%#= form_for(@household,:url => process_household_finance_data_entry_wizard_path, method: :post) do |arg_household| %>
+			<%#= render "shared/common_error", object_argument: @household %>
+
+			<%# if  "#{@household.current_step}" == "household_member_incomes_step" %>
+	          <b><h3>Step 6-Household member income </h3></b>
+		    <%# end %>
+
+		    <%# if  "#{@household.current_step}" == "household_member_assessment_employment_step" %>
+	          <b><h3>Step 7-Household member Employment Asessment </h3></b>
+		    <%# end %>
+
+		    <%# if  "#{@household.current_step}" == "household_member_expenses_step" %>
+	          <b><h3>Step 8-Household member expense </h3></b>
+		    <%# end %>
+
+		     <%# if  "#{@household.current_step}" == "household_member_resources_step" %>
+	          <b><h3>Step 9-Household member resource </h3></b>
+		    <%# end %>
+
+		    <ul>
+		       	<div class="row">
+					<div class="large-12 columns">
+	                   <%#= render "#{@household.current_step}", :arg_object => arg_household %>
+	                </div>
+		        </div>
+		    </ul>
+
+		    <div>
+	      		<%#= render "buttons_next_back_save_for_finance", :arg_object => arg_household , :arg_instance =>@household %>
+	    	</div>
+	    <%# end %>
+
+</section>
+</fieldset>
+
+
+-->

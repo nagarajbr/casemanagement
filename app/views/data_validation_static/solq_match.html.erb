@@ -1,0 +1,113 @@
+<%# Child support match with OCSE %>
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("SOLQ response information for: #{client_full_name(@client)}") %></legend>
+<p>
+<h5 class="subheader"> <%= "Verification date-time: #{Time.now.strftime("%m/%d/%Y %H:%M:%S")}" %></h5>
+</p>
+
+<% if @client.present? %>
+			<p>
+			    <b> Social Security Number Verification:</b>
+			    <%= 'SSN is verified'  %>
+			</p>
+			<p>
+			    <b> Error:</b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Discrepancy </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Title II (SSA Income) data present:</b>
+			    <%= 'A Title II record does not exist' %>
+			</p>
+			<p>
+			    <b> Title IV (SSI Income) data present:</b>
+			    <%= 'A Title IV record does not exist' %>
+			</p>
+			<p>
+			    <b> Welfare ID number:</b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Special needs code: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> SSN correction indicator:</b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Proof of age indicator: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Date of death source (SSI source): </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Disability payment:</b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Dual entitlement indicator: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Dual entitlement BIC:</b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Dual entitlement status: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Type of dual entitlement: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Claim account number: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Other date of entitlement: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Date of initial entitlement: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Date of current entitlement: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Other office: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Date of suspension or termination: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Other eligibility year: </b>
+			    <%= %>
+			</p>
+			<p>
+			    <b> Disability onset date: </b>
+			    <%= %>
+			</p>
+<%else%>
+	<%# if validate_authorization(433) %>
+	<p>
+    <h5 class="subheader">SOLQ is currently unavailable, please try again later. If issue persists
+    	notify system support to escalate issue.</h5>
+    </p>
+<%end%>
+
+
+ <%= link_to("Back", program_unit_data_validation_results_path(@program_unit_id,1) , class: 'button radius secondary')%>
+</section>
+</fieldset>

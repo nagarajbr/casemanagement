@@ -1,0 +1,60 @@
+<p>
+     <b>Service Plan ID:  </b>
+     <%= arg_srvc_object.id %>
+</p>
+
+<p>
+      <b>Service Type:  </b>
+     <%=drop_down_value_description(arg_srvc_object.service_type) %>
+</p>
+
+<!--
+<p>
+      <b>Activity Service ID:  </b>
+     <%#=arg_srvc_object.activity_service_id %>
+</p>
+-->
+
+
+<% if arg_srvc_object.provider_id.present? && arg_view_mode == true%>
+<p>
+     <b>Service Provided By (Provider Name):  </b>
+     <%= get_provider_name(arg_srvc_object.provider_id) %>
+</p>
+<% end %>
+
+
+<p>
+    <b>Service Start Date:</b>
+   	<%= format_db_date(arg_srvc_object.service_start_date)  %>
+</p>
+
+<p>
+    <b>Service End Date:</b>
+   	<%= format_db_date(arg_srvc_object.service_end_date)  %>
+</p>
+<p>
+	<ul>
+		<li>
+			<%= render  "common_view_start_address", arg_object: arg_srvc_object %>
+		</li>
+	</ul>
+</p>
+<p>
+	<ul>
+		<li>
+			<%= render  "common_view_end_address", arg_object: arg_srvc_object %>
+		</li>
+	</ul>
+</p>
+<p>
+	<%= render  "common_view_service_schedule",arg_service_schedule: arg_service_schedule %>
+</p>
+
+<p>
+	<%= render  "service_cost_summary", arg_object: arg_srvc_object %>
+</p>
+
+<div id="srvc_line_items_toggle"  style="display: none">
+	<%= render  "common_service_authorization_line_items",arg_srvc_line_item: arg_srvc_line_item %>
+</div>

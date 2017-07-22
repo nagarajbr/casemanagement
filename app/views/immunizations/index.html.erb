@@ -1,0 +1,53 @@
+<!--
+<section class="solidbody">
+	<%# if session[:CLIENT_ID].present? %>
+		<%# if @client.dob.present? %>
+			<fieldset>
+				<%#= set_subheader("Immunization information for client: #{client_full_name(@client)}") %>
+				<table>
+				  <thead>
+				    <tr>
+						<th> Vaccination </th>
+						<th> Provider </th>
+						<th> Date Required </th>
+						<th> Date Administered </th>
+						<th></th>
+					</tr>
+				  </thead>
+				    <tbody>
+						<%# @immunizations.each do |arg_imzn| %>
+							<tr>
+								<td>  <%= system_param_value_description(arg_imzn.vaccine_type) %></td>
+								<td>  <%= arg_imzn.provider_id%></td>
+								<td>  <%= format_db_date(arg_imzn.date_required)  %></td>
+								<td>  <%= format_db_date(arg_imzn.date_administered)  %></td>
+							<%# if validate_authorization(431) %>
+								<td> <%#= link_to "Edit",edit_immunization_path(arg_imzn),id: "hyperlink" %> </td>
+							<%# end %>
+							</tr>
+						 <%# end %>
+					</tbody>
+				</table>
+
+			</fieldset>
+		<%# else %>
+			<fieldset>
+		        <%#= set_subheader("Manage Immunization" ) %>
+		        <h5 class="subheader"><%#= " No immunization information found. Click New to add immunization information." %></h5>
+		        <p></p>
+		        <td> <%#= link_to "Client Profile",show_client_path, class: "button radius" %> </td>
+	    	</fieldset>
+
+		<%# end %>
+
+<%#else%>
+	<fieldset>
+        <%#= set_subheader("Manage Immunization" ) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+         <%#= render "shared/search_client_button" %>
+    </fieldset>
+<%#end%>
+</section>
+
+-->

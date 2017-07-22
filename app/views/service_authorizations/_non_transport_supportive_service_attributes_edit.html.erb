@@ -1,0 +1,25 @@
+ <!-- <li class="required">
+      <%#= arg_common_object.label :barrier_id %>
+     <%#= arg_common_object.select :barrier_id, @non_transportation_barrier_collection.collect { |p| ["#{p.barrier_description} ", p.barrier_id] },{ :include_blank => 'Select Barrier' } %>
+ </li -->
+
+
+ <li class="required">
+      <%= arg_common_object.label :service_date %>
+      <%= arg_common_object.date_field :service_date, onkeyup:"validate_date_format(event)" %>
+ </li>
+
+ <li class="required">
+      <%= arg_common_object.label :service_type %>
+     <%= arg_common_object.select :service_type, arg_non_transport_support_service.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Supportive Service' } %>
+ </li>
+
+  <li class="required">
+      <%= arg_common_object.label :provider_id %>
+     <%= arg_common_object.select :provider_id, arg_non_transport_provider_service.collect { |p| ["#{p.provider_name} ", p.id] },{ :include_blank => 'Select Provider' } %>
+ </li>
+
+ <li >
+      <%= arg_common_object.label :notes %>
+      <%= arg_common_object.text_area :notes %>
+ </li>

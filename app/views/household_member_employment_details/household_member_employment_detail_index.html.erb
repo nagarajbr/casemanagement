@@ -1,0 +1,32 @@
+<!-- <fieldset>
+	 <section class="solidbody">
+		<legend><%#=set_subheader("Employment details for employment at #{@employer_name} for household member: #{client_full_name(@client)}") %></legend>
+	 	<%#= render 'employment_details/selected_employer' %>
+	 	<table>
+	 		<caption style="text-align:inherit"><p><b><%#= "Employment details" %></b></p></caption>
+	 		<thead>
+	 			<tr>
+	 				<th> Position Type </th>
+	 				<th> Status</th>
+	 				<th> Begin Date </th>
+	 				<th> End Date </th>
+	 				<th> Action</th>
+	 			</tr>
+	 		</thead>
+	 		<tbody>
+	 			<%# @employment_details.each do |arg_detail| %>
+		 			<tr>
+		 				<td>  <%= drop_down_value_description(arg_detail.position_type) %></td>
+		 				<td>  <%= drop_down_value_description(arg_detail.current_status) %></td>
+		 				<td>  <%=  format_db_date(arg_detail.effective_begin_date) %></td>
+		 				<td>  <%=  format_db_date(arg_detail.effective_end_date) %></td>
+		 				<td> <%#= link_to "Show", show_household_member_employment_detail_path(@client.id,@employment.id,arg_detail.id),id: "hyperlink" %> </td>
+		 			</tr>
+	 			<%# end %>
+	 		</tbody>
+	 	</table>
+	 	<%#= link_to 'Back', start_household_member_registration_wizard_path,class: " secondary button radius" %>
+	 	<%#= link_to("New", new_household_member_employment_detail_path(client.id,@employment.id), class: 'button radius') %>
+	</section>
+</fieldset>
+ -->

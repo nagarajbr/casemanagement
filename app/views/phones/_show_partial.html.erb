@@ -1,0 +1,31 @@
+<%# if arg_primary.present? %>
+	<P>
+   		<b><%= drop_down_value_description(4661) %>:</b>
+   		<%= arg_primary.present? ? format_phone_number(arg_primary.phone_number) : ""%>
+   </p>
+<%# end %>
+
+<%# if arg_secondary.present? %>
+   <P>
+   		<b><%= drop_down_value_description(4662) %>:</b>
+   		<%= arg_secondary.present? ? format_phone_number(arg_secondary.phone_number) : "" %>
+   </p>
+<%# end %>
+
+<%# if arg_other.present? %>
+    <P>
+   		<b><%= drop_down_value_description(4663) %>:</b>
+   		<%= arg_other.present? ? format_phone_number(arg_other.phone_number) : "" %>
+    </p>
+<%# end %>
+
+<P>
+	<b> Email: </b>
+		<%= arg_email.present? ? arg_email : "" %>
+</p>
+
+<p>
+	<b>Worker: </b>
+	<%= get_user_name(arg_modified) %>
+</p>
+	<%= render "notes/notes_field_show", arg_notes: arg_notes %>

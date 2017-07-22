@@ -1,0 +1,55 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Activities for: #{client_full_name(@client)}") %></legend>
+		<% if @action_plan_details.present? %>
+			<table>
+				<caption class="fontc">
+						<%= "Activity Details" %>
+				<p> </p> </caption>
+				<thead>
+				    <tr>
+						<th width="15%"> Activity Type </th>
+						<th> Start Date </th>
+						<th> End Date </th>
+						<th> Agreement Date </th>
+						<th width="5%"> Description </th>
+						<th> Status </th>
+						<th> Action </th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @action_plan_details.each do |ap_detail| %>
+						<tr>
+							<td>  <%= drop_down_value_description(ap_detail.activity_type) %> </td>
+							<td>  <%= format_db_date ap_detail.start_date %> </td>
+							<td>  <%= format_db_date ap_detail.end_date %> </td>
+							<td>  <%= format_db_date ap_detail.client_agreement_date %> </td>
+							<td>  <%= drop_down_value_description(ap_detail.entity_type) %> </td>
+							<td>  <%= drop_down_value_description(ap_detail.activity_status) %> </td>
+							<td>
+								<%= link_to "show", show_client_activity_path(ap_detail),id: "hyperlink" %>
+								<% if (ap_detail.activity_status == 6043 && ap_detail.client_agreement_date.present?) %>
+								|
+								<%#= link_to "enter participation hours", enter_participation_hours_path(ap_detail.action_plan_id,ap_detail),id: "hyperlink" %>
+								<%= link_to "activity index", activity_index_path(ap_detail.action_plan_id,ap_detail),id: "hyperlink" %>
+								<% end %>
+								<% if @activity_hours.present?  %>
+								<% if (ap_detail.activity_status == 6044 && ap_detail.client_agreement_date.present?) %>
+								|
+								<%= link_to "view participation hours", show_participation_hours_path(ap_detail.action_plan_id,ap_detail.id,@activity_hours.id),id: "hyperlink" %>
+								<% end %>
+								<% end %>
+						    </td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<%= paginate @action_plan_details %>
+
+		<% else %>
+			<h5 class="subheader">No activity information available for <%= "#{client_full_name(@client)}" %>.</h5>
+	        <p></p>
+		<% end %>
+		<%#= link_to 'Back', action_plans_path,class: "secondary button radius" %>
+	</section>
+</fieldset>

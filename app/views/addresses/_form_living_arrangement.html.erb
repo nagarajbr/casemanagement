@@ -1,0 +1,136 @@
+<ul>
+    <fieldset>
+
+        <!-- <legend><h4 class="fontc"><%#= "#{drop_down_value_description(@address.address_type)} Address" %></h4></legend> -->
+
+        <% if session[:CLIENT_ID].present? %>
+
+                <% if arg_primary_applicant_address.present? %>
+                 <!--  <legend><%#= set_subheader("Primary Applicant Address information:" ) %></legend> -->
+
+                    <!-- <legend><%= set_subheader("Primary Applicant: #{client_full_name(arg_primary_applicant)}") %></legend><br> -->
+
+                    <legend class="radiolegend"><b>Primary Applicant <%= drop_down_value_description(arg_primary_applicant_address.address_type) %> Address Information:</b></legend><br>
+
+                    <%= "#{client_full_name(arg_primary_applicant).capitalize}" %><br>
+                    <% if arg_primary_applicant_address.in_care_of.present? %>
+                      <%= " C/O #{arg_primary_applicant_address.in_care_of}"%><br>
+                    <% end %>
+
+                    <%= arg_primary_applicant_address.address_line1%><br>
+
+                    <% if arg_primary_applicant_address.address_line2.present? then %>
+                      <%= arg_primary_applicant_address.address_line2 %><br>
+                    <% end %>
+
+                    <%= " #{arg_primary_applicant_address.city}, #{drop_down_value_description(arg_primary_applicant_address.state)}"%>
+
+                    <% if arg_primary_applicant_address.zip_suffix.present? %>
+                      <%= "#{arg_primary_applicant_address.zip}-#{arg_primary_applicant_address.zip_suffix}"%>
+                    <%else%>
+                      <%= "#{arg_primary_applicant_address.zip}"%>
+                    <% end %><br>
+
+                    <% if arg_primary_applicant_address.county.present? %>
+                      <%= drop_down_value_long_description(arg_primary_applicant_address.county) %><br>
+                    <% end %>
+                    <br>
+
+
+                    <fieldset class="radio">
+                      <legend class="radiolegend"><b><%= "Copy #{client_full_name(arg_primary_applicant)} Residence Address to #{client_full_name(arg_client).capitalize} "%></b></legend> <br>
+                        <div class="button-group">
+                          <label class="radio-button"><%= radio_button_tag :copy_address, "Y", checked = false ,id: "copy_address_y",onclick:"js_living_arrangement_copy_yes_No(this)",autofocus: true%>&nbsp;Yes</label>
+                          <label class="radio-button"><%= radio_button_tag :copy_address, "N",checked = false, id: "copy_address_n",onclick:"js_living_arrangement_copy_yes_No(this)"%>&nbsp;No</label>
+                        </div>
+                    </fieldset>
+
+                    <input type="hidden" name="hidden_in_care_of" id="hidden_in_care_of" value = "<%= "#{arg_primary_applicant_address.in_care_of}"%>" >
+                    <input type="hidden" name="hidden_address_line1" id="hidden_address_line1" value = "<%= "#{arg_primary_applicant_address.address_line1}"%>" >
+                    <input type="hidden" name="hidden_address_line2" id="hidden_address_line2" value = "<%= "#{arg_primary_applicant_address.address_line2}"%>" >
+                    <input type="hidden" name="hidden_city" id="hidden_city" value = "<%= "#{arg_primary_applicant_address.city}"%>" >
+                    <input type="hidden" name="hidden_state" id="hidden_state" value = <%= "#{arg_primary_applicant_address.state}"%> >
+                    <input type="hidden" name="hidden_zip" id="hidden_zip" value = <%= "#{arg_primary_applicant_address.zip}"%> >
+                    <input type="hidden" name="hidden_zip_suffix" id="hidden_zip_suffix" value = <%= "#{arg_primary_applicant_address.zip_suffix}"%> >
+                    <input type="hidden" name="hidden_county" id="hidden_county" value = <%= "#{arg_primary_applicant_address.county}" %> ><!-- CodetableItem.get_long_description( -->
+
+                    <input type="hidden" name="actual_in_care_of" id="actual_in_care_of" value = "<%= "#{arg_address.in_care_of}"%>" >
+                    <input type="hidden" name="actual_address_line1" id="actual_address_line1" value = "<%= "#{arg_address.address_line1}"%>" >
+                    <input type="hidden" name="actual_address_line2" id="actual_address_line2" value = "<%= "#{arg_address.address_line2}"%>" >
+                    <input type="hidden" name="actual_city" id="actual_city" value = <%= "#{arg_address.city}"%> >
+                    <input type="hidden" name="actual_state" id="actual_state" value = <%= "#{arg_address.state}"%>>
+                    <input type="hidden" name="actual_zip" id="actual_zip" value = <%= "#{arg_address.zip}"%> >
+                    <input type="hidden" name="actual_zip_suffix" id="actual_zip_suffix" value = <%= "#{arg_address.zip_suffix}"%> >
+                    <input type="hidden" name="actual_county" id="actual_county" value = <%= "#{arg_address.county}" %> >
+
+                  <p></p>
+
+                <% else %>
+                  <legend><%= set_subheader("Primary applicant address information is not available" ) %></legend>
+                <% end %>
+
+        <% else %>
+              <legend><%= set_subheader("View address information" ) %></legend>
+            <h5 class="subheader">Client is not selected, Select a client by clicking Search Client button.</h5>
+            <p></p>
+            <%= render "shared/search_client_button" %>
+        <% end %>
+        <div class="row">
+
+          <div class="large-4 columns">
+
+            <li>
+              <%= arg_object.label :in_care_of %>
+              <%= arg_object.text_field :in_care_of, id: "in_care_of", autofocus: true,title1: "Care of", maxlength: "20",readonly: true  %>
+            </li>
+
+            <li class="required">
+              <%= arg_object.label :address_line1 %>
+              <%= arg_object.text_field :address_line1, id: "address_line1", maxlength: "50",readonly: true %>
+            </li>
+
+            <li>
+                <%= arg_object.label :address_line2 %>
+                <%= arg_object.text_field :address_line2, id: "address_line2", title1: "Address Line2", maxlength: "50",readonly: true  %>
+            </li>
+
+            <li class="required">
+                <%= arg_object.label :city %>
+                <%= arg_object.text_field :city, id: "city", title1: "City", maxlength: "50",readonly: true %>
+            </li>
+
+
+            <li  class="required">
+              <%= arg_object.label :state %>
+              <!-- <%#= arg_object.text_field :state, id: "state",onkeypress: "return isNumberKey(event)", maxlength: "20",readonly: true  %> -->
+              <%= arg_object.select :state, CodetableItem.item_list(104,"State List").collect { |p| ["#{p.long_description} ", p.id] }, { :include_blank => 'Select a state' },prompt: "select a State",id: "state",disabled: true %>
+            </li>
+            <input type="hidden" name="address_state" id="address_state" >
+
+            <div class="row">
+              <div class="large-7 columns">
+                 <li class="required">
+                    <%= arg_object.label :zip %>
+                    <%= arg_object.text_field :zip, id: "zip", title1: "Zip", maxlength: "5",onkeypress: "return isNumberKey(event)",readonly: true %>
+                  </li>
+              </div>
+              <div class="large-5 columns">
+                <li>
+                    <%= arg_object.label :zip_suffix %>
+                    <%= arg_object.text_field :zip_suffix, id: "zip_suffix", title1: "Zip suffix",onkeypress: "return isNumberKey(event)", maxlength: "4",readonly: true  %>
+                </li>
+              </div>
+            </div>
+
+            <li>
+              <%= arg_object.label :county %>
+              <!-- <%#= arg_object.text_field :county, id: "county", title1: "Zip suffix",onkeypress: "return isNumberKey(event)", maxlength: "20",readonly: true  %> -->
+              <%= arg_object.select :county, CodetableItem.item_list(12,"County List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'select a county' }, title1: "Enter County", data: {tooltip1: '' },id: "county",disabled: true %>
+            </li>
+            <input type="hidden" name="address_county" id="address_county" >
+
+            <%= arg_object.hidden_field :address_type %>
+          </div>
+        </div>
+      </fieldset>
+    </ul>

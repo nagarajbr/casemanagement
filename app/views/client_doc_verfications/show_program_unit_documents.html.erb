@@ -1,0 +1,37 @@
+<section class="solidbody">
+  <fieldset>
+ <caption><%= set_subheader("Document Verification" ) %><caption>
+ <%= render 'program_units/selected_program_unit_details', arg_selected_program_unit:@selected_program_unit %>
+ <br>
+  <% if @client_doc_verification_list.present? %>
+  <b> Verified Documents for selected Program Unit's Members</b>
+  <p></p>
+    <table>
+                <thead>
+                    <tr>
+                      <th> Program Unit Member </th>
+                      <th> Document Type </th>
+                      <th> Verification Date </th>
+                      <th>                   </th>
+                    </tr>
+                </thead>
+                <tbody>
+                     <% @client_doc_verification_list.each do |arg_doc| %>
+                        <tr>
+                          <td>  <%= get_client_full_name(arg_doc.client_id) %></td>
+                          <td>  <%= drop_down_value_description(arg_doc.document_type) %></td>
+                          <td>  <%=  format_db_date(arg_doc.document_verfied_date) %></td>
+                            <td><%= link_to "Show",show_one_program_unit_document_path(@selected_program_unit.id,arg_doc.id),id: "hyperlink" %></td>
+                        </tr>
+                     <% end %>
+                </tbody>
+          </table>
+  <% else %>
+         <h5 class="subheader">No Documents are Verified for Program Unit Members.Click Add button to add Verification Documents.</h5>
+  <% end %>
+   <%= link_to "Back", program_units_path ,class: 'button secondary' %>
+  <%# if validate_authorization(674) %>
+    <%= link_to 'Add Documents',new_program_unit_member_document_path(@selected_program_unit.id), class: "button radius"%>
+  <%# end %>
+</fieldset>
+</section >

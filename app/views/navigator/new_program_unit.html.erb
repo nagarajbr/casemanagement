@@ -1,0 +1,30 @@
+<section class="solidbody">
+	<fieldset>
+		<legend>
+			<%= set_subheader("Select Service Program for household: #{get_household_name_from_application_id(@selected_application.id)}") %>
+		</legend><br>
+		<% if @selected_application.present? %>
+			<%= form_tag(create_new_program_unit_path, method: :post) do %>
+				<!-- <b><h4><%#= "Select Service Program for: #{client_full_name(@client)}" %></h4></b>
+				<b><h4><%#= "Select Service Program for household: #{get_household_name_from_application_id(@selected_application.id)}"%></h4></b> -->
+				<%= render "shared/common_error", object_argument: @selected_application %>
+				<ul>
+			    	<div class="row">
+		       	 		<div class= "large-5 columns">
+		       	 			<li class="required"  >
+								<%= label_tag :service_program_id, "Service Program" %>
+							  	<%= select_tag "service_program_id",options_for_select(@service_programs.collect { |p| ["#{get_service_program_name(p.id)}", p.id] }),prompt:"Select a Service Program"	 %>
+							</li>
+			            </div>
+			        </div>
+			    </ul>
+			    <%= submit_tag "Next",:name => "next",class: 'button' %>
+			<% end %>
+		<% else %>
+			<p>
+		    <h5 class="subheader">No application is selected to create a new program unit. Please select an application from the applications list.</h5>
+	        </p>
+	        <%= link_to 'Applications List',client_applications_path, class: "button radius"%>
+		<% end %>
+	</fieldset>
+</section>

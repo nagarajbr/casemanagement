@@ -1,0 +1,49 @@
+
+<!--Manoj Patil 09/24/2015  -->
+
+<fieldset>
+
+<section class="solidbody">
+	<legend><%= set_subheader("Add Local Office to User") %></legend>
+
+	<% if session["USER_ID_SAVE_ADD"].present?%>
+		<%= render 'user_local_office_list_for_save_and_add',arg_user_list:@user_local_office_list_save_and_add %>
+	<% end %>
+	<%= form_for(@user_local_office_object, :url => user_local_offices_create_path, method: :post) do |f| %>
+	  	<%= render "shared/common_error", object_argument: @user_local_office_object %>
+
+	    	<ul>
+		     	<div class="row">
+		          <div class="large-4 columns">
+
+		          		<% if session["USER_ID_SAVE_ADD"].present?%>
+		          			<p>
+					        	<b>User Name: </b>
+					       		 <%= get_user_name(@user_local_office_object.user_id) %>
+					   		 </p>
+		          		<% else %>
+		          			<li class="required">
+						      <%= f.label :user_id %>
+						      <%= f.select :user_id, @users_list.collect { |p| [p.name, p.uid] },{ :include_blank => 'Select User' } %>
+							</li>
+		          		<% end %>
+
+
+
+
+						<li class="required">
+						      <%= f.label :local_office_id%>
+						      <%= f.select :local_office_id, @local_office_list.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Local Office' } %>
+						</li>
+			 	  </div>
+			    </div>
+			</ul>
+		    <p>
+		    	<%= link_to 'Back',user_local_offices_index_path ,class: "secondary button radius" %>
+		        <%= f.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+		        <%= f.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+		    </p>
+
+	<% end %>
+</section>
+  </fieldset>

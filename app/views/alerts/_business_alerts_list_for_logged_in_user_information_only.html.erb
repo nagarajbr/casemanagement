@@ -1,0 +1,34 @@
+<fieldset>
+	<section class="solidbody">
+	 	<legend><%=set_subheader("Work alerts for user: #{current_user.name}") %></legend>
+
+	<% if arg_object.present? %>
+	 	<table >
+	 		<thead>
+	 			<tr>
+                    <th> Alert </th>
+                    <th> Alert For  </th>
+                    <th> Alert For ID</th>
+             		<th> Action</th>
+	 			</tr>
+	 		</thead>
+	 		<tbody>
+	 			<% arg_object.each do |arg_detail| %>
+		 			<tr>
+		 				<td>  <%= arg_detail.alert_text %></td>
+		 				<td>  <%= drop_down_value_description(arg_detail.alert_for_type) %></td>
+		 				<td>  <%= arg_detail.alert_for_id %></td>
+		 				<td> <%= link_to "Acknowledge", alerts_acknowledge_path(arg_detail),id: "hyperlink" %>
+		 				</td>
+		 			</tr>
+	 			<% end %>
+	 		</tbody>
+	 	</table>
+	 	<%= paginate arg_object,:param_name => :information_only %>
+	<%else%>
+	        <h5 class="subheader">User <%= current_user.name %> does not have any work alerts </h5>
+	        <p></p>
+
+	<%end%>
+   </section>
+</fieldset>

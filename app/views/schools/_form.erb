@@ -1,0 +1,16 @@
+  <li class="required">
+      <%= arg_object.label :school_type %>
+      <%= arg_object.select :school_type, CodetableItem.item_list(21,"School type").collect { |p| ["#{p.short_description} ", p.id ] }, prompt:"Select School type", autofocus: true %>
+  </li>
+
+  <li class="required">
+    <%= arg_object.label :school_name  %>
+    <%= arg_object.text_field :school_name, maxlength: "150" %>
+  </li>
+
+  <li>
+      <%= arg_object.label :web_address %>
+      <%= arg_object.text_field :web_address, maxlength: "100"  %>
+  </li>
+
+  <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>

@@ -1,0 +1,46 @@
+ NOT USED -->
+
+<!--
+
+<b>Household Member: <%#= "#{client_full_name(@client)}" %></b>
+<p></p>
+<%# if @client_characteristics.present? %>
+		<table>
+		<caption style="text-align:inherit"> <p><b> Mental health characteristics </b></p></caption>
+		  <thead>
+		    <tr>
+			  <th> Characteristic </th>
+              <th> Start date </th>
+              <th> End date </th>
+              <th> Action </th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<%#  @client_characteristics.each do |each_characteristic| %>
+					<tr>
+						<td>  <%= drop_down_value_description(each_characteristic.characteristic_id) %></td>
+                		<td>  <%= format_db_date(each_characteristic.start_date) %></td>
+                		<td>  <%= format_db_date(each_characteristic.end_date) %></td>
+                		<td> <%#= link_to "Show",show_household_member_characteristic_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD','mental',each_characteristic.id),id: "hyperlink" %> </td>
+					</tr>
+				 <% #end %>
+			</tbody>
+		</table>
+<%#else%>
+		<! <h5 class="subheader">Mental health issues characteristics data not found. Have you been diagnosed or treated for Mental health condition or Attention deficit disorder (ADD)? or Do you have any mental health issues that presents challenge to get work? </h5> -->
+		 <!-- <h5 class="subheader">Mental health issues characteristics data not found. Do you want to add mental health issues characteristics data? </h5> -->
+             <!--  <p></p>
+            <fieldset class="radio">
+                <div class="button-group"> -->
+                 <!--  <label class="radio_button_bigger_text" for="member_mental_health_issues_charcteristics_found_add_flag_y"><%#= arg_object.radio_button :member_mental_health_issues_charcteristics_found_add_flag, "Y"%>Yes</label>
+                  <label class="radio_button_bigger_text" for="member_mental_health_issues_charcteristics_found_add_flag_n"><%#= arg_object.radio_button :member_mental_health_issues_charcteristics_found_add_flag, "N"%>No</label>
+                   <label class="radio_button_bigger_text" for="member_mental_health_issues_charcteristics_found_add_flag_s"><%#= arg_object.radio_button :member_mental_health_issues_charcteristics_found_add_flag, "S"%>Skip for now</label>
+
+                </div>
+            </fieldset> -->
+<%#end%>
+ <%#= arg_object.submit 'New',:name => "new_mental_health_char_button", class: "button radius" %>
+  <%#= link_to "New",new_household_member_characteristic_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD','mental'), class: 'button radius' %>
+
+
+

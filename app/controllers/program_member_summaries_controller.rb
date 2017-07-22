@@ -1,0 +1,2 @@
+class ProgramMemberSummariesController < AttopAncestorController
+end

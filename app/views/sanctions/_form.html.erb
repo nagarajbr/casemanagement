@@ -1,0 +1,70 @@
+    <ul>
+      <% if arg_sancton_month == true  %>
+         <% unless arg_sanction.new_record? %>
+            <p>
+              <b>Service Program: </b>
+              <%= get_service_program_name(@sanction.service_program_id) %>
+            </p>
+            <p>
+              <b>Sanction Type: </b>
+              <%= drop_down_value_description(@sanction.sanction_type) %>
+            </p>
+            <p>
+              <b>Infraction Begin Date: </b>
+              <%=format_db_date(@sanction.infraction_begin_date) %>
+            </p>
+          <%end%>
+       <%else%>
+       <div class="row">
+        <div class="large-4 columns">
+           <li class="required">
+              <%= arg_object.label :service_program_id %>
+              <%= arg_object.select :service_program_id, arg_program_list.collect { |p| ["#{p.title} ", p.id ] }, { :include_blank => 'Select service program' },autofocus: true,title1: "select service program", data: {tooltip1: '' } %>
+            </li>
+
+            <li class="required">
+              <%= arg_object.label :sanction_type %>
+              <%= arg_object.select :sanction_type, arg_reduction_list.collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select sanction type', :disabled => arg_item_list} %>
+            </li>
+
+            <li  class="required" >
+              <%= arg_object.label :infraction_begin_date %>
+              <%= arg_object.date_field :infraction_begin_date, alt: "infraction_begin_date",title1: "Enter or select the date that the sanctionable event occurred", data: {tooltip1: true }, onkeyup:"validate_date_format(event)"  %>
+            </li>
+        </div>
+       </div>
+       <%end%>
+  <div class="row">
+    <div class="large-4 columns">
+
+    <li >
+        <%# if validate_authorization(730) %>
+        <%= arg_object.label :infraction_end_date %>
+        <%= arg_object.date_field :infraction_end_date, alt: "infraction_end_date",title1: "Enter or select the date that the sanctionable event occurred", data: {tooltip1: true }, onkeyup:"validate_date_format(event)"  %>
+        <%#end%>
+    </li>
+
+     <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+
+
+
+      <!-- <li >
+        <%#= arg_object.label :description %>
+        <%#= arg_object.text_area :description, cols: 40, rows: 7,alt: "description" %>
+      </li> -->
+
+       <!-- <li >
+        <fieldset class="radio">
+          <legend class="radiolegend"> Add To The To Do List</legend>
+            <div class="button-group">
+              <label class="radio-button" for="sanction_mytodolist_indicator_y"><%#= arg_object.radio_button :mytodolist_indicator, "Y"%>&nbsp;Yes</label>
+              <label class="radio-button" for="sanction_mytodolist_indicator_n"><%#= arg_object.radio_button :mytodolist_indicator, "N"%>&nbsp;No</label>
+            </div>
+        </fieldset>
+      </li> -->
+
+      <%= arg_object.hidden_field :created_by %>
+ 			 <%= arg_object.hidden_field :updated_by %>
+		</div>
+  </div>
+    </ul>

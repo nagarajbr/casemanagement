@@ -1,0 +1,228 @@
+// Place all the styles related to the user_admin controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+@import "colors";
+
+//should be available only for foundation rails begin
+meta.foundation-data-attribute-namespace {
+  font-family: false; }
+//end
+
+#header{
+  background-color: #414143;
+
+}
+
+#header li:hover{
+ background-color: lighten(#022D57, 50%);
+}
+
+#body{
+  margin-top:30px;
+  min-height:700px;
+}
+
+#footer{
+   position: absolute;
+    height:auto;
+    background-color:#DEE0E2;
+    left:0px;
+    right:0px;
+    margin-bottom:0px;
+    padding:50px;
+	border-top: 10px solid $footer-border-color;
+}
+#footer ul{
+  clear:both;
+  text-align: center;
+  text-decoration: underline;
+    a{
+    padding:20px;
+    color: $footer-hyperlink-color;
+  }
+  a:hover{
+  color:$footer-hyperlink-hover-color;
+  }
+}
+
+#alert-text-center ul{
+  color: #FF0000 ;
+}
+
+#warning-text-center ul{
+  color: #000000 ;
+}
+
+#warning_explanation {
+    background-color: $error-background-color;
+    padding: 0.1px 1 2px 0 ;
+    h6{
+    margin-left: 10px;
+    color: #000000;
+    }
+    li{
+    list-style-type: disc;
+    margin-left: 35px;
+    color: $black-color;
+    }
+  }
+
+#alert-text-center{
+margin-top:1%;
+margin-bottom: 0px;
+}
+
+
+
+#menu ul{
+  list-style: none;
+}
+#menu li{
+   border-top: solid #fff;
+}
+
+#menu li a, #menu li a:visited{
+  display: block;
+  background:  #E9EDF0;
+  padding: 5px 0 0 10px;
+
+}
+#menu li a:hover{
+  border-style: solid;
+  border-color: #FFBF47;
+  background-color: #FFFFFF;
+}
+
+
+
+div .alert-box{
+ background-color: #FFC;
+ border-color: darken(#FFC, 15%);
+ //color: #DF3034;
+ color: #000000;
+}
+div .flash-alert{
+ background-color: #FFC;
+ border-color: darken(#FFC, 15%);
+ color: #DF3034;
+ //color: #000000;
+}
+div .flash-error{
+ background-color: #FFC;
+ border-color: darken(#FFC, 15%);
+ color: #DF3034;
+ //color: #000000;
+}
+
+
+
+
+
+/*Information Styles*/
+
+div .panel-info{
+border-radius: 15px;
+background-color: $information-panel-bg-color;
+border: 5px solid darken($information-panel-bg-color,5%);
+ ul{
+ list-style-type:disc;
+ padding: 0 0 0 30px;
+ }
+ div {
+   p {
+   float: right;
+   color: $information-icon-color;
+   font-size: 3em;
+   }
+ }
+}
+
+
+
+/*Radio Button*/
+.radio-button{
+  background-color: $white-color;
+  border: 2.5px solid #CCCCCC;
+  text-align: center;
+  width:4.5em;
+  height:1.8em;
+}
+
+/*Radio Button Bigger Text*/
+.radio_button_bigger_text{
+  background-color: $white-color;
+  border: 2.5px solid #CCCCCC;
+  text-align: center;
+  width:8.5em;
+  height:1.8em;
+}
+
+.radio-button-status{
+ background-color: $white-color;
+  border: 2.5px solid #CCCCCC;
+  text-align: center;
+  width:5.5em;
+  height:1.8em;
+}
+
+.radio-button-focus{
+  background-color: $white-color;
+  border: 2.5px solid #FFBF47;
+  text-align: center;
+  width:4.5em;
+  height:1.8em;
+}
+
+.dropdown-focus{
+  border: 2.5px solid $focus-border-color;
+  box-shadow: 0px 0px 5px #6EA2DE;
+  include-glowing-effect: true;
+  outline: none;
+}
+
+.dropdown-blur{
+  border: 2.5px solid $blur-border-color;
+  outline: none;
+}
+
+#col-result-pass{
+  color: $table-cell-result-pass;
+  font-weight: bold;
+}
+
+#col-result-fail{
+  color: $table-cell-result-fail;
+  font-weight: bold;
+}
+
+#col-result-warning{
+  color: $table-cell-result-warning;
+  font-weight: bold;
+}
+
+
+#petitjeanbetaleft{
+   color: #FFDE00;
+   margin-top: 1.85em;
+   text-align: right;
+   font-size: 115%;
+}
+
+#petitjeanbetaright{
+   color: #FFDE00;
+   margin-top: 1.85em;
+   text-align:left;
+   font-size: 115%;
+}
+
+
+#show_physical_address_fields{
+  display: block;
+}
+
+#hide_physical_address_fields{
+  display: none;
+
+}

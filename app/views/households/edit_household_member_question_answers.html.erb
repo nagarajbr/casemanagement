@@ -1,0 +1,41 @@
+<!-- NOT USED
+
+
+
+
+  <fieldset>
+<section class="solidbody">
+        <legend>
+          <%= set_subheader("Registration questions -household member: #{client_full_name(@client)}") %>
+        </legend>
+
+        <%= form_tag update_household_member_question_answers_path(@household_member.id), method: :put do %>
+          <table>
+          <caption style="text-align:inherit">
+            <b>Check the relevant box to answer question</b><p></p>
+          </caption>
+            <thead>
+              <tr>
+                   <th> Question  </th>
+                  <th> Answer </th>
+              </tr>
+            </thead>
+              <tbody>
+                <% for arg_q_a in @household_member_registration_question_answers   %>
+                  <tr>
+                    <%= fields_for "household_member_registration_q_answers[]", arg_q_a do |f|  %>
+                       <%= render "household_member_registration_question_answer", arg_object: f,arg_object2:arg_q_a %>
+                    <% end %>
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+             <%= link_to 'Back', start_household_member_registration_wizard_path ,class: "secondary button radius" %>
+             <%= submit_tag "Save", class: "button radius" %>
+      <% end %>
+
+</section>
+ </fieldset>
+
+
+-->

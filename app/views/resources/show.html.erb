@@ -1,0 +1,109 @@
+<fieldset>
+  <section class="solidbody">
+     <legend><%= set_subheader("#{drop_down_value_description(@resource.resource_type)} resource information for: #{client_full_name(@client)}") %> </legend><br>
+
+    <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+
+
+          <p>
+          <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+        </p>
+
+    <% end %>
+
+
+
+
+  <p>
+    <b>Resource Type: </b>
+    <%= drop_down_value_description(@resource.resource_type) %>
+  </p>
+
+  <p>
+    <b>Account Number: </b>
+    <%= @resource.account_number %>
+  </p>
+
+   <p>
+    <b>Notes: </b>
+    <%= @resource.description %>
+  </p>
+
+
+  <p>
+    <b>Date Resource Acquired: </b>
+    <%= format_db_date @resource.date_assert_acquired %>
+  </p>
+
+  <p>
+    <b>Date Resource Disposed: </b>
+    <%= format_db_date @resource.date_assert_disposed %>
+  </p>
+
+  <p>
+    <b>Number of Owners: </b>
+    <%= @resource.number_of_owners %>
+  </p>
+
+ <!--  <p>
+    <b>Net Value: </b>
+    <%#= number_to_currency_br(@resource.net_value) %>
+  </p> -->
+<!--
+  <p>
+    <b>Date value determined: </b>
+    <%#= format_db_date @resource.date_value_determined %>
+  </p> -->
+
+  <p>
+    <b>Ownership Percentage: </b>
+    <%=number_to_percentage_br(@resource.use_code) %>
+  </p>
+
+  <p>
+    <b>Verified: </b>
+    <%= get_flag_description(@resource.verified) %>
+  </p>
+
+
+  <p>
+    <b>Worker: </b>
+    <%= get_user_name(@resource.updated_by)%>
+  </p>
+    <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+     <% if  @client_resources.present?%>
+     <table>
+      <caption class="text-left"> <b>Resource used by: </b> <p></p> </caption>
+
+      <thead>
+        <tr>
+        <th> Client Name </th>
+        <th> Action </th>
+      </tr>
+      </thead>
+        <tbody>
+        <% @client_resources.each do |client| %>
+          <tr>
+            <td>  <%=  client_full_name(client) %></td>
+            <td>
+                <%= link_to 'Delete', delete_share_path("resource",@resource,client.id),data: { confirm: 'Are you sure?' },method: :delete, class: "alert", id: "hyperlink_alert" %>
+            </td>
+          </tr>
+         <% end %>
+      </tbody>
+    </table>
+    <%end%>
+
+
+      <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+          <%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+          <%= link_to 'Edit', edit_household_member_resource_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+          <%= link_to 'Delete', delete_household_member_resource_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+      <% else %>
+          <%= link_to 'Back', resources_path,class: "secondary button radius" %>
+          <%= link_to 'Edit', edit_resource_path(@resource),class: "button radius" %>
+          <%= link_to 'Delete', @resource, method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius"  %>
+      <% end %>
+  </section>
+</fieldset>

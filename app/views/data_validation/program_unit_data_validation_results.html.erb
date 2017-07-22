@@ -1,0 +1,55 @@
+<fieldset>
+<section class="solidbody">
+
+
+	<legend><%= set_subheader("Program Unit information for: #{client_full_name(@client)}") %></legend>
+	 <%= render 'program_units/form_program_unit_review',arg_pgu:@program_unit,arg_selected_pgu:@selected_program_unit,arg_pgu_participation:@program_participations,arg_pgu_members:@program_unit_members, arg_client_relation:@client_relationships,arg_clients: @data_validation_results,arg_client_doc_list:@client_doc_verification_list,arg_family_type:@family_type_struct,arg_case_type:@case_type,arg_app_elig_rslt:@app_elig_rslts,arg_selected_pgu:@selected_program_unit%>
+	<%#= link_to "Back",program_units_path, class: 'button radius secondary' %>
+
+	<%# program_unit_link_visible = ProgramUnit.allow_program_unit_to_be_modified?(@selected_program_unit.id) %>
+	<%# if program_unit_link_visible == true && @can_see_start_button == true %>
+		<%# if validate_authorization(676) || current_user.uid == @selected_program_unit.eligibility_worker_id%>
+			<!-- <td><%#= link_to "Start",edit_program_unit_wizard_initialize_path(@selected_program_unit.id),class: 'button radius' %></td> -->
+		<%# end %>
+	<%# end %>
+
+
+
+<!-- <legend><%#= set_subheader("Data validations for members in the program unit") %></legend><br>
+<%#= render 'program_units/selected_program_unit_details',arg_selected_program_unit: @client_program_unit %> -->
+
+<% if @failed_validations.present? %>
+	<p>
+	<b>Missing Data </b>
+	</p>
+
+	<%= render 'fix_program_unit_validations',arg_clients: @failed_validations,arg_program_unit_id: @client_program_unit.id,arg_navigate: "DATA_VALIDATIONS" %>
+
+<%else%>
+	   <%#= render '/data_validation/demo_data_validation' %>
+<%end%>
+	 <%= link_to("Back", program_units_path , class: 'button radius secondary')%>
+	 <%# @number = 1 %>
+	 <%#= link_to("Verify", program_unit_data_validation_results_path(@client_program_unit.id, @number), class: 'button radius primary')%>
+	 <%#= link_to("Next", by_pass_program_wizard_path , class: 'button radius primary')%>
+	 <% if @program_unit_participation_status.present? && (@program_unit_participation_status == 6041 || @program_unit_participation_status == 6044) %>
+	 	<%= link_to("Next", "#" , class: 'disabled button')%>
+		 	<%= link_to "Overwrite","#",class: 'disabled button' %>
+		 	<p>
+		 		<h6 class="subheader"><b>Next</b> and <b>Overwrite</b> buttons are disabled because, program unit is <%= @program_unit_participation_status == 6044 ? "closed" : "denied" %>.</h6>
+		 	</p>
+	 <% else %>
+	 	<% if can_logged_in_user_edit?('PROGRAM_UNIT',@selected_program_unit.id) %>
+			<%= link_to("Next", primary_beneficiary_path(@selected_program_unit.id) , class: 'button radius primary')%>
+		 	<%= link_to "Overwrite",overwrite_wizard_initialize_path(@selected_program_unit.id),class: 'button radius' %>
+		 <% else %>
+		 	<%= link_to("Next", "#" , class: 'disabled button')%>
+		 	<%= link_to "Overwrite","#",class: 'disabled button' %>
+		 	<p>
+		 		<h6 class="subheader"><b>Next</b> and <b>Overwrite</b> buttons are disabled because, you are not the eligibility worker of this program unit.</h6>
+		 	</p>
+		 <% end %>
+	 <% end %>
+
+</section>
+</fieldset>

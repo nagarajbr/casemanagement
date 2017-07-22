@@ -1,0 +1,21 @@
+<section class="solidbody">
+	<%= form_for(@client_doc_verification,:url => edit_focus_client_document_path(@client_doc_verification.id), method: :put) do |f| %>
+  <%= render "shared/common_error", object_argument: @client_doc_verification %>
+    <fieldset>
+    	<%= set_subheader("Edit Document of client: #{client_full_name(@client)}") %>
+    	<ul>
+	     	<div class="row">
+	          <div class="large-6 columns">
+	               <%= render 'form_focus_client_doc_verification.html',arg_object: f %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+	    	<%= link_to "Cancel",show_focus_client_document_path(@client_doc_verification.id),class: 'secondary button radius'%>
+
+	       <%= f.submit "Save",class: 'button radius'%>
+	        </p>
+
+    </fieldset>
+<% end %>
+</section>

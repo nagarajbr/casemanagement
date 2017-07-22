@@ -1,0 +1,22 @@
+<fieldset>
+  <section class="solidbody">
+<legend><%= set_subheader("Service information for client: #{client_full_name(@client)}") %></legend>
+    <%= render "action_plan_details/parent_action_plan",arg_action_plan:@action_plan,arg_emp_goal:@employment_goal  %>
+
+    <%= render 'action_plan_details/show_partial',arg_object: @action_plan_detail %>
+     <% if @service_authorization_object.status == 6162 %>
+       <p>
+        <b> Service Authorization Status: </b>
+        <%=  drop_down_value_description(@service_authorization_object.status) %>
+      </p>
+    <% end %>
+
+    <%= link_to 'Back', service_approval_index_path(session[:PROGRAM_UNIT_ID].to_i), class: "secondary button radius" %>
+     <% if @service_authorization_object.status != 6162 %>
+      <% if validate_authorization(702) %>
+        <%= link_to 'Approve Service', service_approval_approve_path(@service_authorization_object.id),class: "button radius" %>
+      <% end %>
+     <% end %>
+
+  </section>
+</fieldset>

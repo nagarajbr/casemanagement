@@ -1,0 +1,59 @@
+<!-- Not Used <fieldset>
+	<%# if @my_local_office_pending_tasks.present? %>
+
+			 <section class="solidbody">
+			 	<legend><%#=set_subheader("Pending tasks for my local office: #{drop_down_value_description(current_user.location)}") %></legend>
+			 		<body onload="highlight_table_fields()">
+				 	<table id="work_lists">
+
+				 		<thead>
+				 			<tr>
+
+			                    <th> Due date  </th>
+			                    <th> Task</th>
+			                    <th> Number of Days Due  </th>
+			                    <th> Client</th>
+
+				 				<th> Action</th>
+				 			</tr>
+				 		</thead>
+				 		<tbody>
+				 			<%# @my_local_office_pending_tasks.each do |arg_detail| %>
+					 			<tr>
+
+					 				<td>  <%= format_db_date(arg_detail.due_date) %></td>
+
+					 				<td>  <%= arg_detail.action_text %></td>
+					 				<td>  <%#=  (Date.parse(arg_detail.due_date.strftime("%Y-%m-%d")) - Date.parse(Date.today.strftime("%Y-%m-%d"))).to_i  %></td>
+					 				<td>  <%#= get_client_full_name(arg_detail.client_id) if arg_detail.client_id.present? %></td>
+
+
+
+
+					 				<td> <%#= link_to "Show", work_task_path(arg_detail),id: "hyperlink" %></td>
+					 			</tr>
+				 			<%# end %>
+				 		</tbody>
+				 	</table>
+				 </body>
+
+				 <%#= paginate @my_local_office_pending_tasks,:param_name => :local_office  %>
+			</section>
+
+
+	<%# else %>
+
+			<section class="solidbody">
+				  	<legend><%#=set_subheader("Pending tasks for my local office: #{drop_down_value_description(@current_user.location)}") %></legend>
+			        <h5 class="subheader">There are no pending work tasks for this office.</h5>
+			        <p></p>
+
+			</section>
+
+	<%#end%>
+</fieldset>
+
+
+
+
+ -->

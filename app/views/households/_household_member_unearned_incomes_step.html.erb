@@ -1,0 +1,49 @@
+<!-- <b><h4>Household Member: <%#= "#{client_full_name(@client)}" %></h4></b> -->
+<body onload = "household_registration_unearned_income_step()">
+<% if @unearned_incomes.present? %>
+		<table>
+		<caption style="text-align:inherit"> <p><b><%=("#{pluralize_without_count(@unearned_incomes.count,"Unearned Income","")}") %></b></p></caption>
+		  <thead>
+		    <tr>
+				<th> Type of Income </th>
+				<th> Frequency </th>
+				<th width="10%"> Begin Date </th>
+				<th width="10%"> End Date </th>
+				<th width="10%"> Recalculate Indicator </th>
+				<th width="30%">Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @unearned_incomes.each do |income| %>
+					<tr>
+						<td>  <%= drop_down_value_description(income.incometype) %></td>
+						<td>  <%= drop_down_value_description(income.frequency) %></td>
+						<td>  <%=  format_db_date income.effective_beg_date %></td>
+						<td>  <%=  format_db_date income.effective_end_date %></td>
+						<td>  <%= get_flag_description(income.recal_ind) %> </td>
+						<td>
+						 <%= link_to "Show",show_household_member_unearned_income_path(@client.id,income.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink"  %> |
+						 <%= link_to("Income details", household_member_unearned_income_detail_index_path(@client.id,income.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink") %>|
+							 <%= link_to("Share", new_client_share_search_path("income",income.id),id: "hyperlink") %>
+						</td>
+					</tr>
+				 <% end %>
+			</tbody>
+		</table>
+<%else%>
+		 <h5 class="subheader">No unearned income information found.</h5><br>
+            <h5 class="subheader">Do you have unearned income?(For example: Pensions, retirement benefits, Social Security, interests, dividends, child support payments, etc..)</h5>
+
+            <fieldset class="radio">
+                <div class="button-group">
+                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_unearned_income_flag, "Y"%>Yes</label>
+                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_unearned_income_flag, "N"%>No</label>
+                </div>
+            </fieldset>
+<%end%>
+<div id = "new_unearned_income_button">
+ <%= link_to("New",new_household_member_unearned_income_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius')%>
+ </div>
+
+
+</body>

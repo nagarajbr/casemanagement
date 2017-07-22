@@ -1,0 +1,18 @@
+<fieldset>
+	<section class="solidbody">
+		<%#= render "household_registration_summary/household_member_registration_summary", arg_steps: @member_steps, arg_client_id: @client.id %>
+		<%#= link_to 'Back',@back_button_path, class: "button secondary radius"%>
+		<legend>
+			<%= set_subheader("Please fix the following missing data in order to identify eligible Program Units") %>
+		</legend>
+		<%= render "application_screenings/application_screening_fourth_step",arg_app_elig_rslts: @app_elig_rslts, arg_called_from: @called_from %>
+
+		<% if @can_show_next %>
+			<%= link_to 'Next', eligible_program_units_path, class: "button radius" %>
+		<% else %>
+			<!-- Reject should appear only when there is missing mandatory data-->
+			<%= link_to 'Reject', reject_application_path, class: "button radius alert" %>
+			<%= link_to 'Next', "#", class: "button radius", disabled: true %>
+		<% end %>
+	</section>
+</fieldset>

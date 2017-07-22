@@ -1,0 +1,28 @@
+<b><h6>Service Schedule </h6></b>
+<% if arg_service_schedule.present? %>
+	<table>
+			<thead>
+				<tr>
+
+					<th> Day of Service </th>
+					<th> Pick Up Time </th>
+					<th> Return Pick Up Time </th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<%  arg_service_schedule.each do |arg_schedule| %>
+				<tr>
+
+					<td>  <%=  drop_down_value_description(arg_schedule.trip_day) %></td>
+					<td>  <%=  arg_schedule.trip_pick_up_time.strftime("%I:%M %p") if arg_schedule.trip_pick_up_time.present? %></td>
+					<td>  <%=  arg_schedule.return_trip_pick_up_time.strftime("%I:%M %p") if arg_schedule.return_trip_pick_up_time.present? %></td>
+
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+<% else%>
+	No Service Schedules Found
+<% end %>
+

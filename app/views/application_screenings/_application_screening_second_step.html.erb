@@ -1,0 +1,8 @@
+<!--Manoj Patil 10/16/2014  -->
+<% if  @data_validation_results.present? %>
+	<%= render 'data_validation/client_application_validation_results',arg_clients: @data_validation_results,arg_application_id: @selected_application.id,arg_navigate: "APPLICATION_SCREENING" %>
+<% else %>
+	<h5 class="subheader">
+		Required information is available for all members in the application, proceed to next step for document verification
+	</h5>
+<%end%>

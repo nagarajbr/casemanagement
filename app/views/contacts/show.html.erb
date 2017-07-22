@@ -1,0 +1,26 @@
+<fieldset>
+  <section class="solidbody">
+    <% if session[:CLIENT_ID].present? %>
+      <legend><%= set_subheader("Address information for: #{client_full_name(@client)}" ) %></legend>
+      <% if @show_edit %>
+            <!-- <p>
+              <b>Primary Contact: </b>
+              <%= @primary_contact %>
+            </p -->
+            <%= render "addresses/show_address_partial" %>
+            <%= render "phones/show_partial",arg_primary:@primary_phone,arg_secondary: @secondary_phone,arg_other:@other_phone,arg_email:@client_email,arg_entity_type:@entity_type,arg_notes:@notes,arg_modified:@modified_by %>
+            <%= link_to 'Edit',new_contact_path, class: "button radius"%>
+      <% else %>
+            <!-- <legend><%#= set_subheader("Address information for: #{client_full_name(@client)}" ) %></legend> -->
+            <h5 class="subheader">No contact information found. Click New to add contact information.</h5>
+            <p></p>
+            <%= link_to 'New',new_contact_path, class: "button radius"%>
+      <% end %>
+    <% else %>
+            <legend><%= set_subheader("View Address information" ) %></legend>
+          <h5 class="subheader">Client is not selected, Select a client by clicking Search Client button.</h5>
+          <p></p>
+          <%= render "shared/search_client_button" %>
+    <% end %>
+  </section>
+</fieldset>

@@ -1,0 +1,73 @@
+<section class="solidbody">
+   <fieldset>
+          <legend><%= set_subheader("#{get_client_full_name(@absent_parent_relationship.to_client_id)}'s responsibility information towards:  #{client_full_name(@client)}") %></legend>
+          <br>
+          <p>
+            <b>Parent Name:</b>
+            <%= get_client_full_name(@absent_parent_relationship.to_client_id) %>
+          </p>
+
+          <p>
+            <b>Parent Status:</b>
+              <%= drop_down_value_description(@absent_parent_rspability.parent_status)  %>
+          </p>
+
+           <p>
+            <b>Deprivation Reason:</b>
+            <%= drop_down_value_description(@absent_parent_rspability.deprivation_code) %>
+          </p>
+
+           <p>
+            <b>Good Cause:</b>
+            <%= get_flag_description(@absent_parent_rspability.good_cause) %>
+          </p>
+
+
+
+          <p>
+            <b>Married At Birth:</b>
+            <%= get_flag_description(@absent_parent_rspability.married_at_birth) %>
+          </p>
+
+         <p>
+            <b>Paternity Established:</b>
+            <%= get_flag_description(@absent_parent_rspability.paternity_established) %>
+          </p>
+
+           <!-- <p>
+            <b>Child Support Referral:</b>
+            <%#= drop_down_value_description(@absent_parent_rspability.child_support_referral) %>
+          </p> -->
+
+           <p>
+            <b>Court Order Number:</b>
+            <%= @absent_parent_rspability.court_order_number %>
+          </p>
+
+          <p>
+            <b>Court Ordered Amount:</b>
+            <%= number_to_currency_br(@absent_parent_rspability.court_ordered_amount) %>
+          </p>
+
+          <p>
+            <b>Amount Collected:</b>
+            <%= number_to_currency_br(@absent_parent_rspability.amount_collected) %>
+          </p>
+
+
+
+          <p>
+          <b>Worker: </b>
+          <%= get_user_name(@absent_parent_rspability.updated_by)%>
+        </p>
+
+          <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+        <%= link_to 'Back', client_parental_rspabilities_path,class: "secondary button radius", title1: "press enter or click mouse to go to previous page ", data: {tooltip1: ''} %>
+        <%# if validate_authorization(335) %>
+          <%= link_to 'Edit', edit_client_parental_rspability_path(@absent_parent_rspability), class: "button radius", title1: "press enter or click mouse to edit  ", data: {tooltip1: '' }%>
+        <%# end %>
+         <%#= link_to 'Delete', @absent_parent_rspability, method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+
+</fieldset>
+</section>

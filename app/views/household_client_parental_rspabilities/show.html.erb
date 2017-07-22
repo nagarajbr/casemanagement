@@ -1,0 +1,62 @@
+<section class="solidbody">
+   <fieldset>
+          <legend><%= set_subheader("Absent parent: #{get_client_full_name(@absent_parent_relationship.to_client_id)}'s responsibility information towards child:  #{get_client_full_name(@absent_parent_relationship.from_client_id)}") %></legend>
+          <br>
+          <%= render 'households/selected_household_partial',arg_household: @household %>
+          <p>
+            <b>Parent Name:</b>
+            <%= get_client_full_name(@absent_parent_relationship.to_client_id) %>
+          </p>
+
+
+           <p>
+            <b>Deprivation Reason:</b>
+            <%= drop_down_value_description(@absent_parent_rspability.deprivation_code) %>
+          </p>
+
+           <p>
+            <b>Good Cause:</b>
+            <%= get_flag_description(@absent_parent_rspability.good_cause) %>
+          </p>
+
+
+          <p>
+            <b>Married At Birth:</b>
+            <%= get_flag_description(@absent_parent_rspability.married_at_birth) %>
+          </p>
+
+         <p>
+            <b>Paternity Established:</b>
+            <%= get_flag_description(@absent_parent_rspability.paternity_established) %>
+          </p>
+
+           <p>
+            <b>Court Order Number:</b>
+            <%= @absent_parent_rspability.court_order_number %>
+          </p>
+
+          <p>
+            <b>Court Ordered Amount:</b>
+            <%= number_to_currency_br(@absent_parent_rspability.court_ordered_amount) %>
+          </p>
+
+          <p>
+            <b>Amount Collected:</b>
+            <%= number_to_currency_br(@absent_parent_rspability.amount_collected) %>
+          </p>
+
+
+
+          <p>
+          <b>Worker: </b>
+          <%= get_user_name(@absent_parent_rspability.updated_by)%>
+        </p>
+
+          <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+        <%= link_to 'Back', household_absent_parents_index_path,class: "secondary button radius" %>
+        <%= link_to 'Edit', household_absent_parent_edit_path(@absent_parent_rspability.id), class: "button radius"%>
+        <%#= link_to 'Change Absent Parent', change_absent_parent_wizard_initialize_path(@absent_parent_rspability.id), class: "button radius"%>
+
+</fieldset>
+</section>

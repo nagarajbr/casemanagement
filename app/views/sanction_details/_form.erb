@@ -1,0 +1,53 @@
+<ul>
+  <div class="row">
+    <div class="large-4 columns">
+  <% if arg_sanction_details.new_record? %>
+    <li class="required">
+      <%= arg_object.label :sanction_month%>
+      <div class = "row">
+        <%= arg_object.date_select :sanction_month,:discard_day => true,:order => [:month,:day, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }%>
+      </div>
+    </li>
+
+    <li class="required">
+      <%= arg_object.label :sanction_indicator%>
+      <%= arg_object.select :sanction_indicator, arg_indicatior_list.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select an Implication' }%>
+    </li>
+
+  <%else%>
+    <p>
+      <b>Sanction Month: </b>
+      <%= format_db_date_MM_YYYY(@sanction_detail.sanction_month)  %>
+    </p>
+    <% if arg_sancton_month == true  %>
+      <p>
+        <b>Sanction Implication: </b>
+        <%=  drop_down_value_description(@sanction_detail.sanction_indicator) %>
+      </p>
+    <%else%>
+      <li class="required">
+        <%= arg_object.label :sanction_indicator%>
+        <%= arg_object.select :sanction_indicator, arg_indicatior_list.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select an Implication' }%>
+      </li>
+    <%end%>
+    <fieldset class="radio">
+      <legend class="radiolegend">Release Indicator</legend>
+        <div class="button-group">
+          <label class="radio-button"><%= arg_object.radio_button :release_indicatior, "1"%>Yes</label>
+          <label class="radio-button"><%= arg_object.radio_button :release_indicatior, "0"%>No</label>
+        </div>
+    </fieldset>
+    <fieldset class="radio">
+      <legend class="radiolegend">Sanction Served</legend>
+        <div class="button-group">
+          <label class="radio-button"><%= arg_object.radio_button :sanction_served, "1"%>Yes</label>
+          <label class="radio-button"><%= arg_object.radio_button :sanction_served, "0"%>No</label>
+        </div>
+    </fieldset>
+
+  <%end%>
+ <%= hidden_field_tag :warning_count, @sanction_detail.warning_count,id: "sanction_detail_warning" %>
+    </div>
+
+    </div>
+</ul>

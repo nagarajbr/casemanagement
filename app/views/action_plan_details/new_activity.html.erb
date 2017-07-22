@@ -1,0 +1,45 @@
+<fieldset>
+    <%#= debug("@action_plan_detail = #{@action_plan_detail.current_step}") %>
+     <section class="solidbody">
+        <legend><%= set_subheader("Enter #{drop_down_value_description(@action_plan_detail.entity_type)} information for client: #{client_full_name(@client)}") %></legend>
+        <%#= render "parent_action_plan" %>
+        <p>
+          <%= render "action_plans/active_plan_summary", action_plan: @action_plan, arg_work_participation: @work_participation, employment_goal: @employment_goal %>
+        </p>
+        <!-- <p>
+          <%#= render "career_pathway_plans/expected_participation_hours"%>
+        </p> -->
+        <p>
+           <%= render "career_pathway_plans/planned_work_participation_hours_per_client", arg_activity_hours: @planned_client_activity_hours_collection %>
+        </p>
+
+        <%= form_for(@action_plan_detail,:url => create_activity_path(@action_plan,@activity_type), method: :post) do |f| %>
+
+
+        <% if  @barriers.present? %>
+            <h3>Add Actions(<%= @activity_type.titleize %>)</h3>
+            <h5><%= ("Enter details for #{drop_down_value_description(@action_plan_detail.entity_type).camelize(:lower)}") %> </h5>
+
+            <%= render "shared/common_error", object_argument: @action_plan_detail %>
+            <%= render "shared/common_warning", object_argument: @warnings %>
+
+            <ul>
+                <div class="row">
+                    <div class="large-5 columns">
+                        <%= render "action_plan_detail_first_step", :arg_object => f, show_mult_add_buttons: @multi_add_buttons %>
+                     </div>
+                </div>
+            </ul>
+            <% if @warnings.present? %>
+              <%= f.submit "Skip Warnings",:name => "skip_warnings_button",class: 'button',id: "action_plan_detail_skip_warnings" %>
+            <% end %>
+
+        <% else %>
+          <p><h5 class="subheader"><%= ("There are no existing barriers to associate with the #{drop_down_value_description(@action_plan.action_plan_type)}. Click 'Work Readiness Assessment' to perform assessment.") %> </h5></p>
+          <p> <%= link_to "Work Readiness Assessment", edit_common_assessment_path(14,session[:CLIENT_ASSESSMENT_ID].to_i), class: 'button radius' %>
+          </p>
+        <% end %>
+
+        <% end %>
+      </section>
+ </fieldset>

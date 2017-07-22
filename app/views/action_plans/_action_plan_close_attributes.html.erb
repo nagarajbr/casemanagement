@@ -1,0 +1,12 @@
+ <P>
+ 	Note: Closing Action Plan will result in closing all Activities/Supportive Services.Closing Application Plan should be done after Client has achieved his goal or Time limit is met.
+
+ </P>
+ <li class="required">
+    <%= f.label :outcome_code %>
+    <%= f.select :outcome_code, CodetableItem.item_list(57,"Outcome Code").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select outcome code' } %>
+  </li>
+  <li >
+    <%= f.label :outcome_notes %>
+    <%= f.text_area :outcome_notes, cols: 40, rows: 7 %>
+  </li>

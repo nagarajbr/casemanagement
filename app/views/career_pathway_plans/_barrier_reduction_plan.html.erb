@@ -1,0 +1,73 @@
+<% if arg_plan_present == true%>
+<p>
+	<b> Barrier Reduction Plan </b>
+
+<table>
+ <thead>
+    <tr>
+		<th> Barrier </th>
+		<th> Activity </th>
+		<th> Provider </th>
+		<th> Federal Component</th>
+		<th> Hours/Week </th>
+		<th> Activity Planned Start Date </th>
+		<th> Activity Planned End Date </th>
+		<th> Outcomes</th>
+	</tr>
+  </thead>
+    <tbody>
+		<% arg_plan_details.each do |each_action_plan_detail| %>
+
+			<tr>
+
+				<td>  <%= get_barrier_description (each_action_plan_detail.barrier_id) %></td>
+				<td>  <%= drop_down_value_description(each_action_plan_detail.activity_type) %></td>
+				<td>  <%= get_provider_name(each_action_plan_detail.provider_id) if each_action_plan_detail.provider_id.present? %></td>
+				<td>  <%= drop_down_value_description(each_action_plan_detail.component_type) %></td>
+				<td>  <%= get_action_detail_hours_per_week(each_action_plan_detail.hours_per_day,each_action_plan_detail.day_of_week)  %></td>
+				<td>  <%= format_db_date(each_action_plan_detail.start_date)%></td>
+				<td>  <%= format_db_date(each_action_plan_detail.end_date) %></td>
+				<td> <%= drop_down_value_description(each_action_plan_detail.action_plan_detail_outcome_code) if each_action_plan_detail.action_plan_detail_outcome_code.present? %></td>
+
+			</tr>
+				<% arg_supportive_service = CareerPathwayPlan.open_supportive_services_for_action_plan_detail(each_action_plan_detail.reference_id,arg_pathway_plan)  %>
+
+				<% if arg_supportive_service.present? %>
+					<tr>
+						<td colspan="5"><b><u>Supportive Services</u></b> </td>
+					</tr>
+					<tr>
+						<td colspan="5">
+							<table>
+								<thead>
+								    <tr>
+										<th> Barrier </th>
+										<th> Service </th>
+										<th> Provider </th>
+										<th> Service Start Date </th>
+										<th> Service End Date </th>
+										<th> Service Date </th>
+									</tr>
+								</thead>
+								<tbody>
+									<% arg_supportive_service.each do |each_supportive_service|%>
+									<tr>
+										<td>  <%= get_barrier_description(each_supportive_service.barrier_id) %></td>
+										<td>  <%= drop_down_value_description(each_supportive_service.service_type) %></td>
+										<td>  <%= get_provider_name(each_supportive_service.provider_id) %></td>
+										<td>  <%= format_db_date(each_supportive_service.service_start_date)%></td>
+										<td>  <%= format_db_date(each_supportive_service.service_end_date) %></td>
+										<td>  <%= format_db_date(each_supportive_service.service_date) %></td>
+									</tr>
+									<% end %>
+								</tbody>
+
+							</table>
+						</td>
+					</tr>
+				<% end %>
+		<% end %>
+	</tbody>
+</table>
+</p>
+<% end %>

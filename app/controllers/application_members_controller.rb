@@ -1,0 +1,3 @@
+class ApplicationMembersController < AttopAncestorController
+
+end

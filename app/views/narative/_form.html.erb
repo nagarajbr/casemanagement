@@ -1,0 +1,32 @@
+<!--
+<%# if session[:CLIENT_ID].present? %>
+	<%#= form_tag(narative_create_path, method: :post) do |f| %>
+	        <legend><%#= set_subheader("Enter notes information for: #{client_full_name(@client)}") %> </legend>
+	       <%#= render "shared/common_error", object_argument: @notes %><br>
+	        <ul>
+		     	<div class="row">
+		          <div class="large-5 columns">
+		                <li>
+		                	<%#= label_tag "Notes Type" %>
+		                	<%#= select_tag "notestype", options_for_select(CodetableItem.item_list_and_long_description(131,@client.id,"Notes Type").collect { |p| ["#{p.long_description} ", p.id] }),{ :prompt => 'Select Notes Type' } %>
+		             	</li>
+		             	<li>
+						  	<%#=  label :notes, "Notes" %>
+						  	<%#= text_area_tag :notes, @notes %>
+						</li>
+
+			 	  </div>
+			    </div>
+			</ul>
+		    <p>
+	      <%#= link_to 'Cancel',"#",id: "cancel_narative",class: "secondary button radius" %>
+	      <%#= submit_tag "Save", class: 'button radius'%>
+	    </p>
+	<%# end %>
+<%# else %>
+  <h5 class="subheader">Client is not selected, Select a client by clicking Search Client button.</h5>
+  <p></p>
+  <%#= render "shared/search_client_button" %>
+<%# end %>
+
+-->

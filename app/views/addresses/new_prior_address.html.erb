@@ -1,0 +1,45 @@
+
+<fieldset>
+<section class="solidbody">
+        <legend><%= set_subheader("Save prior address information for: #{client_full_name(@client)}") %></legend><br>
+          <%= form_for(@address, :url => create_prior_address_path, method: :post) do |f| %><br>
+        <ul>
+            <div class="row">
+            <div class="large-5 columns">
+              <% if session[:MAILING_ADDRESS_CHANGED] == "Y" %>
+                <li >
+                    <fieldset class="radio">
+                      <legend class="radiolegend">Save Prior Mailing Address?</legend>
+                       <div class="button-group">
+                           <label class="radio-button"><%= f.radio_button :save_prior_mailing_address, "Y"%>&nbsp;Yes</label>
+                            <label class="radio-button"><%= f.radio_button :save_prior_mailing_address, "N"%>&nbsp;No</label>
+                        </div>
+                    </fieldset>
+                </li>
+              <% else %>
+                <%= f.hidden_field :save_prior_mailing_address %>
+              <% end %>
+
+              <% if session[:RESIDENCE_ADDRESS_CHANGED] == "Y" %>
+                <li >
+                    <fieldset class="radio">
+                      <legend class="radiolegend">Save Prior Residential Address?</legend>
+                       <div class="button-group">
+                            <label class="radio-button"><%= f.radio_button :save_prior_residence_address, "Y"%>&nbsp;Yes</label>
+                            <label class="radio-button"><%= f.radio_button :save_prior_residence_address, "N"%>&nbsp;No</label>
+                        </div>
+                    </fieldset>
+                 </li>
+              <% else %>
+              <%= f.hidden_field :save_prior_residence_address %>
+              <% end %>
+            </div>
+            </div>
+        </ul>
+        <p>
+            <%= link_to 'Cancel', show_address_path,class: "secondary button radius" %>
+            <%= f.submit "Save", class: 'button radius'%>
+        </p>
+        <% end %>
+    </section>
+  </fieldset>

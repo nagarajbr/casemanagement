@@ -1,0 +1,14 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Select area serviced for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+<%= render 'selected_provider_service_type',arg_object: @providerservice %>
+
+<%= form_for @provider_service_area, :url => provider_service_area_create_path, :method => :post do |f| %>
+  <%= render "shared/common_error", object_argument: @provider_service_area %>
+	<%= render 'form_provider_service_area',arg_object: f %>
+ 	<%= link_to 'Cancel', provider_service_areas_path(@providerservice.id),class: "secondary button radius" %>
+ 	<%= f.submit "Save", class: 'button radius'%>
+<% end %>
+</section>
+</fieldset>

@@ -1,0 +1,60 @@
+<fieldset>
+	<section class="solidbody">
+        <legend></legend>
+		<caption><%= set_subheader("Payment history for program unit of client: #{client_full_name(@client)}") %></caption>
+        <%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		<%if  @in_state_payment.present?%>
+	       <br>
+
+            	<table>
+            	<caption style="text-align:inherit"> <b>Payment details</b><p></p></caption>
+            	  <thead>
+            	    <tr>
+                        <th> Service Program :</th>
+                        <th> Payment Month </th>
+                        <!-- <th> Issue Date </th> -->
+                        <th>Amount</th>
+                        <!-- <th>Action Date</th>
+                        <th>Action Type </th>
+                        <th> Sanction</th> -->
+                        <th> Payment Type</th>
+                        <th> Payment Action</th>
+                        <!-- <th>Avaliable Date</th>
+                        <th>Recoup Amount</th> -->
+            			<th> Action </th>
+            		</tr>
+            	  </thead>
+            	    <tbody>
+            			<% @in_state_payment.each do |isp| %>
+            				<tr>
+                                <td> <%= ServiceProgram.get_category(isp.service_program_id)%></td>
+                                <td> <%= isp.payment_month %></td>
+                                <!-- <td> <%= isp.issue_date %></td> -->
+                                <td> <%= number_to_currency_br(isp.dollar_amount) %></td>
+                                <!-- <td> <%= isp.action_date %></td>
+                                <td> <%= isp.action_type %></td>
+                                <td> <%= isp.sanction %></td> -->
+                                <td> <%= drop_down_value_description(isp.payment_type) %></td>
+                                <td> <%= drop_down_value_description(isp.action_type) %></td>
+
+                                <!-- <td> <%= isp.available_date %></td>
+                                <td> <%= isp.recoup_amount %></td> -->
+                                <td><%= link_to 'show',program_unit_in_state_payments_show_path(isp.id),id: "hyperlink" %></td>
+            			 <% end %>
+            		</tbody>
+            	</table>
+
+
+	<%= paginate @in_state_payment %>
+
+    <%= link_to("Back", program_units_path , class: 'button radius secondary')%>
+
+    <%#= link_to("Back", "#" , class: "secondary button radius") %>
+    <%#= link_to("Add Payments",edit_in_state_payments_path, class: 'button radius') %>
+    <%else%>
+            <h5 class="subheader">In state payments for the program unit have not been issued.  </h5>
+
+
+    <%end%>
+</section>
+</fieldset>

@@ -1,0 +1,21 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+		<legend><%= set_subheader("Edit application information for: #{client_full_name(@client)}") %></legend><br>
+		<%= form_for(@client_application) do |f| %>
+			  <%= render "shared/common_error", object_argument: @client_application %>
+				    <ul>
+					    <div class="row">
+					        <div class="large-5 columns">
+								<%= render 'client_application_first_step',arg_object: f,arg_client_relations:@client_relations,arg_client_application:@client_application %>
+
+							</div>
+					    </div>
+				    </ul>
+				    <p>
+				      <%= link_to 'Cancel', client_applications_path,class: "secondary button radius" %>
+				      <%= f.submit "Save", class: 'button radius'%>
+				    </p>
+		<% end %>
+</section>
+	</fieldset>

@@ -1,0 +1,27 @@
+<%#= form_for(@client, :url => create_client_path, method: :post) do |f| %>
+
+<section class="solidbody">
+	<fieldset>
+		<legend>
+			<%= set_subheader("Screening application of client: #{client_full_name(@client)}") %>
+		</legend>
+		<p>
+	 	<%= render 'application_screenings/selected_application_details',arg_selected_application: @selected_application %>
+	 	</p>
+	 	<%= form_tag(create_case_path, method: :post) do %>
+	 		<% if  "#{@selected_application.application_processing_current_step}_step" == "application_processing_fifth_step" %>
+
+		          <b><h4>Step 5 of 7</h4><%#= "Application Screening Results" %></b>
+	        <% end %>
+	        <%= render "possible_family_compositions",arg_family_comp:@family_comp,arg_service_program:@service_programs,arg_application:@selected_application  %>
+
+
+ 	        <%= link_to "Exit Wizard", client_applications_path,class: 'secondary button' %>
+	    	<%#= link_to "Back",household_index_path,class: 'secondary button radius'%>
+	    	<%= link_to "Back",back_to_application_processing_wizard_path,class: 'secondary button radius'%>
+	    	<% if @family.comp.present? %>
+	    		<%= submit_tag "Next", class: "button radius" %>
+    		<% end %>
+    	<% end %>
+    </fieldset>
+</section>

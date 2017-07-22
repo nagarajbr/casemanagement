@@ -1,0 +1,7 @@
+<!--Manoj Patil 10/16/2014  -->
+ <li class="required">
+
+  <%= arg_object.label :self_client_id %>
+  <%= arg_object.select :self_client_id,arg_app_members.collect { |p| ["#{get_client_full_name(p.client_id)} ", p.client_id ] },{ :include_blank => 'Choose Primary Contact' },title: "Choose Self of the Budget from List of Application Members", data: {tooltip1: '' } %>
+
+</li>

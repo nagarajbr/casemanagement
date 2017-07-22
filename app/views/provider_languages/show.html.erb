@@ -1,0 +1,29 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Language information for provider:  #{@provider.provider_name}" ) %></legend>
+<%= render "providers/selected_provider" %>
+
+  <p>
+    <b>Language: </b>
+    <%= drop_down_value_description(@providerlanguage.language_type) %>
+  </p>
+
+   <p>
+    <b>Start date: </b>
+    <%= format_db_date @providerlanguage.start_date %>
+  </p>
+
+   <p>
+    <b>End date: </b>
+    <%= format_db_date @providerlanguage.end_date %>
+  </p>
+
+    <%= link_to 'Back', provider_languages_path,class: "secondary button radius" %>
+    <% if validate_authorization(551) %>
+      <%= link_to 'Edit', edit_provider_language_path(@providerlanguage),class: "button radius" %>
+    <% end %>
+    <% if validate_authorization(552) %>
+      <%= link_to 'Delete', destroy_provider_language_path(@providerlanguage), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <% end %>
+</section>
+</fieldset>

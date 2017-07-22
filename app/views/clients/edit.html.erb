@@ -1,0 +1,26 @@
+<fieldset>
+  <section class="solidbody">
+  	<legend> <%= set_subheader("Edit demographic information for: #{client_full_name_demographics_edit(@client)}") %> </legend><br>
+  	<%= form_for(@client, :url => update_client_path, method: :put ) do |f| %>
+	  	 <%= render "shared/common_error", object_argument: @client %><br>
+	    <ul>
+	     <div class="row">
+	          <div class="large-4 columns">
+	               <%= render 'clients/form',arg_object: f , arg_client: @client %>
+	               <li>
+					    <%= f.label :death_date%>
+					    <%= f.date_field :death_date %>
+					</li>
+					<%= render "notes/notes_field_new_edit", object_argument: @notes %>
+		 	  </div>
+
+		  </div>
+		</ul>
+		    <p>
+		      <%= link_to "Cancel", show_client_path ,class: 'button secondary', title1: "Press Enter Key or Mouse Click to cancel changes and return to Show Page", data: {tooltip1: '' }%>
+		      <%= f.submit "Save ",class: 'button radius', title1: "Press Enter Key or Mouse Click to Save #{client_full_name(@client)}'s Demographic information", data: {tooltip1: ''}%>
+		    </p>
+    <% end %>
+  </section>
+</fieldset>
+

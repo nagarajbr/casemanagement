@@ -1,0 +1,11 @@
+
+<section class="solidbody">
+
+	<caption><%= set_subheader("Search results") %></caption>
+	<legend><h5 class="subheader">No employers found with the search criteria, enter a new search or register employer.</h5><br>
+    <br>
+	<% if @show_new_button %>
+		<%= link_to 'New Search',employer_new_search_path, class: "button radius"%>
+			<%= link_to 'Register New Employer',new_employer_path, class: "button radius"%>
+	<% end %>
+</section>

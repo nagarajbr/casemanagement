@@ -1,0 +1,4 @@
+<li class="required">
+ 	<%= f.label :usage_code,"Usage Code" %>
+ 	<%= f.select :usage_code, CodetableItem.item_list(63,"Usage code").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'select a usage code' } %>
+ </li>

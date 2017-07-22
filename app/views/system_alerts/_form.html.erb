@@ -1,0 +1,11 @@
+              <li >
+			      <%= arg_object.label :alert_text%>
+			      <%= arg_object.text_field :alert_text,  maxlength: "255" %>
+
+			  <li>
+
+              <li>
+			      <%= arg_object.label :expiration_date %>
+			      <%= arg_object.date_field :expiration_date, onkeyup:"validate_date_format(event)" %>
+
+			  </li>

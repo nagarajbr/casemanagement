@@ -1,0 +1,41 @@
+<section class="solidbody">
+<fieldset>
+	<%= form_tag process_selected_sections_for_short_assessment_path, method: :post do %>
+		<legend>
+	     	<%= set_subheader("Select the sections to be assessed for client: #{@client_name}") %>
+	    </legend>
+
+	    <div class="row">
+			<div class="large-8 column">
+			    <table>
+		          	<caption style="text-align:inherit">
+		          		<b>Check the relevant box to select the sections which you want to assess</b><p></p>
+		          	</caption>
+		            <thead>
+		              	<tr>
+		              		<th  width="5%"> Select </th>
+		                   	<th> Sections  </th>
+
+		              	</tr>
+		            </thead>
+		            <tbody>
+		                <% @short_assessment_sections.each do |each_section|%>
+		                  	<tr>
+		                  		<% if @defaulted_list.include? each_section.value%>
+		                  			<td><%= check_box_tag("selected_assessment_sections[]", each_section.value,{checked: true}) %></td>
+		                  		<%else%>
+		                  			<td><%= check_box_tag("selected_assessment_sections[]", each_section.value) %></td>
+		                  		<%end%>
+
+		                       	<td><%=   each_section.description %></td>
+		                  	</tr>
+		                <% end %>
+		            </tbody>
+		        </table>
+             <%= submit_tag "Next", class: "button radius" %>
+            </div>
+		</div>
+
+	<%end%>
+</fieldset>
+</section>

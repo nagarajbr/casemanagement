@@ -1,0 +1,50 @@
+<!--Manoj Patil 10/16/2014  -->
+<section class="solidbody">
+<%= form_for(@client_relationship, :url => create_member_relationship_path, method: :post) do |f| %>
+	<%= render "shared/common_error", object_argument: @client_relationship %>
+
+  	<caption>
+    <%= set_subheader("How is the primary contact: #{client_full_name(@client)} related to other application members") %>
+    </caption><br>
+
+    <ul>
+     	<div class="row">
+          <div class="large-6 columns">
+
+          		<p >
+          			<table>
+          				<tr>
+          					<td> <b>Self of the Budget:</b></td>
+          					<td>  <%= label_tag  "#{get_client_full_name(@client_relationship.from_client_id)}" %></td>
+          				</tr>
+          			</table>
+
+
+				  <%= f.hidden_field :from_client_id %>
+
+				</p>
+
+          		<li class="required">
+				  <%= f.label :to_client_id, "Application Member" %>
+
+				  <%= f.select :to_client_id, @application_members.collect { |p| ["#{get_client_full_name(p.client_id)} ", p.client_id] },prompt: "select a Member" %>
+				</li>
+
+               <li class="required">
+				  <%= f.label :relationship_type %>
+
+				  <%= f.select :relationship_type, CodetableItem.item_list(125,"Budget Relationship List").collect { |p| ["#{p.short_description} ", p.id] },prompt: "select a relationship" %>
+				</li>
+
+
+	 	  </div>
+	     </div>
+
+	</ul>
+	    <p>
+	     <%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+	      <%= f.submit "Save",class: 'button radius'%>
+	    </p>
+
+<% end %>
+</section>

@@ -1,0 +1,20 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- first step - Program Unit Processing center -->
+<li class="required">
+
+  <%= arg_object.label :processing_location,"Processing Office" %>
+  <%= arg_object.select :processing_location, CodetableItem.item_list(2,"DWS Office List").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Processing Office' } %>
+
+</li>
+
+
+<li>
+
+     <fieldset class="radio">
+                            <legend class="radiolegend">Is the family composition same as that of application</legend>
+                                <div class="button-group">
+                                    <label class="radio-button"><%= arg_object.radio_button :pgu_family_comp_same_as_application, "Y"%>&nbsp;Yes</label>
+                                    <label class="radio-button"><%= arg_object.radio_button :pgu_family_comp_same_as_application, "N"%>&nbsp;No</label>
+                                </div>
+    </fieldset>
+</li>

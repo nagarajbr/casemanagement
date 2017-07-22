@@ -1,0 +1,42 @@
+<b><h6>Application Members </h6></b>
+<% if arg_object.present? %>
+	<table>
+		<thead>
+			<tr>
+				<th> Name </th>
+				<th> Social Security Number </th>
+				<th> Date of Birth </th>
+				<th> Gender </th>
+				<% if arg_object2.present? %>
+					<th> Race </th>
+				<% else %>
+					<th> Action </th>
+				<% end %>
+
+			</tr>
+		</thead>
+		<tbody>
+			<% arg_object.each do |arg_m| %>
+			<tr>
+				<td>  <%=  arg_m.client_full_name %></td>
+				<td>  <%=  format_SSN(arg_m.ssn) %></td>
+				<td>  <%=  format_db_date (arg_m.dob) %></td>
+				<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+				<% if arg_object2.present? %>
+					<% if arg_m.ethnicity.present? %>
+							<td id = "col-result-pass">Available</td>
+					<% else %>
+						<td id = "col-result-fail">Not Avaialble</td>
+					<% end %>
+				<% else %>
+					 <td>
+						<% if arg_object3.application_disposition_status.blank? %>
+							<%= link_to "Delete",destroy_application_member_path(arg_object3.id,arg_m.id,"WIZARD"),id: "hyperlink_alert",method: :delete, data: { confirm: 'Are you sure?' } %>
+						<% end %>
+					</td>
+				<% end %>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+<%end%>

@@ -1,0 +1,121 @@
+<!-- Manoj 10/16/2014 This Object is not Used now - may be used later if summary is needed -->
+<!--
+<section class="solidbody">
+<fieldset>
+	<legend>
+	<%#= set_subheader("Application details of client: #{client_full_name(@client)}") %>
+	</legend>
+	<p>
+		<caption style="text-align:inherit">
+		<b>Selected Application </b>
+		</caption>
+		<table>
+			  <thead>
+			    <tr>
+					<th> Application ID </th>
+					<th> Application Date </th>
+
+					<th> Application Status </th>
+					<th> Disposition  </th>
+					<th> Disposition Reason </th>
+					<th> Application Origin </th>
+					<th> DWS Office </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+						<tr>
+							<td>  <%= @client_application.id %></td>
+							<td>  <%= format_db_date(@client_application.application_date)  %></td>
+
+
+							<td>  <%= drop_down_value_description(@client_application.application_status) %></td>
+							<td>  <%= drop_down_value_description(@client_application.application_disposition_status) %></td>
+							<td>  <%= drop_down_value_description(@client_application.application_disposition_reason) %></td>
+							<td>  <%= drop_down_value_description(@client_application.application_origin) %></td>
+							<td>  <%= drop_down_value_description(@client_application.application_received_office) %></td>
+
+						</tr>
+				</tbody>
+			</table>
+
+	</p>
+
+
+	<p>
+		<b>Application Members </b>
+		<%# if @application_members.present? %>
+
+
+
+				<table>
+					<thead>
+						<tr>
+							<th> Name </th>
+							<th> Social Security Number </th>
+							<th> Date of Birth </th>
+							<th> Gender </th>
+							<th> Primary Applicant</th>
+							<th>  </th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<%#  @application_members.each do |arg_m| %>
+						<%# client_object = Client.find(arg_m.client_id)%>
+						<tr>
+							<td>  <%=  client_full_name(client_object) %></td>
+							<td>  <%=  format_SSN(client_object.ssn) %></td>
+							<td>  <%=  format_db_date (client_object.dob) %></td>
+							<td>  <%=  drop_down_value_description(client_object.gender) %></td>
+							<td>  <%= get_flag_description(arg_m.primary_member)%>		</td>
+
+							<td> <%#= link_to "Edit",navigate_to_client_page_path(client_object.id),id: "hyperlink"%></td>
+
+						</tr>
+						<%# end %>
+					</tbody>
+				</table>
+
+
+		<%# end %>
+	</p>
+
+	<p>
+		<b>Member Relationships </b>
+		<%# if @client_relationships.present? %>
+
+
+
+				<table>
+				  <thead>
+				  	  <tr>
+						<th> Application Member </th>
+						<th> Relationship </th>
+						<th> Application Member</th>
+						<th>  </th>
+					</tr>
+
+				  </thead>
+				    <tbody>
+						<%# @client_relationships.each do |arg_reln| %>
+							<tr>
+								<td>  <%#= "#{get_client_full_name(arg_reln.to_client_id)} is" %></td>
+								<td>  <%#= "#{drop_down_value_description(arg_reln.relationship_type)} of" %></td>
+								<td>  <%#= get_client_full_name(arg_reln.from_client_id) %></td>
+
+								<td> <%#= link_to "Edit",navigate_to_relationship_page_path(arg_reln.from_client_id,arg_reln.id),id: "hyperlink"%> </td>
+
+
+
+							</tr>
+						 <%# end %>
+					</tbody>
+
+				</table>
+
+		<%# end %>
+	</p>
+	 <%#= link_to "Back",client_applications_path, class: 'button radius secondary',title1: "Navigate back to Applications list Page", data: {tooltip1: '' } %>
+</section>
+-->

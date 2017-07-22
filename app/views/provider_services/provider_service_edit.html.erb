@@ -1,0 +1,13 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Edit service information for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+
+<%= form_for @providerservice, :url => update_provider_service_path, :method => :patch do |f| %>
+  <%= render "shared/common_error", object_argument: @providerservice %>
+	<%= render 'form_provider_service',arg_object: f %>
+ 	<%= link_to 'Cancel', show_provider_service_path,class: "secondary button radius" %>
+ 	<%= f.submit "Save", class: 'button radius'%>
+<% end %>
+</section>
+</fieldset>

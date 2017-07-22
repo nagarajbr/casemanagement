@@ -1,0 +1,63 @@
+<!--Manoj Patil 11/03/2015  -->
+
+<fieldset>
+<section class="solidbody">
+<% if session[:CLIENT_ID].present? %>
+	  <ul class="breadcrumbs">
+
+
+           <% i = 0 %>
+           <% j = 0 %>
+           <% heading = nil %>
+          <% @label_list.each do |title|%>
+             <% if @step_list[i] == @household.current_step %>
+                 <li role="menuitem" class="current" ><a href= <%= "/household_registration/#{@step_list[i]}/bread_crumbs_selected" %> > <%= "#{title}" %></a></li>
+                 <% heading = title %>
+                   <% j = 1  %>
+             <% else %>
+               <% if j == 0 %>
+                    <li role="menuitem"  ><a href=<%= "/household_registration/#{@step_list[i]}/bread_crumbs_selected" %> >  <%= "#{title}" %></a></li>
+                 <% else %>
+                    <li role="menuitem"  ><a href=<%= "/household_registration/#{@step_list[i]}/bread_crumbs_selected" %> >  <%= "#{title}" %></a></li>
+                 <% end %>
+             <% end %>
+             <% i = i + 1  %>
+          <% end %>
+
+          </ul>
+	<%= render 'selected_household_member_partial',
+	    arg_household_member:@household_member,
+	    arg_household_object:@household if (@household_member.present? && @household.id.present?  )
+	%>
+	<%= form_for(@household,:url => process_household_member_registration_wizard_path, method: :post) do |arg_household| %>
+		<%= render "shared/common_error", object_argument: @household %>
+
+
+	    <b><h3><%= "#{heading}" %> </h3></b>
+	    <p></p>
+	    <ul>
+	       	 <div class="row">
+					<% if  "#{@household.current_step}" == "household_member_client_demographics_step" %>
+						<div class="large-5 columns">
+		                    <%= render "#{@household.current_step}", :arg_object => arg_household %>
+		                </div>
+					<% else %>
+						<div class="large-12 columns">
+		                   <%= render "#{@household.current_step}", :arg_object => arg_household %>
+		                </div>
+					<% end %>
+	          </div>
+	    </ul>
+
+	    <div>
+      		<%= render "buttons_next_back_save", :arg_object => arg_household , :arg_instance =>@household %>
+    	</div>
+
+	<% end %>
+<%else%>
+	 <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+<% end%>
+</section>
+</fieldset>

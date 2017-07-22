@@ -1,0 +1,41 @@
+<!--Manoj Patil 10/16/2014  -->
+<b><h6>Member Relationships </h6></b>
+<% if arg_client_relations.present? %>
+
+		<table>
+		  <thead>
+		    <tr>
+				<th> Application Member </th>
+				<th> Relationship </th>
+				<th> Application Member</th>
+
+			</tr>
+		  </thead>
+		    <tbody>
+				<% arg_client_relations.each do |arg_reln| %>
+					<tr>
+						<td>  <%= "#{get_client_full_name(arg_reln.to_client_id)} is" %></td>
+						<td>  <%= "#{drop_down_value_description(arg_reln.relationship_type)} of" %></td>
+						<td>  <%= get_client_full_name(arg_reln.from_client_id) %></td>
+
+					</tr>
+				 <% end %>
+			</tbody>
+
+		</table>
+		<% if arg_client_application.application_disposition_status.blank? %>
+
+		   <%= link_to "Manage Relationships",edit_application_member_multiple_relationship_path(arg_client_application.id,"WIZARD"), class: 'button radius',title1: "Manage relationship between application members", data: {tooltip1: '' } %>
+		<% end %>
+
+<% else %>
+<p>
+	<% if arg_client_application.application_disposition_status.blank? %>
+
+	   <%= link_to "Manage Relationships",edit_application_member_multiple_relationship_path(arg_client_application.id,"WIZARD"), class: 'button radius',title: "Add relationship between application members", data: {tooltip1: '' } %>
+	<% end %>
+
+</p>
+
+
+<%end%>

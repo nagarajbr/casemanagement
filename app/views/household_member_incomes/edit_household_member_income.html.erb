@@ -1,0 +1,58 @@
+<fieldset>
+	 <section class="solidbody">
+		<% if  @menu == 'CLIENT'%>
+		<!-- CLIENT MANAGEMENT -->
+			<%= form_for(@income, :url => update_income_path(@menu,@income.id), method: :put) do |f| %>
+			        <legend><%= set_subheader("Edit #{drop_down_value_description(@income.incometype)} income information for client: #{client_full_name(@client)}") %> </legend>
+			       <%= render "shared/common_error", object_argument: @income %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				          	<% if @salary_income_type == 'Y'%>
+				          		<%= render 'edit_household_member_income_fields_partial',
+				          		     f: f,
+				          		     arg_income:@income,
+				          		     arg_notes:@notes
+				          		%>
+				          	<% else %>
+				          		<%= render 'new_household_member_income_fields_partial',
+				          		    f: f,
+				          		    arg_earned_income_types:@earned_income_types,
+				          		    arg_income:@income,
+				          		    arg_client:@client,
+				          		    arg_notes: @notes
+				          		%>
+				          	<% end %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+			      <%= link_to 'Cancel', incomes_path(@menu), class: "secondary button radius" %>
+			      <%= f.submit "Save", class: 'button radius'%>
+			    </p>
+			<% end %>
+		<%else%>
+		<!-- HH REGISTRATION -->
+
+			<%= form_for(@income, :url => update_household_member_income_path(@client.id,@income.id), method: :put) do |f| %>
+			        <legend><%= set_subheader("Edit #{drop_down_value_description(@income.incometype)} income information for household member: #{client_full_name(@client)}") %> </legend>
+			       <%= render "shared/common_error", object_argument: @income %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				          	<% if @salary_income_type == 'Y'%>
+				          		 <%= render 'edit_household_member_income_fields_partial',f: f, arg_income:@income,arg_notes:@notes %>
+				          	<% else %>
+				          		 <%= render 'new_household_member_income_fields_partial',f: f,arg_earned_income_types:@earned_income_types,arg_income:@income,arg_client:@client, arg_notes: @notes %>
+				          	<% end %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+			      <%= link_to "Back", start_household_member_registration_wizard_path ,class: 'button secondary'%>
+			      <%= f.submit "Save", class: 'button radius'%>
+			    </p>
+			<% end %>
+		<%end%>
+ 	</section>
+</fieldset>

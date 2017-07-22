@@ -1,0 +1,2 @@
+class ProgramMemberDetailsController < AttopAncestorController
+end

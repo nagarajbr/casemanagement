@@ -1,0 +1,28 @@
+
+<fieldset>
+  <section class="solidbody">
+  	 <legend><%= set_subheader("#{@selected_queue_name}") %></legend>
+  	 <% if @subscribed_queue_records.present?%>
+			<%= form_for @work_queue_object, url: selected_queue_details_update_path(@selected_queue_type,@selected_local_office_id), method: :put do |f| %>
+
+					<p></p>
+					<%= render "shared/common_error", object_argument: @work_queue_object %><br>
+					<%= render @partial, arg_role_id: @role_id,arg_subscribed_records: @subscribed_queue_records,arg_queue_type:@selected_queue_type,arg_local_office_id: @selected_local_office_id, arg_user_list:@user_list, arg_worker_id:@worker_id, arg_caption: @caption, arg_eligibility_worker_id: @eligibility_worker_id, work_queue_ids: @work_queue_ids %>
+					<%= link_to "Back ",my_queues_summary_path, class: "secondary button radius" %>
+					<% if @role_id == 5 || @role_id == 6 %>
+						<% if @selected_queue_type != 6625 && @selected_queue_type != 6626 &&  @selected_queue_type != 6631%>
+							<%= f.submit "Assign/Reassign Worker", class: 'button radius' %>
+						<% end %>
+					<% end %>
+
+			<% end %>
+
+	<% else %>
+		 <h5 class="subheader">No Records are found in the Queue. </h5>
+		 <p></p>
+		 <%= link_to "Back ",my_queues_summary_path, class: "secondary button radius" %>
+	<% end %>
+
+</section>
+</fieldset>
+

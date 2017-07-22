@@ -1,0 +1,105 @@
+<body onload = "set_activity_providers_dropdown()">
+
+	
+		<!-- <li class="required">
+		  	<%#= arg_object.label :barrier_id %>
+		  	<%#= arg_object.select :barrier_id,  @barriers.collect { |p| ["#{p.description} ", p.barrier_id ] }, { :include_blank => 'Select barrier'}, id: "barrier_id"  %>
+		</li> -->
+
+		<%= arg_object.hidden_field :entity_type %>
+
+	    <%= arg_object.hidden_field :reference_id %>
+
+		<li class="required">
+			<% if @action_plan_detail.entity_type == 6253 %>
+				<%= arg_object.label :activity_type, "Service Type" %>
+			<% else %>
+		  		<%= arg_object.label :activity_type %>
+	  		<% end %>
+		  	<%= arg_object.select :activity_type, @activity_types.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select activity type',id: "activity_type"},:onchange => 'set_activity_providers_dropdown();' %>
+		  	<%#= select_tag "action_plan_detail[activity_type]", grouped_options_for_select(@activity_type_grouped_options, selected_key = @action_plan_detail.activity_type),{ :prompt => 'Select activity type', id: "activity_type" } %>
+		</li>
+
+	    <!-- <li class="required">
+		  	<%#= arg_object.label :component_type %>
+		  	 <%#= arg_object.select :component_type,grouped_options_for_select(@grouped_options, selected_key = :component_type),{ :include_blank => 'Select component type' }, id: "activity_components" %>
+		  	<%#= select_tag "action_plan_detail[component_type]", grouped_options_for_select(@grouped_options, selected_key = @action_plan_detail.component_type),{ :prompt => 'Select component type', id: "activity_components" } %>
+		</li> -->
+
+		<%# if @action_plan_detail.entity_type == 6253 %>
+
+
+			  	<!--all_providers is needed to in jave script to filter the provider list -->
+			  	<div style="display: none">
+			  		<%= select_tag "all_providers_list", grouped_options_for_select(@providers, selected_key = @action_plan_detail.provider_id),{ :prompt => 'Select provider', id: "all_providers" } %>
+			  	</div>
+
+			<div id = action_plan_detail_provider_div>
+				<%= arg_object.label :provider_id %>
+				<li class="required">
+				  	<%= select_tag "action_plan_detail[provider_id]", grouped_options_for_select(@providers, selected_key = @action_plan_detail.provider_id),{ :prompt => 'Select provider', id: "activity_providers" } %>
+				</li>
+			</div>
+		<%# end %>
+
+		<!-- <li class="required">
+		  	<%#= arg_object.label :activity_status %>
+		  	<%#= arg_object.select :activity_status,  @activity_statuses.collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select activity status'}, id: "activity_status", onchange: "set_action_plan_details_outcome()" %>
+		</li> -->
+
+		<%= arg_object.hidden_field :activity_status %>
+
+	<li class="required">
+      	<%= arg_object.label :start_date %>
+      	<%= arg_object.date_field :start_date, id: "action_plan_detail_start_date", onkeyup:"validate_date_format(event)" %>
+    </li>
+
+    <%= arg_object.hidden_field :activity_status, id: "activity_status" %>
+    <%= arg_object.hidden_field :warning_count, id: "action_plan_detail_warning" %>
+
+
+    <li class="required">
+      	<%= arg_object.label :hours_per_day %>
+      	<%= arg_object.number_field :hours_per_day,id: "action_plan_detail_hours_per_day" %>
+    </li>
+
+    <li class="required">
+      	<%= arg_object.label :frequency_id %>
+      	<%= arg_object.select :frequency_id, CodetableItem.where(" id in (2320)").order(:short_description).collect { |p| ["#{p.short_description} ", p.id] }, id: "frequency_id" , :disabled => true %>
+    </li>
+
+    <div id="div_weekly">
+      	<div class="checkbox-style">
+	        <li>
+	          	<%= hidden_field_tag("action_plan_detail[days_of_week][]",nil) %>
+	            <% CodetableItem.where("code_table_id = 153").order("id").each do |day|%>
+	            	&nbsp;<%= check_box_tag("action_plan_detail[days_of_week][]",
+	                                 day.id,
+	                                 @selected_days.include?(day.id.to_s)
+	                              )
+	              		   %>
+	            	<%= day.short_description%>
+	              	<br>
+	            <% end %>
+	        </li>
+      	</div>
+    </div>
+
+
+    <div id="div_duration">
+      	<li class="required">
+	        <div id= "num_of_weeks">
+	            <%= arg_object.label :duration, "Number of Weeks " %>
+	        </div>
+	        <%= arg_object.number_field :duration,id: "action_plan_detail_duration" %>
+	    </li>
+    </div>
+
+
+<p>
+	<%= link_to "Cancel", action_plan_action_plan_details_path(@action_plan.id), class: "button radius secondary" %>
+	<%= arg_object.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+    <%= arg_object.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+</p>
+
+</body>

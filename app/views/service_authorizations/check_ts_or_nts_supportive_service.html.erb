@@ -1,0 +1,52 @@
+<!-- check_ts_or_nts_supportive_service -->
+
+<%= form_for(@check_supportive_service_ts_nts, :url => check_ts_or_nts_supportive_service_post_path, method: :post) do |f| %>
+<fieldset>
+  <section class="solidbody">
+
+        <legend><%= set_subheader("Enter new supportive service information for: #{client_full_name(@client)}") %> </legend>
+			<!-- <P> <%#= render "action_plan_details/parent_action_plan" %> </p>
+		  <p> <%#= render "selected_action_plan_detail" %> </p> -->
+
+       <%= render "shared/common_error", object_argument: @check_supportive_service_ts_nts %><br>
+        <ul>
+	     	<div class="row">
+	          <div class="large-5 columns">
+
+	          	<!--  <li class="required">
+				      <%#= f.label :barrier_id %>
+				     <%#= f.select :barrier_id,@supportive_services_barriers.collect { |p| ["#{p.barrier_description} ", p.barrier_id] },{ :include_blank => 'Select Barrier' } %>
+				 </li> -->
+
+				<li class="required">
+			      	<%= f.label :action_plan_detail_id %>
+				    <%= f.select :action_plan_detail_id,@open_activities.collect { |p| ["#{drop_down_value_description p.activity_type} ", p.id] },{ :include_blank => 'Select Activity' } %>
+				</li>
+
+				<li class="required">
+			      	<%= f.label :service_type %>
+				    <%= f.select :service_type,@supportive_service_types.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Supportive Service' } %>
+				</li>
+
+				<li class="required">
+				    <%= f.label :service_date %>
+				    <%= f.date_field :service_date, onkeyup:"validate_date_format(event)" %>
+				</li>
+
+				<li >
+				    <%= f.label :notes %>
+				    <%= f.text_area :notes %>
+				</li>
+
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+ 			<%= link_to 'Cancel', service_authorizations_index_path(session[:PROGRAM_UNIT_ID]),class: "secondary button radius" %>
+		    <%= f.submit "Next", class: 'button radius' %>
+	    </p>
+
+	</section>
+    </fieldset>
+
+<% end %>

@@ -1,0 +1,19 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Select local office where the case has to be transfered.") %></legend>
+		<%= form_tag(create_transfer_path(@program_unit.id), method: :post) do  |f| %>
+			<%= render "shared/common_error", object_argument: @program_unit %><br>
+	        <ul>
+		     	<div class="row">
+		          <div class="large-5 columns">
+		               <%= render 'form',f: f %>
+			 	  </div>
+			    </div>
+			</ul>
+			<p>
+				<%= link_to 'Back', program_unit_transfer_path,class: "secondary button radius" %>
+		   	 	<%= submit_tag "Save", class: 'button radius' %>
+			</p>
+		<% end %>
+	</section>
+</fieldset>

@@ -1,0 +1,30 @@
+<p>
+			<b>Warrant number:  </b>
+                <%= arg_line_item.provider_invoice_id %>
+			</p>
+
+			<p>
+			    <b>Service Date:  </b>
+                <%= format_db_date(arg_line_item.service_date) %>
+			</p>
+
+			<b>Provider Invoice:  </b>
+                <%= arg_line_item.provider_invoice %>
+			</p>
+
+
+			<p>
+			    <b>Actual Cost:  </b>
+                <%= arg_line_item.actual_cost %>
+			</p>
+
+			<p>
+			    <b>Line Item Status:  </b>
+                <%= drop_down_value_description(arg_line_item.line_item_status) %>
+			</p>
+
+
+
+			<b>Notes:  </b>
+                <%= arg_line_item.notes %>
+			</p>

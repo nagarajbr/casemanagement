@@ -1,0 +1,36 @@
+
+
+      <li class="required">
+        <%= f.label :position_type %>
+        <%= f.select :position_type,arg_position_type.collect { |p| ["#{p.long_description} ", "#{p.long_description}$#{p.short_description} " ] }, prompt:"Select position type", autofocus: true %>
+      </li>
+
+      <li class="required">
+        <%= f.label :current_status, "Status" %>
+        <%= f.select :current_status, CodetableItem.item_list(28,"Employment detail status").collect { |p| ["#{p.short_description} ", p.id ] }, prompt:"Select Employment Status", autofocus: true %>
+      </li>
+      <li class="required">
+        <%= f.label :effective_begin_date,"Begin Date" %>
+        <%= f.date_field :effective_begin_date, alt: "effective begin date",title1: "Select begin date.", data: {tooltip1: true }, onkeyup:"validate_date_format(event)"  %>
+      </li>
+       <li >
+        <%= f.label :effective_end_date,"End Date" %>
+        <%= f.date_field :effective_end_date, alt: "effective begin date",title1: "Select end date.", data: {tooltip1: true }, onkeyup:"validate_date_format(event)"  %>
+      </li>
+       <li class="required">
+        <%= f.label :salary_pay_frequency,"Salary Frequency" %>
+        <%= f.select :salary_pay_frequency, CodetableItem.item_list(27,"Employment detail salary_pay_frequency").collect { |p| ["#{p.short_description} ", p.id ] }, prompt:"Select Salary Frequency", autofocus: true %>
+      </li>
+      <li class="required">
+        <%= f.label :salary_pay_amt,"Salary" %>
+        <%= f.number_field :salary_pay_amt,placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+      </li>
+        <li class="required">
+        <%= f.label :hours_per_period,"Hours Per Week" %>
+        <%= f.number_field :hours_per_period,min: "1",onkeypress: "return isLimitedNaturalNumber(event,4)"%>
+      </li>
+
+
+
+
+

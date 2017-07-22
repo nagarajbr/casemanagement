@@ -1,0 +1,35 @@
+<fieldset>
+  <table>
+    <%= "Activity Type: #{drop_down_value_description(action_plan_detail.activity_type)}" %> <br> <br>
+    <thead>
+      <tr>
+        <th width="5%"> Activity Date </th>
+        <th width="5%"> Work Participation Status </th>
+        <th width="5%"> Assigned Hours</th>
+        <th width="1%"> Completed Hours</th>
+        <!-- <th width="5%"> Completed Minutes </th> -->
+        <th width="5%"> Absent Hours </th>
+        <!-- <th width="5%"> Absent Minutes </th> -->
+        <th width="5%"> Absent Reason </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% activity_hours.each do |activity_hour| %>
+          <%= fields_for "activity_hours[]", activity_hour do |ahf| %>
+                <tr>
+                  <td>  <%= format_db_date activity_hour.activity_date %></td>
+                  <td>  <%= activity_hour.work_participation_code.present? ? drop_down_value_description(activity_hour.work_participation_code) : "" %> </td>
+                  <td>  <%= ahf.number_field :assigned_hours, readonly: true %> </td>
+                  <td>  <%= ahf.number_field :completed_hours,min: "0" %> </td>
+                  <!-- <td>  <%#= ahf.number_field :completed_minutes %> </td> -->
+                  <td>  <%= ahf.number_field :absent_hours,min: "0" %> </td>
+                  <!-- <td>  <%#= ahf.number_field :absent_minutes %> </td> -->
+                  <td>  <%= ahf.select :absent_reason, CodetableItem.item_list(183,"Absent Reason").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select absent reason'} %> </td>
+                </tr>
+
+          <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate activity_hours %>
+</fieldset>

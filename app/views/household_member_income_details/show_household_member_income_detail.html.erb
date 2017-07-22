@@ -1,0 +1,38 @@
+<fieldset>
+  <section class="solidbody">
+     <legend><%= set_subheader("Checks details") %><legend>
+    <%= render "income_details/parent_income",arg_income: @income %>
+     <p>
+      <b>Date Received: </b>
+      <%= format_db_date @income_detail.date_received %>
+    </p>
+
+    <p>
+      <b>Type of Income: </b>
+      <%= drop_down_value_description(@income_detail.check_type) %>
+    </p>
+
+    <p>
+      <b>Gross Amount: </b>
+      <%= number_to_currency_br(@income_detail.gross_amt) %>
+    </p>
+
+    <p>
+      <b>Count for converted: </b>
+      <%=  get_flag_description(@income_detail.cnt_for_convert_ind) %>
+    </p>
+
+  <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+  <% if @menu == 'CLIENT' %>
+      <%= link_to 'Back', income_income_details_path(@menu,@income.id),class: "secondary button radius" %>
+      <%= link_to 'Edit', edit_income_income_detail_path(@menu,@income.id,@income_detail.id),class: "button radius" %>
+      <%= link_to 'Delete', delete_income_income_detail_path(@menu,@income.id,@income_detail.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+  <%else%>
+      <%= link_to 'Back', household_member_income_detail_index_path(@client.id,@income.id),class: "secondary button radius" %>
+      <%= link_to 'Edit', edit_household_member_income_detail_path(@client.id,@income.id,@income_detail.id),class: "button radius" %>
+      <%= link_to 'Delete', delete_household_member_income_detail_path(@client.id,@income.id,@income_detail.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+  <%end%>
+
+  </section>
+</fieldset>

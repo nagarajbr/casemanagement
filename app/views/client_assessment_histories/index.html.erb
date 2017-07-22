@@ -1,0 +1,42 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Assessment history for: #{client_full_name(@client)}") %></legend>
+
+	<% if session[:CLIENT_ID].present? %>
+	<% if @client_assessment_histories.present? %>
+		<table>
+		  <thead>
+		    <tr>
+		    	<th> ID </th>
+				<th> Assessment Date </th>
+				<th> Assessment Status </th>
+				<th>Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @client_assessment_histories.each do |assessment_history| %>
+					<tr>
+						<td>  <%=  assessment_history.id %></td>
+						<td>  <%=  format_db_date assessment_history.assessment_date %></td>
+						<td>  <%=  drop_down_value_description(assessment_history.assessment_status) %></td>
+						<td>
+						 <%= link_to "Show",client_assessment_history_show_path(assessment_history.id),id: "hyperlink"  %>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+	<%else%>
+			<p>
+		    <h5 class="subheader">No assessment history found.</h5>
+	        </p>
+	<%end%>
+<%else%>
+	    <p>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+        <%= render "shared/search_client_button" %>
+<%end%>
+</section>
+</fieldset>

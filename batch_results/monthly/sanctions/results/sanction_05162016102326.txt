@@ -1,0 +1,23 @@
+ sanction id = 223 ,sanction detail id = 575,sanction month = 2016-06-01,sanction implication = 6111
+sanction id = 213 ,sanction detail id = 576,sanction month = 2016-06-01,sanction implication = 6111
+sanction id = 234 ,sanction detail id = 577,sanction month = 2016-06-01,sanction implication = 6111
+ sanction id = 212 ,sanction detail id = 578,sanction month = 2016-06-01,sanction implication = 6111
+sanction id = 259 ,sanction detail id = 579,sanction month = 2016-06-01,sanction implication = 6111
+sanction id = 13 ,sanction detail id = 580,sanction month = 2016-06-01,sanction implication = 6113
+sanction id = 214 ,sanction detail id = 581,sanction month = 2016-06-01,sanction implication = 6111
+sanction id = 108 ,sanction detail id = 582,sanction month = 2016-06-01,sanction implication = 6113
+ sanction id = 253 ,sanction detail id = 583,sanction month = 2016-06-01,sanction implication = 6111
+sanction_details_sanction_indicator_closed = 107,4,3064
+sanction id = 244 ,sanction detail id = 584,sanction month = 2016-06-01,sanction implication = 6111
+ sanction id = 105 ,sanction detail id = 585,sanction month = 2016-06-01,sanction implication = 6111
+ sanction id = 256 ,sanction detail id = 586,sanction month = 2016-06-01,sanction implication = 6111
+sanction id = 257 ,sanction detail id = 587,sanction month = 2016-06-01,sanction implication = 6111
+ sanction id = 207 ,sanction detail id = 588,sanction month = 2016-06-01,sanction implication = 6111
+Total sanction record present = 58
+Total records - no sanction details present  = 18
+Total sanction record has next month sanction detail record   = 21
+Total sanction details records inserted  = 14
+Total records sanction is released = 4
+count_for_sanction_details_sanction_indicator_closed = 1
+count_for_sanction_details_insert_failed =0
+count_for_sanction_served_update_fail =0

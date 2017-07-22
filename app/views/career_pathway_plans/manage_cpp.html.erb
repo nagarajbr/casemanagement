@@ -1,0 +1,75 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Career Plan for client: #{client_full_name(@client)}") %></legend>
+	<p>
+		<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+	</p>
+	<% if @service_plan_found == "N"%>
+		<h5 class="subheader">No open plan or their associated activities found or all plan and their associated activities have been approved in career plan.</h5><br>
+	        <%= link_to "Employment Plan", action_plans_path, class: 'button radius' %>
+	        <p></p>
+	<% else %>
+		<% if @allow_cpp %>
+
+			<%= render "shared/common_error", object_argument: @cpp_object %><br>
+			<%= render "assessment_work_sheet_pending_cpp",
+			    arg_sections: @assessed_sections_with_barriers,
+			    arg_barriers:@assessment_barriers,
+			    arg_client_id: @client.id,
+			    arg_plan_id: @action_plan.id
+			%>
+			<!-- SHOW ACTION PLAN PARTIALS START-->
+			<p>
+			 	<%= render "action_plans/active_plan_summary",
+			 	    action_plan: @action_plan,
+			 	    arg_work_participation: @work_participation,
+			 	    employment_goal: @employment_goal
+			 	%>
+		 	</p>
+
+			<!-- SHOW ACTION PLAN PARTIALS END-->
+
+			<%= render "career_pathway_plans/planned_work_participation_hours_per_client",
+			     arg_activity_hours: @planned_client_activity_hours_collection
+			%>
+			<%= render "career_pathway_plans/employment_plan_details",
+			    arg_plan_details: @open_employment_plan_details,
+			    arg_pathway_plan: @career_pathway_plan_id
+			%>
+			<%= render "shared/common_warning", object_argument: @warnings %>
+
+			<%= form_for(@cpp_object, :url => save_cpp_path, method: :post) do |f| %>
+		        <ul>
+			     	<div class="row">
+			          <div class="large-5 columns">
+			               <%= render 'form',arg_object: f, arg_communication_type:@communication_type,arg_client:@client %>
+				 	  </div>
+				    </div>
+				</ul>
+			    <p>
+			    	<%= link_to "Cancel",index_cpp_path(session[:CLIENT_ASSESSMENT_ID].to_i),class: 'secondary button radius'%>
+			       <%= f.submit "Complete career plan",class: 'button radius'%>
+			    </p>
+			<% end %>
+		<% else %>
+
+
+				<b>Career Plans</b>
+				<p></p>
+				<% if @pending_career_pathway_plans.present? %>
+					<%= render 'cpp_plans_list',arg_object: @pending_career_pathway_plans %>
+				<% end %>
+				<h5 class="subheader">There is a requested/rejected career plan which needs to be approved/modified.Can't create a new career plan.</h5><br>
+
+	        <%= link_to "Back",index_cpp_path(session[:CLIENT_ASSESSMENT_ID].to_i),class: 'secondary button radius'%>
+	        <p></p>
+		<% end %>
+
+	<% end%>
+
+
+
+
+
+</section>
+</fieldset>

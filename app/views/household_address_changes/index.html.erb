@@ -1,0 +1,31 @@
+<!--Manoj Patil 11/03/2015  -->
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Household address change") %></legend>
+		<% if session[:HOUSEHOLD_ID].present? && session[:HOUSEHOLD_ID] != 0 %>
+				<%= render 'households/selected_household_partial',arg_household: @household %>
+				<%if @in_household_status_members.present?%>
+					<%if @physical_address_object.present?%>
+						<%= render 'all_household_members', arg_all_members: @household_members%>
+						<%= render 'household_physical_address', arg_addr: @physical_address_object%>
+						<%= link_to "Change Address ",initialize_change_household_address_wizard_path(@physical_address_object.id), class: "button radius"%>
+					<%else%>
+						 <h5 class="subheader">No open physical address found for this household.No action can be performed on this household.</h5>
+				        <p></p>
+				       <%= link_to "Back",household_index_path,class: 'secondary button' %>
+					<%end%>
+
+				<%else%>
+			        <h5 class="subheader">All members are in 'out of household' status in this household. No action can be performed on this household.</h5>
+			        <p></p>
+			       <%= link_to "Back",household_index_path,class: 'secondary button' %>
+			    <%end%>
+
+
+	    <%else%>
+	        <h5 class="subheader">Household is not selected, Select household by clicking Search Client button.</h5>
+	        <p></p>
+	        <%= render "shared/search_client_button" %>
+		<%end%>
+	</section>
+</fieldset>

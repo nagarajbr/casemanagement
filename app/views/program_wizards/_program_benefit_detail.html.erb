@@ -1,0 +1,126 @@
+<!--Manoj Patil 10/16/2014  -->
+<% if arg_collection.present?%>
+	<% arg_object = arg_collection.first %>
+	<table width="100%">
+		<caption style="text-align:inherit"><b> Program Benefit Details</b><p></p></caption>
+		<tr>
+			<td valign="top">
+					<table  width="100%">
+						<thead>
+							<tr>
+								<th> Eligibility Budget</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Gross Earned-->
+							<tr>
+								<td>Gross Earned:</td>
+								<td><%= number_to_currency_br(arg_object.eligibility_gross_earned) %></td>
+							</tr>
+							<!-- Work Deduction-->
+							<tr>
+								<td>Work Deduction:</td>
+								<td><%= number_to_currency_br(arg_object.eligibility_work_deduct) %></td>
+							</tr>
+							<!-- Incentive Deduction-->
+							<tr>
+								<td>Incentive Deduction:</td>
+								<td><%= number_to_currency_br(arg_object.eligibility_incent_deduct) %></td>
+							</tr>
+							<!-- Net Income-->
+							<tr>
+								<td>Net Income:</td>
+								<td><%= number_to_currency_br(arg_object.eligibility_net_income) %></td>
+							</tr>
+							<!-- Total Unearned-->
+							<tr>
+								<td>Total Unearned:</td>
+								<td><%= number_to_currency_br(arg_object.eligibility_tot_unearned) %></td>
+							</tr>
+							<!-- Total Adjusted Income-->
+							<tr>
+								<td>Total Adjusted Income:</td>
+								<td><%= number_to_currency_br(arg_object.eligibility_tot_adjusted) %></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+			</td>
+			<td valign="top">
+				<table  width="100%">
+					<thead>
+						<tr>
+							<th> Benefit:</th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- Gross Earned-->
+						<tr>
+							<td>Gross Earned:</td>
+							<td><%= number_to_currency_br(arg_object.benefit_gross_earned) %></td>
+						</tr>
+						<!-- Total UnEarned-->
+						<tr>
+							<td>Total UnEarned:</td>
+							<td><%= number_to_currency_br(arg_object.benefit_total_unearned) %></td>
+						</tr>
+						<!-- Total Adjusted Income-->
+						<tr>
+							<td>Total Adjusted Income:</td>
+							<td><%= number_to_currency_br(arg_object.benefit_total_adjusted) %></td>
+						</tr>
+
+					</tbody>
+
+				</table>
+
+
+
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" valign="top">
+					<table  width="100%">
+						<tr>
+							<td>Full Benefit:</td>
+							<td><%= number_to_currency_br(arg_object.full_benefit) %></td>
+							<td> Sanction:</td>
+							<td><%= number_to_currency_br(arg_object.sanction) %></td>
+
+						</tr>
+						<tr>
+							<td>Reduction:</td>
+							<td><%= number_to_currency_br(arg_object.reduction) %></td>
+							<td> Benefit Amount:</td>
+							<td><%= number_to_currency_br(arg_object.program_benefit_amount) %></td>
+
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td> <%= "TEA Diversion Reimbursed Amount:" if arg_object.reimbursed_amount.present? %></td>
+							<td><%= arg_object.reimbursed_amount if arg_object.reimbursed_amount.present? %></td>
+						</tr>
+					</table>
+
+			</td>
+		</tr>
+
+	</table>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+

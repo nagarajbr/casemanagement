@@ -1,0 +1,38 @@
+<p>
+	<b> Employment Goal: </b>
+	<%= employment_goal %>
+</p>
+
+<p>
+	<b> Start Date: </b>
+	<%= format_db_date(action_plan.start_date) %>
+</p>
+
+<p>
+	<b> End Date: </b>
+	<%= format_db_date(action_plan.end_date) %>
+</p>
+
+<p>
+	<b> Agreement Date: </b>
+	<%= format_db_date(action_plan.client_agreement_date) %>
+</p>
+
+
+<p>
+	<b> Plan Status: </b>
+	<%= drop_down_value_description(action_plan.action_plan_status) %>
+
+</p>
+
+<% if action_plan.outcome_code.present? %>
+	<p>
+		<b> Outcome: </b>
+		<%= drop_down_value_description(action_plan.outcome_code) %>
+	</p>
+
+	<p>
+		<b> Outcome Notes: </b>
+		<%= action_plan.outcome_notes %>
+	</p>
+<% end %>

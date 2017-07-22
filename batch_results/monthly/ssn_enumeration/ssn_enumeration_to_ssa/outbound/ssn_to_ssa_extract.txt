@@ -1,0 +1,163 @@
+900100136TPV217Oct15AchildonMom              01011975                                                 1                    3ARA   
+900100212TPV217Deferral4    Dad              01011970                                                 1                    3ARA   
+900101073TPV217Feb12single  Dad              01011975                                                 1                    3ARA   
+900100113TPV217TEA_CASE_TESTDad              01011970                                                 1                    3ARA   
+900100831TPV217jan25_2016   son1             01012010                                                 1                    3ARA   
+900100359TPV217Nov03Atwo    Daughter         01012012                                                 1                    3ARA   
+900100265TPV217Oct23Atwo    Dad              01011975                                                 1                    3ARA   
+900100298TPV217ONEDEFERRAL  Dad              01011970                                                 1                    3ARA   
+900100657TPV217lewis        perry            01011970                                                 1                    3ARA   
+900100434TPV217Nov19        Son              01012009                                                 1                    3ARA   
+900100848TPV217xyz_jan26_201dad              01011970                                                 1                    3ARA   
+900100292TPV217oneparent    Dad              01011970                                                 1                    3ARA   
+900100473TPV217Dec7_Monday  Dad              01011970                                                 1                    3ARA   
+900100338TPV217TE_OCT292015 SON              01012012                                                 1                    3ARA   
+900100110TPV217TDOct10132015Son              01012014                                                 1                    3ARA   
+900100054TPV217FOct05ZsingleSon              01012010                                                 1                    3ARA   
+900100226TPV217DEF2         Dad              01011970                                                 1                    3ARA   
+900100658TPV217babylewis    perry            12151997                                                 1                    3ARA   
+900100117TPV217CHILD_ONLY_CAgrandpa          01011960                                                 1                    3ARA   
+900100225TPV217Oct19Ctwo    Daughter         01012012                                                 1                    3ARA   
+900100800TPV217Jan19single  Dad              01011980                                                 1                    3ARA   
+900100846TPV217jan26_2016   Dad              01011970                                                 1                    3ARA   
+900100228TPV217DEF2         KID              01012012                                                 1                    3ARA   
+900100053TPV217EOct05ZsingleMom              01011970                                                 1                    3ARA   
+900100114TPV217TEA_CASE_TESTSon              01012010                                                 1                    3ARA   
+900100814TPV217Jan20two     Dad              01011980                                                 1                    3ARA   
+900100847TPV217jan26_2016   son1             01012012                                                 1                    3ARA   
+900100101TPV217T2parent     Mom              01011970                                                 1                    3ARA   
+900100337TPV217TE_OCT292015 Dad              01011970                                                 1                    3ARA   
+900100171TPV217Mparent3     kid              01012015                                                 1                    3ARA   
+900100459TPV217service      mom              12011992                                                 1                    3ARA   
+900100653TPV217bearbaby     teddy            01012010                                                 1                    3ARA   
+900100851TPV217xyz_jan26_201son1             01012012                                                 1                    3ARA   
+900100126TPV217TEA_10142015 Son              01012015                                                 1                    3ARA   
+900101075TPV217Feb12single  Son              01012010                                                 1                    3ARA   
+900100275TPV217Oct23Btwo    Dad              01011975                                                 1                    3ARA   
+900100102TPV217T2parent     kid              01012000                                                 1                    3ARA   
+900100288TPV217TAJ          Son              01012012                                                 1                    3ARA   
+900100652TPV217bear         teddy            01011970                                                 1                    3ARA   
+900100047TPV217Oct05Bsingle Son              01012010                                                 1                    3ARA   
+900100227TPV217DEF2         MOM              01011970                                                 1                    3ARA   
+900100276TPV217Oct23Btwo    Mom              01011975                                                 1                    3ARA   
+900100913TPV217Feb02Asingle Son              01012011                                                 1                    3ARA   
+900100172TPV217MParent3     Grandpa          01011960                                                 1                    3ARA   
+900100115TPV217TEADIVERSION_Dada             01011970                                                 1                    3ARA   
+900100286TPV217TAJ          Dad              01011970                                                 1                    3ARA   
+900100910TPV217Feb02single  Mom              01011982                                                 1                    3ARA   
+900100943TPV217Feb04single  Son              01012006                                                 1                    3ARA   
+900100293TPV217oneparent    Son              01012012                                                 1                    3ARA   
+900100818TPV217Jan20childonlSon              01012005                                                 1                    3ARA   
+900100116TPV217TEADIVERSION_Son              01012010                                                 1                    3ARA   
+900100134TPV217OTEA_15      Son              01012012                                                 1                    3ARA   
+900100306TPV217Hanks        Tom              01011970                                                 1                    3ARA   
+900100911TPV217Feb02single  Son              01012010                                                 1                    3ARA   
+900100108TPV217TOct10132015 Son              01012012                                                 1                    3ARA   
+900100051TPV217DOct05ZsingleMom              01011970                                                 1                    3ARA   
+900100987TPV217Feb08AchildonSon              01012015                                                 1                    3ARA   
+900100220TPV217Oct19Btwo    Daughter         09101997                                                 1                    3ARA   
+900100417TPV217Nov16        Mom              01011970                                                 1                    3ARA   
+900100995TPV217feb9_2016    son              01012012                                                 1                    3ARA   
+900100237TPV217T2_10202015  Son              01012012                                                 1                    3ARA   
+900100445TPV217Nov23single  Mom              01011975                                                 1                    3ARA   
+900100781TPV217franklin     kid              01152010                                                 1                    3ARA   
+900100205TPV217Oct19Aminor  Son              10012015                                                 1                    3ARA   
+900100291TPV217volvo        son              01012012                                                 1                    3ARA   
+900100065TPV217Oct07Atwo    Mom              01011975                                                 1                    3ARA   
+900100231TPV217Oct19Ctwo    Son              01012008                                                 1                    3ARA   
+900100985TPV217Feb08AchildonDad              01011975                                                 1                    3ARA   
+900100912TPV217Feb02Asingle Dad              01011980                                                 1                    3ARA   
+900100308TPV217T2OCT26      Dad              01011970                                                 1                    3ARA   
+900100904TPV217Feb02two     Dad              01011980                                                 1                    3ARA   
+900100066TPV217Oct07Atwo    Daughter         01011998                                                 1                    3ARA   
+900100124TPV217TDD          Son              01012010                                                 1                    3ARA   
+900100783TPV217Jan15Asingle Dad              01011980                                                 1                    3ARA   
+900100296TPV217GRANDPA_CHILDGrandpa          01011960                                                 1                    3ARA   
+900100283TPV217Davis        Dad              01011970                                                 1                    3ARA   
+900100360TPV217Nov03Atwo    Son              10011998                                                 1                    3ARA   
+900100307TPV217Hanks        Son              01012012                                                 1                    3ARA   
+900100460TPV217service      son              12022012                                                 1                    3ARA   
+900100118TPV217CHILD_ONLY_CAkid              01012010                                                 1                    3ARA   
+900100223TPV217Oct19Ctwo    Dad              01011975                                                 1                    3ARA   
+900100289TPV217volvo        Dad              01011970                                                 1                    3ARA   
+900100297TPV217GRANDPA_CHILDKid              01012012                                                 1                    3ARA   
+500501112TPV217Dec12Asingle Son              01012010                                                 1                    3ARA   
+900100924TPV217Feb03AchildonSon              01012005                                                 1                    3ARA   
+900100994TPV217feb9_2016    dad              01011970                                                 1                    3ARA   
+900100310TPV217REJECT_OCT26 Dad              01011970                                                 1                    3ARA   
+900100432TPV217Nov19        Mom              01011975                                                 1                    3ARA   
+900100107TPV217TOct10132015 Dad              01011970                                                 1                    3ARA   
+900100213TPV217Deferral4    Son              01012012                                                 1                    3ARA   
+900100236TPV217T2_10202015  Mom              01011970                                                 1                    3ARA   
+900100268TPV217Oct23Atwo    Son              01012008                                                 1                    3ARA   
+900100123TPV217TDD          Dad              01011970                                                 1                    3ARA   
+900100784TPV217Jan15Asingle Son              01012012                                                 1                    3ARA   
+900100200TPV217dell1019     dad              01011970                                                 1                    3ARA   
+900100201TPV217dell1019     son              01012012                                                 1                    3ARA   
+900100278TPV217Oct23Btwo    Son              01012008                                                 1                    3ARA   
+900100052TPV217EOct05ZsingleSon              01012010                                                 1                    3ARA   
+900100905TPV217Feb02two     Mom              01011982                                                 1                    3ARA   
+900100418TPV217Nov16        Son              11231996                                                 1                    3ARA   
+900100266TPV217Oct23Atwo    Mom              01011975                                                 1                    3ARA   
+900100304TPV217Bond         James            01011970                                                 1                    3ARA   
+900100739TPV217Jan08        Dad              01011970                                                 1                    3ARA   
+900100801TPV217Jan19single  Son              01012010                                                 1                    3ARA   
+900100125TPV217TEA_10142015 Dad              01011970                                                 1                    3ARA   
+900100290TPV217volvo        Mom              01011970                                                 1                    3ARA   
+900100433TPV217Nov19        Dad              01011973                                                 1                    3ARA   
+900100311TPV217REJECT_OCT26 son              01012012                                                 1                    3ARA   
+900100438TPV217nov27        dad              11231970                                                 1                    3ARA   
+900100474TPV217Dec7_Monday  Son              01012012                                                 1                    3ARA   
+900100224TPV217Oct19Ctwo    Mom              01011975                                                 1                    3ARA   
+900100476TPV217jan1_monday  son              01012012                                                 1                    3ARA   
+900100441TPV217nov27        son              11242000                                                 1                    3ARA   
+900100458TPV217service      dad              12032011                                                 1                    3ARA   
+900100067TPV217Oct07Atwo    Son              01012015                                                 1                    3ARA   
+900100111TPV217CO_oct1013201grandpa          01011960                                                 1                    3ARA   
+900100235TPV217T2_10202015  Dad              01011970                                                 1                    3ARA   
+900100442TPV217nov27        daughter         11232005                                                 1                    3ARA   
+900100776TPV217franklin     dad              01061980                                                 1                    3ARA   
+900100109TPV217TDOct10132015Dad              01011970                                                 1                    3ARA   
+900100305TPV217Bond         Kid              01012012                                                 1                    3ARA   
+900100230TPV217Oct19Btwo    Son              01012008                                                 1                    3ARA   
+900101052TPV217feb12_2016   son1             01012012                                                 1                    3ARA   
+900100446TPV217Nov23single  Son              01012005                                                 1                    3ARA   
+900100100TPV217T2parent     Dad              01011970                                                 1                    3ARA   
+900100112TPV217CO_oct1013201Son              01012012                                                 1                    3ARA   
+900100170TPV217MParent3     Mom              01012000                                                 1                    3ARA   
+900100906TPV217Feb02two     Son              01012005                                                 1                    3ARA   
+900100274TPV217CPP_TEST     Son              01012012                                                 1                    3ARA   
+900100285TPV217Davis        Son              01012012                                                 1                    3ARA   
+900100048TPV217Oct05Bsingle Mom              01011970                                                 1                    3ARA   
+900100780TPV217franklin     mom              01151990                                                 1                    3ARA   
+900100203TPV217Oct19Aminor  Mom              01011975                                                 1                    3ARA   
+900100357TPV217Nov03Atwo    Dad              01011975                                                 1                    3ARA   
+900100815TPV217Jan20two     Mom              10111980                                                 1                    3ARA   
+900101051TPV217feb12_2016   dad              09011970                                                 1                    3ARA   
+900100131TPV217FOct05ZsingleMom              01011970                                                 1                    3ARA   
+900100219TPV217Oct19Btwo    Mom              01011975                                                 1                    3ARA   
+900100299TPV217ONEDEFERRAL  Kid              01012010                                                 1                    3ARA   
+900100478TPV217Feb1_test    son              01012012                                                 1                    3ARA   
+900100284TPV217Davis        Mom              01011970                                                 1                    3ARA   
+900100830TPV217jan25_2016   Dad              01011970                                                 1                    3ARA   
+900100204TPV217Oct19Aminor  Daughter         09101997                                                 1                    3ARA   
+900100477TPV217Feb1_test    Dad              01011970                                                 1                    3ARA   
+900100740TPV217Jan08        Son              01012010                                                 1                    3ARA   
+900100439TPV217nov27        mom              11231971                                                 1                    3ARA   
+900100050TPV217DOct05ZsingleSon              01122000                                                 1                    3ARA   
+900100654TPV217Smith        Patricia         01011970                                                 1                    3ARA   
+900100277TPV217Oct23Btwo    Daughter         01012012                                                 1                    3ARA   
+900100931TPV217Feb04single  Dad              01011980                                                 1                    3ARA   
+900100287TPV217TAJ          Mom              01011970                                                 1                    3ARA   
+900100267TPV217Oct23Atwo    Daughter         01012012                                                 1                    3ARA   
+900100133TPV217OTEA_15      Dada             01011970                                                 1                    3ARA   
+900100309TPV217T2OCT26      SON              01012012                                                 1                    3ARA   
+900100358TPV217Nov03Atwo    Mom              01011976                                                 1                    3ARA   
+900100272TPV217CPP_TEST     Dad              01011970                                                 1                    3ARA   
+900100138TPV217Oct15AchildonSon              10012015                                                 1                    3ARA   
+900100655TPV217Smith        Babypat          01012012                                                 1                    3ARA   
+900100218TPV217Oct19Btwo    Dad              01011975                                                 1                    3ARA   
+900100475TPV217jan1_monday  dad              01011970                                                 1                    3ARA   
+900100816TPV217Jan20two     Son              01012012                                                 1                    3ARA   
+900100273TPV217CPP_TEST     Mom              01011970                                                 1                    3ARA   
+900100602TPV217Kline        Brooke           12101997                                                 1                    3ARA   

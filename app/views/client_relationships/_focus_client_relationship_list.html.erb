@@ -1,0 +1,50 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+<% if arg_object.present? %>
+
+		<table>
+		<caption style="text-align:inherit"> <%= set_subheader("Relationship information for: #{client_full_name(arg_client)}") %> </caption><br>
+		  <thead>
+		    <tr>
+				<th> Client </th>
+				<th> Relationship</th>
+				<th> Related Client</th>
+				<th> Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% arg_object.each do |arg_reln| %>
+					<tr>
+						<td>  <%= "#{get_client_full_name(arg_reln.to_client_id)} is" %></td>
+						<td>  <%= "#{drop_down_value_description(arg_reln.relationship_type)} of" %></td>
+						<td>  <%= get_client_full_name(arg_reln.from_client_id) %></td>
+						<td>
+						<!--<%#= link_to 'Edit', edit_client_relationship_path(arg_reln.id),id: "hyperlink" %> | -->
+						<%# if validate_authorization(345) %>
+							<%= link_to 'Delete',arg_reln, method: :delete, data: { confirm: 'Are you sure?' },id: "hyperlink" %>
+						<%# end %>
+						</td>
+					</tr>
+				 <% end %>
+			</tbody>
+		</table>
+		<%# if validate_authorization(343) %>
+			<%= link_to "New",new_client_relationship_path, class: 'button radius',title1: "Add relationship between selected focus client and other client", data: {tooltip1: '' } %>
+		<%# end %>
+<% else %>
+		<fieldset>
+	        <legend> <%= set_subheader("Relationship for Client: #{client_full_name(arg_client)}" ) %> </legend><br>
+	      	<%# if validate_authorization(343) %>
+		        <h5 class="subheader"> No relationship information found. Click New to enter relationship information.</h5>
+		        <p></p>
+		       <%= link_to "New",new_client_relationship_path, class: 'button radius',title1: "Add relationship between selected focus client and other client", data: {tooltip1: '' } %>
+	       <%# else %>
+	       <!-- <h5 class="subheader"> No relationship information to show.</h5> -->
+	       <%# end %>
+	   </fieldset>
+<%end%>
+</section>
+</fieldset>
+
+

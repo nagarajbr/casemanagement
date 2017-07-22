@@ -1,0 +1,15 @@
+<fieldset>
+<section class="solidbody">
+  <%= form_for @in_state_payment, url: program_unit_in_state_payments_update_path, method: :patch do |f| %>
+  <legend><%= set_subheader("Payment history for program unit of client: #{client_full_name(@client)}") %></legend>
+<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+    <ul>
+      <%= render('edit_partial_program_unit', arg_edit: f, arg_instate_payment:@in_state_payment) %>
+
+       <%= link_to("Back", program_unit_in_state_payments_show_path , class: "secondary button radius") %>
+
+    <%= f.submit "Save", class: 'button radius' %>
+    </ul>
+<%end%>
+</section>
+  </fieldset>

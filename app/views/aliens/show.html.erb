@@ -1,0 +1,68 @@
+<fieldset>
+<section class="solidbody">
+<% if session[:CLIENT_ID].present?  %>
+
+     <% if @client.citizenship? %>
+          <legend><%= set_subheader("Citizenship information for: #{@client.last_name}, #{@client.first_name}") %></legend>
+
+
+          <p>
+           <b>US Citizenship:</b>
+           <%= get_flag_description(@client.citizenship) %>
+          </p>
+
+          <p>
+            <b>US Citizenship Verification Status:</b>
+            <%= drop_down_value_description(@client.sves_type)  %>
+          </p>
+
+  <% if @alien.present? %>
+          <p>
+            <b>Immigration Status:</b>
+            <%= drop_down_value_description(@alien.refugee_status) %>
+          </p>
+
+          <p>
+            <b>Country of Origin:</b>
+            <%= drop_down_value_description(@alien.country_of_origin) %>
+          </p>
+
+          <p>
+            <b>Alien Date of Entry:</b>
+            <%= format_db_date(@alien.alien_DOE) %>
+          </p>
+
+          <p>
+            <b>Alien Number:</b>
+            <%= @alien.alien_no %>
+          </p>
+  <% end %>
+
+       <!--   <p>
+          <b>Worker: </b>
+          <%#= get_user_name(@client.updated_by)%>
+        </p> -->
+        <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+        <%# if validate_authorization(230) %>
+          <%= link_to 'Edit', edit_alien_path(@alien), class: "button radius"%>
+        <%# end %>
+  <%else%>
+          <%# if validate_authorization(229) %>
+              <legend><%= set_subheader("Citizenship information for: #{client_full_name(@client)}" ) %></legend>
+              <h5 class="subheader">No citizenship information found. Click New to enter citizenship information.</h5>
+              <p></p>
+              <%= link_to 'New',new_alien_path, class: "button radius"%>
+          <%# else %>
+           <!--  <legend><%#= set_subheader("Citizenship information for: #{client_full_name(@client)}" ) %></legend>
+              <h5  class="subheader">No citizenship information to show.</h5>-->
+          <%# end %>
+  <%end%>
+<%else%>
+        <legend><%= set_subheader("View citizenship details" ) %></legend>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+<%end%>
+    </section>
+</fieldset>

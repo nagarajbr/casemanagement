@@ -1,0 +1,25 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Enter contact information for: #{@employer.employer_name}") %></legend>
+		<%= form_tag create_employer_contact_path, method: :post do %>
+			<% if session[:EMPLOYER_ID].present? %>
+			    <%= render "shared/common_error", object_argument: @phones_error_messages %>
+			    <ul>
+			       <div class="row">
+			         <div class="large-4 columns">
+						<%= render '/phones/form',arg_primary:@primary_phone,arg_secondary: @secondary_phone,arg_other:@other_phone,arg_email:@email,arg_entity_type:@entity_type,arg_notes:@notes  %>
+						</div>
+			       </div>
+			    </ul>
+			    <p>
+			      <%= link_to "Cancel", show_employer_contact_path ,class: 'button secondary' %>
+			      <%= submit_tag "Save", class: "button radius" %>
+			    </p>
+			<% else %>
+			    <h5 class="subheader">Employer is not selected, Select an employer by clicking Search button.</h5>
+			    <p></p>
+			    <%= link_to 'Search',employer_new_search_path, class: "button radius" %>
+			<% end %>
+		<% end %>
+	</section>
+</fieldset>

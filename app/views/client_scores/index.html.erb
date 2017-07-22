@@ -1,0 +1,77 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+<% if session[:CLIENT_ID].present? %>
+	<% if @client_scores.present? %>
+		<table>
+		<caption style="text-align:inherit"><%= set_subheader("Scores list for client:#{client_full_name(@client)}") %></caption>
+		  <thead>
+		    <tr>
+		    	<th>Test Type</th>
+		    	<th>Referred Date</th>
+		    	<th> Test Taken Date </th>
+				<th> Scores </th>
+				<th>Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @client_scores.each do |cs| %>
+					<tr>
+						<td>  <%= drop_down_value_description(cs.test_type) %></td>
+						<td>  <%=  format_db_date cs.date_referred %></td>
+						<td>  <%=  format_db_date cs.date_test_taken_on %></td>
+						<td>  <%= number_to_decimal(cs.scores) %></td>
+						<td>
+							<% if @test_types.include? cs.test_type%>
+						 		<%= link_to "Show",client_scores_show_path(@menu,cs.id),id: "hyperlink"%>
+						 	<% end %>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+		<%# if validate_authorization(349) %>
+			<%= link_to("New", client_scores_new_path , class: 'button radius')%>
+		<%# end %>
+		<%# if validate_authorization(731) %>
+	     	<% if @client_assessment.present? %>
+				 <%if !(@client_assessment.first_step?)%>
+					 <%= link_to "Previous", process_previous_step_path,class: 'button' %>
+				 <%end%>
+				 <%if !(@client_assessment.last_step?)%>
+					<%= link_to "Next",process_next_step_path,class: 'button' %>
+				<%end%>
+				<%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+			<% end %>
+		<%# end %>
+	<%else%>
+		    <legend><%= set_subheader("Score information for:#{client_full_name(@client)}"  ) %></legend>
+		    <%# if validate_authorization(349) %>
+		        <h5 class="subheader">No scores information found. Click New to enter score information.</h5>
+		        <p></p>
+		        <%= link_to 'New',client_scores_new_path, class: "button radius"%>
+	        <%# else %>
+	        	<!-- <h5 class="subheader">No scores information to show.</h5> -->
+	        <%# end %>
+	        <%# if validate_authorization(731) %>
+	        	<% if @client_assessment.present? %>
+					 <%if !(@client_assessment.first_step?)%>
+						 <%= link_to "Previous", process_previous_step_path,class: 'button' %>
+					 <%end%>
+					 <%if !(@client_assessment.last_step?)%>
+						<%= link_to "Next",process_next_step_path,class: 'button' %>
+					<%end%>
+					<%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+				<% end %>
+		    <%# end %>
+	<%end%>
+
+<%else%>
+	    <%= set_subheader("Client scores Index" ) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search client button.</h5>
+        <p></p>
+        <%= link_to 'Search Client',client_search_path , class: "button radius"%>
+<%end%>
+</section>
+</fieldset>

@@ -1,0 +1,60 @@
+
+
+
+   <p>
+    <b>Income Type: </b>
+
+    <%= drop_down_value_description(arg_income.incometype) %>
+  </p>
+
+  <p>
+    <b>Source: </b>
+    <%= arg_income.source %>
+  </p>
+
+
+  <p>
+    <b>Frequency: </b>
+    <%= drop_down_value_description(arg_income.frequency) %>
+  </p>
+
+
+                    <li >
+                        <fieldset class="radio">
+                        <legend class="radiolegend">Verified</legend>
+                          <div class="button-group">
+                            <label class="radio-button"><%= f.radio_button :verified, "1"%>Yes</label>
+                            <label class="radio-button"><%= f.radio_button :verified, "0"%>No</label>
+                          </div>
+                      </fieldset>
+                  </li>
+
+
+
+                 <li class="required">
+                  <%= f.label :effective_beg_date %>
+                  <%= f.date_field :effective_beg_date, alt: "effective begin date",title1: "Select an effective begin date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)"  %>
+                 </li>
+
+                 <li>
+                  <%= f.label :effective_end_date %>
+                  <%= f.date_field :effective_end_date, alt: "effective end date",title1: "Select an effective end date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+                 </li>
+
+
+                     <li >
+                      <fieldset class="radio">
+                          <legend class="radiolegend">Recalculate Indicator</legend>
+                          <div class="button-group">
+                          <label class="radio-button"><%= f.radio_button :recal_ind, "Y"%>Yes</label>
+                          <label class="radio-button"><%= f.radio_button :recal_ind, "N"%>No</label>
+                        </div>
+                      </fieldset>
+                  </li>
+
+
+                   <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+
+
+
+

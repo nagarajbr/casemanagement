@@ -1,0 +1,50 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Eligibility determination for selected program unit of client: #{client_full_name(@client)} #{@run_month_description}") %></legend>
+ 	<p>
+	 	<%= render 'selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+ 	</p>
+
+ 	<p>
+ 		<%= render 'selected_program_wizard_run_id_details', arg_object: @selected_program_wizard %>
+ 	</p>
+ 	<p>
+
+ 		<%= render 'selected_program_benefit_members', arg_collection: @program_wizard_benefit_members%>
+ 	</p>
+
+ 	<p>
+		<% if @program_month_summary_collection.present? %>
+			<%= render 'program_month_summary', arg_object: @program_month_summary_collection.first %>
+		<% else %>
+			<b> Program Benefit Summary </b>
+			<label> No Program Month Summary data found</label>
+		<% end %>
+	</p>
+
+	<p>
+		<% if @eligibility_deterimine_results.present? %>
+			<%= render 'eligibility_determine_results', arg_object: @eligibility_deterimine_results,arg_selected_program_wizard:@selected_program_wizard %>
+		<% end %>
+	</p>
+
+ 	<p>
+		<%= render 'program_benefit_detail', arg_collection: @program_benefit_detail%>
+	</p>
+
+	<!--
+	<p>
+
+		<%#= render 'program_members_summary', arg_collection: @program_members_summaries,  arg_run_month: @selected_program_wizard.run_month  %>
+
+	</p>
+-->
+
+<p>
+		<%= link_to 'Back', index_eligibility_determination_runs_path(@selected_program_unit.id),class: " secondary button radius" %>
+
+</p>
+
+</section>
+</fieldset>

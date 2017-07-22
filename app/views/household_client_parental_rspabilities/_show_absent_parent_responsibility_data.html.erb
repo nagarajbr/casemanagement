@@ -1,0 +1,41 @@
+  <p>
+            <b>Parent Name:</b>
+            <%= get_client_full_name(arg_param.to_client_id) %>
+          </p>
+
+
+           <p>
+            <b>Deprivation Reason:</b>
+            <%= drop_down_value_description(arg_param.deprivation_code) %>
+          </p>
+
+           <p>
+            <b>Good Cause:</b>
+            <%= get_flag_description(arg_param.good_cause) %>
+          </p>
+
+
+          <p>
+            <b>Married At Birth:</b>
+            <%= get_flag_description(arg_param.married_at_birth) %>
+          </p>
+
+         <p>
+            <b>Paternity Established:</b>
+            <%= get_flag_description(arg_param.paternity_established) %>
+          </p>
+
+           <p>
+            <b>Court Order Number:</b>
+            <%= arg_param.court_order_number %>
+          </p>
+
+          <p>
+            <b>Court Ordered Amount:</b>
+            <%= number_to_currency_br(arg_param.court_ordered_amount) %>
+          </p>
+
+          <p>
+            <b>Amount Collected:</b>
+            <%= number_to_currency_br(arg_param.amount_collected) %>
+          </p>

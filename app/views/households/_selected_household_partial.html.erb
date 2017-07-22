@@ -1,0 +1,21 @@
+	<% if arg_household.id.present?%>
+		<table>
+			<caption style="text-align:inherit"><b>Selected Household </b><p></p> 	</caption>
+		  <thead>
+		    <tr>
+
+				<th> Household Name </th>
+				<th> ID </th>
+
+			</tr>
+		  </thead>
+		    <tbody>
+					<tr>
+
+						<td>  <%= arg_household.name %>  </td>
+						<td>  <%= arg_household.id %></td>
+
+					</tr>
+			</tbody>
+		</table>
+	<% end %>

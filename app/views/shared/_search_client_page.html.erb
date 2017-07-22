@@ -1,0 +1,12 @@
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+	<%= render 'form' %>
+<% else %>
+	<fieldset>
+		<%= set_subheader(arg_sub_header) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+    </fieldset>
+ <% end %>
+</section>

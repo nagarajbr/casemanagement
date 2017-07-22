@@ -1,0 +1,30 @@
+<fieldset>
+	<section class="solidbody">
+		<%= form_tag(comments_path, method: :post) do %>
+		<% if arg_msg.present? %>
+			<%= arg_msg %>
+		<% else %>
+			<ul>
+			    <div class="row">
+			        <div class="large-5 columns">
+					<li>
+						<%= label :subject, "What you were doing?"%>
+						<%= text_field_tag :subject, object_argument %>
+					</li>
+
+					<li>
+						<%= label :comment, "What went wrong?"%>
+						<%= text_area_tag :comment, object_argument%>
+					</li>
+					 <%#= link_to "Send", class: "button radius"%>
+			 		</div>
+			    </div>
+			</ul>
+			 <p>
+			<%= submit_tag "Send",onclick:"show_feedback_message()", class: 'button radius'%>
+			 </p>
+		<% end %>
+	<%end%>
+
+</section>
+</fieldset>

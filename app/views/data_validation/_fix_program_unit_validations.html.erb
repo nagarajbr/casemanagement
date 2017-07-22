@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+		<th> Name </th>
+		<th> Verification Item </th>
+		<th> Result </th>
+		<th> </th>
+
+
+	</tr>
+  </thead>
+    <tbody>
+		<% arg_clients.each do |client| %>
+			<tr>
+				<td>  <%=  get_client_full_name(client.client_id) %> </td>
+				<td>  <%=  CodetableItem.get_short_description(client.data_item_type) %> </td>
+				<td>
+					<%= get_application_validation_result(client.result).html_safe()%>
+				</td>
+
+				<td>
+						<% unless client.result %>
+							<%= link_to 'Fix Data', program_unit_data_validation_correction_link_path(arg_program_unit_id,client.client_id,client.data_item_type,arg_navigate) ,id: "hyperlink" %>
+						<% end %>
+				</td>
+
+			</tr>
+		 <% end %>
+	</tbody>
+</table>

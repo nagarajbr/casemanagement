@@ -1,0 +1,39 @@
+<!--
+	<%= form_for(@immunizations, :url => update_immunizations_path, method: :put) do |f| %>
+	  	<%= render "shared/common_error", object_argument: @immunization %>
+		<fieldset>
+	    	<%= set_subheader("Manage Immunization information for client: #{client_full_name(@client)}") %>
+	    	 <p>
+            <b>Vaccination Name:</b>
+            <%= system_param_value_description(@immunization.vaccine_type) %>
+          </p>
+
+          <p>
+            <b>Date Required:</b>
+            <%= format_db_date(@immunization.date_required) %>
+          </p>
+
+	    	<ul>
+	    	<div class="row">
+	         	 <div class="large-4 columns">
+
+				<li >
+				 	 <%= f.label :provider_id %>
+				 	 <%= f.number_field :provider_id, title1: "The provider is the party giving the services needed.", data: {tooltip1: '' }%>
+				</li>
+				<li >
+				 	 <%= f.label :date_administered %>
+				 	 <%= f.date_field :date_administered, alt: "date_administered",title1: "Select Date Administered.", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)"  %>
+				</li>
+					 <%= f.hidden_field :updated_by %>
+		 	  	</div>
+		    </div>
+		   </ul>
+		    <p>
+		       <%= link_to "Back", immunizations_path,class: " secondary button radius"  %>
+		      <%= f.submit "Save",class: 'button radius'%>
+		    </p>
+		</fieldset>
+	<% end %>
+
+-->

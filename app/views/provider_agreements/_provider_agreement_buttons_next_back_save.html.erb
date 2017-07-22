@@ -1,0 +1,10 @@
+<% if !(arg_instance.last_step?) %>
+	<%= link_to "Exit Wizard", provider_agreements_path,class: 'secondary button' %>
+<% end %>
+
+<%= arg_object.submit "Back", :name => "back_button",class: 'secondary button' unless arg_instance.first_step? %>
+<% if arg_instance.last_step? %>
+	<%= arg_object.submit "Finish",class: 'button' %>
+<% else %>
+	<%= arg_object.submit "Next",:name => "next_button",class: 'button' %>
+<% end %>

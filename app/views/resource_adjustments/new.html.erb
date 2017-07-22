@@ -1,0 +1,49 @@
+
+<fieldset>
+	<section class="solidbody">
+		 <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+            <legend><%= set_subheader("Enter new resource detail adjustment for household member: #{client_full_name(@client)}") %> </legend>
+            <p>
+            	<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+            	<%= render "parent_resource",arg_resource: @resource %>
+              <%= render "parent_resource_detail",arg_resource_detail:@resource_detail %>
+            </p>
+            <%= form_for(@resource_adjustment,:url => create_household_member_resource_detail_adjustment_path(@client.id,@resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :post) do |f| %>
+                 <%= render "shared/common_error", object_argument: @resource_adjustment %><br>
+                  <ul>
+                      <div class="row">
+                          <div class="large-4 columns">
+                               <%= render 'form',f: f %>
+                          </div>
+                      </div>
+                  </ul>
+                <p>
+                  <%= link_to 'Back',household_member_resource_detail_index_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+                    <%= f.submit "Save",class: "button radius" %>
+                </p>
+            <% end %>
+        <% else %>
+        			<legend><%= set_subheader("Enter new resource detail adjustment for: #{client_full_name(@client)}") %> </legend>
+					<%= render "parent_resource",arg_resource: @resource %>
+          <%= render "parent_resource_detail",arg_resource_detail:@resource_detail %>
+				<%= form_for(@resource_adjustment, :url => create_resource_adjustments_path(@resource_detail.id), method: :post) do |f| %>
+				  <%= render "shared/common_error", object_argument: @resource_adjustment %>
+					<ul>
+				 	<div class="row">
+				    	<div class="large-4 columns">
+
+								<%= render 'form',f: f %>
+						</div>
+					</div>
+					</ul>
+
+					<p>
+				       	<%= link_to 'Cancel', index_resource_adjustment_path(@resource_detail.id),class: "secondary button radius" %>
+						<%= f.submit "Save", class: 'button radius'%>
+				    </p>
+
+				<% end %>
+        <% end %>
+
+	</section>
+</fieldset>

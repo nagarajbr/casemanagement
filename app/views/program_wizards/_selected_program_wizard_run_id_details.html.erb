@@ -1,0 +1,23 @@
+<!--Manoj Patil 10/16/2014  -->
+<table>
+	<caption style="text-align:inherit"><b>Selected Eligibility Determination</b><p></p></caption>
+    <thead>
+	    <tr>
+			<th> ID</th>
+			<th> Month </th>
+			<th> DateTime</th>
+			<th> Submit Date </th>
+			<th> Retain </th>
+
+		</tr>
+ 	</thead>
+	<tbody>
+			<tr>
+				<td>  <%= arg_object.run_id %></td>
+				<td>  <%= format_db_date_MM_YYYY(arg_object.run_month) %></td>
+				<td><%= format_date(arg_object.created_at)%></td>
+				<td><%= format_date(arg_object.submit_date)%></td>
+				<td> <%= get_flag_description(arg_object.retain_ind) %></td>
+			</tr>
+	</tbody>
+</table>

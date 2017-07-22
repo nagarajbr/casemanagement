@@ -1,0 +1,2 @@
+class RuleResultsController < AttopAncestorController
+end

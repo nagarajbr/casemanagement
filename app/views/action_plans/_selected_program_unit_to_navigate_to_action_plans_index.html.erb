@@ -1,0 +1,64 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Program units for client: #{client_full_name(arg_client)}") %></legend>
+	<% if session[:CLIENT_ID].present? %>
+	<% if arg_client_program_unit.present? %>
+			<table>
+				<caption style="text-align:inherit"> <p><b> <%= ("Program #{pluralize_without_count(arg_client_program_unit.count,"Unit","")}") %> </b></p><caption>
+			  <thead>
+			    <tr>
+
+					<th> Program Unit ID </th>
+					<th> Service Program </th>
+					<th> Case Type </th>
+					<th> Primary Contact</th>
+					<th> Current Participation Status </th>
+
+					<th> Disposition </th>
+					<th> Disposition Date </th>
+					<th> Processing Office </th>
+
+					<th> Eligibility Determination Worker</th>
+					<th> Case Manager</th>
+					<th> Action </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% arg_client_program_unit.each do |arg_pgu| %>
+
+						<tr>
+
+							<td>  <%= arg_pgu.id %></td>
+							<td>  <%= get_service_program_name(arg_pgu.service_program_id) %></td>
+							<td><%= drop_down_value_description(arg_pgu.case_type) if arg_pgu.case_type.present?%></td>
+							<td> <%= get_primary_beneficiary_of_program_unit(arg_pgu.id)%></td>
+							<td>  <%=  ProgramUnit.get_current_participation_status(arg_pgu.id)%></td>
+
+							<td>  <%= drop_down_value_description(arg_pgu.disposition_status) %></td>
+							<td>  <%= format_db_date(arg_pgu.disposition_date) %></td>
+							<td>  <%= drop_down_value_description(arg_pgu.processing_location) %></td>
+
+							<td>   <%= get_user_name(arg_pgu.eligibility_worker_id) if arg_pgu.eligibility_worker_id.present?%>  </td>
+							<td>   <%= get_user_name(arg_pgu.case_manager_id) if arg_pgu.case_manager_id.present?%>  </td>
+
+							<td><%= link_to "Select",set_program_unit_id_path(arg_pgu.id),id: "hyperlink" %></td>
+
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+
+	<%else%>
+	        <h5 class="subheader">There is no eligible program unit found for this client.Complete the Eligibility determination process before Employment Readiness Planning.</h5>
+	        <p></p>
+	        <%= link_to 'Select Program Unit',program_units_path, class: "button radius"%>
+	<%end%>
+<%else%>
+	    <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+  <%end%>
+</section >
+</fieldset>

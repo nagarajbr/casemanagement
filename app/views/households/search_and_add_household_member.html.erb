@@ -1,0 +1,73 @@
+<!--Manoj Patil 10/16/2014  -->
+<section class="solidbody">
+	<% if @clients.present? %>
+		<caption>
+			<%= set_subheader("Search Results") %>
+		</caption>
+		<% if session[:HOUSEHOLD_ID].present? && session[:HOUSEHOLD_ID].to_i != 0 %>
+			<p>
+
+				<%= render 'households/selected_household_partial',arg_household: @household %>
+			</p>
+		<% end %>
+		<P><%= render "shared/common_error", object_argument: @household %></p>
+		<table>
+			<thead>
+				<tr>
+					<th> Household ID </th>
+					<th> Household Name </th>
+					<th> Name </th>
+					<th> Social Security Number </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+					<th> Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @clients.each do |client| %>
+
+					<tr>
+						<% if client.household_id.present? %>
+							<% @searched_household_object = Household.find(client.household_id) %>
+							<td>  <%=  @searched_household_object.id %></td>
+							<td>  <%=  @searched_household_object.name %></td>
+						<% else %>
+							<td>  </td>
+							<td>  </td>
+						<% end %>
+
+						<td>  <%=  client.get_full_name %></td>
+						<td>  <%=  format_SSN(client.ssn) %></td>
+						<td>  <%=  format_db_date client.dob %></td>
+						<td>  <%=  drop_down_value_description(client.gender) %></td>
+						<td>
+							<% if client.household_id.present? %>
+								<%= link_to "Add to selected household",add_searched_client_into_current_household_path(client.client_id,client.household_id),id: "hyperlink"  %>
+							<% else %>
+								<%= link_to "Add to selected household",add_searched_client_into_current_household_path(client.client_id,0),id: "hyperlink"  %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+
+		<%= link_to 'Back', start_household_member_registration_wizard_path ,class: "secondary button radius" %>
+		<%= link_to 'New Search',new_household_member_search_path(session[:HOUSEHOLD_ID]), class: "button radius"%>
+		<%= link_to 'Register New Household Member', new_household_member_path(session[:HOUSEHOLD_ID].to_i) ,class: "button radius" %>
+
+	<% else %>
+		<legend> <%= set_subheader("Search for a Client") %></legend>
+		<fieldset>
+
+			<%= form_tag household_member_search_results_path, method: 'get' do %>
+				<%= render 'shared/common_client_search_criteria' %>
+				<%= link_to 'Back', start_household_member_registration_wizard_path ,class: "secondary button radius" %>
+				<%= submit_tag "Search", class: 'button radius' %>
+				<% if @show_add_button  %>
+					<%= link_to 'Register New Household Member', new_household_member_path(session[:HOUSEHOLD_ID].to_i) ,class: "button radius" %>
+				<% end %>
+			<% end %>
+		</fieldset>
+  <% end %>
+</section>

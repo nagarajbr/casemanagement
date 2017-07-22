@@ -1,0 +1,16 @@
+<fieldset>
+<section class="solidbody">
+	<legend> <%= set_subheader("Edit #{drop_down_value_description(@income.incometype)} income adjustment details for: #{client_full_name(@client)}") %> </legend>
+    <%= render "parent_income_detail", arg_income_detail:@income_detail %>
+     <% if @activity_hours.present? %>
+		<%= form_for :activity_hour, :url => action_plan_action_plan_detail_activity_hours_path, method: :post do |f| %>
+			<%= render 'form', activity_hours: @activity_hours, action_plan_detail: @action_plan_detail %>
+			<%= link_to 'Cancel', client_activities_path,class: "secondary button radius" %>
+			<%= f.submit "Save", class: 'button radius'%>
+		<%end%>
+	<% else %>
+	  <h5 class="subheader">No participation hours found.</h5><br>
+	  <%= link_to 'Back', client_activities_path ,class: "secondary button radius" %>
+    <%end%>
+</section>
+</fieldset>

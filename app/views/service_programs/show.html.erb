@@ -1,0 +1,21 @@
+<section class="solidbody">
+<fieldset>
+<%= set_subheader("Service Program for: #{@serviceprogram.description}") %>
+	<p>
+		<b>Title: </b>
+		<%= @serviceprogram.title%>
+
+	</p>
+	<p>
+		<b>Description: </b>
+		<%= @serviceprogram.description%>
+
+	</p>
+
+
+<%= link_to 'Back', service_programs_path ,class: "secondary button radius",title1: "Press Enter Key or Mouse Click to go back to previous page ", data: {tooltip1: '' } %>
+<% if validate_authorization(620) %>
+	<%= link_to 'Edit',edit_service_program_path(@serviceprogram) ,class: "button radius", title1: "Press Enter Key or Mouse Click to edit System Params details ", data: {tooltip1: '' } %>
+<% end %>
+</fieldset>
+</section>

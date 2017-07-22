@@ -1,0 +1,45 @@
+<!--  NOT USED
+<!Manoj Patil 10/16/2014   Not used-->
+<!--
+
+<b><h6>Household Members </h6></b>
+
+
+
+<%# if @household_members_collection.present? %>
+		<table>
+			<thead>
+				<tr>
+					<th> Household ID </th>
+					<th> Client ID </th>
+					<th> Member Name </th>
+					<th> SSN </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<%#  @household_members_collection.each do |arg_m| %>
+				<%# client_object = Client.find(arg_m.client_id)%>
+					<tr>
+						<td>  <%#=  arg_m.household_id %></td>
+						<td>  <%#=  arg_m.client_id %></td>
+						<td>  <%#=  client_full_name(client_object) %></td>
+						<td>  <%#=  format_SSN(client_object.ssn) %></td>
+						<td>  <%#=  format_db_date (client_object.dob) %></td>
+						<td>  <%#=  drop_down_value_description(client_object.gender) %></td>
+
+					</tr>
+				<%# end %>
+			</tbody>
+		</table>
+<%# end %>
+
+
+<%#= link_to "Add Household Member",new_household_member_search_path(session[:HOUSEHOLD_ID]), class: 'button radius' %>
+<h5 class="subheader">After adding all household members, click on Next button to set up relationship between household members</h5>
+<p></p>
+
+
+-->

@@ -1,0 +1,10 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+  <section class="solidbody">
+   <legend>
+  <%= set_subheader("Application for client: #{client_full_name(@client)}") %>
+  </legend>
+  	<%= render 'focus_application',arg_selected_application:@client_application %>
+	<%= render 'client_application_fourth_step' %>
+ </section>
+ </fieldset>

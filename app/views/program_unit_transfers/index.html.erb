@@ -1,0 +1,35 @@
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Program units available for transfer") %></legend>
+		<% if @logged_in_user.present? %>
+			<% if @program_units_for_user.present? %>
+				<table>
+				  	<thead>
+				    	<tr>
+						<th> Program Unit </th>
+						<th> Household name </th>
+						<th>Action</th>
+						</tr>
+				  	</thead>
+				    <tbody>
+						<% @program_units_for_user.each do |program_unit| %>
+							<tr>
+								<td>  <%= program_unit.id %></td>
+								<td>  <%= program_unit.household_name %></td>
+								<td>
+								 <%= link_to "Transfer program unit",new_transfer_path(program_unit.id),id: "hyperlink"  %>
+								</td>
+							</tr>
+						 <% end %>
+					</tbody>
+				</table>
+				<%= paginate @program_units_for_user %>
+			<% else %>
+				<p>
+			    	<h5 class="subheader">No program units are assigned.</h5>
+		        </p>
+			<% end %>
+		<% else %>
+		<% end %>
+	</section>
+</fieldset>

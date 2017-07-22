@@ -1,0 +1,48 @@
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Service payments recieved by client: #{client_full_name(@client)}") %></legend>
+	<% if session[:CLIENT_ID].present? %>
+	<% if @client_payment_line_item.present? %>
+
+			<table>
+			  <thead>
+			    <tr>
+					<th> Warrant number </th>
+					<th> Service program</th>
+					<th> Program unit id</th>
+					<th> Date issued </th>
+					<th> Check amount </th>
+					<th> Check status </th>
+					<th> Action </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @client_payment_line_item.each do |payment| %>
+
+						<tr>
+							<td>  <%= payment.determination_id %></td>
+							<td>  <%= payment.title %></td>
+							<td> <%= payment.programunitid %></td>
+							<td>  <%= format_db_date(payment.payment_date) %></td>
+							<td>  <%=  number_to_currency_br(payment.payment_amount)%></td>
+
+							<td>  <%= drop_down_value_description(payment.payment_status) %></td>
+
+							<td><%= link_to "Select",payment_line_items_show_path(payment.id),id: "hyperlink" %></td>
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+
+	<%else%>
+	        <h5 class="subheader"> No payment  </h5>
+
+	<%end%>
+<%else%>
+	    <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+  <%end%>
+</section >
+</fieldset>

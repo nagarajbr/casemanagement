@@ -1,0 +1,36 @@
+<fieldset>
+	<section class="solidbody">
+	 	<legend></legend>
+
+	<% if arg_expired.present?  %>
+		<table>
+		<caption style="text-align:inherit"><%= set_subheader("Expired alerts") %></caption>
+		  <thead>
+		    <tr>
+		    	<th> Alert Text </th>
+		    	<th> Expiration Date </th>
+				<th> Action </th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% arg_expired.each do |alert| %>
+					<tr>
+						<td>  <%= alert.alert_text %></td>
+						<td>  <%= format_db_date(alert.expiration_date) %></td>
+						<td>
+						 <%= link_to "Show",system_alerts_show_path(alert.id),id: "hyperlink"%>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+		<%= paginate arg_expired %>
+
+	<%else%>
+	        <h5 class="subheader">No Expired alert information present.</h5>
+	        <p></p>
+
+	<%end%>
+   </section>
+</fieldset>

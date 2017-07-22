@@ -1,0 +1,38 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Branch offices of Provider: #{ @head_provider.provider_name }") %></legend>
+
+	<%= render "selected_head_provider" %>
+	<% if @branch_offices_of_master_provider.present?%>
+			<caption><b>Branch Office Listing</b><p></p></caption>
+			<p></p>
+			<table>
+			  <thead>
+			    <tr>
+					<th> Provider Name </th>
+					<th> City </th>
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+			    		<% @branch_offices_of_master_provider.each do |arg_provider| %>
+							<tr>
+								<td>  <%= arg_provider.provider_name %></td>
+								<td>  <%= get_provider_city(arg_provider.id) %></td>
+								<td>  <%= link_to "Show",show_provider_path(arg_provider.id),id: "hyperlink" %>	</td>
+							</tr>
+						<% end %>
+				</tbody>
+			</table>
+			 <%= link_to "Back",provider_index_path, class: 'secondary button radius' %>
+			 <%= link_to "New Branch Office", new_branch_office_path(@head_provider_id) , class: 'button radius' %>
+	<% else %>
+	        <h5 class="subheader"> No branch offices found for selected Provider. Click New Branch Office to add branch office.</h5>
+	        <p></p>
+	        <%= link_to "Back",provider_index_path, class: 'secondary button radius' %>
+	        <%= link_to "New Branch Office", new_branch_office_path(@head_provider_id) , class: 'button radius' %>
+	<% end %>
+
+
+</section>
+</fieldset>

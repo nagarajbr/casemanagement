@@ -1,0 +1,38 @@
+<!--
+Rule1) Client not found in the session - inform Client is not found in session - show Client Search Link.
+Rule 2) If No Phone records are found - inform the user -and show New button , so that new records can be     created.
+Rule 3) If Phone records are found for the client - show all phone records in a loop.
+-->
+<fieldset>
+<section class="solidbody">
+<% if session[:CLIENT_ID].present? %>
+
+		 <% if @primary_phone.present? || @secondary_phone.present? || @other_phone.present? ||
+		 	@client_notes.present? || @client.client_email.present? || @notes.present? %>
+			<!-- record found so Normal View Page -->
+
+				<legend><%= set_subheader("Contact information  for:  #{client_full_name(@client)}" ) %></legend>
+				<%= render "show_partial",arg_primary:@primary_phone,arg_secondary: @secondary_phone,arg_other:@other_phone,arg_email:@client_email,arg_entity_type:@entity_type,arg_notes:@notes,arg_modified:@modified_by  %>
+			<%# if validate_authorization(476) %>
+	         	<%= link_to 'Edit',edit_phone_path, class: "button radius"%>
+         	<%# end %>
+		<% else %>
+			<!-- record not found , so show New button. -->
+				<legend><%= set_subheader("Contact information for : #{client_full_name(@client)}" ) %></legend>
+				<%# if validate_authorization(475) %>
+					<h5 class="subheader"> No contact information found. Click New to enter contact information.</h5>
+					<p></p>
+					<%= link_to 'New',new_phone_path, class: "button radius", title1: "Press Enter Key or Mouse Click to add phone numbers", data: {tooltip1: '' }%>
+				<%# else %>
+					<!-- <h5 class="subheader"> No contact information to show.</h5> -->
+				<%# end %>
+		<% end %>
+
+<% else %>
+	<legend><%= set_subheader("View Contact information for : #{client_full_name(@client)}" ) %></legend>
+			<h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+			<p></p>
+			<%= render "shared/search_client_button" %>
+	<% end %>
+</section>
+</fielsdet>

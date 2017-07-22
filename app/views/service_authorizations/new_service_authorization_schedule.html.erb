@@ -1,0 +1,23 @@
+
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Add Service Schedule") %></legend>
+
+<%= form_for(@service_schedule, :url => create_service_authorization_schedule_path, method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @service_schedule %>
+    	<div class="row">
+	        <div class="large-5 columns">
+		    	<ul>
+			     	<%= render 'transportation_service_schedule',arg_object: f,arg_day_final:@arg_days_final %>
+				</ul>
+			</div>
+		</div>
+	    <p>
+	       <%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+	       <%= f.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+	        <%= f.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+	    </p>
+
+<% end %>
+</section>
+</fieldset>

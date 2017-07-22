@@ -1,0 +1,31 @@
+<p>
+    <%if arg_notes.present?%>
+<caption style="text-align:inherit">
+		<b>	Comments </b></caption><p></p>
+
+      <table>
+	<thead>
+	</thead>
+	<tbody>
+		<% arg_notes.each do |nt| %>
+		<tr>
+			<td>  <b> <%= get_user_name(nt.created_by) %>  <br>
+				  on <%= format_db_date(nt.created_at) %> at <%= nt.created_at.strftime("%I:%M %P") %> </b> <br>
+				  &nbsp;&nbsp;&nbsp;&nbsp;<%= nt.notes  %>
+			 </td>
+		</tr>
+		<%end%>
+		<tr>
+			<td>
+			<% if arg_notes.present? %>
+				<%= paginate arg_notes %>
+			<% end %>
+			</td>
+		</tr>
+	</tbody>
+
+</table>
+<%end%>
+
+
+  </p>

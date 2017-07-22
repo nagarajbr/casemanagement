@@ -1,0 +1,2 @@
+class AssessmentQuestionMultiResponsesController < AttopAncestorController
+end

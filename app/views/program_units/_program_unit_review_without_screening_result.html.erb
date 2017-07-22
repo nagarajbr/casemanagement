@@ -1,0 +1,149 @@
+<!--Manoj Patil 10/16/2014  -->
+<% if arg_pgu.blank? %>
+
+	<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: arg_selected_pgu %>
+
+<% end %>
+	<p>
+		<% if arg_pgu_participation.present?%>
+			<table>
+				<caption style="text-align:inherit"><b>Participation Status of Program Unit</b><p></p></caption>
+			  <thead>
+			    <tr>
+					<th> Participation Status </th>
+					<th> Status Date </th>
+					<th> Action Date </th>
+					<th> Reason </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+			    	<% arg_pgu_participation.each do |arg_participation| %>
+						<tr>
+							<td>  <%= drop_down_value_description(arg_participation.participation_status) %></td>
+							<td>  <%= format_db_date(arg_participation.status_date) %></td>
+							<td>  <%= format_db_date(arg_participation.action_date) %></td>
+							<td>  <%= drop_down_value_description(arg_participation.reason) %></td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+
+		<% end %>
+	</p>
+
+
+	<p>
+		<% if arg_pgu_members.present? %>
+				<table>
+					<caption style="text-align:inherit"><b> Members in Program Unit </b><p></p></caption>
+					<thead>
+						<tr>
+							<th> Name </th>
+							<th> SSN </th>
+							<th> Date of Birth </th>
+							<th> Gender </th>
+							<th> Status</th>
+							<th> Primary Contact</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<%  arg_pgu_members.each do |arg_m| %>
+						<tr>
+							<td>  <%=  arg_m.client_full_name %></td>
+							<td>  <%=  format_SSN(arg_m.ssn) %></td>
+							<td>  <%=  format_db_date (arg_m.dob) %></td>
+							<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+							<td>  <%=  drop_down_value_description(arg_m.member_status) %></td>
+							<td>  <%= is_the_client_primary_contact(arg_m.program_unit_id, 6345, arg_m.client_id) %> </td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+		<% end %>
+	</p>
+
+	<p>
+		<% if arg_client_relation.present? %>
+				<table>
+					<caption style="text-align:inherit"><b> Relationships Between Members in Program Unit  </b><p></p></caption>
+				  <thead>
+				    <tr>
+						<th> Member </th>
+						<th> Relationship </th>
+						<th> Member</th>
+
+					</tr>
+				  </thead>
+				    <tbody>
+						<% arg_client_relation.each do |arg_reln| %>
+							<tr>
+								<td>  <%= "#{get_client_full_name(arg_reln.to_client_id)} is" %></td>
+								<td>  <%= "#{drop_down_value_description(arg_reln.relationship_type)} of" %></td>
+								<td>  <%= get_client_full_name(arg_reln.from_client_id) %></td>
+							</tr>
+						 <% end %>
+					</tbody>
+				</table>
+		<% end %>
+	</p>
+	<!-- Application Data element verification Results -->
+ 	<p>
+  		<% if arg_clients.present?%>
+  		<caption style="text-align:inherit"><b> Required Information for Program Unit </b><p></p></caption>
+  		<%= render 'data_validation/fix_program_unit_validations',arg_clients: arg_clients,arg_program_unit_id: arg_selected_pgu.id,arg_navigate: "PROGRAM_UNIT_SUMMARY" %>
+	 		<!-- <table>
+
+				  <thead>
+				    <tr>
+						<th> Name </th>
+						<th> Verification Item </th>
+						<th> Availability </th>
+					</tr>
+				  </thead>
+				    <tbody>
+						<%# @data_validation_results.each do |client| %>
+							<tr>
+								<td>  <%#=  client_full_name(Client.find(client.client_id)) %> </td>
+								<td>  <%#=  CodetableItem.get_short_description(client.data_item_type) %> </td>
+								<td> <%#= get_application_validation_result(client.result).html_safe()%>	</td>
+							</tr>
+						 <% #end %>
+					</tbody>
+			</table> -->
+		<% else %>
+			<p>
+				<label>  Required Application Information Results not found.</label>
+			</p>
+		<% end %>
+
+ 	</p>
+ 	<!-- Application Document Verification -->
+ 	<p>
+ 		<b> Program Unit Verification Documents</b>
+ 		<% if arg_client_doc_list.present? %>
+	 		 <table>
+	                <thead>
+	                    <tr>
+	                      <th> Program Unit Member </th>
+	                      <th> Document Type </th>
+	                      <th> Verification Date </th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	                     <% arg_client_doc_list.each do |arg_doc| %>
+	                        <tr>
+	                          <td>  <%= get_client_full_name(arg_doc.client_id) %></td>
+	                          <td>  <%= drop_down_value_description(arg_doc.document_type) %></td>
+	                          <td>  <%=  format_db_date(arg_doc.document_verfied_date) %></td>
+	                        </tr>
+	                     <% end %>
+	                </tbody>
+	          </table>
+	    <% else %>
+	    	<p>
+				There are no application verification documents.
+			</p>
+	    <% end %>
+	</p>

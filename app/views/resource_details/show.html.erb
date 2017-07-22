@@ -1,0 +1,73 @@
+<fieldset>
+  <section class="solidbody">
+    <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+        <legend><%= set_subheader("Resource detail  of resource: #{drop_down_value_description(@resource.resource_type)} for household member: #{client_full_name(@client)}") %></legend>
+        <p>
+          <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+          <%= render "parent_resource",arg_resource: @resource %>
+        </p>
+    <% else %>
+        <p>
+          <%= render "parent_resource",arg_resource: @resource %>
+        </p>
+        <legend><%= set_subheader("#{drop_down_value_description(@resource.resource_type)} resource details for: #{client_full_name(@client)}") %> </legend>
+    <% end %>
+
+
+
+   <p>
+    <b>Resource Value Date: </b>
+    <%= format_db_date @resource_detail.resource_valued_date %>
+  </p>
+
+  <p>
+    <b>Current Resource Value: </b>
+    <%= number_to_currency_br(@resource_detail.resource_value) %>
+  </p>
+
+  <p>
+    <b>First Of Month Value: </b>
+    <%= number_to_currency_br(@resource_detail.first_of_month_value) %>
+  </p>
+
+  <p>
+    <b>Face Value: </b>
+    <%= number_to_currency_br(@resource_detail.res_ins_face_value) %>
+  </p>
+
+  <p>
+    <b>Amount Owed As Of Date: </b>
+    <%= number_to_currency_br(format_db_date @resource_detail.amount_owned_as_of_date) %>
+  </p>
+
+  <p>
+    <b>Amount Owned On Resource: </b>
+    <%= number_to_currency_br(@resource_detail.amount_owned_on_resource )%>
+  </p>
+
+   <p>
+    <b>Value Evaluated By: </b>
+    <%= CodetableItem.item_description(40,@resource_detail.res_value_basis,"Value Basis")  if @resource_detail.res_value_basis.present?%>
+  </p>
+
+
+  <p>
+    <b>Worker: </b>
+   <%= get_user_name(@resource_detail.updated_by)%>
+  </p>
+      <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+         <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+                <%= link_to 'Back', household_member_resource_detail_index_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+                <%= link_to 'Edit', edit_household_member_resource_detail_path(@client.id,@resource.id,@resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+                <%= link_to "Delete", delete_household_member_resource_detail_path(@client.id,@resource.id,@resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),  method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+         <% else %>
+              <%= link_to 'Back', resource_resource_details_path(@resource),class: "secondary button radius" %>
+              <%= link_to 'Edit', edit_resource_resource_detail_path(@resource,@resource_detail),class: "button radius" %>
+              <%= link_to 'Delete', resource_resource_detail_path(@resource,@resource_detail), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+         <% end %>
+
+
+
+  </section>
+</fieldset>

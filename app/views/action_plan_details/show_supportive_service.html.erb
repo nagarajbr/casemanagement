@@ -1,0 +1,21 @@
+<fieldset>
+  <section class="solidbody">
+   <legend><%= set_subheader("#{drop_down_value_description(@action_plan.action_plan_type)} for: #{client_full_name(@client)}") %></legend>
+   <%= render "parent_action_plan",arg_action_plan:@action_plan,arg_emp_goal:@employment_goal  %>
+     <%= render "parent_action_plan_detail", arg_object: @parent_action_plan_detail %>
+
+     <p><h6> Supportive Service information </h6></p>
+    <%= render 'show_partial',arg_object: @action_plan_detail,arg_outcome:@outcome,arg_schedule:@schedule %>
+
+    <%= link_to 'Back', application_detail_supportive_services_path(@action_plan,@action_plan_detail.reference_id), class: "secondary button radius" %>
+    <% if @action_plan_detail.activity_status != 6044 %>
+      <%= link_to 'Edit', edit_supportive_service_action_plan_detail_path(@action_plan,@action_plan_detail),class: "button radius" %>
+      <%= link_to 'Delete', action_plan_action_plan_detail_path(@action_plan,@action_plan_detail), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <% else %>
+      <% if @action_plan.action_plan_status != 6044 && @action_plan_detail.activity_status != 6044 %>
+        <%= link_to 'Reopen', reopen_action_plan_detail_path(@action_plan,@action_plan_detail), class: "button radius" %>
+      <% end %>
+    <% end %>
+
+  </section>
+</fieldset>

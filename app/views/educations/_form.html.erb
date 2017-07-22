@@ -1,0 +1,76 @@
+
+			<li class="required">
+			 	<%= f.label :school_type %>
+			 	<%= f.select :school_type, arg_school_type.collect { |p| ["#{p.short_description} ", p.id] }, { :include_blank => 'Select school type' },autofocus: true, id: "school_type" %>
+			</li>
+
+			<li>
+			 	<%= f.label :school_name %>
+			 	<%= select_tag "education[school_name]", grouped_options_for_select(arg_group_option, selected_key = arg_edu.school_name),{ :prompt => 'Select school name', id: "school_name"} %>
+			</li>
+
+			<p>
+				<%= link_to "Register the school when the client's school is not included in the above list.",new_school_from_client_management_path('CLIENT_MANAGEMENT'),id: "hyperlink" %>
+			</p>
+
+			<li>
+			 	<%= f.label :attendance_type %>
+			 	<%= f.select :attendance_type, CodetableItem.item_list(22,"Attendance Type").collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select attendance type' },title1: "Select attendance type", data: {tooltip1: '' }  %>
+			</li>
+
+			<li>
+			 	<%= f.label :school_address_1 %>
+			 	<%= f.text_field :school_address_1, maxlength: "30",title1: "Enter address of the school",data: {tooltip1: '' } %>
+			</li>
+
+			<li>
+			 	<%= f.label :school_address_2 %>
+			 	<%= f.text_field :school_address_2, maxlength: "30",title1: "Enter city, state and zip code of the school",data: {tooltip1: '' } %>
+			</li>
+
+            <li class="required">
+        	<%= f.label :effective_beg_date%>
+		      <div class = "row">
+		        <%= f.date_select :effective_beg_date,:discard_day => true,:order => [:month,:day, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, start_year: 1950 %>
+		      </div>
+		    </li>
+
+			<li>
+        	<%= f.label :effective_end_date%>
+		      <div class = "row">
+		        <%= f.date_select :effective_end_date,:discard_day => true,:order => [:month,:day, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, start_year: 1950 %>
+		      </div>
+		    </li>
+
+
+			<li>
+        	<%= f.label :expected_grad_date%>
+		      <div class = "row">
+		        <%= f.date_select :expected_grad_date,:discard_day => true,:order => [:month,:day, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, start_year: 1950 %>
+		      </div>
+		    </li>
+
+			<li>
+			 	<%= f.label :degree_obtained %>
+			 	<%= f.select :degree_obtained, CodetableItem.item_list(23,"Degree Obtained").collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select a degree in obtained ' },title1: "Select a degree in obtained", data: {tooltip1: '' }%>
+			</li>
+
+			<li class="required">
+			 	<%= f.label :high_grade_level %>
+			 	<%#= select_tag "education[school_name]", grouped_options_for_select(@grouped_options, selected_key = @education.school_name),{ :prompt => 'Select school name', id: "school_name"} %>
+			 	<%= select_tag "education[high_grade_level]", grouped_options_for_select(arg_high_grade,selected_key = arg_edu.high_grade_level),{ :prompt => 'Select grade', id: "high_grade_level"}  %>
+			 	<%#= f.select :high_grade_level, CodetableItem.item_list(24,"Highest Grade Completed").collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select highest grade level completed' },title1: "Select highest grade level completed", data: {tooltip1: '' } %>
+			</li>
+
+			<li>
+			 	<%= f.label :major_study %>
+				<%= f.text_field :major_study, alt: "major",title1: "Enter type of major completed", data: {tooltip1: '' }  %>
+			</li>
+
+			<li>
+			 	<%= f.label :effort %>
+				<%= f.number_field :effort,min: "1",onkeypress: "return isLimitedNaturalNumber(event,3)"%>
+
+			</li>
+
+			<%= render "notes/notes_field_new_edit", object_argument: arg_notes%>

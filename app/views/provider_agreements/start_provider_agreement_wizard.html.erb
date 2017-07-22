@@ -1,0 +1,43 @@
+<fieldset>
+     <section class="solidbody">
+<%= form_for(@provider_agreement,:url => process_provider_agreement_wizard_path, method: :post) do |f| %>
+    <legend><%= set_subheader("Agreement for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+    <% if  "#{@provider_agreement.current_step}_step" == "provider_agreement_details_first_step" %>
+             <h3>Step 1 of 3</h3>
+             <h5>Enter service information</h5>
+             <%= render "shared/common_error", object_argument: @provider_agreement %>
+    <% end %>
+    <% if  "#{@provider_agreement.current_step}_step" == "provider_agreement_county_second_step" %>
+            <h3>Step 2 of 3 </h3>
+               <h5>Select service area</h5>
+              <%= render "shared/common_error", object_argument: @provider_agreement %>
+    <% end %>
+
+    <% if  "#{@provider_agreement.current_step}_step" == "provider_agreement_review_last_step" %>
+            <h3>Step 3 of 3</h3>
+            <h5>Review and complete agreement</h5>
+    <% end %>
+
+    <ul>
+        <div class="row">
+         <% if  "#{@provider_agreement.current_step}_step" == "provider_agreement_details_first_step" ||  "#{@provider_agreement.current_step}_step" == "provider_agreement_county_second_step" %>
+             <div class="large-5 columns">
+                <%= render "#{@provider_agreement.current_step}_step", :arg_object => f %>
+              </div>
+         <% else %>
+              <div class="large-12 columns">
+                <%= render "#{@provider_agreement.current_step}_step", :arg_object => f %>
+              </div>
+         <% end %>
+       </div>
+
+    </ul>
+    <div>
+      <%= render "provider_agreement_buttons_next_back_save", :arg_object => f , :arg_instance =>@provider_agreement %>
+    </div>
+
+
+<% end %>
+ </section>
+ </fieldset>

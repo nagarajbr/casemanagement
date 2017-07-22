@@ -1,0 +1,55 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Payment history for: #{client_full_name(@client)}") %></legend>
+		<%if  @in_state_payment.present?%>
+
+
+            	<table>
+            	<caption style="text-align:inherit"> <b> Payment details</b><p></p></caption>
+            	  <thead>
+            	    <tr>
+                        <th> Service Program </th>
+                        <th> Payment Month </th>
+                        <!-- <th> Issue Date </th> -->
+                        <th>Amount</th>
+                        <!-- <th>Action Date</th>
+                        <th>Action Type </th>
+                        <th> Sanction</th> -->
+                        <th> Payment Type</th>
+                        <th> Work Participation Status</th>
+                        <!-- <th>Avaliable Date</th>
+                        <th>Recoup Amount</th> -->
+            			<th> Action </th>
+            		</tr>
+            	  </thead>
+            	    <tbody>
+            			<% @in_state_payment.each do |isp| %>
+            				<tr>
+                                <td> <%= ServiceProgram.get_category(isp.service_program_id) %></td>
+                                <td> <%= isp.payment_month %></td>
+                                <!-- <td> <%= isp.issue_date %></td> -->
+                                <td> <%= number_to_currency_br(isp.dollar_amount) %></td>
+                                <!-- <td> <%= isp.action_date %></td>
+                                <td> <%= isp.action_type %></td>
+                                <td> <%= isp.sanction %></td> -->
+                                <td> <%= drop_down_value_description(isp.payment_type) %></td>
+                                <td> <%= drop_down_value_description(isp.work_participation_status) %></td>
+
+                                <!-- <td> <%= isp.available_date %></td>
+                                <td> <%= isp.recoup_amount %></td> -->
+                                <td><%= link_to 'show',show_in_state_payments_path(isp.id),id: "hyperlink" %></td>
+            			 <% end %>
+            		</tbody>
+            	</table>
+
+	<%= paginate @in_state_payment %>
+
+    <%= link_to("Back", time_limits_path , class: "secondary button radius") %>
+    <%#= link_to("Add Payments",edit_in_state_payments_path, class: 'button radius') %>
+    <%else%>
+            <h5 class="subheader">No Payment history information found.  </h5>
+
+
+    <%end%>
+</section>
+</fieldset>

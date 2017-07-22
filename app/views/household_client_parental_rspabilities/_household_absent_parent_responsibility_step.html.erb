@@ -1,0 +1,11 @@
+    <% if @ap_responsibility_data.present? %>
+          <%= render "show_absent_parent_responsibility_data",arg_param:@ap_responsibility_data %>
+
+            <p></p>
+            <%= link_to 'Edit',edit_household_absent_parent_address_path(@ap_responsibility_data.id), class: "button radius" %>
+    <% else %>
+      <!-- record not found , so show New button. -->
+          <h5 class="subheader">No absent parent responsibility information found for absent parent: <%= "#{@absent_parent.get_full_name}"%>. Click New to add absent parent responsibility information.</h5>
+          <p></p>
+           <%= link_to 'New',new_absent_parent_responsibility_information_path(@absent_parent.id), class: "button radius"%>
+    <% end %>

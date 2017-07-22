@@ -1,0 +1,25 @@
+<!--
+Rule1) Client not found in the session - inform Client is not found in session - show Client Search Link.
+Rule 2) If No Address records are found - inform the user -and show New button , so that new records can be     created.
+Rule 3) If Address records are found for the client - show Mailing & Residential address records in a loop.
+-->
+<%#= render 'selected_household_partial' %>
+<p></p>
+
+<b><h4> <%= "Client: #{client_full_name(@client)}" if @household.id.blank? && @household_member.blank?%></h4></b>
+<p></p>
+
+<% if  @client.present? %>
+     <% if @addresses.present? %>
+
+          <%= render "addresses/show_address_partial" %>
+          <%= render "phones/show_partial",arg_primary:@primary_phone,arg_secondary: @secondary_phone,arg_other:@other_phone,arg_email:@client_email,arg_entity_type:@entity_type,arg_notes:@notes,arg_modified:@modified_by %>
+            <p></p>
+            <%= link_to 'Edit',edit_household_member_address_path(@client.id), class: "button radius" if @edit_address == true%>
+     <% else %>
+      <!-- record not found , so show New button. -->
+          <h5 class="subheader">No address information found. Click New to add address information.</h5>
+          <p></p>
+           <%= link_to 'New',new_household_member_address_path(@client.id), class: "button radius"%>
+     <% end %>
+<% end %>

@@ -1,0 +1,9 @@
+
+ 		<% if @application_members_with_race.present? %>
+ 			<%= render 'application_members',arg_object: @application_members_with_race , arg_object2:@show_race, arg_object3: @selected_application%>
+ 		<% else %>
+ 			<p>
+		    <h5 class="subheader">Race information is not available for any of the application members. Click New to enter race information.</h5>
+	        </p>
+ 		<% end %>
+ 		<p><%= link_to 'Add Race',new_application_member_race_path, class: "button radius"%></p>

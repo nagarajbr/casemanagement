@@ -1,0 +1,2 @@
+class ClientIncomesController < AttopAncestorController
+end

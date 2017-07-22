@@ -1,0 +1,22 @@
+<%= form_for(arg_model_object,:url => process_application_processing_wizard_path, method: :post) do |arg_appln| %>
+	<%= arg_appln.hidden_field :application_processing_current_step %>
+	<b><h4><%= @step_number %></h4><%#= "Select Service Program" %></b>
+
+    <% if arg_selected_application.present? %>
+       <%= render "shared/common_error", object_argument: arg_selected_application %><br>
+		<% end %>
+    <ul>
+    	<div class="row">
+    		<% if arg_div_class == 5 %>
+       	 		<div class= "large-5 columns">
+	 			<% else %>
+	 				<div class= "large-12 columns">
+	 			<% end %>
+            	<%= render "#{arg_partical}", :arg_object => arg_appln,arg_app_elig_rslts: arg_app_elig_rslts, arg_called_from: arg_called_from %>
+            </div>
+        </div>
+    </ul>
+    <div>
+  		<%= render "application_processing_buttons_next_back_save", :arg_object => arg_appln , :arg_instance =>arg_selected_application, arg_family_comp: arg_family_comp %>
+    </div>
+<% end %>

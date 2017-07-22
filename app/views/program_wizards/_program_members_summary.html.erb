@@ -1,0 +1,79 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- Member summary & and their details -->
+<% if arg_collection.present?%>
+	<b> Program Benefit Members Summary </b>
+	<table>
+		<tr>
+			<td><b> Run Month: </b></td>
+			<td> <%= format_db_date_MM_YYYY(arg_run_month) %></td>
+		</tr>
+	</table>
+
+
+		<table>
+			<thead>
+				<tr>
+					<th>Benefit Member</th>
+					<th>Total Earned Income</th>
+					<th>Total Unearned Income</th>
+					<th>Total Expenses</th>
+					<th>Total Resources</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% arg_collection.each do |arg_member|%>
+				<tr>
+					<% benefit_member_name = get_benefit_member_name(arg_member.run_id,arg_member.month_sequence,arg_member.member_sequence)%>
+					<td><%= "#{benefit_member_name}" %></td>
+					<td> <%= number_to_currency_br(arg_member.tot_earned_inc)%></td>
+					<td> <%= number_to_currency_br(arg_member.tot_unearned_inc)%></td>
+					<td> <%= number_to_currency_br(arg_member.tot_expenses)%></td>
+					<td> <%= number_to_currency_br(arg_member.tot_resources)%></td>
+				</tr>
+				<tr>
+					<td colspan="5"> <u>Program benefit member Details:</u></td>
+				</tr>
+				<tr>
+
+					<td colspan="4">
+					<% memebr_detail_collection = ProgramMemberDetail.get_program_member_detail_collection(arg_member.run_id,arg_member.month_sequence,arg_member.member_sequence) %>
+					<% if memebr_detail_collection.present? %>
+
+
+							<table>
+								<thead>
+									<tr>
+										<th>Benefit Member</th>
+										<th>Income Type</th>
+										<th>Source</th>
+										<th>Amount</th>
+										<th>Calc Method</th>
+									</tr>
+								</thead>
+								<tbody>
+									<% memebr_detail_collection.each do |arg_detail |%>
+										<tr>
+											<td><%= "#{benefit_member_name}" %></td>
+											<td><%= drop_down_value_description(arg_detail.item_type) %></td>
+											<td><%= arg_detail.item_source %></td>
+											<td><%= number_to_currency_br(arg_detail.dollar_amount) %></td>
+											<td><%= drop_down_value_description(arg_detail.calc_method_code) %></td>
+										</tr>
+									<% end %>
+								</tbody>
+							</table>
+					<% end %> <!-- end of memebr_detail_collection.present -->
+					</td>
+					</tr>
+				<% end %> <!-- end of arg_collection.each -->
+			</tbody>
+		</table>
+
+
+
+
+
+
+
+
+<% end %>

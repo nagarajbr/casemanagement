@@ -1,0 +1,34 @@
+<fieldset>
+  <section class="solidbody">
+
+<%= set_subheader("School Details") %>
+
+
+   <p>
+    <b> School Type: </b>
+    <%= drop_down_value_description(@school.school_type)%>
+  </p>
+
+  <p>
+    <b>School Name:  </b>
+    <%= @school.school_name %>
+  </p>
+
+
+
+  <p>
+    <b>Web Address: </b>
+    <%= @school.web_address %>
+  </p>
+  <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+    <%= link_to 'Back', schools_search_path,class: "secondary button radius" %>
+    <%# if validate_authorization(611) %>
+      <%= link_to 'Edit', edit_school_path(@school),class: "button radius"  %>
+    <%# end %>
+    <%# if validate_authorization(612) %>
+      <%= link_to 'Delete', delete_school_path(@school.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <%# end %>
+  </section>
+</fieldset>

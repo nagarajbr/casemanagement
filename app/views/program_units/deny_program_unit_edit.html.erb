@@ -1,0 +1,30 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- NOT USED
+<section class="solidbody">
+
+	<%#= form_for(@selected_program_unit, :url => deny_program_unit_update_path(@selected_program_unit.id), method: :put ) do |f| %>
+
+  <fieldset>
+    <legend><%#= set_subheader("Deny Program Unit of client: #{client_full_name(@client)}") %></legend>
+    <p>
+ 	<%#= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+ 	</p>
+	    <ul>
+	    	<div class="row">
+	          	<div class="large-4 columns">
+					<li>
+					  <%#= f.label :disposition_reason,"Denial Reason" %>
+					  <%#= f.select :disposition_reason, @program_unit_disposition_reasons.collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'Select Denial Reason' } %>
+					</li>
+		 	 	</div>
+		     </div>
+		</ul>
+	<p>
+	      <%#= link_to "Cancel", index_eligibility_determination_runs_path(@selected_program_unit.id) ,class: 'button secondary'%>
+	      <%#= f.submit "Save ",class: 'button radius'%>
+	</p>
+	  </fieldset>
+<%# end %>
+</section>
+
+-->

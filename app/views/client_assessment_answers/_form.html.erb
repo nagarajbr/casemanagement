@@ -1,0 +1,8 @@
+<body onload = "assessment_scripts()">
+	<input type="hidden" name="gender" id="client_gender" value = "<%= get_client_gender(session[:CLIENT_ID]) %>" >
+	<% arg_assessment_que.each do |arg_qstn|%>
+		<li>
+			<%= display_assessment_question_control(arg_qstn.id,arg_assessment_id).html_safe %>
+		</li>
+	<% end %>
+</body>

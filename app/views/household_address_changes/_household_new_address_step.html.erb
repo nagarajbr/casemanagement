@@ -1,0 +1,19 @@
+<p>
+   <fieldset style="width: 40%" id = "test_fieldset">
+        <legend style=" width: auto " class="legend_group">
+          <b>Household Physical Address</b><br>
+        </legend>
+          <%= " C/O #{arg_addr.in_care_of}" if arg_addr.in_care_of?%><br>
+          <%= arg_addr.address_line1 %><br>
+          <%= arg_addr.address_line2 if arg_addr.address_line2?%><br>
+          <%= " #{(arg_addr.city)}, #{drop_down_value_description(arg_addr.state)}"%>
+        <% if arg_addr.zip_suffix.present? %>
+          <%= "#{arg_addr.zip}-#{arg_addr.zip_suffix}"%>
+        <%else%>
+          <%= "#{arg_addr.zip}"%>
+        <% end %>
+   </fieldset>
+</p>
+<p>
+   <%= link_to "Edit",edit_household_address_path(arg_addr.id,arg_household.id), class: 'button radius' %>
+</p>

@@ -1,0 +1,15 @@
+<table>
+	<caption class="fontc"> Resource details <p></p></caption>
+	<thead>
+	    <tr>
+			<th> Resource Valued Date </th>
+			<th> Current Resource Value </th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>  <%= format_db_date arg_resource_detail.resource_valued_date %></td>
+			<td>  <%= number_to_currency_br(arg_resource_detail.resource_value) %></td>
+		</tr>
+	</tbody>
+</table>

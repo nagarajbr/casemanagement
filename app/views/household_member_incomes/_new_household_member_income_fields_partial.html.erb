@@ -1,0 +1,63 @@
+
+
+ <body onload = "js_salary_income_type_show_employment_div();">
+            <li class="required">
+              <%= f.label :incometype %>
+              <%= f.select :incometype, arg_earned_income_types.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'select income type' }, autofocus: true,:onchange => 'js_salary_income_type_show_employment_div();'  %>
+            </li>
+
+
+
+            <div id = "other_income_fields" >
+                    <li >
+                        <fieldset class="radio">
+                        <legend class="radiolegend">Verified</legend>
+                          <div class="button-group">
+                            <label class="radio-button"><%= f.radio_button :verified, "1"%>Yes</label>
+                            <label class="radio-button"><%= f.radio_button :verified, "0"%>No</label>
+                          </div>
+                      </fieldset>
+                  </li>
+
+                 <li class="required">
+                     <%= f.label :frequency %>
+                     <%= f.select :frequency, CodetableItem.item_list(27,"Frequency").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'select frequency type' } %>
+                 </li>
+
+                 <li class="required">
+                  <%= f.label :effective_beg_date %>
+                  <%= f.date_field :effective_beg_date, alt: "effective begin date",title1: "Select an effective begin date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)"  %>
+                 </li>
+
+                 <li>
+                  <%= f.label :effective_end_date %>
+                  <%= f.date_field :effective_end_date, alt: "effective end date",title1: "Select an effective end date", data: {tooltip1: '' }, onkeyup:"validate_date_format(event)" %>
+                 </li>
+
+
+                     <li >
+                      <fieldset class="radio">
+                          <legend class="radiolegend">Recalculate Indicator</legend>
+                          <div class="button-group">
+                          <label class="radio-button"><%= f.radio_button :recal_ind, "Y"%>Yes</label>
+                          <label class="radio-button"><%= f.radio_button :recal_ind, "N"%>No</label>
+                        </div>
+                      </fieldset>
+                  </li>
+
+                   <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+               </div>
+
+              <div id = "income_type_salary_employment_navigate" >
+
+
+                     <h5 class="subheader">You have selected one of the employment income type,proceed to below link to add employment details, it will populate income data for that employment.</h5>
+                    <p></p>
+                    <% if  @menu == 'CLIENT'%>
+                        <%= link_to("Proceed to Employment", new_employment_path('CLIENT') , id: "hyperlink") %>
+                    <%else%>
+                        <%= link_to("Proceed to Employment", new_household_member_employment_path(arg_client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , id: "hyperlink") %>
+                    <%end%>
+
+              </div>
+ </body>

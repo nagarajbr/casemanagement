@@ -1,0 +1,32 @@
+
+
+  <section class="solidbody">
+  <fieldset>
+  	<%= form_for(@service_authorization_line_item, :url => non_transport_service_payment_record_create_path(@provider_service_authorization.id), method: :post ) do |f| %>
+
+  	<legend> <%= set_subheader("Add Payment record for Provider:  #{provider_name(@provider)}") %> </legend><br>
+  		<%= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+			<P></P>
+  	 <%= render "shared/common_error", object_argument: @service_authorization_line_item %><br>
+  	 <br>
+    <ul>
+     <div class="row">
+          <div class="large-4 columns">
+
+
+			<%= render 'common_edit_non_transportation_service_attributes',f:f%>
+
+
+	 	  </div>
+
+	     </div>
+	   </ul>
+	    <p>
+	      <%= link_to "Cancel", service_authorization_line_items_index_path(@provider_service_authorization.id) ,class: 'button secondary'%>
+	      <%= f.submit "Save",class: 'button radius'%>
+	    </p>
+
+	<% end %>
+
+	 </fieldset>
+	</section>

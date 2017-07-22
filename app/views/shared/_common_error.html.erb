@@ -1,0 +1,17 @@
+
+
+<% if object_argument.present? && object_argument.errors.any? %>
+    <div id="error_explanation">
+
+        <%if object_argument.errors.count == 1%>
+          <h6 class="fi-alert subheader" id="alert-text-center">Please correct the following error</h6>
+        <%else%>
+          <h6 class="fi-alert subheader" id="alert-text-center">Please correct the following <%= pluralize(object_argument.errors.count, "error") %> </h6>
+        <%end%>
+        <ul>
+          <% object_argument.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>

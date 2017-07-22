@@ -1,0 +1,57 @@
+<fieldset>
+<section class="solidbody">
+	<% if @selected_program_unit.present? %>
+			<legend><%= set_subheader("Actions on program unit for client: #{client_full_name(@client)}") %></legend>
+		 	<p>
+				<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+			</p>
+		<p>
+			 		<b> Eligibility Determinations</b>
+			 		<table>
+					    <thead>
+						    <tr>
+								<th> Run ID</th>
+								<th> Run Month </th>
+								<th> Run DateTime</th>
+								<th> Eligible</th>
+								<th> Submit Date </th>
+								<th> Retain </th>
+
+							</tr>
+					 	</thead>
+						<tbody>
+								<% @program_wizards.each do |arg_ed_run| %>
+									<% program_month_summary_collection = ProgramMonthSummary.get_program_month_summary_collection(arg_ed_run.run_id,arg_ed_run.month_sequence)%>
+									<tr>
+										<td>  <%= arg_ed_run.run_id %></td>
+										<td>  <%= format_db_date_MM_YYYY(arg_ed_run.run_month) %></td>
+										<td><%= format_date(arg_ed_run.created_at)%></td>
+										<% if program_month_summary_collection.present? %>
+												<td id = <%= get_flag_description(program_month_summary_collection.first.budget_eligible_ind) == "No" ? "col-result-fail" : "col-result-pass" %> > <%=  get_flag_description(program_month_summary_collection.first.budget_eligible_ind) %>
+												</td>
+										<% end %>
+
+										<td><%= format_date(arg_ed_run.submit_date)%></td>
+										<td> <%= get_flag_description(arg_ed_run.retain_ind) %></td>
+									</tr>
+								<% end %>
+						</tbody>
+					</table>
+		</p>
+
+			<% can_modify_action = ProgramUnit.can_modify_pgu_action(@selected_program_unit.id) %>
+			<% if can_modify_action == true  %>
+				<% unless (@selected_program_unit.disposition_status.present? and @selected_program_unit.disposition_status == 6041)%>
+					<% if can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id) %>
+						<%= link_to 'Action',program_unit_action_wizard_initialize_path(@selected_program_unit.id),class: "button radius" %>
+					<% else %>
+						<%= link_to 'Action',"#",class: "disabled button" %>
+               		 	<h6 class="subheader"><b>Action</b> button is disabled because, you are not the eligibility worker of this program unit. Only eligibility worker of this program unit can perform actions on this program unit.</h6>
+          			<% end %>
+				<% end %>
+			<% end %>
+
+
+	 <% end %>
+</section>
+</fieldset>

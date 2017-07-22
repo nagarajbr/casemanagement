@@ -1,0 +1,53 @@
+<fieldset>
+<section class="solidbody">
+  <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+      <legend> <%= set_subheader("#{drop_down_value_description(@income.incometype)} income adjustment details for household member: #{client_full_name(@client)}") %> </legend>
+    <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+  <%else%>
+      <legend> <%= set_subheader("#{drop_down_value_description(@income.incometype)} income adjustment details for: #{client_full_name(@client)}") %> </legend>
+  <% end %>
+
+  <%= render "/income_details/parent_income",arg_income: @income %>
+  <%= render "parent_income_detail", arg_income_detail:@income_detail %>
+ <% if @adjust_reason.adjusted_reason.present? %>
+    <%= set_subheader("Adjustment details") %>
+ <% end %>
+
+
+   <p>
+    <b>Adjusted Amount: </b>
+    <%= number_to_currency_br(@adjust_reason.adjusted_amount) %>
+  </p>
+
+  <p>
+    <b>Adjusted Reason: </b>
+    <% if @adjust_reason.adjusted_reason.present? %>
+        <td>  <%= drop_down_value_description(@adjust_reason.adjusted_reason) %></td>
+      <% else %>
+        <td></td>
+      <% end %>
+  </p>
+   <p>
+  <b>Worker: </b>
+  <%= get_user_name(@adjust_reason.updated_by)%>
+</p>
+
+ <% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+      <%= link_to("Back", household_member_unearned_income_detail_adjust_reasons_index_path(@client.id,@income_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'secondary button radius') %>
+
+    <%= link_to 'Edit', edit_household_member_unearned_income_detail_adjust_reason_path(@client.id,@income_detail.id,@adjust_reason.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+
+    <%= link_to 'Delete', delete_household_member_unearned_income_detail_adjust_reason_path(@client.id,@income_detail.id,@adjust_reason.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+ <% else %>
+    <%= link_to("Back", unearned_income_detail_income_detail_adjust_reasons_path(@menu,@income_detail.id) , class: 'secondary button radius') %>
+
+    <%= link_to 'Edit', edit_unearned_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id,@adjust_reason.id),class: "button radius" %>
+
+    <%= link_to 'Delete', delete_unearned_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id,@adjust_reason.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+
+ <% end %>
+
+
+
+</section>
+</fieldset>

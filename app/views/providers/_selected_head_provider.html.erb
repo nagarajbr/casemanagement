@@ -1,0 +1,25 @@
+
+	<% if @head_provider.present? %>
+		<p>
+			<b> Main Provider information </b>
+		<table>
+		  <thead>
+		    <tr>
+				<th> Provider Name </th>
+				<th> Provider Type </th>
+				<th> Tax ID/ SSN </th>
+
+			</tr>
+		  </thead>
+		    <tbody>
+
+					<tr>
+						<td>  <%= @head_provider.provider_name %></td>
+						<td>  <%= drop_down_value_description(@head_provider.provider_type) %></td>
+						<td>  <%= @head_provider.tax_id_ssn %></td>
+
+					</tr>
+			</tbody>
+		</table>
+		</p>
+	<% end %>

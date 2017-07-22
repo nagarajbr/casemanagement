@@ -1,0 +1,28 @@
+<fieldset>
+	<section class="solidbody">
+		<legend> <%= set_subheader("Enter #{(drop_down_value_description(@action_plan_detail.entity_type)).camelize(:lower)} outcome information for: #{client_full_name(@client)}") %> </legend>
+		<%= form_for(@outcome,:url => create_apd_outcome_path(@action_plan, @action_plan_detail), method: :post) do |f| %>
+			<%= render "selected_action_plan_detail",arg_action_plan_detail:@action_plan_detail %>
+			 <%= render "shared/common_error", object_argument: @outcome %><br>
+   			 <ul>
+				<div class="row">
+	          		<div class="large-5 columns">
+	          			<li class="required">
+			    	        <%= f.label :outcome_code %>
+			    	        <%= f.select :outcome_code, CodetableItem.item_list(57,"Outcome Code").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select outcome code' } %>
+			    	    </li>
+
+			    	    <li>
+			    	        <%= f.label :notes %>
+			    	        <%= f.text_area :notes, cols: 40, rows: 7 %>
+			    	    </li>
+					</div>
+				</div>
+			</ul>
+			 <p>
+			 	<%= link_to 'Cancel', action_plan_action_plan_detail_path(@action_plan, @action_plan_detail),class: "secondary button radius"%>
+			    <%= f.submit "Save", class: 'button radius' %>
+		    </p>
+		<% end %>
+	</section>
+</fieldset>

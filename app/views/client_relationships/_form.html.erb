@@ -1,0 +1,39 @@
+<ul>
+
+			<table>
+				<caption style="text-align:inherit"> <%= set_subheader("Enter relationship information for: #{client_full_name(arg_client)}") %> </caption><br>
+				<thead>
+				<tr>
+				<th >Client </th>
+				<th ><%= arg_object.label :relationship_type %></th>
+				<th > Related Client</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>
+					<% if arg_target_client.present?%>
+					<%= label_tag "#{client_full_name(arg_target_client)} is"  %>
+					<%  else %>
+					<%= link_to 'Search Client', new_modal_client_search_path,id: "hyperlink" %>
+					<% end %>
+				</td>
+
+
+				<td>
+					<%= arg_object.select :relationship_type, CodetableItem.item_list(125,"Budget Relationship List").collect { |p| ["#{p.short_description} ", p.id] },prompt: "Select a relationship" %>
+				</td>
+				<td>
+					<%=" of #{client_full_name(arg_client)}"%>
+				</td>
+
+
+
+			</tr>
+			</table>
+
+
+	<%= arg_object.hidden_field :from_client_id %>
+	<%= arg_object.hidden_field :to_client_id %>
+</ul>
+<%= link_to 'Cancel', client_relationships_path,class: "secondary button radius" %>
+<%= arg_object.submit "Save",class: 'button radius'%>

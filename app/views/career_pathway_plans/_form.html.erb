@@ -1,0 +1,35 @@
+	<li class="required">
+	    <%= arg_object.label :update_communication_type %>
+	    <%= arg_object.select :update_communication_type, arg_communication_type.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Update Method' } %>
+
+	</li>
+
+	<p>
+	    <b> Case Worker:</b>
+	    <%= "#{current_user.name}"  %>
+	</p>
+	<li class="required">
+	    <%= arg_object.label :case_worker_signed_date %>
+	    <%= arg_object.date_field :case_worker_signed_date, onkeyup:"validate_date_format(event)" %>
+    </li>
+
+
+
+	<p>
+	    <b> Client Signature:</b>
+	    <%= "#{client_full_name(arg_client)}"  %>
+	</p>
+
+
+
+	<li class="required">
+	    <%= arg_object.label :client_signed_date %>
+	    <%= arg_object.date_field :client_signed_date, onkeyup:"validate_date_format(event)" %>
+    </li>
+
+<!-- do not comment this - if cpp is in edit mode this hidden field will have cpp_id value in it-->
+    <%= arg_object.hidden_field :core_hours %>
+    <%= arg_object.hidden_field :non_core_hours %>
+    <%= arg_object.hidden_field :id %>
+
+

@@ -1,0 +1,22 @@
+<ul>
+  <li class="required">
+  <%= arg_object.label :client_id %>
+  <%= arg_object.select :client_id,arg_pgu_member_collection.collect{|p| ["#{get_client_full_name(p.client_id)}",p.client_id]},{ :include_blank => 'Select a client' }%>
+  </li>
+
+  <li class="required">
+  <%= arg_object.label :representative_type %>
+  <%= arg_object.select :representative_type, CodetableItem.item_list(78,"Type").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select a type' }%>
+  </li>
+<!--
+  <li class="required">
+    <%#= arg_object.label :start_date %>
+    <%#= arg_object.date_field :start_date, onkeyup:"validate_date_format(event)" %>
+  </li>
+
+  <li>
+    <%#= arg_object.label :end_date%>
+    <%#= arg_object.date_field :end_date, onkeyup:"validate_date_format(event)"%>
+  </li> -->
+
+</ul>

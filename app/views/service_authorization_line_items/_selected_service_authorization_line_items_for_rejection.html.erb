@@ -1,0 +1,22 @@
+<b> Selected Payment Line item(s) for Rejection</b>
+		<p></p>
+		<table>
+			  <thead>
+			    <tr>
+			    	<th> Payment Line Item ID </th>
+					<th> Service Date </th>
+					<th> Actual Cost</th>
+					<th> Provider submitted Invoice</th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<% arg_object.each do |arg_line_item| %>
+						<tr>
+							<td>  <%= arg_line_item.id %></td>
+							<td>  <%= format_db_date(arg_line_item.service_date)%></td>
+							<td>  <%= number_to_currency_br(arg_line_item.actual_cost) %></td>
+							<td>  <%= arg_line_item.provider_invoice %></td>
+						</tr>
+					<%end%>
+				</tbody>
+			</table>

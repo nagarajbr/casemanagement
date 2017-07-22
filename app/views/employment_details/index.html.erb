@@ -1,0 +1,60 @@
+<fieldset>
+	 <section class="solidbody">
+	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+	 	<p>
+			<%= (render 'households/selected_household_partial',arg_household: @household)if @household.present? %>
+		 </p>
+		  <p><legend><%=set_subheader("Employment details for client:#{client_full_name(@client)} for employer: #{@employer_name}") %></legend></p>
+	<% else %>
+		<% if @client_assessment.present? %>
+			<legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+			<p>
+				<%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal:  @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+			</p>
+		<% else %>
+			<legend><%=set_subheader("Employment details for client:#{client_full_name(@client)} for employer: #{@employer_name}") %></legend>
+		<% end %>
+	<% end %>
+
+	 	<%= render 'selected_employer',arg_employer_name:@employer_name,arg_employment:@employment  %>
+	 	<table>
+	 		<caption style="text-align:inherit"><p><b><%= "Employment details" %></b></p></caption>
+	 		<thead>
+	 			<tr>
+	 				<th> Position Type </th>
+	 				<th> Status</th>
+	 				<th> Begin Date </th>
+	 				<th> End Date </th>
+	 				<th> Action</th>
+	 			</tr>
+	 		</thead>
+	 		<tbody>
+	 			<% @employment_details.each do |arg_detail| %>
+		 			<tr>
+		 				<td>  <%= arg_detail.position_type_desc %></td>
+		 				<td>  <%= drop_down_value_description(arg_detail.current_status) %></td>
+		 				<td>  <%=  format_db_date(arg_detail.effective_begin_date) %></td>
+		 				<td>  <%=  format_db_date(arg_detail.effective_end_date) %></td>
+		 				<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+		 					<td> <%= link_to "Show", show_household_member_employment_detail_path(@client.id,@employment.id,arg_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %> </td>
+		 				<% else %>
+		 					<td> <%= link_to "Show", employment_employment_detail_path(@menu,@employment.id,arg_detail.id),id: "hyperlink" %> </td>
+		 				<% end %>
+		 			</tr>
+	 			<% end %>
+	 		</tbody>
+	 	</table>
+	 	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+	 		<%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+	 		<%= link_to("Add Employment Detail", new_household_member_employment_detail_path(@client.id,@employment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: 'button radius') %>
+	 		<%= link_to("Next", start_household_member_registration_wizard_path, class: 'button radius') if EmploymentDetail.employment_details_found_for_the_given_employment?(@employment.id)%>
+	 	<% else %>
+	 		<%= link_to 'Back', employments_path(@menu),class: " secondary button radius" %>
+	 		<%= link_to("New", new_employment_employment_detail_path(@menu,@employment.id), class: 'button radius') %>
+	 	<% end %>
+
+
+
+
+	</section>
+</fieldset>

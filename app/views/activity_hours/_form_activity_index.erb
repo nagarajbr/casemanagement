@@ -1,0 +1,23 @@
+
+<fieldset>
+  <table>
+   <%= "Activity Type: #{drop_down_value_description(action_plan_detail.activity_type)}" %> <br> <br>
+    <thead>
+      <tr>
+      <th width="5%"> Week Ending </th>
+      <th width="5%"> Work Participation Status </th>
+      <th width="5%"> Assigned Hours </th>
+      <th width="4%"> Completed Hours </th>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>  <%= format_db_date week_info.week_ending_date %></td>
+        <td>  <%= work_participation_for_client.present? ? drop_down_value_description(work_participation_for_client) : "" %> </td>
+        <td>  <%= number_field_tag 'assigned_hours',week_info.assigned_hours_for_week, readonly: true %> </td>
+        <td>  <%= number_field_tag 'completed_hours',week_info.completed_hours_for_week,min: "0", readonly: completed_hours_read_only_flag %> </td>
+      </tr>
+    </tbody>
+  </table>
+  <%#= paginate activity_info %>
+</fieldset>

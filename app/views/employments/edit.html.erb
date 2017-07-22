@@ -1,0 +1,54 @@
+<fieldset>
+	<section class="solidbody">
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+			<p>
+				<%= (render 'households/selected_household_partial',arg_household: @household) %>
+			</p>
+			<legend><%= set_subheader("Edit employment at #{@employment.employer_name} information for: #{client_full_name(@client)}")  %> </legend>
+			<%= form_for(@employment, :url => update_household_member_employment_path(@client.id,@employment.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :put) do |f| %>
+				 <%= render "shared/common_error", object_argument: @employment %><br>
+				  <ul>
+			     	<div class="row">
+			          <div class="large-5 columns">
+			               <%= render 'form',f: f,arg_employer:@employer_list,arg_employment_income:@employment_income_types,arg_notes: @notes,arg_menu: @menu %>
+				 	  </div>
+				    </div>
+				 </ul>
+				 <p>
+					<%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+					<%= f.submit "Save", class: 'button radius' %>
+				 </p>
+			<% end %>
+
+		<% else%>
+			<%= form_for(@employment, :url => update_employment_path(@menu,@employment.id), method: :put) do |f| %>
+				<% if @client_assessment.present? %>
+					<legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+					<p>
+						<%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal:  @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+					</p>
+					<h6><%= ("Edit employment at #{@employment.employer_name} information for: #{client_full_name(@client)}")  %> </h6>
+				<% else %>
+					<legend><%= set_subheader("Edit employment at #{@employment.employer_name} information for: #{client_full_name(@client)}")  %> </legend>
+				<% end %>
+				 <%= render "shared/common_error", object_argument: @employment %><br>
+				  <ul>
+			     	<div class="row">
+			          <div class="large-5 columns">
+			               <%= render 'form',f: f,arg_employer:@employer_list,arg_employment_income:@employment_income_types,arg_notes: @notes,arg_menu: @menu %>
+				 	  </div>
+				    </div>
+				</ul>
+			    <p>
+			 		<%= link_to 'Cancel', employments_path(@menu),class: "secondary button radius" %>
+				    <%= f.submit "Save", class: 'button radius' %>
+			    </p>
+
+			<% end %>
+
+		<% end %>
+
+
+
+	 </section>
+</fieldset>

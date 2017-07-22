@@ -1,0 +1,23 @@
+	<table>
+		<caption style="text-align:inherit"><b>Selected Household Member</b><p></p> 	</caption>
+	  <thead>
+	    <tr>
+
+
+			<th> Household Member</th>
+			<th> Household Name</th>
+			<th> Household ID </th>
+
+		</tr>
+	  </thead>
+	    <tbody>
+				<tr>
+					<td>  <%= get_household_member_name(arg_household_member.id) %>  </td>
+
+					<td>  <%= arg_household_object.name %>  </td>
+					<td>  <%= arg_household_object.id %></td>
+
+
+				</tr>
+		</tbody>
+	</table>

@@ -1,0 +1,70 @@
+
+     <fieldset>
+      <section class="solidbody">
+        <legend></legend>
+  <% if session[:CLIENT_ID].present? %>
+   <% if @supplement_payment.present? %>
+       <caption><%= set_subheader("Issued payment details for client: #{@client.first_name}, #{@client.last_name}") %></caption>
+      <p>
+        <b> Payment Type: </b>
+        <%= drop_down_value_description(@supplement_payment.payment_type) %>
+      </p>
+
+      <p>
+        <b> Payment Month: </b>
+        <%= format_db_date @supplement_payment.payment_month %>
+      </p>
+
+      <p>
+        <b> Payment Amount: </b>
+        <%=  number_to_currency_br(@supplement_payment.payment_amount) %>
+      </p>
+
+      <p>
+        <b> Payment Status: </b>
+        <%=  drop_down_value_description(@supplement_payment.payment_status) %>
+      </p>
+      <p>
+        <b> Payment Creation: </b>
+        <%=  @supplement_payment.created_at.to_date %>
+      </p>
+        <b> Reason: </b>
+        <%=  @supplement_payment.reason %>
+      </p>
+      <p>
+        <b> Authorization Status: </b>
+        <%= drop_down_value_description(@supplement_payment.status) %>
+      </p>
+      <p>
+
+
+      <br>
+      <%= link_to 'Back', supl_retro_bns_payments_path,class: "secondary button radius" %>
+      <% if @supplement_payment.payment_status != 6193  && validate_authorization(629)%>
+        <%= link_to 'Edit', edit_supl_retro_bns_payment_path(@supplement_payment.id),class: "button radius" %>
+      <% end %>
+      <!-- <%#= link_to 'Delete', supl_retro_bns_payment_path(@supplement_payment.id),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%> -->
+   <%else%>
+
+
+               <legend><%= set_subheader("Supplement Payments for client: #{@client.first_name}, #{@client.last_name}") %></legend>
+
+              <h5 class="subheader"><%= "No Payment information to show." %></h5>
+              <p></p>
+
+              <%= link_to 'Back', supl_retro_bns_payments_path,class: "secondary button radius" %>
+   <%end%>
+
+<%else%>
+
+
+       <legend><%= set_subheader("Supplement Payments for client: #{@client.first_name}, #{@client.last_name}") %></legend><br>
+
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+
+<%end%>
+  </section>
+    </fieldset>
+

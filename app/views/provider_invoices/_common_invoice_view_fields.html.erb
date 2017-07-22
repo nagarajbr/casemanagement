@@ -1,0 +1,21 @@
+<p>
+     <b>Warrant Number:  </b>
+     <%= arg_provider_invoice.id %>
+</p>
+
+<p>
+      <b>Date:  </b>
+     <%= format_db_date(arg_provider_invoice.invoice_date) %>
+</p>
+
+<p>
+    <b> Status:</b>
+    <%= drop_down_value_description(arg_provider_invoice.invoice_status) if arg_provider_invoice.invoice_status.present? %>
+</p>
+
+
+<p>
+    <b>Amount:</b>
+	<%= number_to_currency_br(arg_provider_invoice.invoice_amount)  %>
+</p>
+

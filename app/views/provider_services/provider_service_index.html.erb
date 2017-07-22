@@ -1,0 +1,52 @@
+<fieldset>
+<section class="solidbody">
+<% if session[:PROVIDER_ID].present? %>
+	<legend><%= set_subheader("Services offered by provider: #{provider_name(@provider)}" ) %></legend>
+	<%= render "providers/selected_provider" %>
+	<% if @providerservices.present? %>
+		<table>
+		<caption style="text-align:inherit"><b>Offered Services</b><p></p></caption>
+		  <thead>
+		    <tr>
+		    	<th> Service </th>
+				<th> Start Date </th>
+				<th> End Date </th>
+				<th>Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @providerservices.each do |pl| %>
+					<tr>
+						<td>  <%= drop_down_value_long_description(pl.service_type) %></td>
+						<td>  <%=  format_db_date pl.start_date %></td>
+						<td>  <%=  format_db_date pl.end_date %></td>
+						<td>
+						 <%= link_to "Show",show_provider_service_path(pl),id: "hyperlink"%> |
+						 <%= link_to "Areas Serviced",provider_service_areas_path(pl),id: "hyperlink"%>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+		<% if validate_authorization(553) %>
+			<%= link_to("New", new_provider_service_path , class: 'button radius')%>
+		<% end %>
+	<%else%>
+		<% if validate_authorization(553) %>
+		    <p>
+		    <h5 class="subheader">No services offered. Click New to enter services offered.</h5>
+	        </p>
+	        <%= link_to 'New',new_provider_service_path, class: "button radius"%>
+        <% else %>
+        	<h5 class="subheader">No services to show.</h5>
+        <% end %>
+	<%end%>
+<%else%>
+		<p>
+	    <h5 class="subheader">Provider is not selected, Select provider by clicking Search Provider button.</h5>
+        </p>
+        <%= link_to 'Search Provider',new_provider_search_path , class: "button radius"%>
+<%end%>
+</section>
+</fieldset>

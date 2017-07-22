@@ -1,0 +1,84 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Unearned income information for: #{client_full_name(@client)}") %></legend>
+
+	<% if session[:CLIENT_ID].present? %>
+	<% if @incomes.present? %>
+		<table>
+		<caption style="text-align:inherit"> <p><b><%=("#{pluralize_without_count(@incomes.count,"Income","")}") %></b></p></caption>
+		  <thead>
+		    <tr>
+
+				<th> Type of Income </th>
+				<th> Frequency </th>
+				<th width="10%"> Begin Date </th>
+				<th width="10%"> End Date </th>
+				<th width="10%"> Recalculate Indicator </th>
+				<th width="30%">Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @incomes.each do |income| %>
+					<tr>
+						<td>  <%= drop_down_value_description(income.incometype) %></td>
+						<td>  <%= drop_down_value_description(income.frequency) %></td>
+						<td>  <%=  format_db_date income.effective_beg_date %></td>
+						<td>  <%=  format_db_date income.effective_end_date %></td>
+						<td>  <%= get_flag_description(income.recal_ind) %> </td>
+
+						<td>
+
+						 <%= link_to "Show",unearned_income_path(@menu,income.id),id: "hyperlink"  %> |
+						 <%= link_to("Income details", unearned_income_income_details_path(@menu,income.id),id: "hyperlink") %>
+						  <%# if validate_authorization(675) %>|
+							 <%= link_to("Share", new_client_share_search_path("income",income.id),id: "hyperlink") %>
+						 <%# end %>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+
+			<%= paginate @incomes %>
+	      <%# if validate_authorization(433) %>
+			   <%= link_to("New", new_unearned_income_path(@menu) , class: 'button radius')%>
+			   <% if @client_assessment.present? %>
+						 <%if !(@client_assessment.first_step?)%>
+							 <%= link_to "Previous", process_previous_step_path,class: 'button' %>
+						 <%end%>
+						 <%if !(@client_assessment.last_step?)%>
+							<%= link_to "Next",process_next_step_path,class: 'button' %>
+						<%end%>
+						<%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+				<% end %>
+		  <%# end %>
+
+	<%else%>
+		<%# if validate_authorization(433) %>
+			<p>
+		    <h5 class="subheader">No unearned income information found. Click New to enter income information.</h5>
+	        </p>
+	        <%= link_to 'New',new_unearned_income_path(@menu), class: "button radius"%>
+        <%# else %>
+        	<!-- <h5 class="subheader">No income information to show.</h5> -->
+        <%# end %>
+	        <% if @client_assessment.present? %>
+					 <%if !(@client_assessment.first_step?)%>
+						 <%= link_to "Previous", process_previous_step_path,class: 'button' %>
+					 <%end%>
+					 <%if !(@client_assessment.last_step?)%>
+						<%= link_to "Next",process_next_step_path,class: 'button' %>
+					<%end%>
+					<%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+			<% end %>
+
+	<%end%>
+<%else%>
+	    <p>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        </p>
+        <%= render "shared/search_client_button" %>
+<%end%>
+</section>
+</fieldset>

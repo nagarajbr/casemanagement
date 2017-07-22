@@ -1,0 +1,27 @@
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Edit contact information for provider:  #{@provider.provider_name}" ) %></legend>
+	<%= render "providers/selected_provider" %>
+	<%= form_tag update_provider_contact_path, method: :put do %>
+			<% if session[:PROVIDER_ID].present? %>
+		    	<%= render "shared/common_error", object_argument: @phones_error_messages %>
+		    	<ul>
+		        	<div class="row">
+			        	<div class="large-4 columns">
+			    			<%= render '/phones/form',arg_primary:@primary_phone,arg_secondary: @secondary_phone,arg_other:@other_phone,arg_email:@email,arg_entity_type:@entity_type,arg_notes:@notes  %>
+			  			</div>
+		       		</div>
+		    	</ul>
+
+			    <p>
+			      <%= link_to "Cancel", show_provider_contact_path ,class: 'button secondary' %>
+			      <%= submit_tag "Save", class: "button radius" %>
+			    </p>
+		    <% else %>
+			    <h5 class="subheader">Provider is not selected, Select a provider by clicking Search button.</h5>
+			    <p></p>
+			    <%= link_to 'Search',provider_new_search_path, class: "button radius" %>
+		    <% end %>
+		<% end %>
+	</section>
+</fieldset>

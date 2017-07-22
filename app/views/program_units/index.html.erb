@@ -1,0 +1,71 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Program units for client: #{client_full_name(@client)}") %></legend>
+	<% if session[:CLIENT_ID].present? %>
+	<% if @client_program_units.present? %>
+
+			<table>
+				<caption style="text-align:inherit"> <b> Program Units <b><p></p><caption>
+			  <thead>
+			    <tr>
+ 					<th> Program Unit ID </th>
+					<th> Service Program </th>
+					<th> Case Type </th>
+					<th> Primary Contact </th>
+					<th> Current Participation Status </th>
+					<th> Disposition </th>
+					<th> Disposition Date</th>
+					<th> Processing Office </th>
+					<th> Eligibility Determination Worker</th>
+					<th> Case Manager</th>
+					<th> Action</th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @client_program_units.each do |arg_pgu| %>
+
+						<tr>
+							<td> <%=arg_pgu.id%></td>
+							<td>  <%= get_service_program_name(arg_pgu.service_program_id)%></td>
+							<td><%= drop_down_value_description(arg_pgu.case_type) if arg_pgu.case_type.present?%></td>
+							<td> <%= get_primary_beneficiary_of_program_unit(arg_pgu.id)%></td>
+							<td>  <%=  ProgramUnit.get_current_participation_status(arg_pgu.id)%></td>
+
+							<td>  <%= drop_down_value_description(arg_pgu.disposition_status) %></td>
+							<td>  <%= format_db_date(arg_pgu.disposition_date) %></td>
+
+
+							<!-- <td>  <%= arg_pgu.client_application_id %></td> -->
+
+							<td>  <%= drop_down_value_description(arg_pgu.processing_location) %></td>
+							<td>   <%= get_user_name(arg_pgu.eligibility_worker_id) if arg_pgu.eligibility_worker_id.present?%>  </td>
+							<td>   <%= get_user_name(arg_pgu.case_manager_id) if arg_pgu.case_manager_id.present?%>  </td>
+							<!--
+							<% #program_unit_link_visible = ProgramUnit.allow_program_unit_to_be_modified?(arg_pgu) %>
+							<% #if program_unit_link_visible == true %>
+								<td><%#= link_to "Program Unit Wizard",edit_program_unit_wizard_initialize_path(arg_pgu.id),id: "hyperlink" %></td>
+							<% #end %>
+						-->
+							<td><%= link_to "Select",index_eligibility_determination_runs_path(arg_pgu.id),id: "hyperlink" %> </td>
+							<td> <%= link_to "Work Flow ",work_flow_status_path(arg_pgu.id),id: "hyperlink" %></td>
+
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+
+	<%else%>
+	        <!-- <h5 class="subheader">Accepted application information is not found. Complete an application. </h5>
+	        <p></p>
+	        <%#= link_to 'Select Application',client_applications_path, class: "button radius"%> -->
+	        <h5 class="subheader">Program Units are not available for this client. </h5>
+	<%end%>
+<%else%>
+	    <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+  <%end%>
+</section >
+</fieldset>

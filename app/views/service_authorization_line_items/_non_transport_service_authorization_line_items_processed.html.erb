@@ -1,0 +1,38 @@
+<!--Not used <b> Processed Service Plan Line Item(s) </b>
+			<p></p>
+		<table>
+			  <thead>
+			    <tr>
+			    	<th> Warrant number</th>
+					<th> Service Date </th>
+
+
+
+					<th> Actual Cost</th>
+					<th> Provider submitted Invoice</th>
+
+					<th> Action </th>
+				</tr>
+			  </thead>
+			    <tbody>
+					<%# @service_authorization_line_items_processed.each do |arg_line_item| %>
+
+						<tr>
+
+							<td>  <%#= arg_line_item.provider_invoice_id if  arg_line_item.provider_invoice_id.present?  %></td>
+							<td>  <%= format_db_date(arg_line_item.service_date)%></td>
+
+
+
+							<td>  <%= number_to_currency_br(arg_line_item.actual_cost) %></td>
+							<td>  <%= arg_line_item.provider_invoice %></td>
+
+							<td>
+							 <%#= link_to "Show",service_authorization_line_item_show_path(@provider_service_authorization.id,arg_line_item.id),id: "hyperlink" %>
+							</td>
+						</tr>
+						<%#end%>
+
+				</tbody>
+			</table>
+			<%#= link_to "Back ",service_authorization_line_items_index_path(@provider_service_authorization.id), class: "secondary button radius" %> -->

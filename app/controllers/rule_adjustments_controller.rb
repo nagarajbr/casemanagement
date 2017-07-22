@@ -1,0 +1,2 @@
+class RuleAdjustmentsController < AttopAncestorController
+end

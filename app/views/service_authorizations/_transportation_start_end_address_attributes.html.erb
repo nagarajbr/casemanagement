@@ -1,0 +1,54 @@
+  <p>
+    <li class="required">
+        <%= arg_common_object.label :trip_start_address_line1 %>
+        <%= arg_common_object.text_field :trip_start_address_line1, maxlength: "50" %>
+    </li>
+
+    <li >
+        <%= arg_common_object.label :trip_start_address_line2 %>
+        <%= arg_common_object.text_field :trip_start_address_line2, maxlength: "50" %>
+    </li>
+
+     <li class="required">
+        <%= arg_common_object.label :trip_start_address_city %>
+        <%= arg_common_object.text_field :trip_start_address_city, maxlength: "50" %>
+    </li>
+
+     <li class="required">
+        <%= arg_common_object.label :trip_start_address_state %>
+        <%= arg_common_object.select :trip_start_address_state, CodetableItem.item_list(104,"State List").collect { |p| ["#{p.long_description} ", p.id] },{ :include_blank => 'select a State' } %>
+    </li>
+
+     <li class="required">
+        <%= arg_common_object.label :trip_start_address_zip %>
+        <%= arg_common_object.text_field :trip_start_address_zip,onkeypress: "return isNumberKey(event)", maxlength: "5" %>
+    </li>
+  </p>
+
+
+<p>
+    <li class="required">
+        <%= arg_common_object.label :trip_end_address_line1 %>
+        <%= arg_common_object.text_field :trip_end_address_line1, maxlength: "50" %>
+    </li>
+
+    <li >
+        <%= arg_common_object.label :trip_end_address_line2 %>
+        <%= arg_common_object.text_field :trip_end_address_line2, maxlength: "50" %>
+    </li>
+
+     <li class="required">
+        <%= arg_common_object.label :trip_end_address_city %>
+        <%= arg_common_object.text_field :trip_end_address_city, maxlength: "50" %>
+    </li>
+
+     <li class="required">
+        <%= arg_common_object.label :trip_end_address_state %>
+        <%= arg_common_object.select :trip_end_address_state, CodetableItem.item_list(104,"State List").collect { |p| ["#{p.long_description} ", p.id] },{ :include_blank => 'select a State' } %>
+    </li>
+
+     <li class="required">
+        <%= arg_common_object.label :trip_end_address_zip %>
+        <%= arg_common_object.text_field :trip_end_address_zip,onkeypress: "return isNumberKey(event)", maxlength: "5" %>
+    </li>
+  </p>

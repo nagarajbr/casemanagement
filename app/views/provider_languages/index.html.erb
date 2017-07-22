@@ -1,0 +1,52 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+<% if session[:PROVIDER_ID].present? %>
+	<legend><%= set_subheader("Language information for provider:  #{@provider.provider_name}" ) %></legend>
+	<%= render "providers/selected_provider" %>
+	<% if @providerlanguages.present? %>
+		<table>
+		<caption style="text-align:inherit"><b>Languages used by provider </b><p></p></caption>
+		  <thead>
+		    <tr>
+		    	<th> Language </th>
+				<th> Begin Date </th>
+				<th> End Date </th>
+				<th>Action</th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @providerlanguages.each do |pl| %>
+					<tr>
+						<td>  <%= drop_down_value_description(pl.language_type) %></td>
+						<td>  <%=  format_db_date pl.start_date %></td>
+						<td>  <%=  format_db_date pl.end_date %></td>
+						<td>
+						 <%= link_to "Show",show_provider_language_path(pl),id: "hyperlink"%>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+		<% if validate_authorization(550) %>
+			<%= link_to("New", new_provider_language_path , class: 'button radius')%>
+		<% end %>
+	<%else%>
+		<% if validate_authorization(550) %>
+			<p>
+		    <h5 class="subheader">No Language information found. Click New to enter Language information.</h5>
+	        </p>
+	        <%= link_to 'New',new_provider_language_path, class: "button radius"%>
+        <% else %>
+        	<h5 class="subheader">No Language information to show.</h5>
+        <% end %>
+	<%end%>
+<%else%>
+		<p>
+	    <h5 class="subheader">Provider is not selected, Select provider by clicking Search Provider button.</h5>
+        </p>
+        <%= link_to 'Search Provider',new_provider_search_path , class: "button radius"%>
+<%end%>
+</section>
+</fieldset>

@@ -1,0 +1,34 @@
+<fieldset>
+	<section class="solidbody">
+		<%= render 'selected_intake_queue_record',arg_object: @potential_client_object %>
+	      	<table>
+	      		<caption><%= set_subheader("Search results") %></caption>
+
+				<thead>
+					<tr>
+						<th> Name </th>
+						<th> Social Security Number </th>
+						<th> Date of Birth </th>
+						<th> Action </th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @client_results.each do |client| %>
+					<tr>
+						<td>  <%=  client.get_full_name %></td>
+						<td>  <%=  format_SSN(client.ssn) %></td>
+						<td>  <%=  format_db_date client.dob %></td>
+
+						<td>
+								<%= link_to "select",set_client_in_session_and_navigate_path(client.id),id: "hyperlink" %>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+			<p>
+				<%= link_to "Back",intake_queue_path, class: 'button radius secondary' %>
+			</p>
+
+	</section>
+</fieldset>

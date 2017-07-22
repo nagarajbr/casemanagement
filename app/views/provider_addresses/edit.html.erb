@@ -1,0 +1,20 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Edit address information for provider: #{@provider.provider_name}") %></legend>
+	<%= render "providers/selected_provider" %>
+	    <% if session[:PROVIDER_ID].present? %>
+	  		<%= form_for @address, url: update_provider_address_path, method: :put do |f| %>
+		     	<%= render "shared/common_error", object_argument: @addresses_error_messages %>
+		     	<%= render './addresses/form',arg_object: f %>
+		     	 <p>
+			        <%= link_to 'Cancel', show_provider_address_path, class: "secondary button radius" %>
+			        <%= f.submit "Save", class: 'button radius' %>
+			    </p>
+	     	<% end %>
+	    <% else %>
+	    	<legend><h5 class="subheader">Provider is not selected, Select a provider by clicking Search button.</h5><br></legend>
+	    	<p></p>
+	    	<%= render "shared/search_client_button" %>
+		<% end %>
+</section>
+</fieldset>

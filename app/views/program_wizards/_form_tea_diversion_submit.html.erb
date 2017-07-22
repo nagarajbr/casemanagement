@@ -1,0 +1,8 @@
+ <p>
+    <b>Maximum TEA Diversion Payment </b>
+    <%= number_to_currency_br(arg_program_benfit_details.program_benefit_amount) %>
+  </p>
+<li>
+  <%= arg_object.label :reimbursed_amount %>
+  <%= arg_object.number_field :reimbursed_amount, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+ </li>

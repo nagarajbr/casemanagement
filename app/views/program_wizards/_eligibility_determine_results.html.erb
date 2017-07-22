@@ -1,0 +1,93 @@
+<!--Kiran 10/16/2014  -->
+<% if arg_object.present?%>
+	<table width="100%">
+		<caption style="text-align:inherit"><b> Eligibility Results </b><p></p></caption>
+		<tr>
+			<td valign="top">
+					<table  width="100%">
+						<thead>
+							<tr>
+								<th> Program Rules</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<% count = 0 %>
+							<% arg_object.each do |program_results| %>
+								<% if program_results.program_unit_id.present? %>
+									<tr>
+										<td id = "col-result-fail"><%= CodetableItem.get_short_description(program_results.message_type) %></td>
+										<% count = count + 1 %>
+									</tr>
+								<% end %>
+							<% end %>
+							<% if count == 0 %>
+								<td id = "col-result-pass">Pass</td>
+							<% end%>
+						</tbody>
+					</table>
+			</td>
+
+			<td valign="top">
+				<table  width="100%">
+					<thead>
+						<tr>
+							<th colspan = "3", align="center">Client Rules</th>
+						</tr>
+						<tr>
+							<th> Name </th>
+							<th>Message Type</th>
+							<th>Message </th>
+						</tr>
+					</thead>
+					<tbody>
+						<% count = 0 %>
+						<% arg_object.each do |client_results| %>
+							<% if client_results.client_id.present? %>
+
+								<tr>
+									<td> <%= get_client_full_name(client_results.client_id) %> </td>
+									<% if client_results.message_type_text == "Warning" %>
+										<td id = "col-result-warning"><%= client_results.message_type_text %></td>
+										<td id = "col-result-warning"><%= CodetableItem.get_short_description(client_results.message_type) %></td>
+									<% else %>
+										<td id = "col-result-fail"><%= client_results.message_type_text %></td>
+										<td id = "col-result-fail">
+											<% if client_results.message_type == 6085 %>
+												<%= get_ed_violated_characteristics_messsage(client_results.client_id,  arg_selected_program_wizard.run_month) %>
+											<% else %>
+												<%= CodetableItem.get_short_description(client_results.message_type) %>
+											<% end %>
+										</td>
+
+									<% end %>
+
+
+
+
+									<% count = count + 1 %>
+								</tr>
+							<% end %>
+						<% end %>
+						<% if count == 0 %>
+							<td id = "col-result-pass">Pass</td>
+						<% end%>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</table>
+<% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+

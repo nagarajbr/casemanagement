@@ -1,0 +1,76 @@
+<!-- Not used. Remove it from SVN
+
+Rule1) Client not found in the session - inform Client is not found in session - show Client Search Link.
+Rule 2) If No Phone records are found - inform the user -and show New button , so that new records can be     created.
+Rule 3) If Phone records are found for the client - show all phone records in a loop.
+-->
+
+<%#= render 'selected_household_partial' %>
+
+
+<!--
+<p></p>
+
+<b>Household Member: <%#= "#{client_full_name(@client)}" %></b>
+<p></p>
+<%# if @client.present? %>
+
+					<%# if @primary_phone.present? || @secondary_phone.present? || @other_phone.present? ||
+		 	@client_notes.present? || @client.client_email.present? || @notes.present? %>
+
+
+							<%# if @primary_phone.present? %>
+					<P>
+		           		<b><%#= drop_down_value_description(4661) %>:</b>
+		           		<%#= @primary_phone.present? ? format_phone_number(@primary_phone.phone_number) : ""%>
+		           </p>
+	           <%# end %>
+
+	            <%# if @secondary_phone.present? %>
+		           <P>
+		           		<b><%#= drop_down_value_description(4662) %>:</b>
+		           		<%#= @secondary_phone.present? ? format_phone_number(@secondary_phone.phone_number) : "" %>
+		           </p>
+	            <%# end %>
+
+	            <%# if @other_phone.present? %>
+		            <P>
+		           		<b><%#= drop_down_value_description(4663) %>:</b>
+		           		<%= @other_phone.present? ? format_phone_number(@other_phone.phone_number) : "" %>
+		            </p>
+	            <%# end %>
+
+                <P>
+                	<%# if @client.client_email.present? %>
+	           		<b> Email: </b>
+	           		<%= @client.client_email%>
+	           		<%#end%>
+	            </p>
+	             <%#= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+
+
+
+         	<%#= link_to 'Edit',edit_household_member_contact_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: "button radius"%>
+
+		<%# else %>
+			<!-- record not found , so show New button. -->
+              	<!-- #<h5 class="subheader"> No contact information found. Do you want to add contact information?</h5> -->
+                	<!-- <p></p>
+            <fieldset class="radio">
+                <div class="button-group"> -->
+                  <!-- <label class="radio_button_bigger_text" for="member_contacts_add_flag_y"><%#= arg_object.radio_button :member_contacts_add_flag, "Y"%>Yes</label> -->
+                  <!--  -->
+               <!-- <label class="radio_button_bigger_text" for="member_contacts_add_flag_n"><%#= arg_object.radio_button :member_contacts_add_flag, "N"%>No</label>
+                   <label class="radio_button_bigger_text" for="member_contacts_add_flag_s"><%=# arg_object.radio_button :member_contacts_add_flag, "S"%>Skip for now</label> --> 
+            <!--    </div>
+            </fieldset>
+				<p></p> -->
+				<%#= link_to 'New',new_household_member_contact_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), class: "button radius"%>
+		<%# end %>
+
+
+	<%# end %>
+
+-->

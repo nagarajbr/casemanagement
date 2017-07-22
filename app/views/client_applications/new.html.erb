@@ -1,0 +1,69 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+      <legend>
+          <%= set_subheader("Application for client: #{client_full_name(@client)}") %>
+          </legend>
+<%= form_for(@client_application,:url => create_new_application_path, method: :post) do |f| %>
+
+    <ul>
+
+              <% if ("#{@client_application.current_step}_step" == "client_application_first_step") || ("#{@client_application.current_step}_step" == "client_application_third_step")%>
+
+<!--                     <div class="row">
+                    <div class="large-12 columns"> -->
+                      <% if @edit_mode == true %>
+                      <%= render 'focus_application',arg_selected_application:@client_application %>
+                      <% end %>
+
+                    <% if  "#{@client_application.current_step}_step" == "client_application_first_step" %>
+                        <b><h3>Step 1 of 6</h3></b>
+                    <% else %>
+                        <b><h3>Step 3 of 6</h3></b>
+                    <% end %>
+
+<!--                     </div>
+                    </div> -->
+                     <%= render "shared/common_error", object_argument: @client_application %>
+                   <div class="row">
+                    <div class="large-5 columns">
+                    <%= render "#{@client_application.current_step}_step", :arg_object => f %>
+                    </div>
+                  </div>
+
+
+              <% else %>
+<!--                   <div class="row">
+                  <div class="large-12 columns"> -->
+                   <% if "#{@client_application.current_step}_step" == "client_application_last_step"%>
+                        <b><h3>Step 6 of 6</h3></b>
+                   <% else %>
+                       <%= render 'focus_application',arg_selected_application:@client_application %>
+
+                       <% if  "#{@client_application.current_step}_step" == "client_application_second_step" %>
+                           <b><h3>Step 2 of 6</h3></b>
+
+
+
+                       <% end %>
+                       <% if  "#{@client_application.current_step}_step" == "client_application_fourth_step" %>
+                          <b><h3>Step 4 of 6</h3></b>
+                       <% end %>
+                       <% if  "#{@client_application.current_step}_step" == "client_application_fifth_step" %>
+                          <b><h3>Step 5 of 6</h3></b>
+                        <% end %>
+                   <% end %>
+                    <%= render "shared/common_error", object_argument: @client_application %>
+                    <%= render "#{@client_application.current_step}_step", :arg_object => f %>
+<!--                    </div>
+                  </div> -->
+              <% end %>
+
+    </ul>
+    <div>
+      <%= render "buttons_next_back_save", :arg_object => f , :arg_instance =>@client_application %>
+    </div>
+
+<% end %>
+</section>
+</fieldset>

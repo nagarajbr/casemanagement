@@ -1,0 +1,21 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- 5th step - Data Verification -->
+
+<% if  @data_validation_results.present? %>
+    <%= render 'data_validation/fix_program_unit_validations',arg_clients: @data_validation_results,arg_program_unit_id: @selected_program_unit.id,arg_navigate: "PROGRAM_UNIT_PROCESSING" %>
+<% else %>
+    <p>
+        <label>Data verification passed for all the program unit members, proceed to next step for Document Verification</label>
+    </P>
+<%end%>
+
+
+
+
+
+
+
+
+
+
+

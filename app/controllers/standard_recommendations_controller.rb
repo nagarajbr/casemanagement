@@ -1,0 +1,2 @@
+class StandardRecommendationsController < AttopAncestorController
+end

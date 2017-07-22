@@ -1,0 +1,49 @@
+<fieldset>
+  <section class="solidbody">
+    <legend><%= set_subheader("#{drop_down_value_description(@action_plan_detail.entity_type)} information for client: #{client_full_name(@client)}") %></legend>
+   <!--  <%#= render "parent_action_plan",arg_action_plan:@action_plan,arg_emp_goal:@employment_goal  %>
+    <p>
+        <%#= render "career_pathway_plans/expected_participation_hours",arg_expected_hours:@expected_work_participation_hours_collection,arg_service_program_id:@service_program_id,arg_case_type:@case_type_id %>
+    </p>
+    <p>
+       <%#= render "career_pathway_plans/planned_work_participation_hours_per_client",arg_activity_hours: @planned_client_activity_hours_collection %>
+     </p> -->
+    <p>
+      <%= render "action_plans/active_plan_summary", action_plan: @action_plan, arg_work_participation: @work_participation, employment_goal: @employment_goal %>
+    </p>
+    <%= render 'show_partial',arg_object: @action_plan_detail,arg_outcome:@outcome,arg_schedule:@schedule %>
+
+    <%= render "schedule_extensions",arg_activity:@schedule_extension_for_activity %>
+    <%= link_to 'Back', action_plan_action_plan_details_path(@action_plan), class: "secondary button radius" %>
+    <% if @action_plan_detail.activity_status != 6044 %>
+      <% if @action_plan_detail.client_agreement_date.blank? %>
+        <% if  can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id) && @can_edit %>
+           <%= link_to 'Edit', edit_activity_path(@action_plan,@action_plan_detail),class: "button radius" %>
+           <%= link_to 'Delete', action_plan_action_plan_detail_path(@action_plan,@action_plan_detail), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+        <% elsif @can_edit != false %>
+                <%= link_to 'Edit',"#", class: "disabled button"%>
+                <%= link_to 'Delete',"#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Edit</b> and <b>Delete</b> buttons are disabled because, You are not the case manager of this program unit. Only case manager of this program unit can edit plan details.</h6>
+                </p>
+        <% end %>
+
+         <%# if @action_plan_detail.entity_type == 6253 && @service_can_be_approved == true%>
+          <%#= link_to 'Approve Service', authorize_service_path(@action_plan.id,@action_plan_detail.id),class: "button radius" %>
+        <%# end %>
+      <% else %>
+        <% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id) %>
+          <%= link_to 'Close', close_action_plan_detail_path(@action_plan,@action_plan_detail),class: "button radius" %>
+          <%= link_to 'Extend', extend_action_plan_detail_path(@action_plan,@action_plan_detail),class: "button radius" %>
+         <% else %>
+              <%= link_to 'Close',"#", class: "disabled button"%>
+              <%= link_to 'Extend',"#", class: "disabled button"%>
+              <p>
+                  <h6 class="subheader"><b>Close</b> and <b>Extend</b> buttons are disabled because, You are not the case manager of this program unit. Only case manager of this program unit can edit plan details.</h6>
+              </p>
+        <% end %>
+
+      <% end %>
+    <% end %>
+  </section>
+</fieldset>

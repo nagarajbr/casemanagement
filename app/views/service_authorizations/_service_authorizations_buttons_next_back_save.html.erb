@@ -1,0 +1,7 @@
+<%= link_to "Exit Wizard", service_authorizations_index_path(session[:PROGRAM_UNIT_ID]),class: 'secondary button' %>
+<%= arg_object.submit "Back", :name => "back_button",class: 'secondary button' unless arg_instance.first_step? %>
+<% if arg_instance.last_step? %>
+	<%= arg_object.submit "Save",class: 'button' %>
+<% else %>
+	<%= arg_object.submit "Next",:name => "next_button",class: 'button' %>
+<% end %>

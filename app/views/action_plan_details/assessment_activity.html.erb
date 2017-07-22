@@ -1,0 +1,50 @@
+<fieldset>
+    <section class="solidbody">
+        <legend><%= set_subheader("Enter #{drop_down_value_description(@action_plan_detail.entity_type)} information for client: #{client_full_name(@client)}") %></legend>
+        <%#= render "parent_action_plan" %>
+        <%= form_for(@action_plan_detail,:url => @path, method: :post) do |f| %>
+          <%= render "shared/common_error", object_argument: @action_plan_detail %>
+          <%= render "shared/common_warning", object_argument: @warnings %>
+          <ul>
+              <div class="row">
+                  <% if @view_page.present? && @view_page == "edit_activity" %>
+                    <div class="large-12 columns">
+                      <p>
+                        <b> Barrier: </b>
+                        <%= Barrier.get_description(@action_plan_detail.barrier_id) %>
+                      </p>
+
+                      <p>
+                        <b> Description: </b>
+                        <%= drop_down_value_description @action_plan_detail.activity_type %>
+                      </p>
+
+                      <p>
+                        <b> Component Type: </b>
+                        <%= drop_down_value_description @action_plan_detail.component_type %>
+                      </p>
+                    </div>
+                  <% end %>
+              </div>
+              <div class="row">
+                  <div class="large-5 columns">
+                      <%= render "action_plan_detail_second_step", arg_object: f, show_mult_add_buttons: @multi_add_buttons %>
+                  </div>
+              </div>
+          </ul>
+
+          <% if @cancel_url.present? %>
+            <%= link_to("Cancel", @cancel_url , class: 'button secondary radius') %>
+          <% end %>
+          <%= f.submit "Save",:name => "save_button",class: 'button',id: "action_plan_detail_next" %>
+          <!-- <%# if @cancel_url.blank? %>
+            <%#= f.submit "Skip",:name => "skip_button",class: 'button radius secondary' %>
+          <%# end %> -->
+          <% if @warnings.present? %>
+            <%= f.submit "Skip Warnings",:name => "skip_warnings_button",class: 'button',id: "action_plan_detail_skip_warnings" %>
+          <% elsif @cancel_url.blank? %>
+            <%= f.submit "Skip",:name => "skip_button",class: 'button radius secondary' %>
+          <% end %>
+        <% end %>
+    </section>
+</fieldset>

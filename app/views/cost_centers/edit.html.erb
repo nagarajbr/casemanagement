@@ -1,0 +1,11 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Edit cost center information") %> </legend>
+<%= form_for @cost_center, :url => cost_center_path(@cost_center.id), :method => :put do |f| %>
+  <%= render "shared/common_error", object_argument: @cost_center %>
+	<%= render 'form',arg_object: f %>
+ 	<%= link_to 'Cancel', cost_center_path(@cost_center.id),class: "secondary button radius" %>
+ 	<%= f.submit "Save", class: 'button radius'%>
+<% end %>
+</section>
+</fieldset>

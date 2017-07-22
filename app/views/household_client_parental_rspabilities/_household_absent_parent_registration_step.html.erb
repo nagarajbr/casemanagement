@@ -1,0 +1,43 @@
+<% if @absent_parent.present? %>
+
+    <p>
+      <b>Last Name:  </b>
+        <%= @absent_parent.last_name %>
+    </p>
+    <p>
+      <b>First Name:  </b>
+      <%=@absent_parent.first_name %>
+    </p>
+    <p>
+          <b>Middle Name:</b>
+          <%if @absent_parent.middle_name? %>
+            <%= @absent_parent.middle_name  %>
+          <%end%>
+    </p>
+    <p>
+          <b> Suffix:</b>
+          <% if @absent_parent.suffix? %>
+          <%=@absent_parent.suffix %>
+          <% end %>
+    </p>
+    <p>
+      <b> Social Security Number:</b>
+      <%= format_SSN(@absent_parent.ssn)  %>
+    </p>
+    <p>
+      <b> Date of Birth:</b>
+      <%= format_db_date @absent_parent.dob %>
+    </p>
+    <p>
+      <b> Gender:</b>
+       <%= drop_down_value_description(@absent_parent.gender) %>
+    </p>
+    <p>
+          <%= link_to 'Edit', edit_household_absent_parent_path(@absent_parent.id),class: "button radius"%>
+      </p>
+<% else%>
+    <h5 class="subheader">Search or register absent parent by clicking Search Absent Parent button.</h5>
+      <p></p>
+      <%= link_to 'Search Absent Parent',new_household_absent_parent_search_path, class: "button radius"%>
+<%end%>
+

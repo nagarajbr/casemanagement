@@ -1,0 +1,17 @@
+
+
+<% if object_argument.present? %>
+  <div id="warning_explanation">
+
+    <%if object_argument.count == 1%>
+    <h6 class="fi-alert subheader" id="alert-text-center">Warning</h6>
+    <%else%>
+    <h6 class="fi-alert subheader" id="alert-text-center"><%= pluralize(object_argument.count, "Warning") %> </h6>
+    <%end%>
+    <ul>
+    <% object_argument.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>

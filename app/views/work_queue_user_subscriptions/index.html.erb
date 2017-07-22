@@ -1,0 +1,46 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<fieldset>
+  <section class="solidbody">
+  <legend><%= set_subheader("User work queue subscription list") %></legend>
+
+  <% if @all_distinct_work_queue_users_list.present? %>
+
+      <table>
+        <caption style="text-align:inherit"> <b> Subscribed Queues <b><p></p><caption>
+        <thead>
+          <tr>
+          <th> User </th>
+          <th> User's Local office </th>
+          <th> Subscribed Queue(s)</th>
+          <th> Action </th>
+
+        </tr>
+        </thead>
+          <tbody>
+          <%  @all_distinct_work_queue_users_list.each do |each_user| %>
+            <tr>
+              <td>  <%= each_user.user_name %></td>
+              <td>  <%= drop_down_value_description(each_user.local_office_id)%></td>
+              <td>  <%= WorkQueueUserSubscription.get_formatted_queues_for_user_and_location(each_user.user_id,each_user.local_office_id) %></td>
+              <td>
+                <%= link_to "Edit",edit_work_queue_user_subscription_path(each_user.user_id,each_user.local_office_id),id: "hyperlink" %> |
+                 <%= link_to "Delete",delete_work_queue_user_subscription_path(each_user.user_id,each_user.local_office_id), method: :delete, data: { confirm: 'Are you sure you want to delete? '},id: "hyperlink_alert" %>
+              </td>
+
+            </tr>
+           <% end %>
+        </tbody>
+      </table>
+
+  <%else%>
+          <h5 class="subheader">No Queues are subscribed for Users.Click New to subscribe queues to User. </h5>
+
+  <%end%>
+   <p></p>
+          <%= link_to 'New',user_queue_subscription_wizard_initialize_path, class: "button radius"%>
+
+</section >
+</fieldset>
+
+

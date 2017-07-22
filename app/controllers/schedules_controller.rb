@@ -1,0 +1,2 @@
+class SchedulesController < AttopAncestorController
+end

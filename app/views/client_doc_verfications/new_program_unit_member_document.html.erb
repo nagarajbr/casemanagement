@@ -1,0 +1,23 @@
+<section class="solidbody">
+	<%= form_for(@client_doc_verification,:url => create_program_unit_member_document_path(@selected_program_unit.id), method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @client_doc_verification %>
+    <fieldset>
+    	<legend><%= set_subheader("Document verification for selected application") %></legend>
+    	  <%= render "shared/common_error", object_argument: @client_doc_verification %>
+    	<ul>
+	     	<div class="row">
+	          <div class="large-6 columns">
+	               <%= render 'form_document_verification',arg_object: f,arg_member_collection: @program_unit_members %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+	    	<%= link_to "Cancel",show_program_unit_documents_path(@selected_program_unit.id),class: 'secondary button radius'%>
+	    	<%= link_to "Upload","#",class: 'button radius'%>
+
+	       <%= f.submit "Save",class: 'button radius'%>
+	    </p>
+
+    </fieldset>
+<% end %>
+</section>

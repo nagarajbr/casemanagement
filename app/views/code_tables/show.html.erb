@@ -1,0 +1,38 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+	<table>
+		<caption style="text-align:inherit"><%= set_subheader("Code Table Item for : #{@codetable.name}") %></caption>
+	  <thead>
+	        <tr>
+	        <th> Value </th>
+	        <th> Short Description </th>
+	        <th> Long Description </th>
+	        <th> System Defined </th>
+	        <th> Active </th>
+	        <th> Action</th>
+	    </tr>
+	  </thead>
+	    <tbody>
+	    	<% @codetableitems.each do |item| %>
+			<tr>
+				<td>  <%=  item.id %></td>
+				<td>  <%=  item.short_description %>  </td>
+				<td>  <%=  item.long_description %>  </td>
+				<td>  <%=  item.system_defined %>  </td>
+				<td>  <%=  item.active %>  </td>
+			<%# if validate_authorization(359) %>
+				<td> <%= link_to("Edit", edit_code_table_codetable_item_path(@codetable,item),id: "hyperlink") %> </td>
+			<%# end %>
+			</tr>
+		 <% end %>
+	    </tbody>
+	</table>
+	<%= paginate @codetableitems %>
+
+	<%= link_to 'Back', code_tables_path,class: "secondary button radius" %>
+	<%# if validate_authorization(358) %>
+		<%#= link_to("New", new_code_table_codetable_item_path(@codetable) , class: 'button' ) %>
+	<%# end %>
+</section>
+</fieldset>

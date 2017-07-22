@@ -1,0 +1,78 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Program participation information for #{client_full_name(@client)}") %></legend>
+
+	<p>
+		<b>Payment State: </b>
+		<%= drop_down_value_long_description(@time_limit.state) %>
+
+	</p>
+	<p>
+		<b>payment Month: </b>
+		<%= format_db_date_YYYY_MM(@time_limit.payment_date) %>
+
+	</p>
+
+	<p>
+		<b>payment Issue Date: </b>
+		<%= format_db_date(@time_limit.issue_date) %>
+
+	</p>
+
+	<p>
+		<b>Payment Amount: </b>
+		<%= number_to_currency_br(@time_limit.payment_amount) %>
+
+	</p>
+	<p>
+		<b>Payment Type: </b>
+		<%= drop_down_value_description(@time_limit.payment_type) %>
+
+	</p>
+
+	<p>
+		<b>Work Participation Reason: </b>
+		<%= drop_down_value_description(@time_limit.work_participation_reason) %>
+
+	</p>
+	<p>
+		<b>Case Number: </b>
+		<%= @time_limit.budget_unit_id %>
+
+	</p>
+	<p>
+		<b>Federal Count: </b>
+		<%= @time_limit.federal_count %>
+
+	</p>
+	<p>
+		<b>TEA State Count: </b>
+		<%= @time_limit.tea_state_count %>
+
+	</p>
+	<p>
+		<b>WORKPAYS Count: </b>
+		<%= @time_limit.work_pays_state_count %>
+
+	</p>
+	<p>
+		<b>Skip Count: </b>
+		<%= @time_limit.skip_count %>
+
+	</p>
+	<p>
+		<b>Out of State Count: </b>
+		<%= @time_limit.out_of_state_count %>
+
+	</p>
+
+
+<%= link_to 'Back', time_limits_path,class: "secondary button radius" %>
+<% if validate_authorization(641) %>
+	<%= link_to 'Edit', edit_time_limit_path(@time_limit),class: "button radius" %>
+<% end %>
+<% if validate_authorization(642) %>
+	<%= link_to 'Delete', @time_limit, method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+<% end %>
+</section>
+</fieldset>

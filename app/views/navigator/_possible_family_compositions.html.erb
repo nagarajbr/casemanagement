@@ -1,0 +1,127 @@
+<%#= debug @family_comp %><br>
+<% if arg_family_comp.present? %>
+	<%#= hidden_field_tag 'program_units', @program_units %>
+	<% if arg_family_comp.present? && arg_family_comp.class.name == "String" %>
+		<h5 class="subheader"><%= arg_family_comp %></h5><br>
+	<% else %>
+		<% i = 0 %>
+		<% arg_family_comp.family_structure.each do |family_struct| %>
+			<% if family_struct.any_eligible_service_program %>
+				<fieldset id = "test_fieldset">
+					<legend style=" width: auto " class="legend_group">
+						<%#= check_box_tag "program_units[]",family_struct.program_unit_id %>
+						<% if family_struct.case_type.class.name == "String" %>
+							<%= family_struct.case_type %>
+						<% else %>
+							<%= drop_down_value_description family_struct.case_type %>
+						<% end %>
+					</legend>
+					<!-- Eligible: <%#= get_flag_description(family_struct.budget_eligible_ind) %> <br>
+					Benefit Amount: <%#= family_struct.benefit_amount %> <br>
+					<br> -->
+					<table>
+						<thead>
+						    <tr>
+						    	<!-- <%# if family_struct.case_type == "Child Only Case" %>
+						    		<th> Select </th>
+					    		<%# end %> -->
+								<th> Client Name </th>
+								<th> Age </th>
+								<th> Type </th>
+								<th> Member Status </th>
+								<!-- <th> Status in Program Unit </th> -->
+								<!-- <th> Primary </th> -->
+							</tr>
+						</thead>
+				    	<tbody>
+					    	<% family_struct.members.each do |client_id| %>
+					    		<tr>
+					    			<!-- <%# if family_struct.case_type == "Child Only Case" %>
+					    				<%# if get_age(client_id) > 18 %>
+							    			<td> <%#= check_box_tag "client_ids[]",client_id %> </td>
+						    			<%# else %>
+						    				<td></td>
+						    			<%# end %>
+						    		<%# end %> -->
+						    		<!-- If it's a child only case show members(parents) who has member status as "Inactive Partial" -->
+						    		<% if family_struct.case_type != 6048 || is_child(client_id) || family_struct.member_status[client_id] == 4469 %>
+						    			<td> <%= get_client_full_name(client_id)  %> </td>
+										<td> <%= get_age(client_id) %> </td>
+										<td> <%= get_client_type(client_id) %> </td>
+										<td> <%= drop_down_value_description(family_struct.member_status[client_id]) %> </td>
+									<!--	<td> <%#= is_the_client_active_in_an_open_pgu(client_id,@service_program_id) %> </td>
+									 <%# if (get_age(client_id) > 18) || drop_down_value_description(family_struct.case_type) == "Minor Parent" %>
+						    			<td> <%#= radio_button_tag "primary[#{family_struct.program_unit_id}][]",client_id %> </td>
+					    			<%# end %> -->
+					    			<% end %>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+					<% family_struct.eligible_service_programs.each do |eligible_program_id| %>
+						<table>
+							<thead>
+							    <tr>
+							    	<th> Select </th>
+									<th> Service Program </th>
+									<th> Eligible </th>
+									<% if family_struct.service_program_id == 3 %>
+										<th> One Time Benefit Amount (Upto) </th>
+									<% else %>
+										<th> Monthly Benefit Amount (Upto) </th>
+										<th> Annual Benefit Amount (Upto) </th>
+									<% end %>
+									<!-- <th> Ineligible Reasons </th> -->
+								</tr>
+							</thead>
+							<tbody>
+					    		<% arg_service_program.each do |srvc_pgm| %>
+						    		<% if (srvc_pgm.id == eligible_program_id) || (srvc_pgm.id == 22) %>
+						    			<tr>
+						    				<% if srvc_pgm.id != 22 %>
+						    					<td> <%= check_box_tag "service_programs[#{i}][]",srvc_pgm.id %> </td>
+					    					<% else %>
+						    					<td></td>
+					    					<% end %>
+											<td> <%= srvc_pgm.description %> </td>
+											<%# if (family_struct.any_eligible_service_program && srvc_pgm.id == family_struct.service_program_id) || srvc_pgm.id == 22 %>
+												<td> <%= get_flag_description(family_struct.budget_eligible_ind[eligible_program_id].present? ? family_struct.budget_eligible_ind[eligible_program_id] : 'Y') %> </td>
+												<% if srvc_pgm.id == 22 %>
+													<td> For every dollar you contribute, we will add $3 to your account</td>
+													<td> For every dollar you contribute, we will add $3 to your account</td>
+												<% else %>
+													<td> <%= number_to_currency_br (family_struct.benefit_amount[eligible_program_id]/12) %> </td>
+													<td> <%= number_to_currency_br family_struct.benefit_amount[eligible_program_id] %> </td>
+												<% end %>
+												<!-- <td> <%#= family_struct.ineligible_codes.values.flatten.uniq.present? ? family_struct.ineligible_codes.values.flatten.uniq : "" %> </td> -->
+											<%# else %>
+												<!--<td> </td>
+												<td> </td>
+												<td> </td> -->
+											<%# end %>
+						    			</tr>
+					    			<% end %>
+								<% end %>
+							</tbody>
+						</table>
+					<% end %>
+
+				</fieldset><br>
+			<% end %>
+			<% i += 1 %>
+		<% end %>
+	<% end %>
+<% else %>
+	<h5 class="subheader">Please select an application to determine possible family compositions</h5><br>
+<% end %>
+
+
+<% if arg_family_comp.present? %>
+	<% if arg_family_comp.class.name == "String" %>
+		<%= link_to "Household Relations",application_processing_household_relations_path(arg_application.id),class: 'button radius'%>
+	<% end %>
+    <%#= f.submit "Save",class: 'button radius'%>
+    <%#= submit_tag "Ready for Eligibility Determination", class: "button radius" %>
+<% else %>
+	<%= link_to "Applications List",client_applications_path,class: 'button radius'%>
+<% end %>

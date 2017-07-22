@@ -1,0 +1,43 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- 4th step - Member Relationship -->
+
+<% if @program_unit_member_relationships.present? %>
+
+		<table>
+			<caption style="text-align:inherit"><b>Relationship Between Members of Program Unit</b><p></p></caption>
+		  <thead>
+		    <tr>
+				<th> Member </th>
+				<th> Relationship </th>
+				<th> Member</th>
+
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @program_unit_member_relationships.each do |arg_reln| %>
+					<tr>
+						<td>  <%= "#{get_client_full_name(arg_reln.to_client_id)} is" %></td>
+						<td>  <%= "#{drop_down_value_description(arg_reln.relationship_type)} of" %></td>
+						<td>  <%= get_client_full_name(arg_reln.from_client_id) %></td>
+					</tr>
+				 <% end %>
+			</tbody>
+		</table>
+		   <%= link_to "Manage Relationships",edit_program_unit_member_multiple_relationship_path(@selected_program_unit.id), class: 'button radius' %>
+
+<% else %>
+
+<p>
+	<label> Only One Program Unit member found, This may be Child Only Case. Proceed to Next Step.</label>
+
+</p>
+
+<%end%>
+
+
+
+
+
+
+
+

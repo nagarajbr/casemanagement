@@ -1,0 +1,54 @@
+<fieldset>
+  <section class="solidbody">
+    <% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+            <legend><%= set_subheader("Edit expense details for household member: #{client_full_name(@client)} for expense:#{drop_down_value_description(@expense.expensetype)}") %> </legend>
+            <p>
+             <%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+             <%= render 'header', arg_expense:@expense %>
+            </p>
+            <%= form_for(@expensedetail,:url => update_household_member_expense_detail_path(@client.id,@expense.id,@expensedetail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :put) do |f| %>
+                 <%= render "shared/common_error", object_argument: @expensedetail %><br>
+
+                  <ul>
+                      <div class="row">
+                          <div class="large-4 columns">
+                               <%= render 'form',f: f,arg_code_table_list:@code_table_list,arg_notes: @notes %>
+                          </div>
+                      </div>
+                  </ul>
+                <p>
+                  <%= link_to 'Back',household_member_expense_detail_index_path(@client.id,@expense.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: " secondary button radius" %>
+                    <%= f.submit "Save",class: "button radius" %>
+                </p>
+            <% end %>
+    <% else %>
+    		 <%= render 'header',arg_expense:@expense  %>
+              <%= form_for(@expensedetail,:url => expense_expense_detail_path(@expense.id,@expensedetail.id), method: :put) do |f| %>
+                     <legend><%= set_subheader(" Edit #{drop_down_value_description(@expense.expensetype)} expense for: #{client_full_name(@client)}") %></legend>
+
+                   <%= render "shared/common_error", object_argument: @expensedetail %><br>
+                    <ul>
+                      <div class="row">
+                          <div class="large-4 columns">
+                               <%= render 'form',f: f,arg_code_table_list:@code_table_list,arg_notes: @notes %>
+                          </div>
+                      </div>
+                    </ul>
+                  <p>
+                    <%= link_to 'Cancel', expense_expense_details_path,class: " secondary button radius" %>
+                    <%= f.submit "Save",class: "button radius" %>
+                  </p>
+              <% end %>
+    <% end %>
+
+  </section>
+</fieldset>
+
+
+
+
+
+
+
+
+

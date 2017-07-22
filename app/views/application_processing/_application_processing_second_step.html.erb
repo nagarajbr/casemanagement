@@ -1,0 +1,8 @@
+<!--Kiran Chamarthi 01/06/2016  -->
+
+<%= render "application_members", arg_object: @application_members, arg_object2:@show_race, arg_object3: @selected_application %>
+
+<%# if @selected_application.application_disposition_status.blank? %>
+	<%= link_to "Add Members",edit_application_members_path(@selected_application.id), class: 'button radius' %>
+ 	<%= link_to "Register and Add",register_add_client_from_client_application_path(@household.id,@selected_application.id), class: 'button radius' %>
+<%# end %>

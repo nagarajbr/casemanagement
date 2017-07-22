@@ -1,0 +1,57 @@
+<!--
+<section class="solidbody">
+	<fieldset>
+			<%= set_subheader("Immunization information for #{client_full_name(@client)} ") %>
+    <%= form_tag create_immunizations_path, method: :post do %>
+		 <div class="row">
+	        <div class="large-5 columns">
+				<ul>
+					<li >
+			            <li >
+			                <%= label_tag :exempt_from_immunization,"Exempt from Immunization?" %>
+			            </li>
+			            <div class="row">
+			                    <div class="large-6 column">
+			                        <label class="radio-button"> <%= radio_button_tag :exempt_from_immunization, "Y" ,title1: "exempt_from_immunization yes", data: {tooltip1: '' }%>&nbsp;Yes</label>
+			                    </div>
+			                    <div class="large-6 column">
+			                      <label class="radio-button"> <%= radio_button_tag :exempt_from_immunization, "N"  ,title1: "exempt_from_immunization no ", data: {tooltip1: '' } %>&nbsp;No</label>
+			                   </div>
+			            </div>
+			      	</li>
+			    </ul>
+			</div>
+		</div>
+
+		<table>
+		  <thead>
+		    <tr>
+				<th> Vaccination </th>
+				<th> Date Required </th>
+				<th> Provider </th>
+				<th> Date Administered </th>
+
+			</tr>
+		  </thead>
+		    <tbody>
+
+		    	<% for arg_imnz in  @immunizations   %>
+
+		    		<tr>
+			    		<%= fields_for "immunizations[]", arg_imnz do |f|  %>
+			    		<div><%= render "shared/common_error", object_argument: arg_imnz %></div>
+		    				<%= render "immunization_fields", arg_object: f,arg_object2: arg_imnz  %>
+	                   		<%= render "immunization_hidden_fields", arg_object: f %>
+
+			    		<% end %>
+		    		</tr>
+		    	<% end %>
+			</tbody>
+		</table>
+				 <%= link_to 'Cancel', show_immunizations_path,class: "secondary button radius"  , title1:"Press Enter Key or Mouse Click to cancel immunizations details ", data: {tooltip1: '' }%>
+				 <%= submit_tag "Save", class: "button radius"  , title1:"Press Enter Key or Mouse Click to save immunizations details ", data: {tooltip1: '' }%>
+	<% end %>
+</fieldset>
+</section>
+
+-->

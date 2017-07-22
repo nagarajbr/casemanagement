@@ -1,0 +1,55 @@
+<fieldset>
+<legend></legend>
+<section class="solidbody">
+<!-- <%# if session[:CLIENT_ID].present? %> -->
+	<% if @cost_centers.present? %>
+		<table>
+		<caption style="text-align:inherit"><%= set_subheader("Cost Centers List") %></caption>
+		  <thead>
+		    <tr>
+		    	<th> Service Program </th>
+		    	<th> Cost Center </th>
+		    	<th> Internal order </th>
+				<th> Account </th>
+				<th> Service Type </th>
+				<th> Action </th>
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @cost_centers.each do |cc| %>
+					<tr>
+						<td>  <%= get_service_program_name(cc.service_program_group) %></td>
+						<td>  <%= cc.cost_center %></td>
+						<td>  <%= cc.internal_order %></td>
+						<td>  <%= cc.gl_account %></td>
+						<td>  <%= cc.service_type %></td>
+						<td>
+						 <%= link_to "Show",cost_center_path(cc),id: "hyperlink"%>
+						</td>
+					</tr>
+
+				 <% end %>
+			</tbody>
+		</table>
+		<%= paginate @cost_centers %>
+		<% if validate_authorization(361) %>
+			<%= link_to("New", new_cost_center_path , class: 'button radius')%>
+		<% end %>
+	<%else%>
+		    <legend><%= set_subheader("Cost centers list"  ) %></legend>
+		    <% if validate_authorization(361) %>
+		        <h5 class="subheader">No cost center information found. Click New to enter cost center information.</h5>
+		        <p></p>
+		        <%= link_to 'New',new_cost_center_path, class: "button radius"%>
+	        <% else %>
+	        	<h5 class="subheader">No cost center information to show.</h5>
+	        <% end %>
+	<%end%>
+<!-- <%#else%>
+	    <%#= set_subheader("Cost Centers List" ) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search client button.</h5>
+        <p></p>
+        <%#= link_to 'Search Client',client_search_path , class: "button radius"%>
+<%#end%>-->
+</section>
+</fieldset>

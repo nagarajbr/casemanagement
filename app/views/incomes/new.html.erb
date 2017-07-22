@@ -1,0 +1,55 @@
+<fieldset>
+	 <section class="solidbody">
+	 	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+	 		<p>
+				<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+			</p>
+	 		<%= form_for(@income, :url => create_household_member_unearned_income_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :post) do |f| %>
+		        <legend><%= set_subheader("Enter Unearned income information for household member: #{client_full_name(@client)}") %> </legend>
+			       <%= render "shared/common_error", object_argument: @income %><br>
+			        <ul>
+				     	<div class="row">
+				          <div class="large-4 columns">
+				               <%= render 'form',f: f,arg_income_types:@income_types,arg_notes:@notes %>
+					 	  </div>
+					    </div>
+					</ul>
+				    <p>
+			      <%= link_to 'Back', start_household_member_registration_wizard_path, class: "secondary button radius" %>
+			      <%= f.submit "Save", class: 'button radius'%>
+			    </p>
+
+			<% end %>
+	 	<% else %>
+	 			<% if session[:CLIENT_ID].present? %>
+					<%= form_for(@income, :url => create_unearned_income_path(@menu), method: :post) do |f| %>
+
+					        <legend><%= set_subheader("Enter Unearned income information for client: #{client_full_name(@client)}") %> </legend>
+					       <%= render "shared/common_error", object_argument: @income %><br>
+					        <ul>
+						     	<div class="row">
+						          <div class="large-4 columns">
+						               <%= render 'form',f: f,arg_income_types:@income_types,arg_notes:@notes %>
+							 	  </div>
+							    </div>
+							</ul>
+						    <p>
+					      <%= link_to 'Cancel', unearned_incomes_path(@menu), class: "secondary button radius" %>
+					      <%= f.submit "Save", class: 'button radius'%>
+					    </p>
+
+					<% end %>
+				<% else %>
+			      <h5 class="subheader">Client is not selected, Select a client by clicking Search Client button.</h5>
+			      <p></p>
+		    	  <%= render "shared/search_client_button" %>
+				<% end %>
+	 	<% end %>
+
+
+
+
+
+
+ 	</section>
+</fieldset>

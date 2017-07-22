@@ -1,0 +1,13 @@
+<fieldset>
+<section class="solidbody">
+ <% unless @program_unit_id == 0 %>
+    <legend><%= set_subheader("Work Flow Status of Program Unit: #{@selected_program_unit.id}") %></legend>
+    <%= File.read('work_flow.svg').html_safe %>
+ <%else %>
+     <legend><%= set_subheader("Work Flow Status ") %></legend>
+     <h5 class="subheader">Select Program Unit for Work flow </h5>
+  <%end%>
+  <br><br><fieldset><section><%= link_to 'Back', program_units_path,class: "secondary button radius" %></fieldset>
+</section>
+
+</fieldset>

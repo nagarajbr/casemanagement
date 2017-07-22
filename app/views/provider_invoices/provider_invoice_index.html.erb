@@ -1,0 +1,47 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Warrant information for provider: #{provider_name(@provider)}" ) %>
+		</legend>
+		<p></p>
+		<% if session[:PROVIDER_ID].present?%>
+			<% if @provider_invoices.present?%>
+				<table>
+				  <thead>
+				    <tr>
+						<th> Warrant number </th>
+						<th> Warrant Date </th>
+						<th> Amount </th>
+						<th> Status </th>
+						<th> Provider submitted Invoice</th>
+						<th> Action </th>
+					</tr>
+				  </thead>
+				    <tbody>
+						<% @provider_invoices.each do |arg_invoice| %>
+							<tr>
+								<td>  <%= arg_invoice.id %></td>
+								<td>  <%= format_db_date(arg_invoice.invoice_date)%></td>
+								<td>  <%= number_to_currency_br(arg_invoice.invoice_amount) %></td>
+								<td>  <%= drop_down_value_description(arg_invoice.invoice_status) %></td>
+								<td>  <%= arg_invoice.provider_invoice %></td>
+								<td>
+								 <%= link_to "Show",provider_invoice_show_path(arg_invoice.id),id: "hyperlink" %>| <%= link_to "Warrant details",provider_invoice_line_items_index_path(arg_invoice.id),id: "hyperlink" %>
+								</td>
+							</tr>
+						 <% end %>
+					</tbody>
+				</table>
+			<% else %>
+
+	        	<h5 class="subheader">No Invoices Found.</h5>
+
+			<% end %>
+		<% else %>
+			<p>
+		        <h5 class="subheader">Provider is not selected, Select provider by clicking Search Provider button.</h5>
+	        </p>
+	        <%= render "shared/search_provider_button" %>
+		<% end %>
+
+	</section>
+</fieldset>

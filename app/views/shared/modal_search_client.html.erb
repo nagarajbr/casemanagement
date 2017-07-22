@@ -1,0 +1,40 @@
+<section class="solidbody">
+<fieldset>
+	<% if @clients.present? %>
+		<%= set_subheader("Search Results") %>
+		<table>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> Social Security Number </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @clients.each do |client| %>
+				<tr>
+					<td>  <%=  client.get_full_name %></td>
+					<td>  <%=  format_SSN(client.ssn) %></td>
+					<td>  <%=  format_db_date client.dob %></td>
+					<td>  <%=  drop_down_value_description(client.gender) %></td>
+
+					<td>
+							<%= link_to "select",set_client_in_modal_session_path(client.client_id),id: "hyperlink"  %>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+	<% end %>
+	 <%= set_subheader("#{session[:CALLED_PAGE_TITLE]} ")  if session[:CALLED_PAGE_TITLE].present?%>
+		<%= form_tag modal_client_search_path, method: 'get' do %>
+			<%= render 'shared/common_client_search_criteria' %>
+			<%= link_to 'Cancel', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+			<%= submit_tag "Search", class: 'button radius' %>
+		<% end %>
+
+</fieldset>
+</section>

@@ -1,0 +1,7 @@
+<%= link_to "Exit Wizard", program_unit_data_validation_results_path(arg_pgu.id),class: 'secondary button' %>
+<%= submit_tag "Back", :name => "back_button",class: 'secondary button' unless arg_pgu.overwrite_wizard_first_step? %>
+<% if arg_pgu.overwrite_wizard_last_step? %>
+	<%= submit_tag "Save",:name => "save_button",class: 'button' %>
+<% else %>
+	<%= submit_tag "Next",:name => "next_button",class: 'button' %>
+<% end %>

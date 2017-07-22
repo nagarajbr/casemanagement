@@ -1,0 +1,66 @@
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+		<% if (@client.present? && @client.exempt_from_immunization.present?) || @client_immunization.present? || @notes.present? %>
+			<fieldset>
+				<legend><%= set_subheader("Immunization information for: #{client_full_name(@client)}" ) %></legend><br>
+
+				<p>
+		         	<b>Provided Immunization record: </b>
+				    <%= @client_immunization.present? && @client_immunization.immunizations_record.present? ? get_flag_description(@client_immunization.immunizations_record) : "" %>
+				</p>
+				<p>
+		         	<b>Exempt from Immunization: </b>
+				    <%= @client.present? && @client.exempt_from_immunization? ? get_flag_description(@client.exempt_from_immunization) : "" %>
+				</p>
+
+				 <p>
+					<b>Worker: </b>
+					<% if @client_immunization.present? %>
+						<%= get_user_name(@client_immunization.updated_by) %>
+					<% else %>
+						<%= get_user_name(@client.updated_by) %>
+					<% end %>
+
+				</p>
+ 					<%= render "notes/notes_field_show", arg_notes: @notes %>
+					<%= link_to 'Edit',edit_client_immunization_path(@menu), class: "button radius"%>
+
+					<%= link_to 'Delete',delete_client_immunization_path(@menu),data: { confirm: 'Are you sure?' },method: :delete, class: "button alert radius"%>
+					<% if @client_assessment.present? %>
+                         <%if !(@client_assessment.first_step?)%>
+                           <%= link_to "Previous", process_previous_step_path,class: ' button radius' %>
+                         <%end%>
+                         <%if !(@client_assessment.last_step?)%>
+                          <%= link_to "Next",process_next_step_path,class: 'button radius ' %>
+                        <%end%>
+                    <% end %>
+
+			</fieldset>
+		<%else%>
+			<fieldset>
+				<legend><%= set_subheader("Immunization information for: #{client_full_name(@client)}" ) %></legend><br>
+
+					<h5 class="subheader">No immunization information found, Click New to add immunization information.</h5>
+					<p></p>
+					<%= link_to 'New',new_client_immunization_path(@menu), class: "button radius"%>
+
+					<% if @client_assessment.present? %>
+                         <%if !(@client_assessment.first_step?)%>
+                           <%= link_to "Previous", process_previous_step_path,class: ' button radius' %>
+                         <%end%>
+                         <%if !(@client_assessment.last_step?)%>
+                          <%= link_to "Next",process_next_step_path,class: 'button radius ' %>
+                        <%end%>
+                    <% end %>
+			</fieldset>
+		<%end%>
+	<%else%>
+		<fieldset>
+			<legend><%= set_subheader("View client immunization information" ) %></legend><br>
+
+				<h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+				<p></p>
+				<%= render "shared/search_client_button" %>
+		</fieldset>
+	<%end%>
+</section>

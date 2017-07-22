@@ -1,0 +1,2 @@
+class ApplicationServiceProgramsController < AttopAncestorController
+end

@@ -1,0 +1,108 @@
+    <p>
+      <b> Barrier: </b>
+      <%= Barrier.get_description(arg_object.barrier_id) %>
+    </p>
+
+    <!-- <p>
+      <b> Provider: </b>
+      <%= arg_object.provider_id %>
+    </p> -->
+
+    <!-- <p>
+      <b> Activity Classification: </b>
+      <%#= CodeTable.get_description(arg_object.activity_classfication) %>
+    </p> -->
+
+    <p>
+      <b> Description: </b>
+      <%= drop_down_value_description arg_object.activity_type %>
+    </p>
+
+    <p>
+      <b> Component Type: </b>
+      <%= drop_down_value_description arg_object.component_type %>
+    </p>
+
+    <% if arg_object.provider_id.present? %>
+      <p>
+        <b> Provider: </b>
+        <%= get_provider_name(arg_object.provider_id) %>
+      </p>
+    <% end %>
+
+    <p>
+      <b> Activity Status: </b>
+      <%= drop_down_value_description arg_object.activity_status %>
+    </p>
+
+    <p>
+      <b> Start Date: </b>
+      <%= format_db_date arg_object.start_date %>
+    </p>
+
+    <p>
+      <b> End Date: </b>
+      <%= format_db_date arg_object.end_date %>
+    </p>
+
+    <%# if arg_object.client_agreement_date.present? %>
+      <p>
+        <b> Client Agreement Date: </b>
+        <%= format_db_date arg_object.client_agreement_date %>
+      </p>
+    <%# end %>
+
+    <p>
+      <b> Comments: </b>
+      <%= arg_object.notes %>
+    </p>
+
+    <p>
+      <b> Number of Hours/Day: </b>
+      <%= arg_object.hours_per_day %>
+    </p>
+
+    <p>
+      <b> Frequency: </b>
+      <%= drop_down_value_description arg_object.frequency_id %>
+    </p>
+
+    <% if (arg_object.frequency_id == '2320') && arg_object.days_of_week.present? %>
+      <p>
+        <b> Days of Week: </b><br>
+        <% arg_object.days_of_week.each do |day_of_week| %>
+          <%= drop_down_value_description(day_of_week) %> <br>
+        <% end %>
+      </p>
+    <% end %>
+
+    <% if arg_object.duration.present? %>
+      <p>
+        <b> Duration: </b>
+        <%#= arg_object.duration %> <%#= (arg_object.frequency_id == '2325') ? "Days" : "Weeks" %>
+        <%= pluralize(arg_object.duration, (arg_object.frequency_id == '2325') ? "Day" : "Week") %>
+      </p>
+    <% elsif arg_schedule.duration.present? %>
+      <p>
+        <b> Duration: </b>
+
+        <%= pluralize(arg_schedule.duration, (arg_object.frequency_id == '2325') ? "Day" : "Week") %>
+      </p>
+    <% end %>
+
+   <% if arg_outcome.present? %>
+      <p>
+        <b> Outcome Code: </b>
+        <%= drop_down_value_description arg_outcome.outcome_code %>
+      </p>
+
+      <p>
+        <b> Outcome Notes: </b>
+        <%= arg_outcome.notes %>
+      </p>
+    <% end %>
+
+<p>
+  <b>Worker: </b>
+  <%= get_user_name(arg_object.updated_by)%>
+</p>

@@ -1,0 +1,53 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Representative information for program unit of client: #{client_full_name(@client)}" ) %></legend>
+<p>
+	<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+</p>
+
+	<% if @program_unit_representatives.present? %>
+		<%= render "show_added_program_unit_representatives",arg_pgu_representative:@program_unit_representatives,show_hyperlink:@show_hyperlink%>
+
+        <% if  ProgramUnit.get_current_participation_status_value(@program_unit_id) != 6044 %>
+        	<% if can_logged_in_user_edit?("PROGRAM_UNIT",@program_unit_id) %>
+	        	<%= link_to 'Add Representative',program_unit_representatives_new_path, class: "button radius"%>
+        	<% else %>
+        		<%= link_to 'Add Representative',"#", class: "disabled button"%>
+				<p>
+					<h6 class="subheader"><b>Add Representative</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can add representative.</h6>
+				</p>
+        	<% end %>
+	     <%end%>
+
+	<%else%>
+		<p>
+	        <b>Representatives</b>
+	    </p>
+	    <p>
+	    	<% if @selected_program_unit.service_program_id == 3 %>
+	    		<h5 class="subheader">TEA diversion program units do not require representatives. </h5>
+	    	<%else%>
+	        	<h5 class="subheader">No representatives found. To add a representative click <b>Add Representative</b> button.</h5>
+	        	<p></p>
+	        	 <% if  ProgramUnit.get_current_participation_status_value(@program_unit_id) != 6044%>
+	        	 	<%# if can_logged_in_user_edit?("PROGRAM_UNIT",@program_unit_id) || can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@program_unit_id)%>
+	        	 	<% if can_logged_in_user_edit?("PROGRAM_UNIT",@program_unit_id) %>
+	        			<%= link_to 'Add Representative',program_unit_representatives_new_path, class: "button radius"%>
+        			<% else %>
+        				<%= link_to 'Add Representative',"#", class: "disabled button"%>
+        				<p>
+        					<h6 class="subheader"><b>Add Representative</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can add representative.</h6>
+        				</p>
+
+        			<% end %>
+	        	<%end%>
+	        <%end%>
+	    </p>
+
+
+	<%end%>
+
+
+</section >
+</fieldset>

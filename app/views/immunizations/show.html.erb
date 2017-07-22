@@ -1,0 +1,75 @@
+<!--
+<%# if session[:CLIENT_ID].present? %>
+		<%# if @client.dob.present? %>
+				<%# if @client.exempt_from_immunization.present? || @immunizations.present?  %>
+					<fieldset>
+							<%#= set_subheader("Immunization information for client: #{client_full_name(@client)}") %>
+							<p>
+						    	<b>Exempted from Immunization?:</b>
+						    	<%= get_flag_description(@client.exempt_from_immunization)  %>
+						  	</p>
+
+
+
+							<table>
+							  <thead>
+							    <tr>
+									<th> Vaccination </th>
+									<th> Provider </th>
+									<th> Date Required </th>
+									<th> Date Administered </th>
+
+								</tr>
+							  </thead>
+							    <tbody>
+									<%# @immunizations.each do |arg_imzn| %>
+										<tr>
+											<td>  <%#= system_param_value_description(arg_imzn.vaccine_type) %></td>
+											<td>  <%#= arg_imzn.provider_id%></td>
+											<td>  <%#= format_db_date(arg_imzn.date_required)  %></td>
+											<td>  <%#= format_db_date(arg_imzn.date_administered)  %></td>
+
+										</tr>
+									 <%# end %>
+								</tbody>
+							</table>
+
+
+					<%# if validate_authorization(431) %>
+
+						<td> <%#= link_to "Edit",edit_immunizations_path, class: "button radius" ,title1: "Press Enter Key or Mouse Click to edit immunization details", data: {tooltip1: '' } %> </td>
+					<%# end %>
+					</fieldset>
+				<%# else %>
+					<fieldset>
+				        <%#= set_subheader("Immunization details for client " ) %>
+				        <%# if validate_authorization(431) %>
+					        <h5 class="subheader"><%#= "No immunization information found. Click New to add immunization details" %></h5>
+					        <p></p>
+					        <td> <%#= link_to "New",new_immunizations_path, class: "button radius" ,title1: "Press Enter Key or Mouse Click to edit", data: {tooltip1: '' }%> </td>
+				        <%# else %>
+
+				        <%# end %>
+		    		</fieldset>
+				<%# end %>
+
+		<%# else %>
+			<fieldset>
+		        <%#= set_subheader("Immunization details for client " ) %>
+		        <h5 class="subheader"><%#= "Date of Birth is not found.click client profile to add date of birth " %></h5>
+		        <p></p>
+		        <td> <%#= link_to "Client Profile",show_client_path, class: "button radius" , title1: "Press Enter Key or Mouse Click to add immunization details ", data: {tooltip1: '' }%> </td>
+	    	</fieldset>
+
+		<%# end %>
+
+<%#else%>
+	<fieldset>
+        <%#= set_subheader("Immunization details for client " ) %>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+         <%#= render "shared/search_client_button" %>
+    </fieldset>
+<%#end%>
+
+-->

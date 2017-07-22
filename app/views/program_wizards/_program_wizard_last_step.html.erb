@@ -1,0 +1,35 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- Merged Income & Expense in this partial as Review Financial-->
+<!-- Resource Review -->
+<p>
+<%= render 'selected_program_benefit_members', arg_collection: @program_benefit_members %>
+</p>
+
+<p>
+	<% if @benefit_members_incomes.present?%>
+		<%= render 'review_income_detail_for_benefit_members',arg_collection: @benefit_members_incomes %>
+	<% else %>
+		<b>Income summary for selected members</b>
+		 <p>Income details not found for selected members in the run month</p>
+	<% end %>
+</p>
+
+<p>
+
+	<% if @benefit_members_expenses.present?%>
+		<%= render 'review_expense_details_for_benefit_members',arg_collection: @benefit_members_expenses %>
+	<% else %>
+		<b>Expense summary for selected members</b>
+		<p>Expense details not found for selected members in the run month</p>
+	<% end %>
+</p>
+
+<p>
+
+	<% if @benefit_members_resources.present?%>
+		<%= render 'review_resource_details_for_benefit_members',arg_collection: @benefit_members_resources %>
+	<% else %>
+		<b>Resource summary for selected members</b>
+		<p> Resource details not found for selected members in the run month</p>
+	<% end %>
+</p>

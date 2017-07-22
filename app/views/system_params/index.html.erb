@@ -1,0 +1,29 @@
+<fieldset>
+<section class="solidbody">
+	<table>
+		<caption><%= set_subheader("System Parameter") %></caption>
+		<tr>
+			<td> Description</td>
+			<td>Value</td>
+			<td>Action</td>
+
+		</tr>
+		<% @systemparams.each do |system| %>
+			<tr>
+				<td>  <%=  system.description %></td>
+				<td>  <%=  system.value %>  </td>
+				<td>   <%= link_to "show",system_param_path(system) , id: "hyperlink"%></td>
+
+			</tr>
+		 <% end %>
+
+	</table>
+	<% if validate_authorization(634) %>
+		<%= link_to("New ", new_system_param_path,class: "button radius",title1:"Press Enter Key or Mouse Click to add System Params ", data: {tooltip1: '' }) %>
+	<% end %>
+</section>
+</fieldset>
+
+
+
+

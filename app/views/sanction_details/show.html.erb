@@ -1,0 +1,81 @@
+ <fieldset>
+<section class="solidbody">
+<legend>
+  <%= set_subheader("Sanction details for: #{client_full_name(@client)}") %>
+    <legend>
+  <%= render "parent_sanction",arg_sanction:@sanction %>
+
+   <p>
+    <b>Sanction Month: </b>
+    <%= format_db_date_MM_YYYY(@sanction_detail.sanction_month)  %>
+  </p>
+
+   <p>
+    <b>Sanction Implication: </b>
+    <%=  drop_down_value_description(@sanction_detail.sanction_indicator) %>
+
+  </p>
+
+   <p>
+
+    <b>Release Indicator: </b>
+    <%=  get_flag_description(@sanction_detail.release_indicatior) %>
+
+  </p>
+
+   <p>
+    <b>Sanction Served: </b>
+    <%=  get_flag_description(@sanction_detail.sanction_served) %>
+
+  </p>
+
+  <p>
+    <b>Worker: </b>
+    <%= get_user_name(@sanction_detail.updated_by)%>
+  </p>
+
+
+
+  <%= link_to 'Back', sanction_sanction_details_path(@sanction),class: "secondary button radius" %>
+
+   <%if @is_it_progressive_sanction == true %>
+             <!-- if it is progressive sanction -->
+          <%if @sanction.compliance_office_id? %>
+               <!-- if santion is not picked up by compliance officer-->
+              <%if  can_logged_in_user_edit?("SANCTION",@sanction.id) %>
+                 <!-- if authorized fron queue to edit-->
+                  <%= link_to "Edit",edit_sanction_sanction_detail_path(@sanction,@sanction_detail), class: "button radius"%>
+                  <%= link_to 'Delete', sanction_sanction_detail_path(@sanction,@sanction_detail), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" if @sanction_month_present == false %>
+              <%else%>
+                <%= link_to "Edit","#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Edit</b> button is disabled because, You are not the compliance officer for this sanction.
+                    compliance officer for this sanction is: <%= "#{get_user_name(@sanction.compliance_office_id)}"%>
+                    </h6>
+                </p>
+
+              <%end%>
+          <%else%>
+              <%if @sanction.infraction_end_date? %>
+                <!-- Edit button is not shown as it is removed for sanction queue and task is completed. -->
+                <%= link_to "Edit","#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Edit</b> button is disabled because, sanction is closed</h6>
+                </p>
+              <%else%>
+               <!--  <%#= link_to "Edit","#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Edit</b> button is disabled because, sanction is in queue:'Ready for Sanctions Queue',not assigned to any user.Users subscribed to that queue will be able to work on this sanction.</h6>
+                </p> -->
+              <%end%>
+          <%end%>
+    <%else%>
+      <%= link_to "Edit",edit_sanction_sanction_detail_path(@sanction,@sanction_detail), class: "button radius"%>
+      <%= link_to 'Delete', sanction_sanction_detail_path(@sanction,@sanction_detail), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" if @sanction_month_present == false %>
+
+    <%end%>
+
+</section>
+</fieldset>
+
+

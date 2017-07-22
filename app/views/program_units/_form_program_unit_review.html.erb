@@ -1,0 +1,11 @@
+
+ 	<%= render 'program_units/program_unit_review_without_screening_result',arg_pgu:@program_unit,arg_selected_pgu:@selected_program_unit,arg_pgu_participation:@program_participations,arg_pgu_members:@program_unit_members, arg_client_relation:@client_relationships,arg_clients: @data_validation_results,arg_client_doc_list:@client_doc_verification_list %>
+
+ 	<!-- Application screening Results -->
+
+ 		<b> Program Unit Processing Results</b><p></p>
+ 		<!--<%#= render 'program_unit_seventh_step' %>-->
+ 		<%= render 'program_units/program_unit_screening_in_show',arg_family_type:arg_family_type,arg_case_type:arg_case_type,arg_app_elig_rslt:arg_app_elig_rslt,arg_selected_pgu:arg_selected_pgu %>
+
+
+

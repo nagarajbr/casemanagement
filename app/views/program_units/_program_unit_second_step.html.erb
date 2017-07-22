@@ -1,0 +1,45 @@
+<!--Manoj Patil 10/16/2014  -->
+<!-- second step - Add Program Unit Members -->
+
+
+<% if @program_unit_members.present? %>
+		<table>
+			<caption style="text-align:inherit"><b> Current Program Unit Members </b><p></p></caption>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> Social Security Number </th>
+					<th> Date of Birth </th>
+					<th> Gender </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<%  @program_unit_members.each do |arg_m| %>
+				<tr>
+					<td>  <%=  arg_m.client_full_name %></td>
+					<td>  <%=  format_SSN(arg_m.ssn) %></td>
+					<td>  <%=  format_db_date (arg_m.dob) %></td>
+					<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+					<td>
+						<%# if arg_m.member_of_application == "N" %>
+						<%= link_to "Delete",destroy_program_unit_member_path(@selected_program_unit.id,arg_m.id),id: "hyperlink_alert",method: :delete, data: { confirm: 'Are you sure?' } %>
+						<%# end %>
+					</td>
+
+
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		  <%= link_to "Manage Program Unit Member",edit_program_unit_members_path(@selected_program_unit.id,"screening"), class: 'button radius' %>
+<% else %>
+<p>
+	 <%= link_to "Manage Program Unit Member",edit_program_unit_members_path(@selected_program_unit.id,"screening"), class: 'button radius' %>
+</p>
+
+
+<%end%>
+
+
+

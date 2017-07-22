@@ -1,0 +1,33 @@
+<table>
+<caption style="text-align:inherit">
+<p><b>
+<%= "Selected #{drop_down_value_description(@action_plan.action_plan_type)}" %> </b></p>
+</caption>
+<thead>
+<tr>
+<!-- 	<th> Program Unit ID</th> -->
+	<th> Service Program</th>
+	<th> Employment Goal </th>
+	<th> Status </th>
+	<th> Core Hours </th>
+	<th> Non Core Hours </th>
+	<th> Start Date </th>
+	<th> End Date </th>
+</tr>
+</thead>
+<tbody>
+
+	<tr>
+		<!-- <td>  <%= @action_plan.program_unit_id %></td> -->
+		<td>  <%= get_service_program_name_form_program_unit_id(@action_plan.program_unit_id) %></td>
+		<td>  <%= @employment_goal %></td>
+		<td>  <%= drop_down_value_description(@action_plan.action_plan_status) %></td>
+		<td>  <%= @action_plan.core_hours%></td>
+		<td>  <%= @action_plan.non_core_hours%></td>
+		<td>  <%=  format_db_date @action_plan.start_date %></td>
+		<td>  <%=  format_db_date @action_plan.end_date %></td>
+	</tr>
+
+</tbody>
+</table>
+

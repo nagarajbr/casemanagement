@@ -1,0 +1,32 @@
+    <li class="required">
+       <%= f.label :date_received%>
+       <%= f.date_field :date_received, autofocus: true, onkeyup:"validate_date_format(event)" %>
+    </li>
+
+
+    <li class="required">
+      <%= f.label :check_type %>
+      <%= f.select :check_type, CodetableItem.item_list(80,"Check Type").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select check type' }, title1: "select Checks type" , data: {tooltip1: '' }  %>
+    </li>
+
+
+
+     <li>
+      <%= f.label :gross_amt %>
+      <%= f.number_field :gross_amt, placeholder:"$" ,:step => 0.01, onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)"%>
+     </li>
+
+
+    <li >
+     <fieldset class="radio">
+        <legend class="radiolegend"> <%="Count for Converted" %></legend>
+        <div class="button-group">
+            <label class="radio-button"><%= f.radio_button :cnt_for_convert_ind, "Y" %>Yes</label>
+            <label class="radio-button"><%= f.radio_button :cnt_for_convert_ind, "N" %>No</label>
+        </div>
+      </fieldset>
+   </li>
+
+
+<%= render "notes/notes_field_new_edit", object_argument: arg_notes %>
+

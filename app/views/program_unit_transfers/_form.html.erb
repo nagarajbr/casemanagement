@@ -1,0 +1,4 @@
+<li class="required">
+	<%= label_tag "local_office" %>
+	<%= select_tag "local_office", options_for_select(@all_user_local_office_list.collect { |p| ["#{p.short_description} ", p.id] }), { :include_blank => 'select a local office' }  %>
+</li>

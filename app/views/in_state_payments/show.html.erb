@@ -1,0 +1,17 @@
+
+<fieldset>
+<section class="solidbody">
+  <legend><%= set_subheader("Payment history for: #{client_full_name(@client)}") %></legend>
+
+    <ul>
+      <%= render 'show_partial', arg_instate_payment:@in_state_payment %>
+
+
+     <%= link_to("Back",in_state_payments_path, class: "secondary button radius") %>
+    <% if @in_state_payment.service_program_id == 1 %>
+    	<%= link_to 'Edit', edit_in_state_payments_path(@in_state_payment.id),class: "button radius"  %>
+	<% end %>
+    </ul>
+
+</section>
+  </fieldset>

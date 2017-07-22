@@ -1,0 +1,33 @@
+<p>
+
+      <% if arg_addr == @household_physical_address %>
+        <legend style=" width: auto " class="legend_group">
+          <b>Entered Mailing Address:</b><br>
+        </legend>
+      <% else %>
+        <legend style=" width: auto " class="legend_group">
+          <b>Verified Mailing Address:</b><br>
+        </legend>
+      <% end %>
+      <% if arg_addr.address_line1.present? %>
+        <% if arg_addr.in_care_of.present? %>
+          <%= " C/O #{arg_addr.in_care_of}"%><br>
+        <% end %>
+        <%= arg_addr.address_line1%><br>
+        <% if arg_addr.address_line2.present? then %>
+          <%= arg_addr.address_line2 %><br>
+        <% end %>
+        <%= " #{(arg_addr.city)}, #{drop_down_value_description(arg_addr.state)}"%>
+        <% if arg_addr.zip_suffix.present? %>
+          <%= "#{arg_addr.zip}-#{arg_addr.zip_suffix}"%>
+        <%else%>
+          <%= "#{arg_addr.zip}"%>
+        <% end %><br>
+        <% if arg_addr.county.present? %>
+          <%= drop_down_value_long_description(arg_addr.county) %><br>
+        <% end %>
+      <% else %>
+        <%= arg_addr.errors.full_messages.first %>
+      <% end %>
+
+</p>

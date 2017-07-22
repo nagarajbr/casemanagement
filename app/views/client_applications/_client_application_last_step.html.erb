@@ -1,0 +1,129 @@
+<!--Manoj Patil 10/16/2014  -->
+	<p>
+		<b>Application ID: </b>
+		<%= @client_application.id %>
+
+	</p>
+	<p>
+		<b>Application Date: </b>
+		<%= format_db_date(@client_application.application_date) %>
+
+	</p>
+
+	<p>
+		<b>Application Status: </b>
+		<%= drop_down_value_description(@client_application.application_status) %>
+
+	</p>
+	<p>
+		<b>Application Disposition Status: </b>
+		<%= drop_down_value_description(@client_application.application_disposition_status) %>
+
+	</p>
+	<p>
+		<b>Application Disposition Reason: </b>
+		<%= drop_down_value_description(@client_application.application_disposition_reason) %>
+
+
+	</p>
+	<p>
+		<b>Application Origin: </b>
+		<%= drop_down_value_description(@client_application.application_origin) %>
+
+	</p>
+
+	<p>
+		<b>Application Received At: </b>
+		<%= drop_down_value_description(@client_application.application_received_office) %>
+
+	</p>
+
+
+
+
+	<p>
+
+		<% if @application_members.present? %>
+
+
+
+				<table>
+					<caption style="text-align:inherit"><b>Application Members </b><p></p></caption>
+					<thead>
+						<tr>
+							<th> Name </th>
+							<th> Social Security Number </th>
+							<th> Date of Birth </th>
+							<th> Gender </th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<%  @application_members.each do |arg_m| %>
+						<tr>
+							<td>  <%=  arg_m.client_full_name %></td>
+							<td>  <%=  format_SSN(arg_m.ssn) %></td>
+							<td>  <%=  format_db_date (arg_m.dob) %></td>
+							<td>  <%=  drop_down_value_description(arg_m.gender) %></td>
+
+
+
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+		<% end %>
+	</p>
+
+	<p>
+
+		<% if @client_relations.present? %>
+
+
+
+				<table>
+					<caption style="text-align:inherit"><b>Member Relationships </b><p></p></caption>
+				  <thead>
+				    <tr>
+						<th> Application Member </th>
+						<th> Relationship </th>
+						<th> Application Member</th>
+
+					</tr>
+				  </thead>
+				    <tbody>
+						<% @client_relations.each do |arg_reln| %>
+							<tr>
+								<td>  <%= "#{get_client_full_name(arg_reln.to_client_id)} is" %></td>
+								<td>  <%= "#{drop_down_value_description(arg_reln.relationship_type)} of" %></td>
+								<td>  <%= get_client_full_name(arg_reln.from_client_id) %></td>
+
+							</tr>
+						 <% end %>
+					</tbody>
+
+				</table>
+		<% end %>
+	</p>
+	<p>
+		<table>
+		<caption style="text-align:inherit"><b>TANF Application Questions </b><p></p></caption>
+			<thead>
+			    <tr>
+					<th> Question </th>
+					<th> Answer </th>
+				</tr>
+		    </thead>
+		    <tbody>
+		 			<% for arg_question in  @client_application_question_answers_y_n %>
+							<tr>
+								<td><%= "#{drop_down_value_description(arg_question.question_id)} " %></td>
+								<td><%= "#{get_flag_description(arg_question.answer_flag)} " %></td>
+
+							</tr>
+					<% end %>
+
+			</tbody>
+		</table>
+
+	</p>

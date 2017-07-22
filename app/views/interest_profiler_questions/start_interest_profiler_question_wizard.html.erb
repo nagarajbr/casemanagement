@@ -1,0 +1,36 @@
+<fieldset>
+     <section class="solidbody">
+     	<legend><%= set_subheader("Identify employment goals") %> </legend>
+		<%= form_tag process_interest_profiler_question_wizard_path, method: :post do %>
+			<!-- <%# if  "#{@client_assessment.interest_profiler_current_step}_step" == "interest_profiler_first_step" %>
+		             <h3>Step 1 of 3</h3>
+		             <h5>Career Interest Profiler Questions</h5>
+		             <%#= render "shared/common_error", object_argument: @client_assessment %>
+		    <%# end %>
+		    <%# if  "#{@client_assessment.interest_profiler_current_step}_step" == "interest_profiler_second_step" %>
+		            <h3>Step 2 of 3 </h3>
+		               <h5>Careers that fit your interests and preparation level:</h5>
+		              <%#= render "shared/common_error", object_argument: @client_assessment %>
+		    <%# end %>
+
+		    <%# if  "#{@client_assessment.interest_profiler_current_step}_step" == "interest_profiler_last_step" %>
+		            <h3>Step 3 of 3</h3>
+		    <%# end %> -->
+		    <!-- <h3><%#= @step_number%></h3> -->
+		    <% if @header_desc.present? %>
+             	<h5><%= @header_desc %></h5>
+         	<% end %>
+		    <ul>
+        		<div class="row">
+        			<div class="large-12 columns">
+		    			<%= render "#{@client_assessment.interest_profiler_current_step}_step", arg_questions: @questions, arg_selected_dropdown_values: @selected_dropdown_values %>
+	    			</div>
+    			</div>
+			</ul>
+			<div>
+	      		<%= render "interest_profiler_buttons_next_back_save", arg_client_assessment:@client_assessment %>
+	    	</div>
+    	<%= hidden_field_tag 'interest_profiler_current_step', @client_assessment.interest_profiler_current_step %>
+    	<% end %>
+ 	</section>
+ </fieldset>

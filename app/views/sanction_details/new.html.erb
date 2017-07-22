@@ -1,0 +1,20 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Enter #{drop_down_value_description(@sanction.sanction_type)} sanction detail for: #{client_full_name(@client)}") %> </legend>
+<%= form_for(@sanction_detail, url: sanction_sanction_details_path(@sanction.id),method: :post) do |f| %>
+	 <% if @sanction_detail.present? %>
+	  <%= render "parent_sanction",arg_sanction:@sanction %>
+	 <% end %>
+      <%= render "shared/common_error", object_argument: @sanction_detail %>
+       <%= render "shared/common_warning", object_argument: @warnings %><br>
+      <%= render 'form',arg_object:f,arg_sanction_details:@sanction_detail,arg_indicatior_list:@sanction_indicator_list,arg_sancton_month:@regular_payment_present_for_sanction_month %>
+      <%= link_to 'Cancel', sanction_sanction_details_path,class: "secondary button radius" %>
+      <%#= f.submit "Save", class: 'button radius'%>
+     <% if @warnings.present? %>
+          <%= f.submit "Skip Warnings and save",:name => "skip_warnings_button",class: 'button'%>
+        <%else%>
+           <%= f.submit "Save", class: 'button radius'%>
+      <% end %>
+<% end %>
+</section>
+</fieldset>

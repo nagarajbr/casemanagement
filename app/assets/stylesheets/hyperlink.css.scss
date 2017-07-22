@@ -1,0 +1,25 @@
+@import "colors";
+
+#hyperlink{
+ text-decoration: underline;
+ color: $hyperlink-color;
+ font-weight: bold;
+}
+#hyperlink:hover{
+  color: $hyperlink-hover-color;
+  }
+
+  #hyperlink_alert{
+ text-decoration: underline;
+ color: $error-heading-text-color;
+ font-weight: bold;
+}
+#hyperlink_alert:hover{
+  color: #C60F13;
+  }
+
+  #disabled_hyperlink{
+   pointer-events: none;
+   color: $hyperlink-hover-color;
+   cursor: default;
+  }

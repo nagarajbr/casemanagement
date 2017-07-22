@@ -1,0 +1,132 @@
+<fieldset>
+<section class="solidbody">
+	<% if session[:CLIENT_ID].present? %>
+	<legend><%= set_subheader("#{drop_down_value_description(@action_plan_type)} for: #{client_full_name(@client)}" ) %></legend>
+		<!-- <p>
+			<%#= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+		</p> -->
+
+		<% if @action_plan.present? %>
+			<!-- <p>
+				 <%#= render "career_pathway_plans/expected_participation_hours"%>
+			</p> -->
+			<p>
+				<%= render "active_plan_summary", action_plan: @action_plan, arg_work_participation: @work_participation, employment_goal: @employment_goal %>
+			</p>
+			<!-- <p>
+				<%#= render "career_pathway_plans/planned_work_participation_characteristics"%>
+			</p> -->
+			<!-- <p>
+			 <%#= render "career_pathway_plans/planned_work_participation_hours_per_client"%>
+			 </p> -->
+			<!-- <legend><%#= set_subheader("#{pluralize_without_count(@action_plans.count,"Sanction","")} information for: #{client_full_name(@client)}") %></legend> -->
+				<!-- <table>
+					<caption style="text-align:inherit"><p><b><%#=("#{pluralize_without_count(@action_plans.count,"#{drop_down_value_description(@action_plan_type)}","")}") %></b></p></caption>
+				  <thead>
+				    <tr>
+						<th> Program Unit ID</th>
+						<th> Service Program</th>
+						<th> Status </th>
+						<th> Start Date </th>
+						<th> End Date </th>
+						<th> Action </th>
+					</tr>
+				  </thead>
+				    <tbody>
+						<%# @action_plans.each do |action_plan| %>
+							<tr>
+								<td>  <%#= @action_plan.program_unit_id %></td>
+								<td>  <%#= get_service_program_name_form_program_unit_id(@action_plan.program_unit_id) %></td>
+								<td>  <%#= drop_down_value_description(@action_plan.action_plan_status)  %></td>
+								<td>  <%#=  format_db_date(@action_plan.start_date) %></td>
+								<td>  <%#=  format_db_date(@action_plan.end_date) %></td>
+								<td>  <%#= link_to "Show",action_plan_path(@action_plan.id),id: "hyperlink" %> |
+							 <%#= link_to("Details", action_plan_action_plan_details_path(@action_plan.id),id: "hyperlink") %> </td>
+							</tr>
+						 <%# end %>
+					</tbody>
+				</table> -->
+				<%#= render "show_partial", action_plan: @action_plan, employment_goal: @employment_goal %>
+				<%if @notes.present?%>
+					<%= render "notes/notes_field_show", arg_notes: @notes %>
+				<%end%>
+				<%# if  can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+					<%= form_tag create_comments_for_employment_plan_path(@action_plan_type), method: :post do %>
+						<div class="row">
+							<div class="large-5 columns">
+							<ul>
+								<li >
+					              <%= label_tag :comments %>
+					              <%= text_area_tag :notes%>
+					            </li>
+				        	</ul>
+			        		</div>
+			        	</div>
+			        	<%= submit_tag "Add comment", class: "button radius" %>
+					<%end%>
+
+				    	<%#= link_to("New", new_action_plan_path , class: 'button radius') %>
+				    	<% if @action_plan.action_plan_status == 6044%>
+							<%# if @no_open_action_plan %>
+								<%#= link_to 'Reopen', reopen_action_plan_path(@action_plan), class: "button radius" %>
+							<%# end %>
+						<% else %>
+							<% if @action_plan.client_agreement_date.blank? == true %>
+								<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+									<%= link_to 'Edit', edit_action_plan_path(@action_plan), class: "button radius" %>
+								<% else %>
+									<%= link_to 'Edit',"#", class: "disabled button"%>
+									<%= link_to 'Delete',"#", class: "disabled button"%>
+									<p>
+										<h6 class="subheader"><b>Edit</b> and <b>Delete</b> buttons are disabled because, You are not the case manager of this program unit. Only case manager of this program unit can edit plan.</h6>
+									</p>
+								<% end %>
+							<% else %>
+								<% if can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+									<%= link_to 'Close', outcome_new_path(@action_plan.id), class: "button radius" %>
+								<% else %>
+									<%= link_to 'Close',"#", class: "disabled button"%>
+									<p>
+										<h6 class="subheader"><b>Close</b> button is disabled because, You are not the case manager of this program unit. Only case manager of this program unit can edit plan.</h6>
+									</p>
+								<% end %>
+							<% end %>
+							<%= link_to "Work on Plan", action_plan_action_plan_details_path(@action_plan.id), class: "button radius" %>
+						<% end %>
+			    <%# else %>
+			    	<%#= link_to 'New',"#", class: "disabled button" %>
+		        	<!-- <p>
+		        		<h6 class="subheader"> <b>New</b> button is disabled because, you are not the case manager of this program unit.Only case manager of this program unit can add plan.</h6>
+		       		</p> -->
+			    <%# end %>
+		<%else%>
+			<% if @program_unit_participation_status.present? && (@program_unit_participation_status == 6041 || @program_unit_participation_status == 6044) %>
+				<p>
+		        	<h5 class="subheader">An open <%= "#{drop_down_value_description(@action_plan_type).downcase}" %> is not found.</h5>
+		       	</p>
+				<%= link_to 'New',"#", class: "disabled button" %>
+
+			 		<h6 class="subheader"><b>New</b> button is disabled because, program unit is <%= @program_unit_participation_status == 6044 ? "closed" : "denied" %>.</h6></h6>
+
+	        <% else %>
+		       	<p>
+		        	<h5 class="subheader"><%= "#{drop_down_value_description(@action_plan_type)}" %> is not found. Click New to enter <%= "#{drop_down_value_description(@action_plan_type)}" %>.</h5>
+		       	</p>
+		        <% if  can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@selected_program_unit.id)%>
+
+		        	<%= link_to 'New',new_action_plan_path, class: "button radius" %>
+		        <% else %>
+		        	<%= link_to 'New',"#", class: "disabled button" %>
+		        	<p>
+		        		<h6 class="subheader"> <b>New</b> button is disabled because, you are not the case manager of this program unit.Only case manager of this program unit can add plan.</h6>
+		       		</p>
+		        <% end %>
+	        <% end %>
+		<%end%>
+	<%else%>
+	    <legend><%= set_subheader("#{drop_down_value_description(@action_plan_type)} information " ) %></legend>
+        <h5 class="subheader">Client is not selected. Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+    <%end%>
+</section>

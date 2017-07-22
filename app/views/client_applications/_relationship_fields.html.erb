@@ -1,0 +1,17 @@
+<!--Manoj Patil 10/16/2014  -->
+<td><%= "#{get_client_full_name(arg_object2.to_client_id)} is" %></td>
+
+<td >
+
+
+	<%= arg_object.select :relationship_type, CodetableItem.active_item_list(125,"Budget Relationship List").collect { |p| ["#{p.short_description} ", p.id] },prompt: "select a relationship" %>
+
+
+</td>
+<td ><%= "of #{get_client_full_name(arg_object2.from_client_id)}" %></td>
+
+
+
+    <%= arg_object.hidden_field :from_client_id %>
+    <%= arg_object.hidden_field :to_client_id %>
+    <%= arg_object.hidden_field :update_flag %>

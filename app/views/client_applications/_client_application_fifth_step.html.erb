@@ -1,0 +1,31 @@
+<!--Manoj Patil 11/08/2014  -->
+
+<% if @client_application_question_answers_y_n.present? %>
+	<table>
+		<caption style="text-align:inherit">
+			<b>TANF Application Questions</b><p></p>
+		</caption>
+		<thead>
+		    <tr>
+				<th> Question </th>
+				<th> Answer </th>
+			</tr>
+	    </thead>
+	    <tbody>
+	 			<% for arg_question in  @client_application_question_answers_y_n %>
+						<tr>
+							<td><%= "#{drop_down_value_description(arg_question.question_id)} " %></td>
+							<td><%= "#{get_flag_description(arg_question.answer_flag)} " %></td>
+
+						</tr>
+				<% end %>
+
+		</tbody>
+	</table>
+<% else %>
+	<b><h6>TANF Application Questions </h6></b>
+
+<% end %>
+<p>
+	   <%= link_to "Manage Answers",edit_client_application_question_answers_path(@client_application.id), class: 'button radius' %>
+</p>

@@ -1,0 +1,30 @@
+<fieldset>
+  <section class="solidbody">
+
+<%= set_subheader("Alert Details") %>
+
+
+   <p>
+    <b>Alert Text: </b>
+    <%= @alerts.alert_text %>
+  </p>
+
+  <p>
+    <b>Expiration Date:  </b>
+    <%= format_db_date(@alerts.expiration_date) %>
+  </p>
+
+
+
+
+
+
+    <%= link_to 'Back', system_alerts_index_path,class: "secondary button radius" %>
+    <% if validate_authorization(632) %>
+      <%= link_to 'Edit', system_alerts_edit_path(@alerts),class: "button radius"  %>
+    <% end %>
+    <% if validate_authorization(633) %>
+      <%= link_to 'Delete', system_alerts_delete_path(@alerts.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+    <% end %>
+  </section>
+</fieldset>

@@ -1,0 +1,39 @@
+<p>
+  <b> Service Program ID : </b>
+  <%= ServiceProgram.get_category(arg_instate_payment.service_program_id) %>
+</p>
+
+<p>
+  <b> Payment Month : </b>
+  <%= arg_instate_payment.payment_month %>
+</p>
+
+<p>
+  <b>Amount :</b>
+  <%=number_to_currency_br(arg_instate_payment.dollar_amount) %>
+</p>
+
+<p>
+  <b> Payment Type :</b>
+  <%=drop_down_value_description(arg_instate_payment.payment_type) %>
+</p>
+
+<p>
+  <b> Work Participation Status</b>
+    <div class="row">
+      <div class="large-4 columns">
+        <%= arg_edit.select :work_participation_status, CodetableItem.item_list(113,"Check Type").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select work participation status' }  %>
+      </div>
+    </div>
+</p>
+<p>
+  <b> Action Date :</b>
+  <%= arg_instate_payment.action_date %>
+</p>
+
+<p>
+  <b> Action Type :</b>
+  <%= drop_down_value_description(arg_instate_payment.action_type) %>
+</p>
+
+

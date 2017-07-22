@@ -1,0 +1,24 @@
+
+<table>
+	<caption class='fontc'> <p><%= arg_caption %></p></caption>
+			  	<thead>
+			    <tr>
+			    	<th> Local Office </th>
+					<th> Self of Program Unit</th>
+					<th> Reference ID </th>
+					<th> Assigned Worker</th>
+				</tr>
+			  	</thead>
+			    <tbody>
+					<% arg_subscribed_records.each do |each_queue_item| %>
+						<tr>
+							<td>  <%= each_queue_item.queue_loal_office_name%></td>
+							<td>  <%= get_self_of_program_unit_from_queue(each_queue_item.id)%></td>
+							<td>  <%= each_queue_item.reference_id%></td>
+							<td>  <%=  each_queue_item.assigned_worker_name%></td>
+						</tr>
+					<%end%>
+
+				</tbody>
+			</table>
+             <%= paginate arg_subscribed_records %>

@@ -1,0 +1,40 @@
+<fieldset>
+	<legend></legend>
+	<section class="solidbody">
+	<caption><%= set_subheader("School Information") %></caption>
+<% if @school.present? %>
+	<table>
+	  <thead>
+	    <tr>
+	    	<th> School Type</th>
+			<th> School Name </th>
+			<th> Web Address</th>
+			<th> Action</th>
+		</tr>
+	  </thead>
+	    <tbody>
+			<% #@school.each do |school| %>
+				<tr>
+					<td>  <%=  drop_down_value_description(@school.school_type) %></td>
+					<td>  <%=  @school.school_name %></td>
+					<td>  <%=  @school.web_address %></td>
+					<td>  <%= link_to "Show",show_school_path(@school.id),id: "hyperlink" %>	</td>
+				</tr>
+			 <% #end %>
+		</tbody>
+	</table>
+
+	   <%#= link_to("New", new_school_path , class: 'button radius')%>
+
+<%else%>
+	<%# if validate_authorization(610) %>
+       <h5 class="subheader">No school details found. Click New to enter school details.</h5>
+        <p></p>
+        <%= link_to 'New',new_school_path, class: "button radius"%>
+    <%# else %>
+    	<!-- <h5 class="subheader">No school details to show.</h5> -->
+    <%# end%>
+<%end%>
+</section>
+</fieldset>
+

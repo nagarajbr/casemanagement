@@ -1,0 +1,52 @@
+<fieldset>
+	<section class="solidbody">
+		<legend> <%= set_subheader("#{drop_down_value_description(@income.incometype)} income adjustment details for: #{client_full_name(@client)}") %> </legend>
+		<%= render "/income_details/parent_income",arg_income: @income %>
+		<%= render "income_detail_adjust_reasons/parent_income_detail", arg_income_detail:@income_detail%>
+		<p></p>
+		<table>
+			<caption style="text-align:inherit">
+			<div class="fontc">
+			<%= "Adjustment details" %>
+			</div>
+			<p> </p> </caption>
+			<thead>
+			    <tr>
+					<th> Adjustment Amount </th>
+					<th> Adjustment Reason </th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @adjust_reasons.each do |adjust_reason| %>
+				 <tr>
+				  <td>  <%=  number_to_currency_br(adjust_reason.adjusted_amount) %></td>
+				  <% if adjust_reason.adjusted_reason.present? %>
+				  	<td>  <%= drop_down_value_description(adjust_reason.adjusted_reason) %></td>
+				  <% else %>
+				    <td></td>
+				  <% end %>
+				  <td>
+				  	<% if  @menu == 'CLIENT' %>
+				  		<%= link_to 'Show', income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id,adjust_reason.id),id: "hyperlink" %>
+				  	<%else%>
+				  		<%= link_to 'Show', show_household_member_income_detail_adjustment_path(@client.id,@income_detail.id,adjust_reason.id),id: "hyperlink" %>
+				  	<%end%>
+
+					</td>
+				 </tr>
+				<% end %>
+			</tbody>
+		</table>
+
+
+		<% if  @menu == 'CLIENT' %>
+			<%= link_to("Back", income_income_details_path(@menu,@income_detail.income_id) , class: 'secondary button radius') %>
+			<%= link_to("Add Adjustment", new_income_detail_income_detail_adjust_reason_path(@menu,@income_detail.id) , class: 'button radius') %>
+		<%else%>
+			<%= link_to("Back", household_member_income_detail_index_path(@client.id,@income_detail.income_id) , class: 'secondary button radius') %>
+			<%= link_to("Add Adjustment",new_household_member_income_detail_adjustment_path(@client.id,@income_detail.id) , class: 'button radius') %>
+			<%= link_to("Next",household_member_income_detail_index_path(@client.id,@income_detail.income_id) , class: 'button radius')  if IncomeDetailAdjustReason.income_detail_adjust_reason_found_for_the_given_income_detail?(@income_detail.id)%>
+		<%end%>
+	</section>
+</fieldset>

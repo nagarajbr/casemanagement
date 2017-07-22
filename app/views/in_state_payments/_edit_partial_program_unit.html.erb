@@ -1,0 +1,48 @@
+<p>
+  <b> Service Program ID : </b>
+  <%= ServiceProgram.get_category(arg_instate_payment.service_program_id) %>
+</p>
+
+<p>
+  <b> Payment Month : </b>
+  <%= arg_instate_payment.payment_month %>
+</p>
+
+<p>
+  <b>Amount :</b>
+  <%=number_to_currency_br(arg_instate_payment.dollar_amount) %>
+</p>
+
+<p>
+<b> Payment Type :</b>
+ <%=drop_down_value_description(arg_instate_payment.payment_type) %>
+</p>
+
+<%if (arg_instate_payment.action_type == 6054 or arg_instate_payment.action_type == 6055 )%>
+  <p>
+    <b> Action Date :</b>
+    <%= arg_instate_payment.action_date %>
+  </p>
+
+  <p>
+    <b> Action Type :</b>
+    <%= drop_down_value_description(arg_instate_payment.action_type) %>
+  </p>
+
+<%else%>
+  <div class="row">
+    <div class="large-4 columns">
+      <p>
+        <b> Action Date</b>
+        <%= arg_edit.date_field :action_date, onkeyup:"validate_date_format(event)" %>
+      </p>
+
+      <p>
+        <b> Action Type </b>
+        <%= arg_edit.select :action_type, CodetableItem.active_item_list(135,"Check Type").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select action type' }, title1: "select Checks type" , data: {tooltip1: '' }  %>
+      </p>
+    </div>
+  </div>
+<%end%>
+
+

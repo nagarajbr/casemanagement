@@ -1,0 +1,11 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Enter scores for client: #{client_full_name(@client)}") %> </legend>
+<%= form_for @client_score, :url => client_scores_create_path, :method => :post do |f| %>
+  <%= render "shared/common_error", object_argument: @client_score %>
+	<%= render 'form',arg_object: f %>
+ 	<%= link_to 'Cancel', client_scores_index_path,class: "secondary button radius" %>
+ 	<%= f.submit "Save", class: 'button radius'%>
+<% end %>
+</section>
+</fieldset>

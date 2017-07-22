@@ -1,0 +1,39 @@
+
+
+             <li class="required">
+              <%= f.label :resource_valued_date %>
+              <%= f.date_field :resource_valued_date,alt: "date received",title1: "Select check recevied date", data: {tooltip1: true } %>
+             </li>
+
+             <li class="required">
+              <%= f.label :resource_value%>
+             <%= f.number_field :resource_value, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+             </li>
+
+             <li class="required">
+              <%= f.label :first_of_month_value%>
+              <%= f.number_field :first_of_month_value, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+             </li>
+
+              <li>
+              <%= f.label :res_ins_face_value,"Face Value" %>
+              <%= f.number_field :res_ins_face_value, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+             </li>
+
+             <li>
+              <%= f.label :amount_owned_as_of_date,"Amount Owed As Of Date" %>
+              <%= f.date_field :amount_owned_as_of_date,alt: "Amount Owed As Of Date",title1: "Amount Owed As Of Date", data: {tooltip1: true }, onkeyup:"validate_date_format(event)" %>
+             </li>
+
+             <li>
+              <%= f.label :amount_owned_on_resource,"Amount Owned On Resource" %>
+              <%= f.number_field :amount_owned_on_resource, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+             </li>
+
+
+             <li>
+              <%= f.label :res_value_basis,"Value Evaluated By" %>
+              <%= f.select :res_value_basis, CodetableItem.item_list(40,"Value Basis").collect { |p| ["#{p.short_description} ", p.id] }, prompt:"select value basis" %>
+             </li>
+
+             <%= render "notes/notes_field_new_edit", object_argument: arg_notes %>

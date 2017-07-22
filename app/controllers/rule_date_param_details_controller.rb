@@ -1,0 +1,2 @@
+class RuleDateParamDetailsController < AttopAncestorController
+end

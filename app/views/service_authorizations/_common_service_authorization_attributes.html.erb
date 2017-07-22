@@ -1,0 +1,36 @@
+
+  <!-- <li class="required">
+      <%#= arg_common_object.label :activity_service_id %>
+     <%#= arg_common_object.select :activity_service_id, CodetableItem.items_to_include(168,6215,"Service Type List").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Service Type' } %>
+ </li>
+-->
+
+ <!-- <li class="required">
+      <%#= arg_common_object.label :barrier_id %>
+     <%#= arg_common_object.select :barrier_id, @transportation_barrier_collection.collect { |p| ["#{p.barrier_description} ", p.barrier_id] },{ :include_blank => 'Select Barrier' } %>
+ </li> -->
+<!-- <p>
+    <b>Barrier:  </b>
+  <%#=  get_barrier_description(@transportation_barrier_id) %>
+</p> -->
+
+<p>
+    <b>Supportive Service:  </b>
+  Transportation
+</p>
+
+
+ <li class="required">
+      <%= arg_common_object.label :service_start_date %>
+      <%= arg_common_object.date_field :service_start_date, onkeyup:"validate_date_format(event)" %>
+ </li>
+
+ <li class="required">
+      <%= arg_common_object.label :service_end_date %>
+      <%= arg_common_object.date_field :service_end_date, onkeyup:"validate_date_format(event)" %>
+ </li>
+
+ <li >
+      <%= arg_common_object.label :notes %>
+      <%= arg_common_object.text_area :notes %>
+ </li>

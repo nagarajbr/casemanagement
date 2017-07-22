@@ -1,0 +1,25 @@
+<% if arg_object.present? %>
+	<%= arg_object.submit "Previous", :name => "back_button",class: 'secondary button' unless arg_instance.application_processing_first_step? %>
+	<% if arg_instance.application_processing_last_step? %>
+		<%= arg_object.submit "Complete Application Processing",:name => "finish",class: 'button' %>
+	<% else %>
+		<%= link_to "Exit Wizard", client_applications_path,class: 'secondary button' %>
+	<% end %>
+	<% if arg_instance.application_processing_last_step? %>
+		<% if arg_family_comp.present? && arg_family_comp.class.name != "String" %>
+			<%= arg_object.submit "Ready for Eligibility Determination",class: 'button' %>
+		<% end %>
+	<% else %>
+		<%= arg_object.submit "Next",:name => "next_button",class: 'button' %>
+	<% end %>
+<% else %>
+	<%= submit_tag "Previous", :name => "back_button",class: 'secondary button' unless arg_instance.application_processing_first_step? %>
+	<%= link_to "Exit Wizard", client_applications_path,class: 'secondary button' %>
+	<% if arg_instance.application_processing_last_step? %>
+		<% if arg_family_comp.present? && arg_family_comp.class.name != "String" %>
+			<%= submit_tag "Ready for Eligibility Determination",:name => "ready_ed_button",class: 'button' %>
+		<% end %>
+	<% else %>
+		<%= submit_tag "Next",:name => "next_button",class: 'button' %>
+	<% end %>
+<% end %>

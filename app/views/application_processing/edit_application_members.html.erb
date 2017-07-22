@@ -1,0 +1,36 @@
+<fieldset>
+	<section class="solidbody">
+		<legend><%= set_subheader("Screening application of client: #{client_full_name(@client)}") %></legend>
+		<p><%= render 'application_screenings/selected_application_details',arg_selected_application: @selected_application %></p>
+
+		<h5><%= set_subheader("Add application member") %></h5>
+		<%= render "application_members", arg_object: @application_members, arg_object2:@show_race, arg_object3: @selected_application%>
+		<%= form_for(@application_member, :url => add_application_member_path(@selected_application.id), method: :post) do |f| %>
+	  		<%= render "shared/common_error", object_argument: @application_member %>
+	    	<ul>
+		     	<div class="row">
+		          <div class="large-4 columns">
+		               	<li class="required">
+						      <%= f.label :client_id %>
+						      <%= f.select :client_id, @household_members.collect { |p| ["#{get_client_full_name(p.client_id)}", p.client_id] },{ :include_blank => 'Select Application Member' } %>
+						</li>
+
+						<!-- <li class="required">
+						      <%#= f.label :member_status%>
+						      <%#= f.select :member_status, @application_member_status.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select Status' } %>
+						</li> -->
+			 	  </div>
+			    </div>
+			</ul>
+		    <p>
+		    	<%= link_to 'Cancel',start_application_processing_wizard_path ,class: "secondary button radius" %>
+		    	<% if @household_members.size > 1 %>
+		        	<%= f.submit "Save & Add",:name => "save_and_add",class: 'button radius' %>
+	        	<% end %>
+		        <%= f.submit "Save & Exit",:name => "save_and_exit",class: 'button radius' %>
+		    </p>
+
+		<% end %>
+
+	</section>
+</fieldset>

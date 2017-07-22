@@ -1,0 +1,11 @@
+<%= render 'show_partial',arg_object: @action_plan_detail,arg_outcome:@outcome,arg_schedule:@schedule %>
+
+<body onload = "set_action_plan_details_outcome()">
+	<!-- <li>
+	  	<%#= arg_object.label :client_agreement_date %>
+	  	<%#= arg_object.date_field :client_agreement_date, onkeyup:"validate_date_format(event)" %>
+	</li> -->
+	<%= arg_object.hidden_field :client_agreement_date %>
+
+
+</body>

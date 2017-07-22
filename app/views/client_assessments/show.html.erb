@@ -1,0 +1,40 @@
+<!-- NOT USED
+<fieldset>
+<section class="solidbody">
+ <legend><%#= set_subheader("Assessment information for: #{client_full_name(@client)}") %> </legend>
+
+	<p>
+		<b>Assessment Date: </b>
+		<%= @client_assessment.assessment_date %>
+
+	</p>
+
+	<p>
+		<b> Status: </b>
+		<%= drop_down_value_description(@client_assessment.assessment_status) %>
+
+	</p>
+
+
+	<p>
+		<b>Comments: </b>
+		<%= @client_assessment.comments %>
+
+	</p>
+
+
+
+<%#= link_to 'Back', client_assessments_path,class: "secondary button radius" %>
+<%# if validate_authorization(311) %>
+	<%#= link_to 'Edit', edit_client_assessment_path(@client_assessment.id),class: "button radius"%>
+<%# end %>
+<%# if validate_authorization(312) %>
+	<%#= link_to 'Delete', @client_assessment, method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+<%# end %>
+<%# if validate_authorization(665) %>
+	<%#= link_to 'Complete', complete_assessment_path(@client_assessment.id),class: "button radius"%>
+<%# end %>
+
+</section>
+</fieldset>
+-->

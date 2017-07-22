@@ -1,0 +1,21 @@
+@import "colors";
+
+
+div .checkbox-style{
+	padding: 5px 0 5px 5px;
+	border:  solid;
+	border-color: #CCCCCC;
+	background-color: $white-color;
+}
+
+
+div .checkbox-style label{
+	padding: 5px 0 5px 25px;
+	font-size:  1em;
+  	font-weight: normal;
+  	color: rgba(0,0,0,0.75)
+}
+
+ div .checkbox{
+ padding: 0  5px 0 0;
+ }

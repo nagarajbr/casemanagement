@@ -1,0 +1,87 @@
+<!--Manoj Patil 10/16/2014  -->
+<%#= render 'selected_household_partial' %>
+<p></p>
+
+<b> <h4><%= "Client: #{client_full_name(@client)}" if @household.id.blank? && @household_member.blank?%></h4></b>
+<p></p>
+
+<% if @client.present? %>
+
+				<p>
+			     <b>Household ID:  </b>
+                 <%= @household_member.household_id  if @household_member.present? %>
+				</p>
+				<p>
+			     <b>Client ID:  </b>
+                 <%= @client.id %>
+				</p>
+
+				<p>
+			     <b>Client Name:  </b>
+                 <%= client_full_name(@client) %>
+				</p>
+				<p>
+			    	<b> Social Security Number:</b>
+			    	<%= format_SSN(@client.ssn)  %>
+				</p>
+				<p>
+	    		<b> Date of Birth:</b>
+	   				 <%= format_db_date @client.dob %>
+	  			</p>
+	  			<p>
+			    	<b> Gender:</b>
+			   		<%= drop_down_value_description(@client.gender) %>
+				</p>
+				<p>
+			    <b> Marital Status:</b>
+			    <%= drop_down_value_description(@client.marital_status) %>
+			</p>
+
+			<p>
+			    <b>Primary Language:</b>
+			    <%= drop_down_value_description(@client.primary_language) %>
+			</p>
+
+			<p>
+			    <b>Veteran: </b>
+			    <%=get_flag_description(@client.veteran_flag )%>
+			</p>
+			 <p>
+			    <b> Provided Identification: </b>
+			    <%= drop_down_value_description(@client.identification_type)  %>
+			</p>
+             <p>
+             	<%if @client.other_identification_document? %>
+			    <b> Other identification document:</b>
+			    <%= @client.other_identification_document %>
+			    <%end%>
+		    </p>
+		    <p>
+			    <b>Felon: </b>
+			    <%=get_flag_description(@client.felon_flag )%>
+			</p>
+
+			<p>
+			    <b>Received TANF payment in other state: </b>
+			    <%=get_flag_description(@client.rcvd_tea_out_of_state_flag )%>
+			</p>
+
+
+				<%if @client.death_date? %>
+					<p>
+				    	<b> Date of Death:</b>
+				       	<%= format_db_date @client.death_date %>
+				    </p>
+			    <%end%>
+			     <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+
+
+
+
+
+		<p>
+        	<%= link_to 'Edit', edit_household_member_path(@client.id),class: "button radius"%>
+    	</p>
+<% end %>
+

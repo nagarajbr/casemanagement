@@ -1,0 +1,99 @@
+<fieldset>
+	<section class="solidbody">
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' && @household.present?%>
+		        <p>
+		          <%= render 'households/selected_household_partial',arg_household: @household %>
+		        </p>
+		         <p><legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend></p>
+
+		<% else %>
+				<% if @client_assessment.present? %>
+					<legend> <%= set_subheader("Assessment information for: #{client_full_name(@client)}" ) %></legend>
+						<p>
+							<%= render  "/client_assessment_answers/selected_assessment",arg_short_term_goal:  @action_plan_short_term_goals,arg_client:@client,arg_assessment_object: @assessment_object%>
+						</p>
+						<p><h6> <%= ("#{drop_down_value_description(@education.school_type)} education information for: #{client_full_name(@client)}") %> </h6></p>
+				<% else %>
+					<legend><%= set_subheader("#{drop_down_value_description(@education.school_type)} education information for: #{client_full_name(@client)}") %> </legend><br>
+				<% end %>
+		<% end %>
+
+
+
+
+ 	<p>
+		<b>School type: </b>
+		<%= drop_down_value_description(@education.school_type) %>
+
+	</p>
+	<p>
+		<b>School name: </b>
+		<%= get_school_name(@education.school_name) %>
+
+	</p>
+	<p>
+		<b>Attendance type: </b>
+		<%= drop_down_value_description(@education.attendance_type) %>
+
+	</p>
+	<p>
+		<b>Address: </b>
+		<%= @education.school_address_1 %>
+	</p>
+	<p>
+		<b>City, State, Zip: </b>
+		<%= @education.school_address_2 %>
+	</p>
+	<p>
+		<b>Begin Date: </b>
+		<%= format_db_date(@education.effective_beg_date )%>
+	</p>
+	<p>
+		<b>End Date: </b>
+		<%= format_db_date(@education.effective_end_date) %>
+	</p>
+	<p>
+		<b>Expected Graduation Date: </b>
+		<%= format_db_date(@education.expected_grad_date) %>
+	</p>
+	<p>
+		<b>Degree Obtained: </b>
+			<%= drop_down_value_description(@education.degree_obtained) %>
+
+	</p>
+	<p>
+		<b>Highest Grade Completed: </b>
+		<%= drop_down_value_description(@education.high_grade_level) %>
+
+	</p>
+	<p>
+		<b>Major: </b>
+		<%= @education.major_study %>
+	</p>
+	<p>
+		<b>Average Hours Per Week: </b>
+		<%= @education.effort %>
+	</p>
+
+<p>
+  <b>Worker: </b>
+  <%= get_user_name(@education.updated_by)%>
+</p>
+
+<%= render "notes/notes_field_show", arg_notes: @notes %>
+
+	<% if @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+		<%= link_to 'Back', start_household_member_registration_wizard_path,class: "secondary button radius" %>
+		<%= link_to 'Edit', edit_household_member_education_path(@client.id,@education.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "button radius" %>
+		<%= link_to 'Delete',delete_household_member_education_path(@client.id,@education.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :delete, data: { confirm: 'Are you sure you want to delete? '},class: "button alert radius" %>
+	<% else %>
+		<%= link_to 'Back', educations_path(@menu),class: "secondary button radius" %>
+		<%= link_to 'Edit', edit_education_path(@menu,@education.id),class: "button radius" %>
+		<%= link_to 'Delete',delete_education_path(@menu,@education.id), method: :delete, data: { confirm: 'Are you sure you want to delete? '},class: "button alert radius" %>
+	<% end %>
+
+
+
+
+	</section>
+</fieldset>

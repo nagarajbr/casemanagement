@@ -1,0 +1,23 @@
+<fieldset>
+   <section class="solidbody">
+   	<legend><%= set_subheader("Edit absent parental responsibility information for child: #{get_client_full_name(@absent_parent_relationship.from_client_id)}") %></legend>
+   	 	<%= render 'households/selected_household_partial',arg_household: @household %>
+		<%= form_for(@absent_parent_rspability, :url => household_absent_parent_update_path(@absent_parent_rspability.id), method: :put) do |f| %>
+
+		       <%= render "shared/common_error", object_argument: @absent_parent_rspability %>
+		        <ul>
+			     	<div class="row">
+			          <div class="large-4 columns">
+			               <%= render 'form',arg_object: f,arg_notes: @notes,arg_absent_parent: @absent_parent  %>
+				 	  </div>
+				    </div>
+				</ul>
+			    <p>
+			     	<%= link_to 'Cancel', household_absent_parent_show_path(@absent_parent_rspability.id),class: "secondary button radius" %>
+			     	<%= f.submit "Save",class: 'button radius'%>
+			    </p>
+
+
+		<% end %>
+	</section>
+</fieldset>

@@ -1,0 +1,43 @@
+<fieldset>
+	 <section class="solidbody">
+	 	<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD'%>
+				<p>
+					<%= render 'households/selected_household_partial',arg_household: @household %>
+				</p>
+				<% if @edit_race%>
+		     		<%= set_subheader("Edit race-ethnicity information for household member: #{@client.last_name}, #{@client.first_name}") %>
+		     	<% else %>
+		     		<%= set_subheader("Enter race-ethnicity information for household member: #{@client.last_name}, #{@client.first_name}") %>
+	             <% end %>
+	            <%= form_for @client, url: create_household_member_race_path(@household_member.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'), method: :post do |f| %>
+		  	     	<br><%= render "shared/race_error", object_argument: @race_error %><br>
+			        <ul>
+			           <%= render 'form',arg_object: f,arg_app_members:@application_members_without_race, arg_client: @client,arg_client_array:@client_races_in_db_array,arg_notes:@notes,arg_show_race:@show_race  %>
+					</ul>
+				    <p>
+		       			<%= link_to 'Back', start_household_member_registration_wizard_path,class: "button secondary radius" %>
+			            <%= f.submit "Save", class: 'button radius' %>
+				    </p>
+				<% end %>
+		<% else %>
+				<legend>
+			     	<% if @edit_race%>
+			     		<%= set_subheader("Edit race-ethnicity information for: #{@client.last_name}, #{@client.first_name}") %>
+			     	<% else %>
+			     		<%= set_subheader("Enter race-ethnicity information for: #{@client.last_name}, #{@client.first_name}") %>
+		             <% end %>
+	         	</legend>
+	         	<%= form_for @client, url: create_race_path, method: :post do |f| %>
+		  	     	<br><%= render "shared/race_error", object_argument: @race_error %><br>
+			        <ul>
+			           <%= render 'form',arg_object: f,arg_app_members:@application_members_without_race, arg_client: @client,arg_client_array:@client_races_in_db_array, arg_notes:@notes,arg_show_race:@show_race   %>
+					</ul>
+				    <p>
+		       			<%= link_to 'Cancel', show_race_path,class: "button secondary radius" %>
+			            <%= f.submit "Save", class: 'button radius' %>
+				    </p>
+				<% end %>
+		<% end %>
+	</section>
+</fieldset>
+

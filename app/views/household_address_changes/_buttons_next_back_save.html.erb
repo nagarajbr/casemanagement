@@ -1,0 +1,8 @@
+<!--Manoj Patil 10/16/2014  -->
+<%= link_to "Exit Wizard", exit_change_household_address_wizard_path(arg_household_id),class: 'secondary button' %>
+<%= arg_object.submit "Previous", :name => "back_button",class: 'secondary button' unless arg_instance.first_step? %>
+<% if arg_instance.last_step? %>
+	<%= arg_object.submit "Finish",:name => "last_step_button",class: 'button' %>
+<% else %>
+	<%= arg_object.submit "Next",:name => "next_button",class: 'button' %>
+<% end %>

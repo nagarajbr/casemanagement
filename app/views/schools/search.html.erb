@@ -1,0 +1,39 @@
+<section class="solidbody">
+<% if @school.present? %>
+      <table>
+	      <caption><%= set_subheader("Search results") %></caption>
+	      <br>
+			<thead>
+				<tr>
+				<th> School Type </th>
+				<th> School Name</th>
+				<th> Action </th>
+				</tr>
+			</thead>
+	         <tbody>
+				<% @school.each do |school| %>
+				<tr>
+				<td>  <%=  drop_down_value_description(school.school_type) %></td>
+				<td>  <%=  school.school_name %></td>
+				<td>
+				<%= link_to "select",set_selected_schools_in_session_path(school.id),id: "hyperlink"%>
+				</td>
+				</tr>
+				<% end %>
+			</tbody>
+
+		</table>
+		<%= paginate @school %>
+
+<% if @show_new_button %>
+<%= link_to 'New Search',schools_search_path, class: "button radius"%>
+       <%= link_to 'Register New school',new_school_path, class: "button radius"%>
+
+   <% end %>
+
+<% else %>
+       <%= render 'schools/schoolsearch',arg_new_button:@show_new_button  %>
+<% end %>
+
+</section>
+

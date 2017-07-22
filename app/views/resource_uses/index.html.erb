@@ -1,0 +1,56 @@
+
+<fieldset>
+	<section class="solidbody">
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+			<p>
+				<%= (render 'households/selected_household_partial',arg_household: @household) if @household.present?%>
+				<%= render "resource_adjustments/parent_resource",arg_resource: @resource  %>
+				<%= render "resource_adjustments/parent_resource_detail",arg_resource_detail:@resource_detail %>
+			</p>
+		 	<p><legend><%= set_subheader("Resource Use information for: #{client_full_name(@client)}") %></legend></p>
+		<% else %>
+			<%= render "resource_adjustments/parent_resource",arg_resource: @resource  %>
+			<%= render "resource_adjustments/parent_resource_detail",arg_resource_detail:@resource_detail %>
+			<legend><%= set_subheader("Resource Use information for: #{client_full_name(@client)}") %></legend>
+			<p></p>
+		<% end %>
+
+		<table>
+			<caption class="fontc"> Resource Uses <p></p></caption>
+			<thead>
+			    <tr>
+					<th> Usage Code </th>
+					<th> Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @resource_uses.each do |resource_use| %>
+					<tr>
+						<td>  <%= drop_down_value_description(resource_use.usage_code) %></td>
+						<td>
+							<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+								<%= link_to "Show",show_household_member_resource_detail_usage_path(@client.id,@resource_detail.id,resource_use.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>
+							<% else %>
+								<%= link_to "Show",show_resource_uses_path(resource_use.id),id: "hyperlink" %>
+							<% end %>
+
+					    </td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% if  @menu == 'HOUSEHOLD_MEMBER_STEP_WIZARD' %>
+			<%= link_to 'Back', household_member_resource_detail_index_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),class: "secondary button radius" %>
+			<%= link_to("Add Resource Use", new_household_member_resource_detail_usage_path(@client.id,@resource_detail.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') %>
+			<%= link_to("Next",household_member_resource_detail_index_path(@client.id,@resource.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') if ResourceUse.resource_uses_found_for_the_given_resource_detail_id?(@resource_detail.id)%>
+
+		<% else %>
+			<%= link_to 'Back', resource_resource_details_path(@resource),class: "secondary button radius" %>
+			<%= link_to("Add Resource Use", new_resource_uses_path(@resource_detail.id) , class: 'button radius') %>
+		<% end %>
+
+
+
+
+</section>
+  </fieldset>

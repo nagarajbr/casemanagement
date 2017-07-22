@@ -1,0 +1,63 @@
+<%if arg_expected_hours.present? %>
+	<b> Expected Work participation hours</b>
+		<p>
+			<table>
+				<tr>
+					<td>
+						<table>
+							<tr>
+							<td><b>Service Program: </b><%= get_service_program_name(arg_service_program_id) %></td>
+							<td><b>Case Type: </b><%= drop_down_value_description(arg_case_type) %></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+
+						<table>
+
+				 <thead>
+				    <tr>
+				    	<th> Work Participation Status</th>
+						<th> Condition</th>
+						<% if arg_case_type == 4 %>
+						<th> Minimum Employment Hours/Week</th>
+						<% end %>
+						<th> Minimum Core Hours/Week</th>
+						<th> Non Core Hours/Week</th>
+						<th> Total</th>
+						<th> Comments</th>
+
+					</tr>
+				  </thead>
+				    <tbody>
+				    	<% arg_expected_hours.each do |each_record|%>
+						<tr>
+							<td> <%= each_record.work_participation_mandatory_deferred %></td>
+							<td> <%= each_record.work_participation_condition %></td>
+							<% if arg_case_type == 4 %>
+								<td> <%= each_record.workpays_min_employment_hours %></td>
+							<% end %>
+							<td> <%= each_record.min_core_hours %></td>
+							<td> <%= each_record.non_core_hours %></td>
+							<td> <%= each_record.min_core_hours + each_record.non_core_hours %></td>
+							<td> <%= each_record.comments %></td>
+
+						</tr>
+						<% end %>
+					</tbody>
+
+			</table>
+					</td>
+				</tr>
+
+			</table>
+
+
+
+
+
+		</p>
+
+		<%end%>

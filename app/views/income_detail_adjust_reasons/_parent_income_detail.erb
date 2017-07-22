@@ -1,0 +1,26 @@
+<table>
+<caption class="fontc">
+<%= "Check details" %>
+<p></p> </caption>
+	<thead>
+	    <tr>
+			<th> Date Received </th>
+			<th> Check Type </th>
+			<th> Gross Amount </th>
+			<th> Adjusted Total </th>
+			<th> Adjusted Gross Income </th>
+			<th> Count for Converted </th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>  <%= format_db_date arg_income_detail.date_received %></td>
+			<td>  <%= drop_down_value_description(arg_income_detail.check_type) %></td>
+			<td>  <%= number_to_currency_br(arg_income_detail.gross_amt) %></td>
+			<td>  <%= number_to_currency_br(arg_income_detail.adjusted_total) %></td>
+			<td>  <%= number_to_currency_br(arg_income_detail.net_amt) %></td>
+			<td>  <%= get_flag_description(arg_income_detail.cnt_for_convert_ind)%>  </td>
+		</tr>
+
+	</tbody>
+</table>

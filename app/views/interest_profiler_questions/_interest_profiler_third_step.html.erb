@@ -1,0 +1,90 @@
+<%#= debug @zone_results %>
+<% count = 0 %>
+<% if @job_zone_desc.present? %>
+	<% @job_zone_desc["job_zones"]["job_zone"].each do |jz| %>
+		<table>
+		    <tbody>
+					<tr>
+						<td> <b> <%= jz['title'].split(":").first %> </b> </td>
+						<td>  <%= jz['title'].split(":").last %> </td>
+					</tr>
+					<tr>
+						<td> <b> Experience </b> </td>
+						<td> <%= jz['experience'] %> </td>
+					</tr>
+					<tr>
+						<td> <b> Education </b> </td>
+						<td> <%= jz['education'] %> </td>
+					</tr>
+					<tr>
+						<td> <b> Job Training </b> </td>
+						<td> <%= jz['job_training'] %> </td>
+					</tr>
+					<tr>
+						<td> <b> Examples </b> </td>
+						<td> <%= jz['examples'] %> </td>
+					</tr>
+			</tbody>
+		</table>
+
+		<table>
+			<thead>
+				    <tr>
+						<th> Careers </th>
+						<th width="15%"> Bright Outlook </th>
+						<th width="15%"> Green </th>
+						<th width="15%"> Registered Apprenticeship </th>
+					</tr>
+				  </thead>
+		    <tbody>
+		    	<% @zone_results[count]["careers"]["career"].each do |career| %>
+		    		<tr>
+						<td> <%= link_to "#{career['title']}", ipq_career_details_path(career['code'].gsub(/[^0-9]/, '')),id: "hyperlink" %> </td>
+						<td> <%= check_box_tag 'bright_outlook', '', (career['tags']['bright_outlook'] == 'true'), disabled: true %> </td>
+						<td> <%= check_box_tag 'green', 'yes', (career['tags']['green'] == 'true'), disabled: true %> </td>
+						<td> <%= check_box_tag 'apprenticeship', 'yes', (career['tags']['apprenticeship'] == 'true'), disabled: true %> </td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<% count = count + 1 %>
+	<% end %>
+<% else %>
+<table>
+	<thead>
+	    <tr>
+			<th> Careers </th>
+			<th width="15%"> Bright Outlook </th>
+			<th width="15%"> Green </th>
+			<th width="15%"> Registered Apprenticeship </th>
+		</tr>
+  	</thead>
+    <tbody>
+
+				<% @zone_results.each do |career| %>
+					<!-- <td> <%#= radio_button_tag(jz['title'].split(":").first.split.join.underscore, true) %>&nbsp;	<%#= career['title'] %> </td> -->
+					<% if career["careers"]["career"].kind_of?(Array) %>
+					        <% career["careers"]["career"].each do |careers_list| %>
+					         <tr>
+							    <td> <%= link_to "#{careers_list["title"]}", ipq_career_details_path(careers_list["code"].gsub(/[^0-9]/, '')),id: "hyperlink" %> </td>
+							    <td> <%= check_box_tag 'bright_outlook', '', (careers_list["tags"]['bright_outlook'] == 'true'), disabled: true %> </td>
+								<td> <%= check_box_tag 'green', 'yes', (careers_list["tags"]['green'] == 'true'), disabled: true %> </td>
+								<td> <%= check_box_tag 'apprenticeship', 'yes', (careers_list["tags"]['apprenticeship'] == 'true'), disabled: true %> </td>
+						      </tr>
+							<% end %>
+					<% else %>
+						<tr>
+							<td> <%= link_to "#{career["careers"]["career"]["title"]}", ipq_career_details_path(career["careers"]["career"]["code"].gsub(/[^0-9]/, '')),id: "hyperlink" %> </td>
+
+							<td> <%= check_box_tag 'bright_outlook', '', (career["careers"]["career"]["tags"]['bright_outlook'] == 'true'), disabled: true %> </td>
+							<td> <%= check_box_tag 'green', 'yes', (career["careers"]["career"]["tags"]['green'] == 'true'), disabled: true %> </td>
+							<td> <%= check_box_tag 'apprenticeship', 'yes', (career["careers"]["career"]["tags"]['apprenticeship'] == 'true'), disabled: true %> </td>
+							</tr>
+					<% end %>
+				<% end %>
+			</tbody>
+		</table>
+
+
+<% end %>
+

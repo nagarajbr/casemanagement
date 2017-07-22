@@ -1,0 +1,46 @@
+<p>
+   <!-- <fieldset style="width: 50%" id = "test_fieldset">
+    <legend style=" width: auto " class="legend_group">
+      <b><%#= drop_down_value_description(arg_addr.address_type) %> Address:</b><br>
+    </legend>
+    <ul> -->
+      <% if arg_addr == @address %>
+        <legend style=" width: auto " class="legend_group">
+          <b>Entered Mailing Address:</b><br>
+        </legend>
+      <% else %>
+        <legend style=" width: auto " class="legend_group">
+          <b>Verified Mailing Address:</b><br>
+        </legend>
+      <% end %>
+      <% if arg_addr.address_line1.present? %>
+        <% if arg_addr.in_care_of.present? %>
+          <%= " C/O #{arg_addr.in_care_of}"%><br>
+        <% end %>
+        <%= arg_addr.address_line1%><br>
+        <% if arg_addr.address_line2.present? then %>
+          <%= arg_addr.address_line2 %><br>
+        <% end %>
+        <%= " #{(arg_addr.city)}, #{drop_down_value_description(arg_addr.state)}"%>
+        <% if arg_addr.zip_suffix.present? %>
+          <%= "#{arg_addr.zip}-#{arg_addr.zip_suffix}"%>
+        <%else%>
+          <%= "#{arg_addr.zip}"%>
+        <% end %><br>
+        <% if arg_addr.county.present? %>
+          <%= drop_down_value_long_description(arg_addr.county) %><br>
+        <% end %>
+      <% else %>
+        <%= arg_addr.errors.full_messages.first %>
+      <% end %>
+      <!-- <%# if arg_addr.effective_begin_date.present? and arg_addr.address_type == 4664%>
+        Move In Date:
+        <%#= format_db_date arg_addr.effective_begin_date  %><br>
+      <%# end %>
+      <%# if arg_addr.living_arrangement.present? and arg_addr.address_type == 4664%>
+        Federal Housing:
+        <%#= drop_down_value_description(arg_addr.living_arrangement ) %><br>
+      <%# end %> -->
+    <!-- </ul>
+  </fieldset> -->
+</p>

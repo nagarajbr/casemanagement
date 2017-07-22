@@ -1,0 +1,63 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Resource summary for: #{client_full_name(@client)}") %></legend>
+	<% if session[:CLIENT_ID].present? %>
+		<% if @resource_collection.present? %>
+		<% @resource_collection.each do |resource| %>
+
+		<table>
+			<caption class="fontc"><p><%= "Resource: #{drop_down_value_description(resource.resource_type)}"%></p></caption>
+		  <thead>
+		    <tr>
+				<th> Type of Resource </th>
+				<th> Account Number </th>
+				<th> Begin Date </th>
+				<th> End Date </th>
+				<th> Net Value </th>
+			</tr>
+		  </thead>
+		    <tbody>
+					<tr>
+						<td>  <%= drop_down_value_description(resource.resource_type) %></td>
+						<td>  <%= resource.account_number  %></td>
+						<td>  <%= format_db_date resource.date_assert_acquired %></td>
+						<td>  <%= format_db_date resource.date_assert_disposed %></td>
+						<td>  <%= number_to_currency_br(resource.net_value)%> </td>
+					</tr>
+			</tbody>
+
+			<%if @resource_details_collection.present?%>
+				<thead>
+				    <tr>
+				    	<th colspan="2"> Valuation Date </th>
+				    	<th colspan="3"> Value </th>
+
+					</tr>
+				</thead>
+				<tbody>
+				  	<% @resource_details_collection.each do |resource_detail| %>
+						<%if resource_detail.resource_id == resource.id %>
+						<tr>
+							<td colspan="2">  <%= format_db_date resource_detail.resource_valued_date %></td>
+							<td colspan="3">  <%= number_to_currency_br(resource_detail.resource_value) %></td>
+						</tr>
+						<% end %>
+					<%end%>
+				</tbody>
+			<%end%>
+		</table>
+		<% end %>
+		<%= link_to 'Back', resources_path,class: "secondary button radius" %>
+		<%else%>
+				<p>
+			    <h5 class="subheader">No resource information found.</h5>
+		        </p>
+		<%end%>
+	<%else%>
+		    <p>
+	        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+	        </p>
+	        <%= render "shared/search_client_button" %>
+	<%end%>
+</section>
+</fieldset>

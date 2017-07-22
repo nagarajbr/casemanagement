@@ -1,0 +1,107 @@
+
+  <fieldset>
+  <section class="solidbody">
+
+  <% if session[:CLIENT_ID].present? %>
+  <legend><%= set_subheader("#{@characteristic_table_name} for: #{@client.first_name}, #{@client.last_name}") %></legend>
+   <% if @existing_characteristics.present? %>
+        <table>
+          <caption style="text-align:inherit"><b>Characteristics</b><p></p></caption>
+          <thead>
+              <tr>
+              <th> Characteristic </th>
+              <th> Start date </th>
+              <th> End date </th>
+              <th> Action </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @existing_characteristics.each do |existing_characteristic| %>
+              <tr>
+                <td>  <%= drop_down_value_description(existing_characteristic.characteristic_id) %></td>
+                <td>  <%= format_db_date(existing_characteristic.start_date) %></td>
+                <td>  <%= format_db_date(existing_characteristic.end_date) %></td>
+                <td> <%= link_to "Show",show_client_characteristic_path(@menu,@characteristic_type,existing_characteristic.id),id: "hyperlink" %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <br>
+
+              <%#= form_for(@client_characteristic,:url => new_client_characteristic_path(@menu,@characteristic_type), method: :post) do |f| %>
+                  <%#= f.submit 'New', class: "button radius" %>
+                   <%= link_to 'New',new_client_characteristic_path(@menu,@characteristic_type), class: "button radius" %>
+              <%# end %>
+
+                 <%#= link_to 'New',new_client_characteristic_path(@menu,@characteristic_type), class: "button radius" %>
+
+                    <% if @client_assessment.present? %>
+                         <%if !(@client_assessment.first_step?)%>
+                           <%= link_to "Previous", process_previous_step_path,class: ' button radius' %>
+                         <%end%>
+                         <%if !(@client_assessment.last_step?)%>
+                          <%= link_to "Next",process_next_step_path,class: 'button radius ' %>
+                        <%end%>
+                        <%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+                    <% end %>
+
+
+        <%else%>
+
+               <%#= form_for(@client_characteristic,:url => new_client_characteristic_path(@menu,@characteristic_type), method: :post) do |f| %>
+
+
+
+
+              <!--  <%# if @characteristic_type == 'work'%>
+                    <h5 class="subheader">General health characteristics data not found. Is there anything about your health that presents challenge to your work? Or do you have any serious medical conditions?
+                 </h5>
+                  <p></p>
+                  <fieldset class="radio">
+                      <div class="button-group">
+                        <label class="radio_button_bigger_text" for="client_general_health_chalng_to_work_charcteristics_found_add_flag_y"><%#= f.radio_button :client_general_health_chalng_to_work_charcteristics_found_add_flag, "Y"%>Yes</label>
+                        <label class="radio_button_bigger_text" for="client_general_health_chalng_to_work_charcteristics_found_add_flag_n"><%#S= f.radio_button :client_general_health_chalng_to_work_charcteristics_found_add_flag, "N"%>No</label>
+
+                      </div>
+                  </fieldset>
+               <%# else %> -->
+                     <p>
+                    <h5 class="subheader"><%= "No #{@characteristics_description} found. Click New to add #{@characteristics_description} " %></h5>
+                    </p>
+               <%# end %>
+
+
+
+
+
+
+                <%= link_to 'New',new_client_characteristic_path(@menu,@characteristic_type), class: "button radius" %>
+                <%#= f.submit 'New', class: "button radius" %>
+
+
+
+
+
+
+                <% if @client_assessment.present? %>
+                    <%if !(@client_assessment.first_step?)%>
+                     <%= link_to "Previous", process_previous_step_path,class: 'button radius' %>
+                    <%end%>
+                    <%if !(@client_assessment.last_step?)%>
+                    <%= link_to "Next",process_next_step_path,class: 'button radius' %>
+                    <%end%>
+                    <%#= link_to "Generate Assessment Sheet",show_assessment_recommendations_path(@assessment_id),class: 'button radius'%>
+                <% end %>
+
+            <%# end %>
+        <%end%>
+
+
+<%else%>
+        <h5 class="subheader">Client is not selected, Select client by clicking Search Client button.</h5>
+        <p></p>
+        <%= render "shared/search_client_button" %>
+<%end%>
+</section>
+</fieldset>
+

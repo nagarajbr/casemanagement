@@ -1,0 +1,53 @@
+<!--Manoj Patil 10/16/2014  -->
+<section class="solidbody">
+
+          <legend>
+              <%= set_subheader("Manage relationships between application members for application of client: #{client_full_name(@client)}") %>
+          </legend>
+        <%= form_tag update_application_member_multiple_relationship_path, method: :put do %>
+          <%= render "shared/common_error", object_argument: @client_relationship_errors %>
+          <table>
+            <caption style="text-align:inherit"> <b>Application member relationships<b><p></p> </caption>
+            <thead>
+              <tr>
+                  <th> Application Member </th>
+                  <th> Relationship Type </th>
+                  <th> Application Member </th>
+              </tr>
+            </thead>
+              <tbody>
+
+                <% for arg_relation in @client_multiple_relationships   %>
+                  <tr>
+                    <%= fields_for "relationships[]", arg_relation do |f|  %>
+                    <!-- error page-->
+                    <% if arg_relation.present? && arg_relation.errors.any? %>
+                        <td colspan="4">
+                            <div id="error_explanation">
+                              <h5 class="fi-alert subheader" id="alert-text-center">Please correct the following error </h5>
+                              <br>
+                              <ul>
+                                  <% arg_relation.errors.full_messages.each do |msg| %>
+                                     <li><%= msg %></li>
+                                  <% end %>
+                              </ul>
+                            </div>
+                         </td>
+                    <% end %>
+                    <!-- error page end-->
+                  </tr>
+                  <tr>
+                      <%= render "relationship_fields", arg_object: f,arg_object2:arg_relation %>
+
+
+                    <% end %>
+                  </tr>
+                <% end %>
+            </tbody>
+          </table>
+             <%= link_to 'Cancel', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+             <%= submit_tag "Save", class: "button radius" %>
+      <% end %>
+
+</section>
+

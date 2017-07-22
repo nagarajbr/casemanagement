@@ -1,0 +1,26 @@
+<li class="required">
+ 	<%= f.label :reason_code,"Reason Code" %>
+ 	<%= f.select :reason_code, CodetableItem.item_list(88,"Resource Adjust Reason").collect { |p| ["#{p.short_description} ", p.id ] },{ :include_blank => 'select adjustment reason' } %>
+ </li>
+
+ <li class="required">
+  	<%= f.label :resource_adj_amt,"Adjusted Amount" %>
+   	<%= f.number_field :resource_adj_amt, placeholder:"$" ,:step => 0.01,onkeypress: "return isCurrency(event)", onkeyup: "setDecimalValue(event)" %>
+ </li>
+ <li class="required">
+	<%= f.label :receipt_date %>
+	<%= f.date_field :receipt_date, alt: "receipt date", onkeyup:"validate_date_format(event)" %>
+ </li>
+ <li class="required">
+	<%= f.label :adj_begin_date %>
+	<%= f.date_field :adj_begin_date, alt: "Adjust Begin Date", onkeyup:"validate_date_format(event)" %>
+ </li>
+ <li>
+	<%= f.label :adj_end_date %>
+	<%= f.date_field :adj_end_date, alt: "Adjust End Date", onkeyup:"validate_date_format(event)" %>
+ </li>
+ <li>
+	<%= f.label :adj_num_of_months %>
+	<%= f.number_field :adj_num_of_months%>
+ </li>
+

@@ -1,0 +1,74 @@
+<!--
+Rule1) Client not found in the session - inform Client is not found in session - show Client Search Link.
+Rule 2) If No Phone records are found - inform the user -and show New button , so that new records can be     created.
+Rule 3) If Phone records are found for the client - show all phone records in a loop.
+-->
+<fieldset>
+<section class="solidbody">
+	<% if session[:SCHOOLS_ID].present? %>
+		 <% if @school.present? %>
+				<legend><%= set_subheader("Contact information for school: #{@school.school_name}" ) %></legend>
+				<% if @primary_phone.present? || @secondary_phone.present? || @other_phone.present? || @notes.present? || @email.present?%>
+				<!-- record found so Normal View Page -->
+
+
+					<% if @primary_phone.present? %>
+					<P>
+					<b><%= drop_down_value_description(4661) %>:</b>
+					<%= @primary_phone.present? ? format_phone_number(@primary_phone.phone_number) : ""%>
+					</p>
+					<% end %>
+
+					<% if @secondary_phone.present? %>
+					<P>
+					<b><%= drop_down_value_description(4662) %>:</b>
+					<%= @secondary_phone.present? ? format_phone_number(@secondary_phone.phone_number) : "" %>
+					</p>
+					<% end %>
+
+					<% if @other_phone.present? %>
+					<P>
+					<b><%= drop_down_value_description(4663) %>:</b>
+					<%= @other_phone.present? ? format_phone_number(@other_phone.phone_number) : "" %>
+					</p>
+					<% end %>
+	                 <P>
+	                	<% if @school.email_address.present? %>
+		           		<b> Email: </b>
+		           		<%= @school.email_address%>
+		           		<%end%>
+		            </p>
+
+
+						<p>
+							<% if @notes.present? %>
+						 		<b>Notes: </b>
+
+							 	<%=  @notes %>
+							<%end%>
+						</p>
+				<%= link_to 'Cancel', school_index_path(session[:SCHOOLS_ID]),class: "secondary button radius"  %>
+				<%# if validate_authorization(608) %>
+					<%= link_to 'Edit',edit_schools_contact_path, class: "button radius"%>
+				<%# end %>
+
+
+			<% else %>
+				<!-- record not found , so show New button. -->
+				<%# if validate_authorization(607) %>
+					<h5 class="subheader"> No contact information found. Click New to enter contact information.</h5>
+					<p></p>
+					<%= link_to 'New',new_schools_contact_path, class: "button radius" %>
+				<%# else %>
+					<!-- <h5 class="subheader"> No contact information to show.</h5> -->
+				<%# end %>
+			<% end %>
+		<%end%>
+	<% else %>
+		<legend><%= set_subheader("View contact information" ) %></legend>
+		<h5 class="subheader">School is not selected, Select a school by clicking Search button.</h5><br>
+		<p></p>
+		<%= link_to 'Search', schools_search_path,class: "button radius" %>
+	<% end %>
+</section>
+</fielsdet>

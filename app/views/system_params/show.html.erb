@@ -1,0 +1,23 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("System Parameter for: #{@systemparams.description}") %> </legend>
+	<p>
+		<b>description </b>
+		<%= @systemparams.description%>
+
+	</p>
+    <p>
+		<b>value </b>
+		<%= @systemparams.value%>
+
+	</p>
+
+<%= link_to 'Back', system_params_path ,class: "secondary button radius",title1: "Press Enter Key or Mouse Click to go back to previous page ", data: {tooltip1: '' } %>
+<% if validate_authorization(635) %>
+	<%= link_to 'Edit',edit_system_param_path(@systemparams) ,class: "button radius", title1: "Press Enter Key or Mouse Click to edit System Params details ", data: {tooltip1: '' } %>
+<% end %>
+<% if validate_authorization(636) %>
+	<%= link_to 'Delete', system_param_path(@systemparams), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" , title1: "Press Enter Key or Mouse Click to delete System Params details ", data: {tooltip1: '' }%>
+<% end %>
+</section>
+</fieldset>

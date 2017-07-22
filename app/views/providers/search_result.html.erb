@@ -1,0 +1,11 @@
+
+<section class="solidbody">
+
+	<legend><%= set_subheader("Search results") %></legend>
+	<h5 class="subheader">No providers found with the search criteria, enter a new search or register provider.</h5><br>
+    <br>
+	<% if @show_new_button %>
+		<%= link_to 'New Search',new_provider_search_path, class: "button radius"%>
+			<%= link_to 'Register New Provider',new_provider_path, class: "button radius"%>
+	<% end %>
+</section>

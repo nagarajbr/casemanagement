@@ -1,0 +1,97 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+	<section class="solidbody">
+
+
+		<% if session[:HOUSEHOLD_ID].present? && session[:HOUSEHOLD_ID] != 0 %>
+			<legend><%= set_subheader("Applications for household: #{@household.name}" ) %>
+			</legend><br>
+			<% if @household_applications.present? %>
+			<% @show_security_message = nil %>
+					 <%= render 'households/selected_household_partial',arg_household: @household %>
+
+					<table>
+						<caption style="text-align:inherit">
+							<b>Applications</b><p></p>
+						</caption>
+					  <thead>
+					    <tr>
+							<th>  ID </th>
+							<th> Application Date </th>
+
+
+							<th>  Disposition Status</th>
+							<th>  Disposition Date </th>
+							<th>  Disposition Reason </th>
+							<th>  Intake Worker </th>
+							<th>Action </th>
+
+						</tr>
+					  </thead>
+					    <tbody>
+							<% @household_applications.each do |arg_app| %>
+								<tr>
+									<td>  <%= arg_app.id %></td>
+
+									<td>  <%= format_db_date(arg_app.application_date)  %></td>
+
+
+
+									<td>  <%= drop_down_value_description(arg_app.application_disposition_status) %></td>
+									<td>  <%= format_db_date(arg_app.disposition_date)  %></td>
+									<td>  <%= drop_down_value_description(arg_app.application_disposition_reason) %></td>
+									<td>  <%= get_user_name(arg_app.intake_worker_id) if arg_app.intake_worker_id.present?%>  </td>
+									<!-- <td> <%#= link_to "Select",client_application_path(arg_app),id: "hyperlink" %></td> -->
+									<td>
+										<% if arg_app.application_disposition_status.present?%>
+											<%= link_to "Select",application_summary_path(arg_app.id),id: "hyperlink" %>
+										<% else %>
+											<% if  can_logged_in_user_edit?('CLIENT_APPLICATION',arg_app.id)%>
+												<%= link_to "Ready for Processing",ready_for_processing_path(arg_app.id),id: "hyperlink" %>
+											<% else %>
+												<% @show_security_message = " hyperlink is disabled because, you are not the intake worker for the application." %>
+												<%= link_to "Ready for Processing","#",id: "disabled_hyperlink" %>
+											<% end %>
+										<% end %>
+
+									</td>
+
+								</tr>
+							 <% end %>
+						</tbody>
+					</table>
+						<%# if validate_authorization(307) %>
+							<%#= link_to("New Application", new_application_wizard_initialize_path , class: 'button radius') %>
+							<%= link_to("New Application", application_processing_wizard_initialize_path , class: 'button radius') %>
+						<%# end %>
+							<p>
+							<% if  @show_security_message.present?%>
+								<h6 class="small text-left"><b>Ready for Processing</b> <%= "#{@show_security_message}" %></h6>
+							<% end %>
+							</p>
+						</div>
+					</div>
+			<%else%>
+			  	<h5 class="subheader">No application found for this household. You can create new application by clicking the <b>New Application </b>button </h5>
+		        <p></p>
+		        <%= link_to("New Application", application_processing_wizard_initialize_path , class: 'button radius') %>
+		        <%#= link_to 'Household Registration',start_household_member_registration_wizard_path, class: "button radius"%>
+		         <%#= render "shared/search_client_button" %>
+				<%# if validate_authorization(307) %>
+			       <!--  <h5 class="subheader">There are no applications for the client. Click on New Application button to start an application.</h5>
+			        <p></p> -->
+			        <%#= link_to 'New Application',new_application_wizard_initialize_path, class: "button radius"%>
+			        <%#= link_to("New Application", application_processing_wizard_initialize_path , class: 'button radius') %>
+		        <%# else %>
+		        	<!-- <h5 class="subheader">There are no applications for the client.</h5> -->
+		        <%# end %>
+			<%end%>
+		<%else%>
+				<legend><%= set_subheader("Applications for household ") %></legend>
+		        <h5 class="subheader">Household is not selected, Please select household</h5>
+		        <p></p>
+		        <%#= link_to 'Household Registration',new_household_wizard_initialize_path, class: "button radius"%>
+		         <%= render "shared/search_client_button" %>
+		<%end%>
+	</section>
+</fieldset>

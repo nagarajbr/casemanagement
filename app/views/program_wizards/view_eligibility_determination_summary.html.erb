@@ -1,0 +1,49 @@
+<!-- This object is not used -->
+<!--
+<fieldset>
+	<%#= set_subheader("Eligibility Determination Runs for selected Program Unit of Client: #{client_full_name(@client)} #{@run_month_description}") %>
+ 	<p>
+ 	<%#= render 'selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+ 	</p>
+ 	<p>
+ 		<b> Eligibility Determination Runs</b>
+ 	</p>
+
+
+ 	<%# if @program_wizards.present?%>
+		 	<table>
+					  <thead>
+					    <tr>
+							<th> Program Unit ID </th>
+							<th> Primary Contact </th>
+							<th> Service Program </th>
+							<th> Run ID</th>
+							<th> Run Month </th>
+
+							<th>                                </th>
+						</tr>
+					  </thead>
+					    <tbody>
+							<%#  @program_wizards.each do |arg_wizard| %>
+
+								<tr>
+									<td>  <%= arg_wizard.id %></td>
+									<td> <%= get_primary_beneficiary_of_program_unit(arg_wizard.program_unit_id)%></td>
+									<td>  <%= get_service_program_name(@selected_program_unit.service_program_id) %></td>
+									<td>  <%= arg_wizard.id %></td>
+									<td>  <%= format_db_date_MM_YYYY(arg_wizard.run_month) %></td>
+									<td><%#= link_to "show","#",id: "hyperlink" %></td>
+
+								</tr>
+							 <%# end %>
+						</tbody>
+			</table>
+	<%# else %>
+	     <h5 class="subheader">No Eligibility Runs found.Run Eligibility Determination by clicking Eligibility Determination </h5>
+	        <p></p>
+	        <%#= link_to 'Eligibility Determination',program_unit_eligibility_wizard_initialize_path(@selected_program_unit.id), class: "button radius"%>
+	<%# end %>
+	 <%#= link_to 'Back',program_wizards_path, class: "button radius secondary"%>
+
+</fieldset>
+-->

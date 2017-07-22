@@ -1,0 +1,38 @@
+<fieldset>
+  <section class="solidbody">
+    <legend><%= set_subheader(" Activity hours for: #{client_full_name(@client)}") %></legend>
+    <% if session[:CLIENT_ID].present?  %>
+         <% if @activity_hours.present? %>
+                <table>
+                <caption ></caption>
+                <thead>
+                <tr>
+                  <th> Activity Date </th>
+                  <th> Work Participation Status </th>
+                  <th> Assigned Hours </th>
+                  <th> Completed Hours </th>
+                  <th> Absent Hours </th>
+                  <th> Absent Reason </th>
+                </tr>
+                </thead>
+                    <tbody>
+                       <% @activity_hours.each do |activity| %>
+                        <tr>
+                          <td>  <%= format_db_date(activity.activity_date) %></td>
+                          <td>  <%= drop_down_value_description(activity.work_participation_code)  %></td>
+                          <td>  <%=  activity.assigned_hours %></td>
+                          <td>  <%=  activity.completed_hours %></td>
+                          <td>  <%= activity.absent_hours%> </td>
+                         <td> <%= drop_down_value_description(activity.absent_reason)%> </td>
+                        </tr>
+                       <% end %>
+                  </tbody>
+              </table>
+          <%else%>
+             <p>
+               <h5 class="subheader">No activity hours information found.</h5>
+             </p>
+         <%end%>
+    <%end%>
+  </section>
+</fieldset>

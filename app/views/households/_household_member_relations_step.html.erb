@@ -1,0 +1,51 @@
+<!--Manoj Patil 11/12/2015  -->
+<p></p>
+
+<!-- <b><h4>Household Member: <%#= "#{client_full_name(@client)}" %></h4></b> -->
+<p></p>
+
+
+<% if @household_members_count > 1 %>
+
+
+	<% if @client_relations.present? %>
+
+		<table>
+		  <thead>
+		    <tr>
+				<th> Household Member </th>
+				<th> Relationship </th>
+				<th> Household Member</th>
+
+			</tr>
+		  </thead>
+		    <tbody>
+				<% @client_relations.each do |arg_reln| %>
+					<tr>
+						<td>  <%= "#{get_client_full_name(arg_reln.to_client_id)} is" %></td>
+						<td>  <%= "#{drop_down_value_description(arg_reln.relationship_type)} of" %></td>
+						<td>  <%= get_client_full_name(arg_reln.from_client_id) %></td>
+
+					</tr>
+				 <% end %>
+			</tbody>
+
+		</table>
+
+		   <%= link_to "Manage Relationships",edit_household_member_multiple_relationship_path(@household.id), class: 'button radius' %>
+	<% else %>
+			 <h5 class="subheader"> Set up the relationship between household members by clicking 'Manage Relationships' button.</h5>
+			<p></p>
+
+			<p>
+			   <%= link_to "Manage Relationships",edit_household_member_multiple_relationship_path(@household.id), class: 'button radius' %>
+			</p>
+	<%end%>
+
+<% else %>
+	 <h5 class="subheader"> Minimum two household members should be there to set up relationship.Click <b>'Next'</b> button to add one more household member.</h5>
+		<p></p>
+<% end %>
+
+
+

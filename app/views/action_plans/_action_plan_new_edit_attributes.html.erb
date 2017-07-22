@@ -1,0 +1,29 @@
+<li class="required">
+  <%= f.label :short_term_goal %>
+  <% if arg_short_term_goal.present? %>
+    <%= f.text_field :short_term_goal,:value => arg_short_term_goal.first.long_description , :disabled => true  %>
+    <%= f.hidden_field :short_term_goal, value: arg_short_term_goal.first.short_description %>
+  <% end %>
+</li>
+
+<!-- <li class="required">
+  <%#= f.label :long_term_goal %>
+  <%#= f.select :long_term_goal,  @action_plan_long_term_goals.collect { |p| ["#{p.short_description} ", p.id ] }, { :include_blank => 'Select status'} %>
+</li> -->
+
+ <li class="required">
+  <%= f.label :start_date %>
+  <%= f.date_field :start_date, onkeyup:"validate_date_format(event)" %>
+</li>
+
+<% if session[:BRP].blank? %>
+	 <li class="required">
+	  <%= f.label :required_participation_hours %>
+	  <%= f.number_field :required_participation_hours, disabled: arg_action_plan.required_participation_hours.present? %>
+    <% if arg_action_plan.required_participation_hours.present? %>
+    <%= f.hidden_field :required_participation_hours, value: arg_action_plan.required_participation_hours %>
+    <% end %>
+	</li>
+<% end %>
+
+

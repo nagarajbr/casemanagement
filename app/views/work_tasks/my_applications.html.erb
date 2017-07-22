@@ -1,0 +1,63 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Logged in user: #{@ls_logged_in_user}'s client applications ") %></legend>
+
+
+	<% if @my_applications.present? %>
+
+
+			<table>
+				<caption style="text-align:inherit">
+					<b>Applications</b><p></p>
+				</caption>
+			  <thead>
+			    <tr>
+					<th>  ID </th>
+					<th> Household Name </th>
+					<th> Primary Contact </th>
+					<th> Application Date </th>
+
+					<th>  Disposition Date </th>
+					<th>  Disposition Status</th>
+
+					<th>  Disposition Reason </th>
+					<th>Action </th>
+
+				</tr>
+			  </thead>
+			    <tbody>
+					<% @my_applications.each do |arg_app| %>
+					<%# @household_object = Household.find(arg_app.household_id) if arg_app.household_id.present?%>
+						<tr>
+							<td>  <%= arg_app.id %></td>
+							<td>   <%=  arg_app.name %>  </td>
+							<td>   <%= get_primary_applicant_name(arg_app.id) %>  </td>
+							<td>  <%= format_db_date(arg_app.application_date)  %></td>
+
+							<td>  <%= format_db_date(arg_app.disposition_date)  %></td>
+							<td>  <%= drop_down_value_description(arg_app.application_disposition_status) %></td>
+
+							<td>  <%= drop_down_value_description(arg_app.application_disposition_reason) %></td>
+							 <%#= link_to "Select",client_application_path(arg_app),id: "hyperlink" %>
+							<td> <%= link_to "Select",application_summary_path(arg_app.id),id: "hyperlink" %></td>
+
+						</tr>
+					 <% end %>
+				</tbody>
+			</table>
+
+             <div>  <%= paginate @my_applications %></div>
+
+				</div>
+			</div>
+
+
+	<%else%>
+	        <h5 class="subheader">Currently you are not managing any Incomplete applications.</h5>
+	        <p></p>
+
+	<%end%>
+
+</section>
+</fieldset>

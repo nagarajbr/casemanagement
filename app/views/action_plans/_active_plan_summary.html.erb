@@ -1,0 +1,137 @@
+<!--Manoj Patil 10/16/2014  -->
+<% if action_plan.present?%>
+	<table width="100%">
+		<caption style="text-align:inherit"><b> Action Plan Summary for Program Unit</b><p></p></caption>
+		<tr>
+			<td valign="top">
+				<b>Program Unit Details: </b><br>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th> Program Unit ID </th>
+							<th> Service Program </th>
+							<th> Status </th>
+						</tr>
+					</thead>
+					<tbody>
+						<td>  <%= action_plan.program_unit_id %></td>
+						<td>  <%= get_service_program_name_form_program_unit_id(action_plan.program_unit_id) %></td>
+						<td>  <%= drop_down_value_description(action_plan.action_plan_status)  %></td>
+					</tbody>
+				</table>
+			</td>
+			<td valign="top">
+				<b>Action Plan Summary: </b><br>
+				<table width="100%">
+					<thead>
+						<tr>
+							<th> Employment Goal </th>
+							<th> Start Date </th>
+							<th> End Date </th>
+							<th> Agreement Date </th>
+							<th> Status </th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td> <%= employment_goal %> </td>
+							<td> <%= format_db_date(action_plan.start_date) %> </td>
+							<td> <%= format_db_date(action_plan.end_date) %> </td>
+							<td> <%= format_db_date(action_plan.client_agreement_date) %> </td>
+							<td> <%= drop_down_value_description(action_plan.action_plan_status) %> </td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr></tr>
+		<tr>
+			<td colspan = "2">
+				<b>Schedule for <%= arg_work_participation[:current_month].first.reporting_date %></b>: <% if arg_work_participation[:current_month].first.schedule_result.present? && arg_work_participation[:current_month].first.required_avg_hrs_per_week > 0  %><%= "#{arg_work_participation[:current_month].first.schedule_result} of #{arg_work_participation[:current_month].first.required_avg_hrs_per_week} hours" %><% end %><br>
+				<table width="100%">
+					<thead>
+						<tr>
+							<!-- <th> Reporting Month </th> -->
+							<th> Week Ending </th>
+							<% i = 1 %>
+							<% arg_work_participation[:current_month].first.work_characteristics.keys.each do |parent_id| %>
+								<th> <%= get_client_full_name(parent_id) %> Work participation </th>
+								<% i+= 1 %>
+							<% end %>
+							<th> Core Hours </th>
+							<th> Non Core Hours </th>
+							<!-- <th> Hours / Month </th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<% arg_work_participation[:current_month].each do |work_participation| %>
+							<tr>
+								<!-- <td> <b><%#= work_participation.reporting_date %></b> </td> -->
+								<td> <%= format_db_date work_participation.week_ending %> </td>
+								<% work_participation.work_characteristics.values.each do |characteristic_id| %>
+									<td> <%= drop_down_value_description characteristic_id %> </td>
+								<% end %>
+								<td> <%= work_participation.core_hours  %> </td>
+								<td> <%= work_participation.non_core_hours  %> </td>
+								<!-- <td id = <%#= work_participation.schedule_result == "Met" ? "col-result-pass" : "col-result-fail" %>> <%#= work_participation.schedule_result %> </td> -->
+							</tr>
+						<% end %>
+						<!-- <tr>
+							<td colspan = <%#= (arg_work_participation[:current_month].first.work_characteristics.size + 1).to_s%>>
+								<b><%#= "Average hours per week: #{arg_work_participation[:current_month].first.reported_avg_hrs_per_week}" %></b>
+							</td>
+							<td>
+								<b><%#= "Average core hours: #{arg_work_participation[:current_month].first.reported_core_avg_hrs_per_week}" %></b>
+							</td>
+							<td>
+								<b><%#= "Average non core hours: #{arg_work_participation[:current_month].first.reported_non_core_avg_hrs_per_week}" %></b>
+							</td>
+						</tr> -->
+					</tbody>
+				</table>
+				<b>Schedule for <%= arg_work_participation[:next_month].first.reporting_date %></b>: <% if arg_work_participation[:next_month].first.schedule_result.present? && arg_work_participation[:next_month].first.required_avg_hrs_per_week > 0  %><%= "#{arg_work_participation[:next_month].first.schedule_result} of #{arg_work_participation[:next_month].first.required_avg_hrs_per_week} hours" %><% end %><br>
+					<table width="100%">
+						<thead>
+							<tr>
+								<!-- <th> Reporting Month </th> -->
+								<th> Week Ending </th>
+								<% i = 1 %>
+								<% arg_work_participation[:next_month].first.work_characteristics.keys.each do |parent_id| %>
+									<th> <%= get_client_full_name(parent_id) %> Work participation </th>
+									<% i+= 1 %>
+								<% end %>
+								<th> Core Hours </th>
+								<th> Non Core Hours </th>
+								<!-- <th> Hours / Month </th> -->
+							</tr>
+						</thead>
+						<tbody>
+							<% arg_work_participation[:next_month].each do |work_participation| %>
+								<tr>
+									<!-- <td> <b><%#= work_participation.reporting_date %></b> </td> -->
+									<td> <%= format_db_date work_participation.week_ending %> </td>
+									<% work_participation.work_characteristics.values.each do |characteristic_id| %>
+										<td> <%= drop_down_value_description characteristic_id %> </td>
+									<% end %>
+									<td> <%= work_participation.core_hours  %> </td>
+									<td> <%= work_participation.non_core_hours  %> </td>
+									<!-- <td id = <%#= work_participation.schedule_result == "Met" ? "col-result-pass" : "col-result-fail" %>> <%#= work_participation.schedule_result %> </td> -->
+								</tr>
+							<% end %>
+							<!-- <tr>
+								<td colspan = <%#= (arg_work_participation[:current_month].first.work_characteristics.size + 1).to_s%>>
+									<b><%#= "Average hours per week: #{arg_work_participation[:next_month].first.reported_avg_hrs_per_week}" %></b>
+								</td>
+								<td>
+									<b><%#= "Average core hours: #{arg_work_participation[:next_month].first.reported_core_avg_hrs_per_week}" %></b>
+								</td>
+								<td>
+									<b><%#= "Average non core hours: #{arg_work_participation[:next_month].first.reported_non_core_avg_hrs_per_week}" %></b>
+								</td>
+							</tr> -->
+						</tbody>
+					</table>
+			</td>
+		</tr>
+	</table>
+<% end %>

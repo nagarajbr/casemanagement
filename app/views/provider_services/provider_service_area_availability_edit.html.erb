@@ -1,0 +1,13 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Edit hours of operation for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+<%= render 'selected_provider_service_type_location' %>
+<%= form_for @provider_service_area_availability, :url => update_provider_service_area_availability_path(@provider_service_area_availability.id), :method => :patch do |f| %>
+  <%= render "shared/common_error", object_argument: @provider_service_area_availability %>
+	<%= render 'form_provider_service_area_availability',arg_object: f %>
+ 	<%= link_to 'Cancel', show_provider_service_area_availability_path(@provider_service_area_availability.id),class: "secondary button radius" %>
+ 	<%= f.submit "Save", class: 'button radius'%>
+<% end %>
+</section>
+</fieldset>

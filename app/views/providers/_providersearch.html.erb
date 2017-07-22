@@ -1,0 +1,69 @@
+
+	<legend><%= set_subheader("Search for an existing provider") %></legend><br>
+	<%= form_tag @form_path, method: 'get' do %>
+ 		<fieldset>
+	    <legend> By Provider Name</legend><br>
+	    <div class="row">
+	    <div class="large-4 columns">
+	    	<ul>
+	     	<li>
+	     		<%= label_tag :provider_name, "Provider Name"%>
+				<%= text_field_tag :provider_name,params[:provider_name], maxlength: "50"%>
+			</li>
+			</ul>
+		</div>
+		</div>
+		<p> </p>
+		</fieldset>
+
+		<fieldset>
+ 			<legend> By Tax ID (OR) SSN </legend><br>
+ 			<div class="row">
+ 			<div class="large-4 columns">
+ 				<ul>
+	     		<li>
+				 <%= label_tag :tax_id_ssn, "Tax ID (OR) SSN"%>
+		 		<%= text_field_tag :tax_id_ssn,params[:tax_id_ssn] , maxlength: "9"%>
+		 		</li>
+				</ul>
+		 	</div>
+		 	</div>
+		</fieldset>
+
+		<fieldset>
+ 			<legend> By Local Office/and services </legend><br>
+ 			<div class="row">
+ 			<div class="large-4 columns">
+ 				<ul>
+
+		 		<li>
+
+              <%= select_tag "local_office", options_for_select(CodetableItem.item_list(2,"Local Office").collect { |p| ["#{p.long_description} ", p.id] }),{ :prompt => 'Select Local Office' } %>
+            </li>
+				</ul>
+		 	</div>
+		 	</div>
+		</fieldset>
+
+		<fieldset>
+
+ 			<div class="row">
+ 			<div class="large-4 columns">
+ 				<ul>
+
+		 		<li>
+
+              <%= select_tag "service", options_for_select(CodetableItem.item_list(168,"Services").collect { |p| ["#{p.long_description} ", p.id] }),{ :prompt => 'Select Services' } %>
+            </li>
+				</ul>
+		 	</div>
+		 	</div>
+		</fieldset>
+		<%= hidden_field_tag 'called_from', @search_screen %>
+
+		<%= submit_tag "Search", class: 'button radius' %>
+			<% if @show_new_button %>
+		      	<%= link_to 'Register New Provider',new_provider_path, class: "button radius" %>
+		    <% end %>
+		<% end %>
+

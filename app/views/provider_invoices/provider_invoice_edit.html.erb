@@ -1,0 +1,24 @@
+<%= form_for(@provider_invoice, :url => provider_invoice_update_path(@provider_invoice.id), method: :put ) do |f| %>
+
+  <section class="solidbody">
+  <fieldset>
+  	<legend> <%= set_subheader("Enter warrant notes for provider: #{provider_name(@provider)}") %> </legend><br>
+  	 <%= render "shared/common_error", object_argument: @provider_invoice %><br>
+  	 <%= render "common_invoice_view_fields",arg_provider_invoice:@provider_invoice %>
+    <ul>
+        <div class="row">
+          <div class="large-4 columns">
+              <li>
+			      <%= f.label :invoice_notes%>
+			      <%= f.text_area :invoice_notes,maxlength: "250" %>
+			  </li>
+	 	  </div>
+	    </div>
+	</ul>
+	    <p>
+	      <%= link_to "Cancel", provider_invoice_show_path(@provider_invoice.id),class: 'button secondary', title1: "Press Enter Key or Mouse Click to cancel changes and return to Show Page", data: {tooltip1: '' }%>
+	      <%= f.submit "Save ",class: 'button radius'%>
+	    </p>
+	  </fieldset>
+	</section>
+<% end %>

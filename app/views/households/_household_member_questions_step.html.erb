@@ -1,0 +1,45 @@
+<!-- NOT USED -->
+
+<!--Manoj Patil 11/13/2015  -->
+
+<!--
+<b>Household Member: <%#= "#{client_full_name(@client)}" %></b>
+<p></p>
+<%# if @household_member_registration_question_answers_y_n.present? %>
+	<table>
+		<caption style="text-align:inherit">
+			<b>Household member registration Questions</b><p></p>
+		</caption>
+		<thead>
+		    <tr>
+				<th> Question </th>
+				<th> Answer </th>
+			</tr>
+	    </thead>
+	    <tbody>
+	 			<%# for arg_question in  @household_member_registration_question_answers_y_n %>
+						<tr>
+							<td><%#= "#{drop_down_value_description(arg_question.question_id)} " %></td>
+							<td><%#= "#{get_flag_description(arg_question.answer_flag)} " %></td>
+						</tr>
+				<%# end %>
+		</tbody>
+	</table>
+<% #else %>
+
+	 <h5 class="subheader">No answers to household member registration questions found. Do you want to answer registration questions?</h5>
+              <p></p>
+            <fieldset class="radio">
+                <div class="button-group">
+                  <label class="radio_button_bigger_text" for="member_registration_questions_add_flag_y"><%#= arg_object.radio_button :member_registration_questions_add_flag, "Y"%>Yes</label>
+                  <label class="radio_button_bigger_text" for="member_registration_questions_add_flag_n"><%#= arg_object.radio_button :member_registration_questions_add_flag, "N"%>No</label>
+                   <label class="radio_button_bigger_text" for="member_registration_questions_add_flag_s"><%#= arg_object.radio_button :member_registration_questions_add_flag, "S"%>Skip for now</label>
+                </div>
+            </fieldset>
+
+<%# end %>
+<p>
+	   <%#= link_to "Manage Answers",edit_household_member_question_answers_path(@household_member.id), class: 'button radius' %>
+</p>
+
+-->

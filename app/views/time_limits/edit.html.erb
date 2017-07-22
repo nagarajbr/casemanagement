@@ -1,0 +1,10 @@
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Edit program participation information for client: #{client_full_name(@client)}") %></legend>
+		<% if @time_limit.state == 5793 %>
+			<%= render 'edit_in_state',arg_time_limit:@time_limit %>
+		<% else %>
+			<%= render 'edit_out_of_state',arg_time_limit:@time_limit %>
+		<% end %>
+</section>
+</fieldset>

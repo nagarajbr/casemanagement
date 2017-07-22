@@ -1,0 +1,8 @@
+<div class="row">
+	<div class= "large-5 columns">
+		<%= render "client_applications/client_application_third_step", :arg_object => arg_object,arg_app_members:@application_members %>
+	</div>
+</div>
+
+<%= render "application_screenings/application_screening_last_step", :arg_object => arg_object , arg_srvc_prgm_to_be_displayed: "", arg_disposition_types: @application_disposition_types, arg_disposition_reasons:@application_disposition_reasons,
+     arg_selected_application: @selected_application  %>

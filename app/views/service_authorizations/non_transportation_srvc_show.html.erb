@@ -1,0 +1,57 @@
+
+<fieldset>
+<section class="solidbody">
+
+		<legend><%= set_subheader("Supportive Service information for: #{client_full_name(@client)}" ) %>
+			</legend>
+		<P> <%= render "action_plan_details/parent_action_plan",arg_action_plan:@action_plan,arg_emp_goal:@employment_goal %> </p>
+				<p>  <%= render "selected_action_plan_detail",arg_activity:@activity_detail_object%>
+			</p>
+
+			<!-- <p>
+			     <b>Barrier:  </b>
+                 <%#=  get_barrier_description(@non_transport_authorization.barrier_id) %>
+
+			</p> -->
+
+            <p>
+			      <b>Supportive Service:  </b>
+                 <%= drop_down_value_description(@non_transport_authorization.service_type) %>
+			</p>
+
+
+		    <p>
+			    <b>Supportive Service Provided by:</b>
+
+			    	<%= get_provider_name(@non_transport_authorization.provider_id)  %>
+
+			</p>
+
+
+
+			<p>
+			    <b> Service Date:</b>
+
+			    <%=format_db_date(@non_transport_authorization.service_date) %>
+
+		    </p>
+
+
+			<p>
+			    <b> Notes:</b>
+			    <%= @non_transport_authorization.notes  %>
+			</p>
+
+
+			<%= link_to 'Cancel', service_authorizations_index_path(session[:PROGRAM_UNIT_ID]),class: "secondary button radius" %>
+			<% if validate_authorization(700) %>
+				<%= link_to "Edit ",non_transportation_srvc_edit_path(@non_transport_authorization.id), class: "button radius" %>
+			<% end %>
+			<% if validate_authorization(701) %>
+				<%= link_to 'Delete', non_transportation_srvc_delete_path(@non_transport_authorization.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+			<% end %>
+				<%#= link_to "Approve",authorize_non_transport_service_authorization_path(@non_transport_authorization.id), class: "button radius" %>
+
+</section>
+</fieldset>
+

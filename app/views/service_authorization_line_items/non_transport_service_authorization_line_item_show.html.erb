@@ -1,0 +1,58 @@
+<!-- <fieldset>
+	<section class="solidbody">
+		<legend><%#= set_subheader("Service Plan Line Item details for Provider:  #{provider_name(@provider)}" ) %>
+			</legend>
+			<br>
+			<%#= render  "selected_service_authorization", arg_object: @provider_service_authorization %>
+			<P></P>
+
+			<p>
+			<b>Warrant number:  </b>
+                <%#= @service_authorization_line_item.provider_invoice_id %>
+			</p>
+
+			<p>
+			    <b>Service Date:  </b>
+                <%#= format_db_date(@service_authorization_line_item.service_date) %>
+			</p>
+
+			<b>Provider Invoice:  </b>
+                <%#= @service_authorization_line_item.provider_invoice %>
+			</p>
+
+
+			<p>
+			    <b>Actual Cost:  </b>
+                <%#= number_to_currency_br(@service_authorization_line_item.actual_cost) %>
+			</p>
+
+			<p>
+			    <b>Line Item Status:  </b>
+                <%#= drop_down_value_description(@service_authorization_line_item.line_item_status) %>
+			</p>
+
+
+
+			<b>Notes:  </b>
+                <%#= @service_authorization_line_item.notes %>
+			</p>
+
+		<%#= link_to "Back ",non_transport_service_authorization_line_items_index_path, class: "secondary button radius" %>
+
+		<%# if @can_edit == "Y" %>
+			<%#= link_to "Edit ",non_transport_service_authorization_line_item_edit_path(@provider_service_authorization.id,@service_authorization_line_item.id), class: "button radius" %>
+
+			<%## if validate_authorization(728) %>
+				<%##= link_to "Submit ",non_transportation_service_authorization_line_item_approve_path(@provider_service_authorization.id,@service_authorization_line_item.id), class: "button radius" %>
+
+			<%## end %>
+
+		<%# end %>
+		<%## if  @can_generate_warrant == "Y"%>
+			<%##= link_to "Generate Warrant",generate_non_transport_service_provider_invoice_path(@provider_service_authorization.id,@service_authorization_line_item.id), class: "button radius" %>
+		<%# #end %>
+
+	</section>
+</fieldset>
+
+ -->

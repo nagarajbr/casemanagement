@@ -1,0 +1,35 @@
+<fieldset>
+	<section class="solidbody">
+	<%= form_for(@work_task, :url => case_transfer_create_path, method: :post) do |f| %>
+		<legend><%= set_subheader("Transfer selected case to local office") %> </legend>
+		<%= render "shared/common_error", object_argument: @work_task %>
+		<%= render "seleted_program_unit", :selected_program_unit => @selected_program_unit %>
+		<ul>
+		    <div class="row">
+				<div class="large-6 columns">
+		      <li class="required">
+			      <%= f.label :assigned_to_id, "Transfered to local office" %>
+			      <%= f.select :assigned_to_id ,CodetableItem.item_list(2,"Local Offices ").collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Select local offices' }%>
+			  </li>
+
+			  <li >
+			      <%= f.label :notes %>
+			      <%= f.text_area :notes, maxlength: "255" %>
+
+              </li>
+
+
+
+
+
+			   <p>
+			<%= link_to "Cancel",my_program_units_path,class: 'secondary button radius' %>
+
+			<%= f.submit "Transfer",class: 'button radius'%>
+		</p>
+		    </div>
+	   </div>
+		</ul>
+	<%end%>
+	</section>
+</fieldset>

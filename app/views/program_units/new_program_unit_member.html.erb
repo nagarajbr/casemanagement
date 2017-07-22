@@ -1,0 +1,24 @@
+<!--Manoj Patil 10/16/2014  -->
+<fieldset>
+<section class="solidbody">
+	<%= form_for(@client_for_program_unit_member, :url => new_program_unit_member_path(@selected_program_unit.id), method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @client_for_program_unit_member %>
+    <fieldset>
+    	<legend><%= set_subheader("Register a household member") %></legend>
+    	<ul>
+	     	<div class="row">
+	          <div class="large-4 columns">
+	               <%= render 'clients/form',arg_object: f, arg_client: @client_for_program_unit_member %>
+		 	  </div>
+		    </div>
+		</ul>
+	    <p>
+
+	    	<%= link_to 'Back', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+	       <%= f.submit "Save",class: 'button radius'%>
+
+	    </p>
+    </fieldset>
+<% end %>
+</section>
+</fieldset>

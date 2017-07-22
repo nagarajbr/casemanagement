@@ -1,0 +1,8 @@
+<%= form_tag(process_application_processing_wizard_path, method: :post) do %>
+	<%= hidden_field_tag "application_processing_current_step", arg_selected_application.application_processing_current_step %>
+	<b><h4><%= arg_step_number %></h4><%#= "Select Service Program" %></b>
+	<%= render "family_composition/possible_family_compositions",arg_family_comp:arg_family_comp,arg_service_program:arg_service_program,arg_application:arg_application %>
+	<div>
+  		<%= render "application_processing_buttons_next_back_save", arg_object: "", arg_instance: arg_selected_application , arg_family_comp:arg_family_comp %>
+    </div>
+<% end %>

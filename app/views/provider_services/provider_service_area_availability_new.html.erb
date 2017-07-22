@@ -1,0 +1,16 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Enter hours of operation for provider: #{provider_name(@provider)}" ) %></legend>
+<%= render "providers/selected_provider" %>
+
+<%= render 'selected_provider_service_type_location' %>
+<%= render 'selected_hours_of_operation' %>
+<%= form_for @provider_service_area_availability, :url => create_provider_service_area_availability_path, :method => :post do |f| %>
+  <%= render "shared/common_error", object_argument: @provider_service_area_availability %>
+	<%= render 'form_provider_service_area_availability',arg_object: f %>
+ 	<%= link_to 'Cancel', provider_service_areas_availability_path,class: "secondary button radius" %>
+ 	<%= f.submit "Save & Add", :name => "save_and_add", class: 'button radius'%>
+ 	<%= f.submit "Save & Exit", :name => "save_and_exit", class: 'button radius'%>
+<% end %>
+</section>
+</fieldset>

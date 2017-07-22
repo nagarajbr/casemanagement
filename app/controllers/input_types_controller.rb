@@ -1,0 +1,2 @@
+class InputTypesController < AttopAncestorController
+end

@@ -1,0 +1,24 @@
+<!-- NOT USED
+
+
+
+
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Enter address information for: #{client_full_name(@client)}") %></legend>
+	    <% if @client.present? %>
+	  		<%= form_for @address, url: create_household_member_address_path(@client.id), method: :post do |f| %>
+		     	<%= render "shared/common_error", object_argument: @addresses_error_messages %>
+		     	<%= render 'household_address_form',arg_object: f %>
+		     	 <p>
+			        <%= link_to 'Back',start_household_member_registration_wizard_path,class: "secondary button radius" %>
+			        <%= f.submit "Save", class: 'button radius' %>
+			    </p>
+	     	<% end %>
+		<% end %>
+</section>
+</fieldset>
+
+
+
+-->

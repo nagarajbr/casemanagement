@@ -1,0 +1,2 @@
+class ClientResourcesController < AttopAncestorController
+end

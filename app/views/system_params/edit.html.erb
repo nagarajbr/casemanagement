@@ -1,0 +1,12 @@
+<fieldset>
+	<section class="solidbody">
+	<legend><%= set_subheader("Edit system parameter item for : #{@systemparamcategory.description}") %></legend>
+	<%= form_for(@systemparams, :url => system_param_category_system_param_path, method: :put) do |f| %>
+		<%= render 'form', arg_object: f %>
+		<p>
+      <%= link_to 'Back', system_param_category_path(@systemparamcategory.id),class: "secondary button radius" %>
+      <%= f.submit "Save" ,class: 'button radius' %>
+       </p>
+	<%end%>
+	</section>
+</fieldset>

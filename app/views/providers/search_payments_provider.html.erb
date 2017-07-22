@@ -1,0 +1,21 @@
+<fieldset>
+<section class="solidbody">
+	<% if @providers.present? %>
+         <%= render 'providers/search_providers' %>
+
+		<% if @show_new_button %>
+		 	<%= link_to 'New Search',payments_provider_new_search_path, class: "button radius"%>
+		 	<% if validate_authorization(535) %>
+	        <% if @show_register_new_provider_button == false %>
+	        <%else%>
+		      	<%= link_to 'Register New Provider',new_provider_path, class: "button radius" %>
+		    <% end %>
+        	<% end %>
+	    <% end %>
+
+	<% else %>
+       	<%= render 'providers/providersearch' %>
+	<% end %>
+
+</section>
+</fieldset>

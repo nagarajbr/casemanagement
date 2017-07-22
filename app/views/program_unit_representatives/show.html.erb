@@ -1,0 +1,83 @@
+<fieldset>
+  <section class="solidbody">
+    <legend>
+        <%= set_subheader("Representative information of program unit of client: #{client_full_name(@client)}") %>
+    </legend>
+    <p>
+    <%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+    </p>
+
+    <p>
+      <b>Program unit id: </b>
+      <%= @program_unit_representative.program_unit_id %>
+    </p>
+    <p>
+      <b>Name: </b>
+      <%= get_client_full_name(@program_unit_representative.client_id) %>
+    </p>
+    <p>
+      <b>SSN: </b>
+      <%= format_SSN(Client.get_ssn(@program_unit_representative.client_id)) %>
+    </p>
+    </p>
+    <p>
+      <b>Date of Birth: </b>
+      <%= format_db_date(Client.get_dob(@program_unit_representative.client_id)) %>
+    </p>
+     <p>
+      <b> Representative Type: </b>
+      <%= drop_down_value_description @program_unit_representative.representative_type %>
+    </p>
+
+     <p>
+      <b>Account Number: </b>
+      <%= AccountNumber.get_representative_account_number( @program_unit_representative.id) %>
+    </p>
+
+     <!-- <p>
+      <b>Status: </b>
+      <%= drop_down_value_description @program_unit_representative.status %>
+    </p> -->
+
+    <p>
+      <b> Start Date: </b>
+      <%=format_db_date(@program_unit_representative.start_date) %>
+
+    </p>
+
+    <p>
+      <b>End Date: </b>
+      <%=format_db_date(@program_unit_representative.end_date) %>
+
+    </p>
+
+
+
+      <%= link_to 'Back', program_unit_representatives_index_path(@program_unit_representative.program_unit_id),class: "secondary button radius" %>
+      <%#= link_to 'Edit', program_unit_representatives_edit_path(@program_unit_representative.id),class: "button radius" %>
+      <% if  ProgramUnit.get_current_participation_status_value(@program_unit_id) != 6044%>
+        <%if !(ProgramUnitParticipation.is_program_unit_participation_exists?(@program_unit_id))%>
+          <%# if  can_logged_in_user_edit?("PROGRAM_UNIT",@program_unit_id) || can_logged_in_user_edit?("EMPLOYMENT_PLANNING",@program_unit_id)%>
+           <% if  can_logged_in_user_edit?("PROGRAM_UNIT",@program_unit_id) %>
+              <%= link_to 'Delete', program_unit_representatives_destroy_path(@program_unit_representative.id), method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+            <% else %>
+              <%= link_to 'Delete',"#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Delete</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can delete representative.</h6>
+                </p>
+          <% end %>
+        <%end%>
+        <% if @program_unit_representative.end_date == nil %>
+          <%if can_logged_in_user_edit?("PROGRAM_UNIT",@program_unit_id) %>
+            <%= link_to "Deactivate",program_unit_representative_deactivated_path(@program_unit_representative.id),class: "button radius" %>
+          <% else %>
+                <%= link_to 'Deactivate',"#", class: "disabled button"%>
+                <p>
+                  <h6 class="subheader"><b>Deactivate</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can deactivate representative.</h6>
+                </p>
+          <% end %>
+        <% end %>
+      <%end%>
+
+  </section>
+</fieldset>

@@ -1,0 +1,40 @@
+namespace :populate_sys_param83 do
+	desc "work task manual and system closed tasks "
+	task :Work_task_system_created => :environment do
+	#created by system closed manually
+	user_object = User.find(1)
+    AuditModule.set_current_user=(user_object)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"2142",description:"ED Data Changed",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"2154",description:"Re-evaluation",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"2158",description:"SSN Mismatch",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"5878",description:"Citizenship not verified",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6388",description:"Work on First Time benefit Rejected program unit",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6491",description:"Request to approve Provider Invoice",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6492",description:"work on rejected Provider Invoice",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6576",description:"Program Unit closure",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6635",description:"Work on Program Unit due to batch Eligibility Determination",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6716",description:"Potentially eligible for sanction",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6718",description:"Prescreening process",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"6386",description:"Assign Eligibility Worker to Program Unit",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_MANUAL_CLOSE",value:"2144",description:"Provider Invoice Authorization",created_by: 1,updated_by: 1)
+	#created by system closed by system
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"2140",description:"Action Plan Follow Up",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"2168",description:"Sanction",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"2172",description:"Approve Program Unit",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"2178",description:"Case Transfer",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6344",description:"Assign Case Manager to Program Unit",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6346",description:"Complete program unit and determine eligibility",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6353",description:"Approve Provider Agreement",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6387",description:"Complete Work Readiness Assessment",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6464",description:"Work on rejected CPP",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6469",description:"Request to approve Service Payment",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6470",description:"Work on rejected Service Payment",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6593",description:"Complete Application Screening",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6605",description:"Work on Employment Planning and CPP",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6607",description:"Approve CPP",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6633",description:"Request to Approve First Time benefit amount",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6459",description:"Work on Rejected Provider Agreement",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6641",description:"Ready for FMS review",created_by: 1,updated_by: 1)
+	SystemParam.create(system_param_categories_id: 9,key:"SYSTEM_CREATED_SYSTEM_CLOSE",value:"6621",description:"create a work task when assignment done from queue",created_by: 1,updated_by: 1)
+  end
+end

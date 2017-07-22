@@ -1,0 +1,23 @@
+<fieldset>
+<section class="solidbody">
+	<legend><%= set_subheader("Add representative to program unit of client: #{client_full_name(@client)}") %></legend>
+	<p>
+	<%= render 'program_wizards/selected_completed_program_unit',arg_selected_program_unit: @selected_program_unit %>
+</p>
+<%= form_for(@program_unit_representative, :url => program_unit_representatives_create_path, method: :post) do |f| %>
+  <%= render "shared/common_error", object_argument: @program_unit_representative %>
+
+    	<ul>
+	     	<div class="row">
+	          <div class="large-4 columns">
+	               <%= render 'form',arg_object: f,arg_pgu_member_collection:@program_unit_members_collection_for_representatives %>
+		 	  </div>
+		    </div>
+		</ul>
+
+	    	<%= link_to 'Back', program_unit_representatives_index_path(@program_unit_id) ,class: "secondary button radius" %>
+	       	<%= f.submit "Save",class: 'button radius'%>
+
+<% end %>
+</section>
+</fieldset>

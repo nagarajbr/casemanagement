@@ -1,0 +1,66 @@
+<!--Manoj Patil 11/17/2015  -->
+
+<!--
+<table>
+	<caption style="text-align:inherit">
+		<b>Household Members</b><p></p>
+	</caption>
+  <thead>
+    <tr>
+
+		<th> Client ID </th>
+		<th> Member Name </th>
+		<th> SSN </th>
+		<th> Date of Birth </th>
+		<th> Gender </th>
+
+		<th> Steps Completed</th>
+		<th> Action </th>
+	</tr>
+  </thead>
+    <tbody>
+		<%# @household_members.each do |arg_member| %>
+			<%# client_object = Client.find(arg_member.client_id)%>
+			<%# @steps_completed_text = HouseholdMemberStepStatus.steps_completed_for_client(client_object.id)%>
+			<%# @completed_steps = HouseholdMemberStepStatus.get_steps_completed_for_client(client_object.id, arg_member.household_id)%>
+			<%# @all_steps = HouseholdMemberStepStatus.get_all_steps_for_client(client_object.id,arg_member.household_id)%>
+			<tr>
+
+				<td>  <%#= arg_member.client_id %>  </td>
+				<td>  <%#= client_full_name(client_object)  %></td>
+				<td>  <%#= format_SSN(client_object.ssn) %></td>
+				<td>  <%#= format_db_date(client_object.dob) %></td>
+				<td>  <%#=  drop_down_value_description(client_object.gender) %></td>
+
+<<<<<<< .mine
+				<!<td>  <%#= link_to("#{arg_member.steps_completed} of 11 Completed ", navigate_to_first_skiped_step_path(arg_member.id) , id: "hyperlink") %></td> -->
+				<!-- <td> -->
+					<%# if @completed_steps != @all_steps  %>
+
+
+				<!-- <td>
+					<%# if @completed_steps != @all_steps  %>
+
+				<td --> <%#= link_to("#{arg_member.steps_completed} of 11 Completed ", navigate_to_first_skiped_step_path(arg_member.id) , id: "hyperlink") %>
+				<!-- <td>
+					<%# if @completed_steps != @all_steps  %>
+
+
+						<%#= link_to("#{@steps_completed_text}", navigate_to_first_skiped_step_path(arg_member.id) , id: "hyperlink") %>
+
+					<%# else %>
+						 <%#= "#{@steps_completed_text}" %>
+					<%# end %>
+				<! </td> -->
+				<!-- <td><%#= link_to("Select", select_hh_member_for_finance_data_entry_path(arg_member.id) ,  -->id: "hyperlink") %></td>
+
+					<%# else %>
+						 <%#= "#{@steps_completed_text}" %>
+					<%# end %>
+				</td>
+				<td><%#= link_to("Select", select_hh_member_for_finance_data_entry_path(arg_member.id) , id: "hyperlink") %></td>
+
+			</tr>
+		 <%# end %>
+	</tbody>
+</table>

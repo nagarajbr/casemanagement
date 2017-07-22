@@ -1,0 +1,35 @@
+<fieldset>
+<section class="solidbody">
+<legend><%= set_subheader("Service information for provider: #{provider_name(@provider)}" ) %></legend>
+
+<%= render "providers/selected_provider" %>
+  <p>
+    <b>Service: </b>
+    <%= drop_down_value_long_description(@providerservice.service_type) %>
+  </p>
+
+  <p>
+    <b>Service Units: </b>
+    <%= @providerservice.service_units %>
+  </p>
+
+   <p>
+    <b>Start date: </b>
+    <%= format_db_date @providerservice.start_date %>
+  </p>
+
+   <p>
+    <b>End date: </b>
+    <%= format_db_date @providerservice.end_date %>
+  </p>
+
+  <%= render "notes/notes_field_show", arg_notes: @notes %>
+
+    <%= link_to 'Back', provider_services_path,class: "secondary button radius" %>
+    <% if validate_authorization(554) %>
+      <%= link_to 'Edit', edit_provider_service_path(@providerservice),class: "button radius" %>
+    <% end %>
+    <%#= link_to 'Delete',"#", method: :delete, data: { confirm: 'Are you sure?' },class: "button alert radius" %>
+
+</section>
+</fieldset>

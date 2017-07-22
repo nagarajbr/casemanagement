@@ -1,0 +1,31 @@
+
+
+<% if arg_pgu_members.present? %>
+<b><h6>Program Unit Members </h6></b>
+		<table>
+			<thead>
+				<tr>
+					<th> Name </th>
+					<th> SSN </th>
+					<th> Gender </th>
+					<th> Date of Birth </th>
+					<th> Status </th>
+					<th> Primary Member</th>
+					<th> Action </th>
+				</tr>
+			</thead>
+			<tbody>
+				<%  arg_pgu_members.each do |arg_m| %>
+					<tr>
+						<td> <%=  arg_m.client_full_name %> </td>
+						<td> <%=  format_SSN(arg_m.ssn) %> </td>
+						<td> <%=  drop_down_value_description(arg_m.gender) %> </td>
+						<td> <%=  format_db_date (arg_m.dob) %></td>
+						<td> <%=  drop_down_value_description(arg_m.member_status) %> </td>
+						<td> <%= is_the_client_primary_contact(arg_m.program_unit_id, 6345, arg_m.client_id) %> </td>
+						<td><%= link_to "Delete",delete_program_unit_member_path(arg_pgu.id,arg_from,arg_m.id), method: :delete, data: { confirm: 'Are you sure?' },id: "hyperlink_alert" %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+<%end%>

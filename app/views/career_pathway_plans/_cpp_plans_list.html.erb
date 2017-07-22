@@ -1,0 +1,39 @@
+<table>
+    <thead>
+	    <tr>
+	    	<th> Program Unit ID </th>
+	    	<th> Service Program </th>
+	    	<th> Career Plan ID </th>
+	    	<th> Client Signed Date </th>
+			<th> Case Worker </th>
+			<!-- <th> Assessment ID </th> -->
+			<th> Status </th>
+
+			<th> Action </th>
+		</tr>
+    </thead>
+    <tbody>
+		<% arg_object.each do |each_plan| %>
+
+			<tr>
+				<% if each_plan.program_unit_id.present?%>
+					<td>  <%= each_plan.program_unit_id%></td>
+					<td>  <%= get_service_program_name(each_plan.service_program_id)%></td>
+				<% else %>
+					<td></td>
+					<td></td>
+				<% end %>
+				<td>  <%= each_plan.id%></td>
+				<td>  <%= format_db_date(each_plan.client_signed_date) %></td>
+				<td>  <%= get_user_name(each_plan.case_worker_signature) %></td>
+				<!-- <td>  <%#= each_plan.client_assessment_id  %></td> -->
+				<td>  <%= drop_down_value_description each_plan.state %></td>
+
+				<td>
+					<%= link_to "Show",
+					((each_plan.state.present? && each_plan.state == 6166) ? show_cpp_path(each_plan.id) : show_pending_cpp_path(each_plan.id)),id: "hyperlink" %>
+				</td>
+			</tr>
+		 <% end %>
+	</tbody>
+</table>

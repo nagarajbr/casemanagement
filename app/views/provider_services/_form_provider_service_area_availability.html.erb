@@ -1,0 +1,44 @@
+
+<ul>
+    <div class="row">
+     <div class="large-4 columns">
+     	<li class="required">
+              <%= arg_object.label :day_of_the_week %>
+              <% if @blank_drop_down %>
+                <%= arg_object.select :day_of_the_week, @day.collect { |p| ["#{p.short_description} ", p.id] },{ :include_blank => 'Monday to Friday' }%>
+              <% else %>
+                <%= arg_object.select :day_of_the_week, @day.collect { |p| ["#{p.short_description} ", p.id] } %>
+              <% end %>
+        </li>
+
+<li>
+          <%= arg_object.label :start_time_5i %>
+          <%= arg_object.time_select :start_time,
+                                            :combined => true,
+                                            :default => Time.now.change(:hour => 8, :min => 00),
+                                            :minute_interval => 30,
+                                            :time_separator => "",
+                                            :start_hour => 00,
+                                            :start_minute => 00,
+                                            :end_hour => 23,
+                                            :end_minute => 30,
+                                            :ampm => true %>
+
+        </li>
+
+        <li>
+          <%= arg_object.label :end_time_5i %>
+          <%= arg_object.time_select :end_time,
+                                            :combined => true,
+                                            :default => Time.now.change(:hour => 17, :min => 00),
+                                            :minute_interval => 30,
+                                            :time_separator => "",
+                                            :start_hour => 00,
+                                            :start_minute => 00,
+                                            :end_hour => 23,
+                                            :end_minute => 30,
+                                            :ampm => true %>
+        </li>
+     </div>
+  </div>
+</ul>

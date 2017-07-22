@@ -1,0 +1,9 @@
+
+<p>
+ <b> Trip End Address:  </b><br>
+	 <%= arg_object.trip_end_address_line1 %><br>
+	 <%= "#{arg_object.trip_end_address_line2}, " if  arg_object.trip_end_address_line2.present? %>
+	 <%= "#{arg_object.trip_end_address_city},"  %>
+	 <%= "#{drop_down_value_long_description(arg_object.trip_end_address_state)}"  %>
+	 <%= arg_object.trip_end_address_zip  %>
+</p>

@@ -1,0 +1,14 @@
+ sanction id = 105 ,sanction detail id = 456,sanction month = 2016-04-01,sanction implication = 6111
+ sanction id = 212 ,sanction detail id = 457,sanction month = 2016-04-01,sanction implication = 6111
+sanction id = 13 ,sanction detail id = 458,sanction month = 2016-04-01,sanction implication = 6112
+ sanction id = 207 ,sanction detail id = 459,sanction month = 2016-04-01,sanction implication = 6111
+sanction id = 108 ,sanction detail id = 460,sanction month = 2016-04-01,sanction implication = 6111
+sanction_details_sanction_indicator_closed = 107,4,3064
+Total sanction record present = 34
+Total records - no sanction details present  = 12
+Total sanction record has next month sanction detail record   = 16
+Total sanction details records inserted  = 5
+Total records sanction is released = 0
+count_for_sanction_details_sanction_indicator_closed = 1
+count_for_sanction_details_insert_failed =0
+count_for_sanction_served_update_fail =0

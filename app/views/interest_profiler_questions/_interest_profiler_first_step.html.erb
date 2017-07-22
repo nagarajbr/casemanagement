@@ -1,0 +1,5 @@
+<p>
+	<% @questions.each do |q| %>
+    	<%= radio_button_tag 'answer', "#{q}", @answer == q %>&nbsp;<%= q %><br>
+    <% end %>
+</p>

@@ -1,0 +1,28 @@
+<table>
+<caption class="fontc"> Expense information <p></p></caption>
+  <thead>
+      <tr>
+
+			<th> Begin Date </th>
+			<th> End Date </th>
+			<th> Type of Expense </th>
+			<th> Frequency </th>
+			<th> Recalculate Indicator </th>
+
+
+		</tr>
+		</thead>
+       <tbody>
+
+			<tr>
+				<td>  <%=  format_db_date(arg_expense.effective_beg_date)  %></td>
+				<td>  <%=  format_db_date(arg_expense.effective_end_date) %></td>
+				<td>  <%=  drop_down_value_description(arg_expense.expensetype) %></td>
+				<td>  <%=  drop_down_value_description(arg_expense.frequency) %></td>
+				<td>  <%=  get_flag_description(arg_expense.budget_recalc_ind) %>  </td>
+
+
+			</tr>
+
+</tbody>
+	</table>

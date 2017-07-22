@@ -1,0 +1,51 @@
+<fieldset>
+    <section class="solidbody">
+        <legend><%= set_subheader("Service agreement details for provider: #{@provider.provider_name}" ) %></legend>
+        <%= render "providers/selected_provider" %>
+        <%= render "show_provider_agreement_details" %>
+        <%= link_to 'Back', provider_agreements_path,class: "secondary button radius" %>
+        <% if @read_only == true %>
+                <%# if validate_authorization(689) %>
+                    <%= link_to 'Print Agreement',provider_agreement_print_path(@provider_agreement.id),class: "button radius" %>
+                <%# end %>
+        <% else %>
+                <% if @agreement_approved == true %>
+                    <% if validate_authorization(688) %>
+                        <%= link_to 'Terminate',provider_agreement_termination_edit_path(@provider_agreement.id),class: "button radius" %>
+                    <% end %>
+                    <%# if validate_authorization(689) %>
+                        <%= link_to 'Print Agreement',provider_agreement_print_path(@provider_agreement.id),class: "button radius" %>
+                    <%# end %>
+                <% else%>
+                    <%# if validate_authorization(542) %>
+                        <%= link_to 'Edit', edit_provider_agreement_wizard_path(@provider_agreement.id),class: "button radius" %>
+                    <%# end %>
+
+                    <% if @can_show_approve_reject_buttons == true%>
+                        <% if validate_authorization(687) %>
+                            <%= link_to 'Approve', approve_provider_agreement_path(@provider_agreement.id),class: "button radius" %>
+                        <% end %>
+                        <% if validate_authorization(691) %>
+                            <%= link_to 'Reject', provider_agreement_reject_edit_path(@provider_agreement.id),class: "button radius" %>
+                        <% end %>
+                    <% end%>
+
+                    <% if @can_show_request_for_approval_button == true%>
+                        <%# if validate_authorization(690) %>
+                            <%= link_to 'Request for Approval', provider_agreement_request_for_approval_path(@provider_agreement.id),class: "button radius" %>
+                        <%# end %>
+                    <% end %>
+                <% end %>
+        <% end %>
+
+
+
+
+
+
+
+
+
+
+	</section>
+</fieldset>

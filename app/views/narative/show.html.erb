@@ -1,0 +1,13 @@
+<fieldset>
+<section class="solidbody">
+  <legend><%= set_subheader("#{@long_description} notes for: #{client_full_name(@client)}") %></legend>
+
+  <p>
+  	<%= render 'notes/notes_field_show', arg_notes: @notes_for_type %>
+  </p>
+
+
+
+	<%= link_to 'Back', narative_path,class: "secondary button radius" %>
+</section>
+</fieldset>

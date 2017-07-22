@@ -1,0 +1,38 @@
+<!--Manoj Patil 03/17/2016  -->
+<fieldset>
+  <section class="solidbody">
+      <legend>
+          <%= set_subheader("Absent parent information for household: #{@household.name}") %>
+          </legend>
+          <%= render 'households/selected_household_partial',arg_household: @household %>
+    <%= form_for(@absent_parent_responsibility,:url => process_household_absent_parents_wizard_path, method: :post) do |f| %>
+
+      <ul>
+        <% if  "#{@absent_parent_responsibility.current_step}" == "household_absent_parent_registration_step" %>
+               <b><h3>Step 1-Absent parent </h3></b>
+         <% end %>
+         <% if  "#{@absent_parent_responsibility.current_step}" == "household_absent_parent_address_step" %>
+               <b><h3>Step 2-Absent parent address</h3></b>
+         <% end %>
+
+         <% if  "#{@absent_parent_responsibility.current_step}" == "household_children_with_no_absent_parent_data_step" %>
+               <b><h3>Step 3-Children's of absent parent</h3></b>
+         <% end %>
+
+
+          <% if  "#{@absent_parent_responsibility.current_step}" == "household_absent_parent_responsibility_step" %>
+               <b><h3>Step 4-Absent parent's responsibility details towards children</h3></b>
+         <% end %>
+
+          <%= render "shared/common_error", object_argument: @absent_parent_responsibility %>
+          <%= render "#{@absent_parent_responsibility.current_step}", :arg_object => f %>
+
+      </ul>
+    <div>
+      <%= render "buttons_next_back_save", :arg_object => f , :arg_instance =>@absent_parent_responsibility %>
+    </div>
+
+  <% end %>
+
+  </section>
+</fieldset>

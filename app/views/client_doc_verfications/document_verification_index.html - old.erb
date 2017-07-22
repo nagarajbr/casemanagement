@@ -1,0 +1,38 @@
+ <section class="solidbody">
+  <fieldset>
+    <caption><%= set_subheader("Document Verification" ) %></caption>
+    <%= render 'application_screenings/selected_application_details', arg_selected_application:@client_application %>
+ <p>
+
+        <table>
+            <thead>
+                <tr>
+                  <th> Verified Documents </th>
+                </tr>
+            </thead>
+          <tbody>
+            <% if @client_doc_verification_list.present?%>
+              <% @client_doc_verification_list.each do |arg_doc| %>
+                <tr>
+                  <td>  <%= drop_down_value_description(arg_doc.document_type) %></td>
+                </tr>
+              <% end %>
+            <% else %>
+                 <tr>
+                  <td>  No Documents are Verified for this Application</td>
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+
+      </p>
+      <p>
+          <% if @client_doc_verification_list.blank?%>
+            <%= link_to 'Add Document Verification',new_client_doc_verfication_path(@client_application.id), class: "button radius"%>
+          <% else %>
+            <%= link_to 'Manage Document Verification',edit_client_doc_verfication_path(@client_application.id), class: "button radius"%>
+          <% end %>
+      </p>
+</fieldset>
+</section>

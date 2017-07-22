@@ -1,0 +1,49 @@
+<!-- <b><h4>Household Member: <%#= "#{client_full_name(@client)}" %></h4></b> -->
+<body onload = "household_registration_education_step()">
+<p></p>
+	<% if @educations.present? %>
+		<table>
+			<caption style="text-align:inherit"> <p><b>Education </b></p></caption>
+		    <thead>
+			    <tr>
+					<th> School Type </th>
+					<th> Highest Grade Completed </th>
+					<th> Begin Date </th>
+					<th> End Date </th>
+					<th>Action </th>
+				</tr>
+		   </thead>
+			    <tbody>
+					<% @educations.each do |education| %>
+						<tr>
+							<td>  <%= CodetableItem.item_description(21,education.school_type,"School type") %></td>
+							<td>  <%= drop_down_value_description(education.high_grade_level)%></td>
+							<td>  <%= format_db_date education.effective_beg_date %></td>
+							<td>  <%= format_db_date education.effective_end_date %></td>
+							<td>
+							 <%= link_to "Show",show_household_member_education_path(@client.id,education.id,'HOUSEHOLD_MEMBER_STEP_WIZARD'),id: "hyperlink" %>
+							</td>
+						</tr>
+					 <% end %>
+				</tbody>
+		</table>
+
+	<%else%>
+	         <h5 class="subheader">No Education information found. Do you want to add Education information?</h5>
+              <p></p>
+            <fieldset class="radio">
+                <div class="button-group">
+                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_education_add_flag, "Y"%>Yes</label>
+                  <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_education_add_flag, "N"%>No</label>
+                   <label class="radio_button_bigger_text"><%= arg_object.radio_button :member_education_add_flag, "S"%>Skip for now</label>
+                </div>
+            </fieldset>
+
+	<%end%>
+	<div id = "new_education_button">
+	 <%= link_to("New", new_household_member_education_path(@client.id,'HOUSEHOLD_MEMBER_STEP_WIZARD') , class: 'button radius') %>
+	</div>
+
+
+
+</body>

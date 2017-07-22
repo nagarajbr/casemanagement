@@ -1,0 +1,2 @@
+class AssessmentQuestionMetadataController < AttopAncestorController
+end

@@ -1,0 +1,53 @@
+<!--Manoj Patil 10/16/2014  -->
+
+<fieldset>
+<section class="solidbody">
+      <legend><%= set_subheader("Relationships between members of program unit of client: #{client_full_name(@client)}") %></legend>
+        <%= form_tag update_program_unit_member_multiple_relationship_path(@selected_program_unit.id), method: :put do %>
+        <%= render "shared/common_error", object_argument: @client_relationship_errors %>
+        <table>
+        <caption style="text-align:inherit"><b>Manage Relationship</b><p></p></caption>
+        <thead>
+          <tr>
+              <th> Program Unit Member </th>
+              <th> Relationship Type </th>
+              <th> Program Unit Member </th>
+          </tr>
+        </thead>
+          <tbody>
+             <% for arg_relation in @client_multiple_relationships   %>
+              <tr>
+              <%= fields_for "relationships[]", arg_relation do |f|  %>
+                <!-- error page-->
+                <% if arg_relation.present? && arg_relation.errors.any? %>
+                    <td colspan="4">
+                        <div id="error_explanation">
+                          <h5 class="fi-alert subheader" id="alert-text-center">Please correct the following error </h5>
+
+                          <ul>
+                              <% arg_relation.errors.full_messages.each do |msg| %>
+                                 <li><%= msg %></li>
+                              <% end %>
+                          </ul>
+                        </div>
+                     </td>
+                <% end %>
+                <!-- error page end-->
+              </tr>
+
+
+              <tr>
+                  <%= render "client_applications/relationship_fields", arg_object: f,arg_object2:arg_relation %>
+
+              </tr>
+              <% end %>
+              <% end %>
+        </tbody>
+      </table>
+         <%= link_to 'Cancel', session[:NAVIGATED_FROM] ,class: "secondary button radius" %>
+         <%= submit_tag "Save", class: "button radius" %>
+      <% end %>
+</section>
+</fieldset>
+
+

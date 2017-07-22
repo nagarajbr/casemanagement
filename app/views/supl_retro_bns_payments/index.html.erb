@@ -1,0 +1,54 @@
+
+<fieldset>
+  <section class="solidbody">
+        <legend><%= set_subheader("Issue payment to program unit of client: #{@client.first_name}, #{@client.last_name}") %></legend>
+        <%= render 'program_units/selected_program_unit_details', arg_selected_program_unit:@selected_program_unit %>
+        <% if ProgramUnitParticipation.is_program_unit_participation_exists?(@selected_program_unit.id) %>
+                 <% if @supplement_payments.present? %>
+                     <table>
+                      <caption style="text-align:inherit"><b>Issued payments</b><p></p></caption>
+                        <thead>
+                            <tr>
+                            <th> Payment Type </th>
+                            <th> Payment month </th>
+                            <th> Payment Status </th>
+                            <th> Action </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% @supplement_payments.each do |payment| %>
+                            <tr>
+                              <td>  <%= drop_down_value_description(payment.payment_type) %></td>
+                              <td>  <%= format_db_date(payment.payment_month) %></td>
+                              <td>  <%= drop_down_value_description(payment.payment_status) %></td>
+                              <td> <%= link_to "Show",supl_retro_bns_payment_path(payment.id),id: "hyperlink" %> </td>
+                            </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    <br>
+                 <% else %>
+                            <p><b> Issued Payments</b></p>
+                            <p>
+                            <h5 class="subheader">There are no issued payments. Click <b>New</b> button to add payment information.</h5>
+                            </p>
+
+                 <% end %>
+
+                  <% if  can_logged_in_user_edit?("PROGRAM_UNIT",@selected_program_unit.id)%>
+                       <%= link_to 'New',new_supl_retro_bns_payment_path, class: "button radius" %>
+                  <% else %>
+                      <%= link_to 'New',"#", class: "disabled button"%>
+                      <p>
+                        <h6 class="subheader"><b>New</b> button is disabled because, You are not the eligibility worker of this program unit. Only eligibility worker of this program unit can add payments.</h6>
+                      </p>
+                  <% end %>
+
+        <%else%>
+                 <h5 class="subheader">This program unit is not activated.Supplement and bonus payments can be issue to active program units.</h5>
+                      </p>
+        <% end %>
+
+  </section>
+</fieldset>
+
